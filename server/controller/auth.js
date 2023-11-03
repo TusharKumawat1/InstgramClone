@@ -35,12 +35,11 @@ export const createUser = async (req, res) => {
       username: username,
       dob: new Date(dob),
     });
+    await newUser.save();
     const payLoad = {
       email,
-      password,
-      username,
+      _id:newUser._id
     };
-    await newUser.save();
     const token = jwt.sign(payLoad, process.env.JWT_SIGN);
     const profileInfo=await ProfileInfo({userId:newUser._id})
     await profileInfo.save();
@@ -58,11 +57,10 @@ export const loginUser = async (req, res) => {
     if (!userExist)
       res.status(404).json({ success: false, res: "User not found" });
 
-    const payLoad = {
-      email,
-      password,
-      username,
-    };
+      const payLoad = {
+        email,
+        _id:userExist._id
+      };
     const token = jwt.sign(payLoad, process.env.JWT_SIGN);
     return res.status(200).json({ status: 200, res: token });
   } catch (error) {
