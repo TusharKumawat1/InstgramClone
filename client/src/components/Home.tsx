@@ -1,8 +1,8 @@
 import React from "react";
-import Styles from "./styles/home.module.css";
-import Footer from "./components/Footer";
-import LoginForm from "./components/LoginForm";
-export default function Page() {
+import Styles from "../styles/home.module.css";
+import LoginForm from "./LoginForm";
+import Footer from "./Footer";
+export default function Home() {
   return (
     <div className={Styles.container}>
       <div className={Styles.hero}>
@@ -11,5 +11,5 @@ export default function Page() {
       </div>
      <Footer/>
     </div>
-  );
+  )
 }
