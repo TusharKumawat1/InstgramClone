@@ -1,0 +1,21 @@
+.container{
+   background-color: white;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   width: 99vw;
+   height: 99vh;
+   gap: 100px;
+   color: black;
+}
+.hero{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    width: 50%;
+    height: 70%;
+    border: 1px solid black;
+}
+

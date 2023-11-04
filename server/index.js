@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv"
 import userRouter from "./routes/auth.js";
 import connectToDB from "./config/dbConfig.js";
-import { authMiddleware } from "./middleware/authMiddleware.js";
+import { authMiddleware} from "./middleware/authMiddleware.js";
 dotenv.config();
 const app=express();
 

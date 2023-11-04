@@ -1,0 +1,14 @@
+.footer{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    flex-shrink: inherit;
+    flex-wrap: wrap;
+    font-size: 12px;
+    padding: 10px;
+}
+.footer a{
+    margin-inline: 10px;
+}
