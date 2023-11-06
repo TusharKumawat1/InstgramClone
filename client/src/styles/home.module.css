@@ -10,12 +10,12 @@
    color: black;
 }
 .hero{
+    margin-top: 5%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-center;
     align-items: center;
-    gap: 30px;
+    gap: 10px;
     width: 50%;
     height: 70%;
-    border: 1px solid black;
 }
 

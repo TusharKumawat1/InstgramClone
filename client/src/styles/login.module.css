@@ -1,23 +1,22 @@
 .loginFormContainer{
-    height: 100%;
-    width: 40%;
+    height: 97%;
+    width: 37%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    border: 1px solid black;
     color: black;
 }
 .form{
     width: 100%;
-    height: 0%;
+    height: 65%;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     gap: 10px;
-    border: 1px solid black;
+    border: 1px solid #c0c0c0; 
 }
 .instagramFont{
     margin-block: 30px;
@@ -25,15 +24,18 @@
 .inputContainer{
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 72%;
     position: relative;
+    justify-content: center;
+    align-items: center;
 }
 .formInput{
     border: 1px solid #c0c0c0; 
     background-color: #fbfbfb;
-    width: 100%;
-    padding: 8px;
+    width: 90%;
+    padding: 10px;
     font-size: 13px;
+    border-radius: 4px;
 }
 .formInput:focus{
     outline: 1px solid  #d6d6d6;
@@ -41,10 +43,11 @@
 .formInputLable{
     font-size: 10px;
     position: absolute;
-    top: 1px;
-    left: 9px;
+    top: 0px;
+    left: 13px;
     color: #7b7b7b;
     transition: .1s ease-in-out;
+    
 }
 .formInput:placeholder-shown ~ .formInputLable{
     top: 10px;
@@ -54,9 +57,62 @@
     width: 70%;
     color: white;
     font-weight: bold;
-    background-color: rgb(34, 137, 255);
+    background-color: #4CB5F9;
     padding: 8px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+.loginBtn:hover{
+    background-color: #149cf6;
+}
+.divider{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80%;
+    color: rgb(138, 138, 138);
+    font-size: 13px;
+    font-weight:500;
+}
+.line{
+    background-color: rgb(210, 210, 210);
+    width: 35%;
+    height: .1px;
+}
+.loginViaFacebook{
+   color: #385185;
+   text-decoration: none;
+   font-weight: bold;
+    font-size: 14px;
+    margin-block: 20px;
+}
+.forgotPass{
+    font-size: 13px;
+    text-decoration: none;
+    color: black;
+}
+.gotoSingup{
+    margin-top: 20px;
+    border: 1px solid #c0c0c0; 
+    font-size: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+.gotoSingup span {
+    font-weight: bold;
+    color: #149cf6;
+}
+.getApp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 14px;
+}
+.getApp div a{
+    margin-inline: 5px;
 }

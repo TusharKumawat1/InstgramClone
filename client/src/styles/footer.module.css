@@ -11,4 +11,9 @@
 }
 .footer a{
     margin-inline: 10px;
+    text-decoration: none;
+    color: rgb(138, 138, 138);
+}
+.footer a:hover{
+    text-decoration: underline;
 }
