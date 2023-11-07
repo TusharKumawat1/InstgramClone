@@ -2,12 +2,31 @@ import React, { useContext } from "react";
 import Styles from "../styles/signup.module.css";
 import { instagramFont, asset6, asset7 } from "../assets/index";
 import { MyContext } from "../context/Mycontext";
+import { useForm, SubmitHandler } from "react-hook-form"
 
+type OnstubitType={
+  data:{
+    username:String,
+    fullname:String,
+    email:String,
+    password:String,
+  },
+  e:React.FormEvent<HTMLFormElement>,
+}
 export default function SignupForm() {
   const { setIsLogin } = useContext(MyContext);
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm<OnstubitType>()
+ 
+  const handleOnSubmit=async(data:OnstubitType)=>{
+    console.log(data)
+  }
   return (
     <div className={Styles.loginFormContainer}>
-      <form className={Styles.form}>
+      <form className={Styles.form} onSubmit={handleSubmit(handleOnSubmit)}>
         <img
           src={instagramFont}
           alt="img"
@@ -28,6 +47,7 @@ export default function SignupForm() {
             id="user"
             placeholder=" "
             className={Styles.formInput}
+            {...register('email', { required: true })}
           />
           <label htmlFor="user" className={Styles.formInputLable}>
             Mobile Number or email
@@ -36,9 +56,10 @@ export default function SignupForm() {
         <div className={Styles.inputContainer}>
           <input
             type="text"
-            id="user"
+            id="Fullname"
             placeholder=" "
             className={Styles.formInput}
+            {...register('fullname', { required: true })}
           />
           <label htmlFor="user" className={Styles.formInputLable}>
             Full Name
@@ -50,6 +71,7 @@ export default function SignupForm() {
             id="user"
             placeholder=" "
             className={Styles.formInput}
+            {...register('username', { required: true })}
           />
           <label htmlFor="user" className={Styles.formInputLable}>
             Username
@@ -61,6 +83,7 @@ export default function SignupForm() {
             id="password"
             placeholder=" "
             className={Styles.formInput}
+            {...register('password', { required: true ,minLength:8})}
           />
           <label htmlFor="password" className={Styles.formInputLable}>
             Password
