@@ -1,34 +1,38 @@
-.heroImageContainer{
-    width: 50%;
-    height: 100%;
-    position: relative;
+.heroImageContainer {
+  width: 50%;
+  height: 100%;
+  position: relative;
 }
-.coverImage{
-    width: 101%;
-    height: 106%;
+.coverImage {
+  width: 101%;
+  height: 106%;
 }
-.randomImageContainer{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transition: 0.5s ease;
-    top: 0px;
-  
+.randomImageContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: 0.5s ease;
+  top: 0px;
 }
-.randomImages{
-    
-    position: absolute;
-    right: 52px;
-    top:22px;
-    width: 56%;
-    animation: fadeOut 5s both infinite;
-   
+.randomImages {
+  position: absolute;
+  right: 52px;
+  top: 22px;
+  width: 56%;
+  animation: fadeOut 5s both infinite;
 }
 
 @keyframes fadeOut {
-    0% {opacity:  0.1;}
-    10% {opacity: 1;}
-    20% {opacity: 1;}
-    90% {opacity: 1;}  
-    100% {opacity: 0.1;} 
- } 
+  0% {
+    opacity: 0.1;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}

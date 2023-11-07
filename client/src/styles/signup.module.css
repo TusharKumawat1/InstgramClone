@@ -10,16 +10,24 @@
 }
 .form{
     width: 100%;
-    height: 65%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
     border: 1px solid #c0c0c0; 
+    margin-top: 50px;
+    text-align: center;
 }
 .instagramFont{
-    margin-block: 30px;
+    margin-top: 30px;
+    margin-bottom: -20px;
+   
+}
+.instructions{
+    width: 80%;
+    color: #737373;
+    font-weight:650;
 }
 .inputContainer{
     display: flex;
@@ -53,8 +61,8 @@
     top: 10px;
     font-size: 11px;
 }
-.loginBtn{
-    width: 72%;
+.SignupBtn{
+    width: 70%;
     color: white;
     font-weight: bold;
     background-color: #4CB5F9;
@@ -62,9 +70,24 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 20px;
 }
-.loginBtn:hover{
+.SignupBtn:hover{
     background-color: #149cf6;
+}
+.loginViaFacebookBtn{
+    width: 70%;
+    color: white;
+    font-weight: bold;
+    background-color: #008ce9;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.loginViaFacebookBtn:hover{
+    background-color: #0077c7;
 }
 .divider{
     display: flex;
@@ -74,28 +97,31 @@
     color: rgb(138, 138, 138);
     font-size: 13px;
     font-weight:500;
+    margin-top: -10px;
+    margin-bottom: 5px;
 }
 .line{
     background-color: rgb(210, 210, 210);
     width: 35%;
     height: .1px;
 }
-.loginViaFacebook{
-   color: #385185;
-   text-decoration: none;
-   font-weight: bold;
-    font-size: 14px;
-    margin-block: 20px;
-}
-.forgotPass{
+.guidLines{
     font-size: 12px;
+    text-align: center;
+    width: 72%;
+    color: #737373;
+}
+.guidLines a{
+    color: #00376B;
+    text-decoration: none;
+}
+
+.forgotPass{
+    font-size: 13px;
     text-decoration: none;
     color: black;
-    margin-top: -10px;
-    margin-bottom: 10px;
 }
-.gotoSingup{
-    margin-top: 20px;
+.gotoLogin{
     border: 1px solid #c0c0c0; 
     font-size: 14px;
     width: 100%;
@@ -103,8 +129,9 @@
     justify-content: center;
     align-items: center;
     height: 60px;
+    padding: 20px;
 }
-.gotoSingup span {
+.gotoLogin span {
     font-weight: bold;
     color: #149cf6;
 }
@@ -114,6 +141,7 @@
     align-items: center;
     flex-direction: column;
     font-size: 14px;
+    margin-bottom: 20px;
     gap: 10px;
 }
 .getApp div a{
