@@ -19,6 +19,9 @@
   right: 52px;
   top: 22px;
   width: 56%;
+  transition: .5s ease;
+}
+.fade{
   animation: fadeOut 5s both infinite;
 }
 
