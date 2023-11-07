@@ -18,11 +18,12 @@ export default function SignupForm() {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
   } = useForm<OnstubitType>()
  
   const handleOnSubmit=async(data:OnstubitType)=>{
     console.log(data)
+    //todo sendig user details to backend and create a dob page 
   }
   return (
     <div className={Styles.loginFormContainer}>
