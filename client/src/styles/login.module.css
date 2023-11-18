@@ -1,12 +1,13 @@
 .loginFormContainer{
     height: 97%;
-    width: 37%;
+    width: 350px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
     color: black;
+    min-height: 600px;
 }
 .form{
     width: 100%;
@@ -119,3 +120,8 @@
 .getApp div a{
     margin-inline: 5px;
 }
+@media screen and (max-width: 1100px) {
+    .form{
+        width: 99%;
+    }
+  }

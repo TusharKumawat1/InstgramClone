@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Styles from "../styles/hero.module.css";
 import { asset8, asset2, asset3, asset4, asset5 } from "../assets/index";
 export default function Hero() {
-  //geating random path
+  //geating random path 
   const list = [asset2, asset3, asset4, asset5];
   const [newPath, setNewPath] = useState(list[0]);
   const [isanimating, setIsanimating] = useState(false);
@@ -12,7 +12,7 @@ export default function Hero() {
       list.indexOf(newPath) === 3 ? 0 : list.indexOf(newPath) + 1
     ];
   }
-
+      
   //Debouncing....
   useEffect(() => {
     setIsanimating(true)

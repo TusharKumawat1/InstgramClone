@@ -16,9 +16,10 @@
 }
 .randomImages {
   position: absolute;
-  right: 52px;
-  top: 22px;
-  width: 56%;
+  right: 10.6%;
+  top: 3.5%;
+  width: 57%;
+  height: 91.5%;
   transition: .5s ease;
 }
 .fade{
@@ -37,5 +38,10 @@
   }
   100% {
     opacity: 0.1;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .heroImageContainer {
+    display: none;
   }
 }

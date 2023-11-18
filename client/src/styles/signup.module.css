@@ -1,12 +1,13 @@
 .loginFormContainer{
     height: 97%;
-    width: 37%;
+    width: 350px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
     color: black;
+    min-height: 600px;
 }
 .form{
     width: 100%;
@@ -27,7 +28,7 @@
 .instructions{
     width: 80%;
     color: #737373;
-    font-weight:650;
+    font-weight:500;
 }
 .inputContainer{
     display: flex;
@@ -37,6 +38,35 @@
     justify-content: center;
     align-items: center;
 }
+.xMark,.checkMark,.rotateMark{
+    position: absolute;
+    right: 5px;
+    color: red;
+    font-size: 22px;
+}
+.checkMark{
+    color: #a8a8a8;
+}
+.checkPass{
+    display: flex;
+    position: absolute;
+    right: 5px;
+}
+.rotateMark{
+    color: #008ce9;
+    cursor: pointer;
+}
+.checkPass .xMark,.checkPass .checkMark{
+    right: 45px;
+}
+.checkPass p{
+    font-weight: 600;
+    color: #222;
+    cursor: pointer;
+}
+.checkPass p:hover{
+    color:  #a8a8a8;
+}
 .formInput{
     border: 1px solid #c0c0c0; 
     background-color: #fbfbfb;
@@ -44,9 +74,13 @@
     padding: 10px;
     font-size: 13px;
     border-radius: 4px;
+    padding-right: 40px;
 }
 .formInput:focus{
     outline: 1px solid  #d6d6d6;
+}
+.passwordField{
+    padding-right: 80px;
 }
 .formInputLable{
     font-size: 10px;

@@ -8,6 +8,7 @@
     flex-wrap: wrap;
     font-size: 12px;
     padding: 10px;
+    min-width: 280px;
 }
 .footer a{
     margin-inline: 10px;
