@@ -12,48 +12,35 @@ type FormValues = {
 };
 
 export default function SignupForm() {
-  const [isOkay, setIsOkay] = useState(false);
+  const [validateUser, setValidateUser] = useState(false);
+  const [ishide, setIsHide] = useState(true);
   const { setIsLogin } = useContext(MyContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
     getValues,
-    watch
+    watch,
   } = useForm<FormValues>();
-  const onSubmit = (data: FormValues) => {
-    console.log(data); 
+  const isValidEmail = (email: string) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
   };
- const onchange=(e:React.ChangeEvent<HTMLInputElement>)=>{
-  console.log(getValues("fullname"))
- }
+  const phoneRegex = /^[0-9]{10}$/;
+  const onSubmit = (data: FormValues) => {
+    console.log(data);
+  };
+  const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (isValidEmail(value)) setValidateUser((p) => !p);
+    else if (phoneRegex.test(value)) setValidateUser((p) => !p);
+    else setValidateUser((p) => false);
+  };
   const handleOnSubmit = async () => {
     console.log("data");
     //todo sendig user details to backend and create a dob page
   };
-  // const isValidEmail = (email: string) => {
-  //   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  //   return regex.test(email);
-  // };
-  // const phoneRegex = /^[0-9]{10}$/;
-  // const handleBulr = () => {
-  //   if (isValidEmail(userDetails.user)) {
-  //     setIsOkay(true);
-  //     console.log(userDetails.email);
-  //   } else if (phoneRegex.test(userDetails.user)) {
-  //     setIsOkay(true);
-  //   } else {
-  //     setIsOkay(false);
-  //   }
-  // };
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { id, value } = e.target;
-  //   setUserDetails((p: any) => ({
-  //     ...p,
-  //     [id]: value,
-  //   }));
-  //   console.log(userDetails);
-  // };
+
   return (
     <div className={Styles.loginFormContainer}>
       <form className={Styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -81,15 +68,22 @@ export default function SignupForm() {
             id="user"
             placeholder=" "
             className={Styles.formInput}
-            {...register("user")}
+            {...register("user", { required: true })}
+            onChange={onchange}
           />
           <label htmlFor="user" className={Styles.formInputLable}>
             Mobile Number or email
           </label>
-          {isOkay ? (
-            <i className={`fa-regular fa-circle-check ${Styles.checkMark}`}></i>
-          ) : (
-            <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
+          {watch("user") && (
+            <>
+              {validateUser ? (
+                <i
+                  className={`fa-regular fa-circle-check ${Styles.checkMark}`}
+                ></i>
+              ) : (
+                <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
+              )}
+            </>
           )}
         </div>
         <div className={Styles.inputContainer}>
@@ -98,13 +92,12 @@ export default function SignupForm() {
             id="fullname"
             placeholder=" "
             className={Styles.formInput}
-            {...register("fullname")}
-            onChange={onchange}
+            {...register("fullname", { required: true })}
           />
           <label htmlFor="fullname" className={Styles.formInputLable}>
             Full Name
           </label>
-          {isOkay ? (
+          {watch("fullname") ? (
             <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
           ) : (
             <i className={`fa-regular fa-circle-check ${Styles.checkMark}`}></i>
@@ -116,36 +109,40 @@ export default function SignupForm() {
             id="username"
             placeholder=" "
             className={Styles.formInput}
-            {...register("username")}
+            {...register("username", { required: true })}
           />
           <label htmlFor="username" className={Styles.formInputLable}>
             Username
           </label>
-          {isOkay && (
+          {watch("username") && (
             <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
           )}
           <i className={`fa-solid fa-rotate-right ${Styles.rotateMark}`}></i>
         </div>
         <div className={Styles.inputContainer}>
           <input
-            type="password"
+            type={ishide ? "password" : "text"}
             id="password"
             placeholder=" "
             className={`${Styles.formInput} ${Styles.passwordField}`}
-            {...register("password")}
+            {...register("password", { required: true, minLength: 8 })}
           />
           <label htmlFor="password" className={Styles.formInputLable}>
             Password
           </label>
-          {!isOkay && (
+          {watch("password") && (
             <div className={Styles.checkPass}>
-              <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
+              {watch("password").length > 7 ? (
+                <i
+                  className={` fa-regular fa-circle-check ${Styles.checkMark}`}
+                ></i>
+              ) : (
+                <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
+              )}
 
-              <i
-                className={` fa-regular fa-circle-check ${Styles.checkMark}`}
-              ></i>
-
-              <p>show</p>
+              <p onClick={() => setIsHide((p) => !p)}>
+                {ishide ? "Show" : "Hide"}
+              </p>
             </div>
           )}
         </div>
