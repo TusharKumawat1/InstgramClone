@@ -12,8 +12,8 @@ type FormValues = {
 };
 
 export default function SignupForm() {
-  const [validateUser, setValidateUser] = useState(false);
-  const [ishide, setIsHide] = useState(true);
+  const [validateUser, setValidateUser] = useState(true);
+  const [ishide, setIsHide] = useState(false);
   const { setIsLogin } = useContext(MyContext);
   const {
     register,
@@ -32,6 +32,7 @@ export default function SignupForm() {
   };
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
+    console.log(value)
     if (isValidEmail(value)) setValidateUser((p) => !p);
     else if (phoneRegex.test(value)) setValidateUser((p) => !p);
     else setValidateUser((p) => false);
@@ -74,17 +75,13 @@ export default function SignupForm() {
           <label htmlFor="user" className={Styles.formInputLable}>
             Mobile Number or email
           </label>
-          {watch("user") && (
+          {watch("user") ? (
             <>
-              {validateUser ? (
-                <i
-                  className={`fa-regular fa-circle-check ${Styles.checkMark}`}
-                ></i>
-              ) : (
-                <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
-              )}
+              {validateUser ? <i className={`fa-regular fa-circle-check ${Styles.checkMark}`}></i>
+               :  <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
+              }
             </>
-          )}
+          ):""}
         </div>
         <div className={Styles.inputContainer}>
           <input
