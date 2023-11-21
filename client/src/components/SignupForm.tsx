@@ -14,13 +14,14 @@ type FormValues = {
 export default function SignupForm() {
   const [validateUser, setValidateUser] = useState(false);
   const [ishide, setIsHide] = useState(false);
-  const { setIsLogin, userDetails, setUserDetails } = useContext(MyContext);
+  const { setIsLogin, userDetails, setUserDetails , setisDobPage} = useContext(MyContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
     getValues,
     watch,
+    setError,
   } = useForm<FormValues>();
   const isValidEmail = (email: string) => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -28,24 +29,32 @@ export default function SignupForm() {
   };
   const phoneRegex = /^[0-9]{10}$/;
   const onSubmit = async (data: FormValues) => {
-    setUserDetails((p:any) => ({
+    setUserDetails((p: any) => ({
       ...p,
       user: data.user,
       fullname: data.fullname,
       username: data.username,
       password: data.password,
     }));
+    setisDobPage(true)
   };
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     console.log(value);
-    if (isValidEmail(value)) setValidateUser((p) =>true);
+    if (isValidEmail(value)) setValidateUser((p) => true);
     else if (phoneRegex.test(value)) setValidateUser((p) => true);
-    else setValidateUser((p) => false);
+    else {
+      setValidateUser(false);
+      // Add error when input is invalid
+      setError("user", {
+        type: "manual",
+        message: "Please enter a valid email or phone number",
+      });
+    }
   };
-  useEffect(()=>{
-    console.log(userDetails)
-  },[userDetails])
+  useEffect(() => {
+    console.log(userDetails);
+  }, [userDetails]);
   return (
     <div className={Styles.loginFormContainer}>
       <form className={Styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -176,7 +185,11 @@ export default function SignupForm() {
             Terms , Privacy Policy and Cookies Policy .
           </a>
         </p>
-        <button className={Styles.SignupBtn} type="submit" disabled={errors.root?true:false}>
+        <button
+          className={Styles.SignupBtn}
+          type="submit"
+          disabled={errors.root ? true : false || !validateUser}
+        >
           Sign up
         </button>
       </form>

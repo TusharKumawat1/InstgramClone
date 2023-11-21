@@ -37,7 +37,7 @@ export default function LoginForm() {
             Password
           </label>
         </div>
-        <button className={Styles.loginBtn}>Log in</button>
+        <button className={Styles.loginBtn} type="submit">Log in</button>
         <div className={Styles.divider}>
           <span className={Styles.line}></span>
           <span>OR</span>

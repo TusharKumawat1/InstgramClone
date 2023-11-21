@@ -112,6 +112,9 @@
 .SignupBtn:hover{
     background-color: #149cf6;
 }
+.SignupBtn:disabled{
+ cursor: default;
+}
 .loginViaFacebookBtn{
     width: 70%;
     color: white;

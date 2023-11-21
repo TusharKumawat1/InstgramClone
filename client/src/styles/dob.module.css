@@ -1,0 +1,18 @@
+.info1,.link,.info2{
+    font-size: 13px;
+    width: 80%;
+    text-align: center;
+}
+.link{
+    color:#0f95ee;
+    text-decoration: none;
+}
+.info2{
+    font-size: 11px;
+}
+.goBackBtn{
+    font-weight: bold;
+    color: #1c94e3;
+    cursor: pointer;
+    font-size: 12px;
+}
