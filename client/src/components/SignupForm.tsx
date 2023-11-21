@@ -12,9 +12,9 @@ type FormValues = {
 };
 
 export default function SignupForm() {
-  const [validateUser, setValidateUser] = useState(true);
+  const [validateUser, setValidateUser] = useState(false);
   const [ishide, setIsHide] = useState(false);
-  const { setIsLogin } = useContext(MyContext);
+  const { setIsLogin, userDetails, setUserDetails } = useContext(MyContext);
   const {
     register,
     handleSubmit,
@@ -27,21 +27,25 @@ export default function SignupForm() {
     return regex.test(email);
   };
   const phoneRegex = /^[0-9]{10}$/;
-  const onSubmit = (data: FormValues) => {
-    console.log(data);
+  const onSubmit = async (data: FormValues) => {
+    setUserDetails((p:any) => ({
+      ...p,
+      user: data.user,
+      fullname: data.fullname,
+      username: data.username,
+      password: data.password,
+    }));
   };
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    console.log(value)
-    if (isValidEmail(value)) setValidateUser((p) => !p);
-    else if (phoneRegex.test(value)) setValidateUser((p) => !p);
+    console.log(value);
+    if (isValidEmail(value)) setValidateUser((p) =>true);
+    else if (phoneRegex.test(value)) setValidateUser((p) => true);
     else setValidateUser((p) => false);
   };
-  const handleOnSubmit = async () => {
-    console.log("data");
-    //todo sendig user details to backend and create a dob page
-  };
-
+  useEffect(()=>{
+    console.log(userDetails)
+  },[userDetails])
   return (
     <div className={Styles.loginFormContainer}>
       <form className={Styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -77,11 +81,17 @@ export default function SignupForm() {
           </label>
           {watch("user") ? (
             <>
-              {validateUser ? <i className={`fa-regular fa-circle-check ${Styles.checkMark}`}></i>
-               :  <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
-              }
+              {validateUser ? (
+                <i
+                  className={`fa-regular fa-circle-check ${Styles.checkMark}`}
+                ></i>
+              ) : (
+                <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
+              )}
             </>
-          ):""}
+          ) : (
+            ""
+          )}
         </div>
         <div className={Styles.inputContainer}>
           <input
@@ -94,13 +104,16 @@ export default function SignupForm() {
           <label htmlFor="fullname" className={Styles.formInputLable}>
             Full Name
           </label>
-          {watch("fullname") ? (
-            <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
-          ) : (
-            <i className={`fa-regular fa-circle-check ${Styles.checkMark}`}></i>
-          )}
+          {watch("fullname") &&
+            (false ? (
+              <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
+            ) : (
+              <i
+                className={`fa-regular fa-circle-check ${Styles.checkMark}`}
+              ></i>
+            ))}
         </div>
-        <div className={Styles.inputContainer}>
+        <div className={`${Styles.inputContainer} ${Styles.username}`}>
           <input
             type="text"
             id="username"
@@ -108,12 +121,17 @@ export default function SignupForm() {
             className={Styles.formInput}
             {...register("username", { required: true })}
           />
-          <label htmlFor="username" className={Styles.formInputLable}>
+          <label htmlFor="username" className={`${Styles.formInputLable} }`}>
             Username
           </label>
-          {watch("username") && (
-            <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
-          )}
+          {watch("username") &&
+            (false ? (
+              <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
+            ) : (
+              <i
+                className={`fa-regular fa-circle-check ${Styles.checkMark}`}
+              ></i>
+            ))}
           <i className={`fa-solid fa-rotate-right ${Styles.rotateMark}`}></i>
         </div>
         <div className={Styles.inputContainer}>
@@ -158,7 +176,9 @@ export default function SignupForm() {
             Terms , Privacy Policy and Cookies Policy .
           </a>
         </p>
-        <button className={Styles.SignupBtn}>Sign up</button>
+        <button className={Styles.SignupBtn} type="submit" disabled={errors.root?true:false}>
+          Sign up
+        </button>
       </form>
       <div className={Styles.gotoLogin}>
         <p>Have an account? </p>

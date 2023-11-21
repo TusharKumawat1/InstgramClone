@@ -82,6 +82,9 @@
 .passwordField{
     padding-right: 80px;
 }
+.username .xMark,.username .checkMark{
+    right: 35px;
+}
 .formInputLable{
     font-size: 10px;
     position: absolute;
