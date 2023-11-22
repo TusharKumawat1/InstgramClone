@@ -9,7 +9,6 @@ import Dob from "../components/Dob";
 
 export default function Home() {
   const {isLogin,SignupSteps,setSignupSteps}=useContext(MyContext);
-  const [contentTODisplay, setcontentTODisplay] = useState(<SignupForm/>)
   let contentToDisplay;
   if (isLogin) {
     contentToDisplay = <LoginForm />;
