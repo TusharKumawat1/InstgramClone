@@ -5,14 +5,19 @@ import { MyContext } from "../context/Mycontext";
 import Dobstyles from "../styles/dob.module.css";
 import { SelectDatepicker } from "react-select-datepicker";
 export default function Dob() {
-  const { setIsLogin, setisDobPage } = useContext(MyContext);
+  const { setIsLogin, setSignupSteps ,setUserDetails} = useContext(MyContext);
   const [value, setValue] = useState<Date | null>(new Date('2022-01-22'));
   const onDateChange = useCallback((date: Date | null) => {
     if (date !== null) {
       setValue(date);
     }
-    console.log(date);
   }, []);
+  const onClick=()=>{
+    setUserDetails((p: any) => ({
+      ...p,
+     dob:value
+    }));
+  }
   return (
     <div className={Styles.loginFormContainer}>
       <form className={Styles.form}>
@@ -43,11 +48,11 @@ export default function Dob() {
           Use your own birthday, even if this account is for a business, a pet,
           or something else
         </p>
-        <button className={Styles.loginBtn} type="submit">
+        <button className={Styles.loginBtn} type="submit" onClick={()=>setSignupSteps(2)}>
           Next
         </button>
         <span
-          onClick={() => setisDobPage(false)}
+          onClick={() => setSignupSteps(0)}
           className={Dobstyles.goBackBtn}
         >
           Go Back

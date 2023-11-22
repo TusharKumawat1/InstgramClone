@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Styles from "../styles/home.module.css";
 import LoginForm from "../components/LoginForm";
 import Footer from "../components/Footer";
@@ -8,13 +8,26 @@ import SignupForm from "../components/SignupForm";
 import Dob from "../components/Dob";
 
 export default function Home() {
-  
-  const {isLogin,isDobPage}=useContext(MyContext);
+  const {isLogin,SignupSteps,setSignupSteps}=useContext(MyContext);
+  const [contentTODisplay, setcontentTODisplay] = useState(<SignupForm/>)
+  let contentToDisplay;
+  if (isLogin) {
+    contentToDisplay = <LoginForm />;
+  } else {
+    if (SignupSteps === 0) {
+      contentToDisplay = <SignupForm />;
+    } else if (SignupSteps === 1) {
+      contentToDisplay = <Dob />;
+    }else if (SignupSteps === 2) {
+      contentToDisplay = <button onClick={()=>setSignupSteps(1)}>click to go back</button>;
+    }
+  }
+
   return (
     <div className={Styles.container}>
       <div className={Styles.hero}>
-        <Hero/>
-        {isLogin ?<LoginForm/> : isDobPage? <Dob/> :<SignupForm/>}
+      <Hero />
+        {contentToDisplay}
         
       </div>
      <Footer/>

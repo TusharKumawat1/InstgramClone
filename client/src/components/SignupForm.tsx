@@ -14,7 +14,7 @@ type FormValues = {
 export default function SignupForm() {
   const [validateUser, setValidateUser] = useState(false);
   const [ishide, setIsHide] = useState(false);
-  const { setIsLogin, userDetails, setUserDetails , setisDobPage} = useContext(MyContext);
+  const { setIsLogin, userDetails, setUserDetails , setSignupSteps} = useContext(MyContext);
   const {
     register,
     handleSubmit,
@@ -38,11 +38,11 @@ export default function SignupForm() {
       password: data.password,
     }));
     localStorage.setItem("userDetails",JSON.stringify(data))
-    setisDobPage(true)
+    setSignupSteps(1)
   };
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    console.log(value);
+    
     if (isValidEmail(value)) setValidateUser((p) => true);
     else if (phoneRegex.test(value)) setValidateUser((p) => true);
     else {
@@ -55,11 +55,9 @@ export default function SignupForm() {
     }
   };
   useEffect(() => {
-    console.log(userDetails); 
     const ifUserdetails= localStorage.getItem("userDetails")
     if (ifUserdetails) {
       const dummy=JSON.parse(ifUserdetails)
-      console.log(dummy)
       setValue("fullname",dummy.fullname)
       setValue("user",dummy.user)
       setValue("username",dummy.username)
