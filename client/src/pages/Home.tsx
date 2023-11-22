@@ -6,6 +6,7 @@ import Hero from "../components/Hero";
 import { MyContext } from "../context/Mycontext";
 import SignupForm from "../components/SignupForm";
 import Dob from "../components/Dob";
+import OtpPage from "../components/OtpPage";
 
 export default function Home() {
   const {isLogin,SignupSteps,setSignupSteps}=useContext(MyContext);
@@ -18,7 +19,7 @@ export default function Home() {
     } else if (SignupSteps === 1) {
       contentToDisplay = <Dob />;
     }else if (SignupSteps === 2) {
-      contentToDisplay = <button onClick={()=>setSignupSteps(1)}>click to go back</button>;
+      contentToDisplay = <OtpPage/>;
     }
   }
 

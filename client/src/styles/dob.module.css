@@ -33,6 +33,18 @@ h5{
     color: #7b7b7b;
     
 }
+
+.datePicker select:focus{
+    outline: none;
+}
+.datePicker select:active{
+   border: 1px solid red;
+}
+
+.rsd__select-day{
+    width: 50px;
+    background-color: #1c94e3;
+}
 .datePicker label{
     display: none;
 }
