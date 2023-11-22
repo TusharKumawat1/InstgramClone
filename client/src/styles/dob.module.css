@@ -1,18 +1,53 @@
+h5{
+    margin-top: -25px;
+}
 .info1,.link,.info2{
-    font-size: 13px;
+    font-size: 14px;
     width: 80%;
     text-align: center;
 }
 .link{
+    margin: -10px;
+    margin-bottom: 10px;
     color:#0f95ee;
     text-decoration: none;
 }
 .info2{
-    font-size: 11px;
+    font-size: 12px;
+    color: #7b7b7b;
+    margin-bottom: 10px;
 }
 .goBackBtn{
     font-weight: bold;
     color: #1c94e3;
     cursor: pointer;
     font-size: 12px;
+    margin-bottom: 20px;
+}
+.datePicker select{
+    width: 90px;
+    height: 35px;
+    border: 1px solid #DBDBDB;
+    margin-inline: 5px;
+    border-radius: 3px;
+    color: #7b7b7b;
+    
+}
+.datePicker label{
+    display: none;
+}
+.datePicker select option[value="-1"]{
+   display: none;
+}
+.datePicker select option{
+    color:#7b7b7b;
+    font-weight: 200;
+}
+.datePicker{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+.rsd__select-year{
+    color: red;
 }

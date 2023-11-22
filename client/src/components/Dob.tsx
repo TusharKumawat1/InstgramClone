@@ -1,32 +1,60 @@
-import React, { useContext } from "react";
+import React, { useContext, useCallback, useState } from "react";
 import Styles from "../styles/login.module.css";
 import { cake, asset6, asset7 } from "../assets/index";
 import { MyContext } from "../context/Mycontext";
 import Dobstyles from "../styles/dob.module.css";
+import { SelectDatepicker } from "react-select-datepicker";
 export default function Dob() {
-  const { setIsLogin,setisDobPage } = useContext(MyContext);
+  const { setIsLogin, setisDobPage } = useContext(MyContext);
+  const [value, setValue] = useState<Date | null>(new Date('2022-01-22'));
+  const onDateChange = useCallback((date: Date | null) => {
+    if (date !== null) {
+      setValue(date);
+    }
+    console.log(date);
+  }, []);
   return (
     <div className={Styles.loginFormContainer}>
       <form className={Styles.form}>
         <img
           src={cake}
           alt="img"
-          width={160}
-          height={110}
+          width={150}
+          height={100}
           className={Styles.instagramFont}
         />
+        
         <h5>Add Your Birthday</h5>
-        <p className={Dobstyles.info1}>This won't be a part of your public profile.  
+        <p className={Dobstyles.info1}>
+          This won't be a part of your public profile.
         </p>
-        <a href="" className={Dobstyles.link}>Why I need to provide my Birthday?</a>
-        {/* todo make a date picker */}
-        <p className={Dobstyles.info2}>You need to enter the date you were born</p>
-        <p className={Dobstyles.info2}>Use your own birthday, even if this account is for a business, a pet, or something else</p>
-        <button className={Styles.loginBtn} type="submit">Next</button>
-        <span onClick={()=>setisDobPage(false)} className={Dobstyles.goBackBtn}>Go Back</span>
+        <a href="" className={Dobstyles.link}>
+          Why do I need to provide my birthday?
+        </a>
+        <SelectDatepicker
+          className={Dobstyles.datePicker}
+          selectedDate={value}
+          onDateChange={onDateChange}
+        />
+        <p className={Dobstyles.info2}>
+          You need to enter the date you were born
+        </p>
+        <p className={Dobstyles.info2}>
+          Use your own birthday, even if this account is for a business, a pet,
+          or something else
+        </p>
+        <button className={Styles.loginBtn} type="submit">
+          Next
+        </button>
+        <span
+          onClick={() => setisDobPage(false)}
+          className={Dobstyles.goBackBtn}
+        >
+          Go Back
+        </span>
       </form>
       <div className={Styles.gotoSingup}>
-      <p>Have an account? </p>
+        <p>Have an account? </p>
         <span onClick={() => setIsLogin(true)} style={{ cursor: "pointer" }}>
           {" "}
           &nbsp;Log in

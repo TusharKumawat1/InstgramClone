@@ -76,6 +76,10 @@
     border-radius: 4px;
     padding-right: 40px;
 }
+.formInput::placeholder{
+    position: relative;
+    top: 10px;
+}
 .formInput:focus{
     outline: 1px solid  #d6d6d6;
 }

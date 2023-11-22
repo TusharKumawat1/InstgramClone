@@ -22,6 +22,7 @@ export default function SignupForm() {
     getValues,
     watch,
     setError,
+    setValue
   } = useForm<FormValues>();
   const isValidEmail = (email: string) => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -36,6 +37,7 @@ export default function SignupForm() {
       username: data.username,
       password: data.password,
     }));
+    localStorage.setItem("userDetails",JSON.stringify(data))
     setisDobPage(true)
   };
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +55,15 @@ export default function SignupForm() {
     }
   };
   useEffect(() => {
-    console.log(userDetails);
+    console.log(userDetails); 
+    const ifUserdetails= localStorage.getItem("userDetails")
+    if (ifUserdetails) {
+      const dummy=JSON.parse(ifUserdetails)
+      console.log(dummy)
+      setValue("fullname",dummy.fullname)
+      setValue("user",dummy.user)
+      setValue("username",dummy.username)
+    }
   }, [userDetails]);
   return (
     <div className={Styles.loginFormContainer}>
