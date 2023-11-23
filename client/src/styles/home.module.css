@@ -17,7 +17,8 @@
   gap: 10px;
   width: 50%;
   height: 70%;
-  min-width: 800px;
+  min-width: 850px;
+  max-width: 900px;
 }
 
 @media screen and (max-width: 1100px) {
