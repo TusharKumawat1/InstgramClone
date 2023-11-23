@@ -11,7 +11,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/userHome" element={<UserHome/>} />
-          <Route path="8" element={<NotFound/>} />
+          <Route path="*" element={<NotFound/>} />
         </Routes>
       </BrowserRouter>
     </ContextApi>
