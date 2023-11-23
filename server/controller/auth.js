@@ -8,18 +8,23 @@ dotenv.config;
 
 export const createUser = async (req, res) => {
   try {
-    const { email, fullname, password, username, mobileNO, dob ,countryCode} = req.body;
-
-    if (!email && !mobileNO)
+    const { user, fullname, password, username, dob } = req.body;
+    const isValidEmail = (email) => {
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return regex.test(email);
+    };
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!isValidEmail(user) && !phoneRegex.test(user) ) {
       res
-        .status(400)
-        .json({ error: "Either email or mobile number is required" });
+      .status(400)
+      .json({ error: "Either email or mobile number is required" });
+    } 
 
     //checking validation result
     const result = validationResult(req);
     if (!result.isEmpty()) return res.send({ errors: result.array() });
 
-    const userExist = await User.findOne({ email });
+    const userExist = await User.findOne({ user });
     if (userExist)
       res.status(409).json({ success: false, res: "User allery exist" });
 
@@ -28,8 +33,7 @@ export const createUser = async (req, res) => {
 
     //creating new user
     const newUser = await User({
-      email: email ? email : undefined,
-      mobileNO: mobileNO ? Number(mobileNO) : undefined,
+      user: user,
       fullname: fullname,
       password: hash,
       username: username,
@@ -37,13 +41,13 @@ export const createUser = async (req, res) => {
     });
     await newUser.save();
     const payLoad = {
-      email,
-      _id:newUser._id
+      user,
+      _id: newUser._id,
     };
     const token = jwt.sign(payLoad, process.env.JWT_SIGN);
-    const profileInfo=await ProfileInfo({userId:newUser._id})
+    const profileInfo = await ProfileInfo({ userId: newUser._id });
     await profileInfo.save();
-    return res.status(200).json({ status: 200, res: token });
+    return res.status(200).json({ success: true, res: token });
   } catch (error) {
     console.log("Intrenal server error at auth controller🔴 ", error);
   }
@@ -52,17 +56,17 @@ export const createUser = async (req, res) => {
 // login
 export const loginUser = async (req, res) => {
   try {
-    const { email, password, username } = req.body;
-    const userExist = await User.findOne({ email });
+    const { user, password, username } = req.body;
+    const userExist = await User.findOne({ user });
     if (!userExist)
       res.status(404).json({ success: false, res: "User not found" });
 
-      const payLoad = {
-        email,
-        _id:userExist._id
-      };
+    const payLoad = {
+      user,
+      _id: userExist._id,
+    };
     const token = jwt.sign(payLoad, process.env.JWT_SIGN);
-    return res.status(200).json({ status: 200, res: token });
+    return res.status(200).json({ success: true, res: token });
   } catch (error) {
     console.log("Intrenal server error 🔴 ", error);
   }

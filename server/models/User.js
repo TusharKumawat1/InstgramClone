@@ -3,11 +3,7 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
-    mobileNO: {
-      type: Number,
-      unique: true,
-    },
-    email: {
+    user: {
       type: String,
       unique: true,
       lowercase: true,
@@ -28,7 +24,6 @@ const userSchema = new Schema(
       type: Date,
       required: true,
     },
-   
   },
   { timestamps: true }
 );

@@ -1,17 +1,45 @@
 import React, { useContext, useCallback, useState } from "react";
 import Styles from "../styles/login.module.css";
-import { cake, asset6, asset7 } from "../assets/index";
+import { optpng, asset6, asset7 } from "../assets/index";
 import { MyContext } from "../context/Mycontext";
 import Dobstyles from "../styles/dob.module.css";
+import Loader from "./Loader";
+import { useNavigate } from "react-router-dom";
 export default function OtpPage() {
-  const { setIsLogin, setSignupSteps, setUserDetails } = useContext(MyContext);
+  const { setIsLogin, setSignupSteps, userDetails } = useContext(MyContext);
+  const [isloading, setisloading] = useState(false)
+  const [otpValue, setotpValue] = useState("")
+  const [error, seterror] = useState(true);
+  const navigate=useNavigate();
+  const handleSubmit=async(e: React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
+    if(otpValue==="696969"){
+      setisloading(true)
+      const res=await fetch("http://localhost:3002/auth/createUser",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(userDetails)
+      })
+      const result=await res.json();
+      if (result.success) {
+        localStorage.setItem("token",result.res)
+        navigate("/userHome")
+        setisloading(false)
+        localStorage.removeItem("userDetails")
+      }else{
+        console.log(result)
+      }
+    }
+  }
   return (
     <div className={Styles.loginFormContainer}>
-      <form className={Styles.form}>
+      <form className={Styles.form} onSubmit={handleSubmit}>
         <img
-          src={cake}
+          src={optpng}
           alt="img"
-          width={150}
+          width={90}
           height={100}
           className={Styles.instagramFont}
         />
@@ -24,6 +52,13 @@ export default function OtpPage() {
             id="otp"
             placeholder=" "
             className={Styles.formInput}
+            value={otpValue}
+            onChange={(e)=>{
+              setotpValue(e.target.value)
+              if (e.target.value==="696969") {
+                seterror(false)
+              }
+            }}
           />
           <label htmlFor="password" className={Styles.formInputLable}>
             ######
@@ -33,9 +68,9 @@ export default function OtpPage() {
         <button
           className={Styles.loginBtn}
           type="submit"
-          onClick={() => setSignupSteps(3)}
+          disabled={error}
         >
-          Confirm
+         {isloading?<Loader/>: "Confirm"}
         </button>
         <span
           className={Dobstyles.goBackBtn}

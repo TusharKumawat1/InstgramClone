@@ -11,7 +11,7 @@ import asset9 from "./asset9.png";
 import asset10 from "./asset10.png";
 import cake from "./cake.png"
 import instagramFont from "./instagramFont.png";
-
+import optpng from "./otp.png"
 export {
   asset0,
   asset1,
@@ -25,5 +25,6 @@ export {
   asset9,
   asset10,
   instagramFont,
-  cake
+  cake,
+  optpng
 };

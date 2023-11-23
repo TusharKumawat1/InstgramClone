@@ -1,26 +1,55 @@
-import React, { useContext, useCallback, useState } from "react";
+import React, { useContext, useCallback, useState, useEffect } from "react";
 import Styles from "../styles/login.module.css";
 import { cake, asset6, asset7 } from "../assets/index";
 import { MyContext } from "../context/Mycontext";
 import Dobstyles from "../styles/dob.module.css";
 import { SelectDatepicker } from "react-select-datepicker";
+import { useForm } from "react-hook-form";
+
+type FormValues = {
+ dob:"string"
+};
 export default function Dob() {
-  const { setIsLogin, setSignupSteps ,setUserDetails} = useContext(MyContext);
-  const [value, setValue] = useState<Date | null>(new Date('2022-01-22'));
+  const { setIsLogin, setSignupSteps, setUserDetails ,userDetails} = useContext(MyContext);
+  const [value, setValue] = useState<Date | null>(new Date("2022-01-22"));
+  const [error, seterror] = useState(true);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm<FormValues>();
   const onDateChange = useCallback((date: Date | null) => {
     if (date !== null) {
-      setValue(date);
+      const currentDate = new Date();
+      const selectedDate = new Date(date);
+      const differenceInMilliseconds =
+        currentDate.getTime() - selectedDate.getTime();
+      const thirteenYearsInMilliseconds = 13 * 365 * 24 * 60 * 60 * 1000;
+      if (differenceInMilliseconds < thirteenYearsInMilliseconds) {
+        seterror(true);
+      } else {
+        seterror(false);
+        setValue(date);
+      }
     }
   }, []);
-  const onClick=()=>{
+  const handlesubmit = (data:FormValues) => {
+    console.log(value)
     setUserDetails((p: any) => ({
       ...p,
-     dob:value
+      dob: value,
     }));
-  }
+    setSignupSteps(2)
+  };
+  useEffect(() => {
+    console.log(userDetails)
+  }, [userDetails])
+  
   return (
     <div className={Styles.loginFormContainer}>
-      <form className={Styles.form}>
+      <form className={Styles.form} onSubmit={handleSubmit(handlesubmit)} >
         <img
           src={cake}
           alt="img"
@@ -28,7 +57,7 @@ export default function Dob() {
           height={100}
           className={Styles.instagramFont}
         />
-        
+
         <h5>Add Your Birthday</h5>
         <p className={Dobstyles.info1}>
           This won't be a part of your public profile.
@@ -48,13 +77,14 @@ export default function Dob() {
           Use your own birthday, even if this account is for a business, a pet,
           or something else
         </p>
-        <button className={Styles.loginBtn} type="submit" onClick={()=>setSignupSteps(2)}>
+        <button
+          className={Styles.loginBtn}
+          type="submit"
+          disabled={error}
+        >
           Next
         </button>
-        <span
-          onClick={() => setSignupSteps(0)}
-          className={Dobstyles.goBackBtn}
-        >
+        <span onClick={() => setSignupSteps(0)} className={Dobstyles.goBackBtn}>
           Go Back
         </span>
       </form>

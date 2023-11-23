@@ -2,15 +2,16 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ContextApi from "./context/ContextApi";
-import LoginForm from "./components/LoginForm";
-import SignupForm from "./components/SignupForm";
-import Dob from "./components/Dob";
+import UserHome from "./pages/UserHome";
+import NotFound from "./pages/NotFound";
 export default function App() {
   return (
     <ContextApi>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/userHome" element={<UserHome/>} />
+          <Route path="8" element={<NotFound/>} />
         </Routes>
       </BrowserRouter>
     </ContextApi>
