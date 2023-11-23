@@ -14,11 +14,11 @@ export const createUser = async (req, res) => {
       return regex.test(email);
     };
     const phoneRegex = /^[0-9]{10}$/;
-    if (!isValidEmail(user) && !phoneRegex.test(user) ) {
-      res
-      .status(400)
-      .json({ error: "Either email or mobile number is required" });
-    } 
+    if (!isValidEmail(user) && !phoneRegex.test(user)) {
+      return res
+        .status(400)
+        .json({ error: "Either email or mobile number is required" });
+    }
 
     //checking validation result
     const result = validationResult(req);
@@ -26,7 +26,7 @@ export const createUser = async (req, res) => {
 
     const userExist = await User.findOne({ user });
     if (userExist)
-      res.status(409).json({ success: false, res: "User allery exist" });
+      return res.status(409).json({ success: false, res: "User allery exist" });
 
     //password hashing
     const hash = bcrypt.hashSync(password, 10);
@@ -56,17 +56,24 @@ export const createUser = async (req, res) => {
 // login
 export const loginUser = async (req, res) => {
   try {
-    const { user, password, username } = req.body;
-    const userExist = await User.findOne({ user });
-    if (!userExist)
-      res.status(404).json({ success: false, res: "User not found" });
-
-    const payLoad = {
-      user,
-      _id: userExist._id,
-    };
-    const token = jwt.sign(payLoad, process.env.JWT_SIGN);
-    return res.status(200).json({ success: true, res: token });
+    const { user, password } = req.body;
+    const ifuserExist = await User.findOne({ user });
+    if (!ifuserExist) {
+      return res.status(404).json({ success: false, res: "User not found" });
+    }
+    const isCorrectPass = bcrypt.compare(password, ifuserExist.password);
+    if (isCorrectPass) {
+      const payLoad = {
+        user,
+        _id: ifuserExist._id,
+      };
+      const token = jwt.sign(payLoad, process.env.JWT_SIGN);
+      return res.status(200).json({ success: true, res: token });
+    } else {
+      return res
+        .status(404)
+        .json({ success: false, res: "Incorrect credentials" });
+    }
   } catch (error) {
     console.log("Intrenal server error 🔴 ", error);
   }

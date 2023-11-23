@@ -1,13 +1,51 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Styles from "../styles/login.module.css";
 import { instagramFont, asset6, asset7 } from "../assets/index";
 import { MyContext } from "../context/Mycontext";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 
+type FormValues = {
+  user: string;
+  password: string;
+};
 export default function LoginForm() {
   const { setIsLogin } = useContext(MyContext);
+  const [resError, setresError] = useState(false);
+  const [isloading, setisloading] = useState(false);
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+    watch,
+    setError,
+    setValue,
+  } = useForm<FormValues>();
+  const onsubmit = async (data: FormValues) => {
+    setresError(false);
+    setisloading(true);
+    const res = await fetch("http://localhost:3002/auth/loginUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: data.user, password: data.password }),
+    });
+    const result = await res.json();
+    setisloading(false)
+    if (result.success) {
+      localStorage.setItem("token", result.res);
+      navigate("/userHome");
+    } else {
+      setresError(true);
+    }
+  };
   return (
     <div className={Styles.loginFormContainer}>
-      <form className={Styles.form}>
+      <form className={Styles.form} onSubmit={handleSubmit(onsubmit)}>
         <img
           src={instagramFont}
           alt="img"
@@ -21,6 +59,7 @@ export default function LoginForm() {
             id="user"
             placeholder=" "
             className={Styles.formInput}
+            {...register("user", { required: true })}
           />
           <label htmlFor="user" className={Styles.formInputLable}>
             Phone number, username, or email
@@ -32,12 +71,19 @@ export default function LoginForm() {
             id="password"
             placeholder=" "
             className={Styles.formInput}
+            {...register("password", { required: true, minLength: 8 })}
           />
           <label htmlFor="password" className={Styles.formInputLable}>
             Password
           </label>
         </div>
-        <button className={Styles.loginBtn} type="submit">Log in</button>
+        <button
+          className={Styles.loginBtn}
+          type="submit"
+          disabled={errors.root ? true : false}
+        >
+          {isloading ? <Loader /> : "Log in"}
+        </button>
         <div className={Styles.divider}>
           <span className={Styles.line}></span>
           <span>OR</span>
@@ -49,7 +95,12 @@ export default function LoginForm() {
         >
           <i className="fa-brands fa-square-facebook"></i> Log in with Facebook
         </a>
-
+        {resError && (
+          <p className={Styles.resError}>
+            Sorry, your password was incorrect. Please double-check your
+            password.
+          </p>
+        )}
         <a href="/" className={Styles.forgotPass}>
           Forgot password?
         </a>
