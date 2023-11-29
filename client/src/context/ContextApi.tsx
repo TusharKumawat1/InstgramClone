@@ -13,6 +13,7 @@ type userDetailsType = {
 };
 export default function ContextApi({ children }: ContextApiProviderProps) {
   const [isLogin, setIsLogin] = useState(true);
+  const [isMoreOptionsAvailable, setIsMoreOptionsAvailable] = useState(false);
   const [SignupSteps, setSignupSteps] = useState(0);
   const [userDetails, setUserDetails] = useState<userDetailsType>({
     user: "",
@@ -24,7 +25,16 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
 
   return (
     <MyContext.Provider
-      value={{ isLogin, setIsLogin, userDetails, setUserDetails,SignupSteps, setSignupSteps}}
+      value={{
+        isLogin,
+        setIsLogin,
+        userDetails,
+        setUserDetails,
+        SignupSteps,
+        setSignupSteps,
+        isMoreOptionsAvailable,
+        setIsMoreOptionsAvailable,
+      }}
     >
       {children}
     </MyContext.Provider>

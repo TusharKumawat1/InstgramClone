@@ -12,6 +12,7 @@ import asset10 from "./asset10.png";
 import cake from "./cake.png"
 import instagramFont from "./instagramFont.png";
 import optpng from "./otp.png"
+import reels from "./clapperboard.png"
 export {
   asset0,
   asset1,
@@ -26,5 +27,6 @@ export {
   asset10,
   instagramFont,
   cake,
-  optpng
+  optpng,
+  reels
 };

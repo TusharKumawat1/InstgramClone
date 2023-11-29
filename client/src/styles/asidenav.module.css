@@ -14,9 +14,10 @@
     flex-direction: column;
 }
 .logo{
-    margin-block: 10px;
     margin-bottom: 30px;
-    margin-left: 20px;
+    margin-left: 20px; 
+    margin-top: 20px; 
+    cursor: pointer;
 }
 .options{
     font-weight: 400;
@@ -33,25 +34,73 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+   height: 50px;
+}
+.pfp , .reelsIcon{
+    position: relative;
+    top: 1px;
+    margin-left: 7px;
+    margin-right: 8px;
+    transition: .3s ease;
 }
 .pfp{
-    position: relative;
-    top: 10px;
-}
-.options:has(pfp){
-    padding: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 2px;
+    margin-left: 6px;
 }
 .options i{
     position: relative;
     top: 1px;
     font-size: 20px;
     padding: 10px;
+    transition: .3s ease;
 }
 .options:hover{
-    background-color: #e1e1e1;
+    background-color: #efefef;
     
+}
+.options:hover i,.options:hover .pfp,.options:hover .reelsIcon{
+    transform: scale(1.1,1.1);
 }
 .sectionSecond{
     display: flex;
     flex-direction: column;
+}
+.moreOptionsContainer{
+    height: 400px;
+    width: 270px;
+    margin-left:10px ;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 70px;
+    background-color: white;
+    z-index: 999;
+    box-shadow: 0 0 10px rgb(188, 188, 188);
+    border-radius: 15px; 
+    justify-content: center;
+}
+.moreOptionsContainer .options{
+    font-size: 14px;
+    margin-left: 10px;
+}
+.above,.below{
+    border-radius: 15px;
+    border: 1px solid rgba(1,1,1,0.5);
+    border-color: rgba(1,1,1,0.5);
+}
+.above{
+    border-bottom: 2px solid #949494;
+    border-color: rgba(0,0,0,0.1);
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.below{
+    border-top: 2px solid #949494;
+    border-color: rgba(0,0,0,0.1);
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
 }
