@@ -25,12 +25,13 @@ export default function OtpPage() {
       const result=await res.json();
       if (result.success) {
         localStorage.setItem("token",result.res)
-        navigate("/userHome")
-        setisloading(false)
+        navigate("/")
+   
         localStorage.removeItem("userDetails")
       }else{
         console.log(result)
       }
+      setisloading(false)
     }
   }
   return (

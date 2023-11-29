@@ -14,6 +14,7 @@ export default function LoginForm() {
   const { setIsLogin } = useContext(MyContext);
   const [resError, setresError] = useState(false);
   const [isloading, setisloading] = useState(false);
+  const [ishide, setIsHide] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -38,7 +39,7 @@ export default function LoginForm() {
     setisloading(false)
     if (result.success) {
       localStorage.setItem("token", result.res);
-      navigate("/userHome");
+      navigate("/");
     } else {
       setresError(true);
     }
@@ -67,7 +68,7 @@ export default function LoginForm() {
         </div>
         <div className={Styles.inputContainer}>
           <input
-            type="password"
+            type={ishide ? "password" : "text"}
             id="password"
             placeholder=" "
             className={Styles.formInput}
@@ -76,6 +77,21 @@ export default function LoginForm() {
           <label htmlFor="password" className={Styles.formInputLable}>
             Password
           </label>
+          {watch("password") && (
+            <div className={Styles.checkPass}>
+              {watch("password").length > 7 ? (
+                <i
+                  className={` fa-regular fa-circle-check ${Styles.checkMark}`}
+                ></i>
+              ) : (
+                <i className={`fa-regular fa-circle-xmark ${Styles.xMark}`}></i>
+              )}
+
+              <p onClick={() => setIsHide((p) => !p)}>
+                {ishide ? "Show" : "Hide"}
+              </p>
+            </div>
+          )}
         </div>
         <button
           className={Styles.loginBtn}

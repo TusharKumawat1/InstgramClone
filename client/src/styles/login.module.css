@@ -133,3 +133,32 @@
     margin-bottom: 10px;
     width: 80%;
   }
+  .xMark,.checkMark,.rotateMark{
+    position: absolute;
+    right: 5px;
+    color: red;
+    font-size: 22px;
+}
+.checkMark{
+    color: #a8a8a8;
+}
+.checkPass{
+    display: flex;
+    position: absolute;
+    right: 5px;
+}
+.rotateMark{
+    color: #008ce9;
+    cursor: pointer;
+}
+.checkPass .xMark,.checkPass .checkMark{
+    right: 45px;
+}
+.checkPass p{
+    font-weight: 600;
+    color: #222;
+    cursor: pointer;
+}
+.checkPass p:hover{
+    color:  #a8a8a8;
+}

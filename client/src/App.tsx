@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Auth from "./pages/Auth";
 import ContextApi from "./context/ContextApi";
-import UserHome from "./pages/UserHome";
+import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 export default function App() {
   return (
     <ContextApi>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/userHome" element={<UserHome/>} />
+          <Route path="/auth" element={<Auth/>} />
+          <Route path="/" element={<Home/>} />
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </BrowserRouter>
