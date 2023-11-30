@@ -2,17 +2,20 @@ import React, { useRef, useEffect, useContext } from "react";
 import Styles from "../styles/asidenav.module.css";
 import { MyContext } from "../context/Mycontext";
 import { isMoreType } from "../context/ContextApi";
-export default function MoreOptions() {
-  const { setIsMoreOptionsAvailable } =
-    useContext<isMoreType>(MyContext);
+type isAlreadyOpenType = {
+  setIsAlreadyOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+export default function MoreOptions({ setIsAlreadyOpen }: isAlreadyOpenType) {
+  const { setIsMoreOptionsAvailable } = useContext<isMoreType>(MyContext);
   const toggleIsMoreOptions = () => {
-    setIsMoreOptionsAvailable((p) => !p);
+    setIsMoreOptionsAvailable((p) => false);
   };
   function useOutsideAlerter(ref: React.RefObject<HTMLElement | null>): void {
     useEffect(() => {
       function handleClickOutside(event: MouseEvent) {
         const targetNode = event.target as Node;
         if (ref.current && !ref.current.contains(targetNode)) {
+          setIsAlreadyOpen(false);
           toggleIsMoreOptions();
         }
       }

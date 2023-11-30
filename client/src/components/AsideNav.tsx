@@ -1,14 +1,20 @@
-import React, { useContext} from "react";
+import React, { useContext, useState } from "react";
 import { instagramFont, reels } from "../assets";
 import Styles from "../styles/asidenav.module.css";
 import MoreOptions from "./MoreOptions";
 import { MyContext } from "../context/Mycontext";
 import { isMoreType } from "../context/ContextApi";
+
 export default function AsideNav() {
   const { isMoreOptionsAvailable, setIsMoreOptionsAvailable } =
     useContext<isMoreType>(MyContext);
+  const [isAlreadyOpen, setIsAlreadyOpen] = useState(false);
   const toggleIsMoreOptions = () => {
-    setIsMoreOptionsAvailable((p) => !p);
+    setIsAlreadyOpen((p) => !p);
+    if (!isAlreadyOpen) {
+      setIsMoreOptionsAvailable((p) => !p);
+      console.log(isMoreOptionsAvailable);
+    }
   };
   return (
     <div className={Styles.aside}>
@@ -63,7 +69,7 @@ export default function AsideNav() {
           Profile
         </span>
       </div>
-      {isMoreOptionsAvailable && <MoreOptions />}
+      {isMoreOptionsAvailable && <MoreOptions setIsAlreadyOpen={setIsAlreadyOpen}/>}
       <div className={Styles.sectionSecond}>
         <p className={Styles.options}>
           <i className="fa-brands fa-threads"></i>Threads
