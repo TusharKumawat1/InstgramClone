@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Dispatch, SetStateAction  } from "react";
 import { MyContext } from "./Mycontext";
 
 type ContextApiProviderProps = {
@@ -10,6 +10,10 @@ type userDetailsType = {
   fullname: string;
   username: string;
   password: string;
+};
+export type isMoreType = {
+  isMoreOptionsAvailable: boolean;
+  setIsMoreOptionsAvailable: Dispatch<SetStateAction<boolean>>;
 };
 export default function ContextApi({ children }: ContextApiProviderProps) {
   const [isLogin, setIsLogin] = useState(true);
