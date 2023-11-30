@@ -19,10 +19,9 @@ export default function MoreOptions({ setIsAlreadyOpen }: isAlreadyOpenType) {
           toggleIsMoreOptions();
         }
       }
-      // Bind the event listener
+      //binding
       document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        // Unbind the event listener on clean up
+      return () => {//unbinding
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
@@ -39,7 +38,7 @@ export default function MoreOptions({ setIsAlreadyOpen }: isAlreadyOpenType) {
           <i className="fa-solid fa-chart-line"></i>Your activity
         </span>
         <span className={Styles.options}>
-          <i className="fa-regular fa-bookmark"></i>Saved
+          <i className="fa-regular fa-bookmark" style={{marginRight:"5px"}}></i>Saved
         </span>
         <span className={Styles.options}>
           <i className="fa-solid fa-repeat"></i>Switch appearance
