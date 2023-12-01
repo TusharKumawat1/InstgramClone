@@ -1,36 +1,40 @@
 import { ApolloServer } from "@apollo/server";
 import ProfileInfo from "../models/ProfileInfo.js";
-import mongoose from "mongoose";
 const server = new ApolloServer({
   typeDefs: `
-        type sayHello {
-            message:String
-        }
+        type user{
+            username:String
+            dob:String
+            user:String
+            fullname:String
+        } 
         type profileInfos {
             _id:String
-            userId:String
+            userId:user
             bio:String
             pfp:String
         }
         type Query{
-            saySomething: sayHello
-            say:String
             getPfInfo(userId: String): profileInfos
         }
     `,
   resolvers: {
     Query: {
-      saySomething: () => {
-        return { message: "hellow world" };
+      getPfInfo: async (_, req) => {
+        try {
+            console.log(req)
+          const pfInfo = await ProfileInfo.findOne({
+            userId: req.userId,
+          }).populate({ path: "userId", select: "-password" });
+
+          console.log(pfInfo);
+          return pfInfo;
+        } catch (error) {
+          console.log(error);
+        }
       },
-      say:()=>"bye bye",
-      getPfInfo:async(_,req)=>{
-        const pfInfo = await ProfileInfo.findOne({ userId:req.userId });
-        console.log(userId)
-        return pfInfo
-      }
     },
   },
 });
 await server.start();
-export default server
+export default server;
