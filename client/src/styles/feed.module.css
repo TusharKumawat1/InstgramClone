@@ -25,7 +25,30 @@
     /* border: 1px dashed rgb(0, 0, 0); */
     justify-content: flex-start;
     align-items: center;
+    overflow: auto;
+    overflow-y: hidden;
+    position: relative;
 }
+.scrollRight,.scrollLeft{
+    position: sticky;
+    padding: 10px;
+    right: 10px;
+    top: 20px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    cursor: pointer;
+}
+.scrollLeft{
+    right: 95%;
+}
+.stories::-webkit-scrollbar {
+    display: none;
+  }
 .users{
     width: 80px;
     display: flex;
@@ -40,7 +63,7 @@
     border-radius: 50%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
 }
 .pfp{
     width: 58px;
