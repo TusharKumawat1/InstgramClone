@@ -3,32 +3,94 @@
     flex-direction: column;
     align-items: center;
     height: 60vh;
-    width: 350px;
-    border: 1px solid black;
+    width: 280px;
+    margin-top: 20px;
 }
 .profileName{
     width: 100%;
     height: 80px;
-    padding: 10px;
-    border: 1px dotted black;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 8px;
 }
+
 .suggestion{
     height: 30px;
-    border: 1px solid black;
+    width: 100%;
     margin-block: 10px;
     display: flex;
-    width: 100%;
     justify-content: space-between;
+    margin-left: 8px;
 }
 .topSuggestion{
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 30px;
+    margin-top: -10px;
 }
 .suggestedUser{
     width: 100%;
-    height: 80px;
-    border: 1px dashed black;
+    height: 60px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 8px;
+}
+.pfp{
+    position: relative;
+    width: 45px;
+    height: 38px;
+    border-radius: 50%;
+    border:none;
+    overflow: hidden;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    object-position: top;
+}
+.info{
+    width: 80%; 
+}
+.username{
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.forYou{
+    font-size: 15px;
+    font-weight: 600;
+    color: #909090;
+}
+.seeAll{
+    font-size: 11px;
+    font-weight: bold;
+    color: #565656;
+    cursor: pointer;
+}
+.seeAll:hover{
+    color: #909090;
+}
+.followedBy{
+    font-size: 12px;
+    color: #acacac;
+}
+.followBtn,.switchBtn{
+    background: none;
+    border: none;
+    font-weight: bolder;
+    color:#0F9BF7;
+    font-size: 11.5px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+.followBtn:hover,.switchBtn:hover{
+    color: #0a1923;
 }
 .links{
     display: flex;

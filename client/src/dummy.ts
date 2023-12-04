@@ -39,4 +39,8 @@ export const dummySuggestions=[{
     username:"louis",
     pfp:"https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1600",
     followedBy:["alex_cary","11randiotan"]
+},{
+    username:"louis",
+    pfp:"https://images.pexels.com/photos/6321674/pexels-photo-6321674.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    followedBy:["alex_cary","11randiotan"]
 },]
