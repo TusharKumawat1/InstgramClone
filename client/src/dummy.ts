@@ -20,27 +20,27 @@ export const dummyFeed=[{
 
 export const dummyStories=[{
     username:"test1",
-    content:["https://images.pexels.com/photos/2894292/pexels-photo-2894292.jpeg?auto=compress&cs=tinysrgb&w=300"],
+    content:["https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&w=1600"],
     time:"1 hr"
 }]
 export const dummySuggestions=[{
     username:"jane doe",
-    pfp:"https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    pfp:"https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&w=1600",
     followedBy:["alex_cary","11randiotan"]
 },{
     username:"Alex jane",
-    pfp:"https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    pfp:"https://images.pexels.com/photos/3071626/pexels-photo-3071626.jpeg?auto=compress&cs=tinysrgb&w=1600",
     followedBy:["mike23","Tanu1"]
 },{
     username:"Jessey",
-    pfp:"https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    pfp:"https://images.pexels.com/photos/2894292/pexels-photo-2894292.jpeg?auto=compress&cs=tinysrgb&w=1600",
     followedBy:["brianthedog","peter"]
 },{
     username:"louis",
     pfp:"https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1600",
     followedBy:["alex_cary","11randiotan"]
 },{
-    username:"louis",
+    username:"Martha:)",
     pfp:"https://images.pexels.com/photos/6321674/pexels-photo-6321674.jpeg?auto=compress&cs=tinysrgb&w=1600",
     followedBy:["alex_cary","11randiotan"]
 },]
