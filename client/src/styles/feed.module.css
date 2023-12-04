@@ -1,6 +1,35 @@
 .container{
     width: 100vw;
     height: 100vh;
-    /* border: 1px solid rgb(231, 0, 0); */
     display: flex;
+    overflow: auto;
+    justify-content: center;
+    gap: 20px;
+}
+.mainArea{
+    width: 50%;
+    height: 100vh;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.stories{
+    width: 100%;
+    height: 90px;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px dashed rgb(0, 0, 0);
+}
+.feed{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px dotted black;
 }

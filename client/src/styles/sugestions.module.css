@@ -1,0 +1,49 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60vh;
+    width: 350px;
+    border: 1px solid black;
+}
+.profileName{
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px dotted black;
+}
+.suggestion{
+    height: 30px;
+    border: 1px solid black;
+    margin-block: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.topSuggestion{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.suggestedUser{
+    width: 100%;
+    height: 80px;
+    border: 1px dashed black;
+}
+.links{
+    display: flex;
+    gap: 4px;
+    font-size: 11px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.links a,.tag{
+    text-decoration: none;
+    color: #bbbbbb;
+}
+.tag{
+    width: 100%;
+    margin-block: 20px;
+    justify-content: flex-start;
+    font-size: 13px;
+}

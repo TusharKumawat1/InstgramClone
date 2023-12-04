@@ -3,25 +3,28 @@ import Styles from "../styles/asidenav.module.css";
 import { MyContext } from "../context/Mycontext";
 import { isMoreType } from "../context/ContextApi";
 type isAlreadyOpenType = {
-  setIsAlreadyOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isAlreadyOpen: boolean;
 };
-export default function MoreOptions({ setIsAlreadyOpen }: isAlreadyOpenType) {
+export default function MoreOptions({ isAlreadyOpen }: isAlreadyOpenType) {
   const { setIsMoreOptionsAvailable } = useContext<isMoreType>(MyContext);
   const toggleIsMoreOptions = () => {
-    setIsMoreOptionsAvailable((p) => false);
+    console.log("isAlreadyOpen : ",isAlreadyOpen)
+    if (!isAlreadyOpen) {
+      setIsMoreOptionsAvailable((p) => false);
+    }
   };
   function useOutsideAlerter(ref: React.RefObject<HTMLElement | null>): void {
     useEffect(() => {
       function handleClickOutside(event: MouseEvent) {
         const targetNode = event.target as Node;
         if (ref.current && !ref.current.contains(targetNode)) {
-          setIsAlreadyOpen(false);
           toggleIsMoreOptions();
         }
       }
       //binding
       document.addEventListener("mousedown", handleClickOutside);
-      return () => {//unbinding
+      return () => {
+        //unbinding
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
@@ -38,7 +41,11 @@ export default function MoreOptions({ setIsAlreadyOpen }: isAlreadyOpenType) {
           <i className="fa-solid fa-chart-line"></i>Your activity
         </span>
         <span className={Styles.options}>
-          <i className="fa-regular fa-bookmark" style={{marginRight:"5px"}}></i>Saved
+          <i
+            className="fa-regular fa-bookmark"
+            style={{ marginRight: "5px" }}
+          ></i>
+          Saved
         </span>
         <span className={Styles.options}>
           <i className="fa-solid fa-repeat"></i>Switch appearance

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState ,useEffect} from "react";
 import { instagramFont, reels } from "../assets";
 import Styles from "../styles/asidenav.module.css";
 import MoreOptions from "./MoreOptions";
@@ -10,12 +10,11 @@ export default function AsideNav() {
     useContext<isMoreType>(MyContext);
   const [isAlreadyOpen, setIsAlreadyOpen] = useState(false);
   const toggleIsMoreOptions = () => {
-    setIsAlreadyOpen((p) => !p);
-    if (!isAlreadyOpen) {
-      setIsMoreOptionsAvailable((p) => !p);
-      console.log(isMoreOptionsAvailable);
-    }
+    setIsMoreOptionsAvailable((p) => !p);
   };
+    useEffect(() => {
+    console.log(isAlreadyOpen)
+    }, [isAlreadyOpen])
   return (
     <div className={Styles.aside}>
       <div className={Styles.sectionFirst}>
@@ -69,12 +68,19 @@ export default function AsideNav() {
           Profile
         </span>
       </div>
-      {isMoreOptionsAvailable && <MoreOptions setIsAlreadyOpen={setIsAlreadyOpen}/>}
+      {isMoreOptionsAvailable && (
+        <MoreOptions isAlreadyOpen ={isAlreadyOpen} />
+      )}
       <div className={Styles.sectionSecond}>
         <p className={Styles.options}>
           <i className="fa-brands fa-threads"></i>Threads
         </p>
-        <p className={Styles.options} onClick={toggleIsMoreOptions}>
+        <p
+          className={Styles.options}
+          onClick={toggleIsMoreOptions} 
+          onMouseEnter={() => setIsAlreadyOpen(p=>true)}
+          onMouseLeave={() => setIsAlreadyOpen(p=>false)}
+        >
           <i className="fa-solid fa-bars"></i>More
         </p>
       </div>
