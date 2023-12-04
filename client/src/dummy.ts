@@ -19,10 +19,41 @@ export const dummyFeed=[{
 },]
 
 export const dummyStories=[{
-    username:"test1",
+    username:"jhon_ins",
+    pfp:"https://images.pexels.com/photos/4167729/pexels-photo-4167729.jpeg?auto=compress&cs=tinysrgb&w=1600",
     content:["https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&w=1600"],
     time:"1 hr"
-}]
+},{
+    username:"alok123@",
+    pfp:"https://images.pexels.com/photos/3045825/pexels-photo-3045825.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    content:["https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&w=1600"],
+    time:"1 hr"
+},{
+    username:"Marry69",
+    pfp:"https://images.pexels.com/photos/12367870/pexels-photo-12367870.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    content:["https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&w=1600"],
+    time:"1 hr"
+},{
+    username:"cRISthopher",
+    pfp:"https://images.pexels.com/photos/18077235/pexels-photo-18077235/free-photo-of-young-handsome-man-posing-by-an-abstract-entrance-to-a-bar-in-black-and-white.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    content:["https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&w=1600"],
+    time:"1 hr"
+},{
+    username:"MAans7:)",
+    pfp:"https://images.pexels.com/photos/848117/pexels-photo-848117.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    content:["https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&w=1600"],
+    time:"1 hr"
+},{
+    username:"Rohan001",
+    pfp:"https://images.pexels.com/photos/2911066/pexels-photo-2911066.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    content:["https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&w=1600"],
+    time:"1 hr"
+},{
+    username:"Luci1",
+    pfp:"https://images.pexels.com/photos/8855185/pexels-photo-8855185.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    content:["https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&w=1600"],
+    time:"1 hr"
+},]
 export const dummySuggestions=[{
     username:"jane doe",
     pfp:"https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&w=1600",
