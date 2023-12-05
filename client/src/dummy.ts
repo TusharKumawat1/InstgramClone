@@ -1,7 +1,8 @@
 export const dummyFeed=[{
     username:"tushar",
+    pfp:"https://images.pexels.com/photos/19105510/pexels-photo-19105510/free-photo-of-man-lying-down-on-wooden-footpath.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
     location:"in my mind",
-    images:["https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&w=300","https://images.pexels.com/photos/3022403/pexels-photo-3022403.jpeg?auto=compress&cs=tinysrgb&w=300","https://images.pexels.com/photos/4503875/pexels-photo-4503875.jpeg?auto=compress&cs=tinysrgb&w=300"],
+    images:["https://images.pexels.com/photos/889954/pexels-photo-889954.jpeg?auto=compress&cs=tinysrgb&w=1600","https://images.pexels.com/photos/3022403/pexels-photo-3022403.jpeg?auto=compress&cs=tinysrgb&w=300","https://images.pexels.com/photos/4503875/pexels-photo-4503875.jpeg?auto=compress&cs=tinysrgb&w=300"],
     likes:45,
     comments:[{
         username:"test",
@@ -16,6 +17,67 @@ export const dummyFeed=[{
         username:"test4",
         content:"🐳🐳"
     },],
+    caption:"felling happy🐥"
+},{
+    username:"Aalok",
+    pfp:"https://images.pexels.com/photos/19105510/pexels-photo-19105510/free-photo-of-man-lying-down-on-wooden-footpath.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+    location:"Don't Know",
+    images:["https://images.pexels.com/photos/16465979/pexels-photo-16465979/free-photo-of-woman-standing-in-a-rapeseed-field.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",],
+    likes:45,
+    comments:[{
+        username:"test",
+        content:"👍👍"
+    },{
+        username:"test2",
+        content:"wow🐥"
+    },{
+        username:"test3",
+        content:"😊"
+    },{
+        username:"test4",
+        content:"🐳🐳"
+    },],
+    caption:"🐶🐶"
+},{
+    username:"AmitSevda",
+    pfp:"https://images.pexels.com/photos/19105510/pexels-photo-19105510/free-photo-of-man-lying-down-on-wooden-footpath.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+    location:"South India",
+    images:["https://images.pexels.com/photos/774282/pexels-photo-774282.jpeg?auto=compress&cs=tinysrgb&w=1600","https://images.pexels.com/photos/4503875/pexels-photo-4503875.jpeg?auto=compress&cs=tinysrgb&w=300"],
+    likes:45,
+    comments:[{
+        username:"test",
+        content:"👍👍"
+    },{
+        username:"test2",
+        content:"wow🐥"
+    },{
+        username:"test3",
+        content:"😊"
+    },{
+        username:"test4",
+        content:"🐳🐳"
+    },],
+    caption:"Travling🏍️"
+},{
+    username:"Rahul",
+    location:"Hawaii",
+    pfp:"https://images.pexels.com/photos/19105510/pexels-photo-19105510/free-photo-of-man-lying-down-on-wooden-footpath.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+    images:["https://images.pexels.com/photos/4612303/pexels-photo-4612303.jpeg?auto=compress&cs=tinysrgb&w=600","https://images.pexels.com/photos/4503875/pexels-photo-4503875.jpeg?auto=compress&cs=tinysrgb&w=300"],
+    likes:45,
+    comments:[{
+        username:"test",
+        content:"👍👍"
+    },{
+        username:"test2",
+        content:"wow🐥"
+    },{
+        username:"test3",
+        content:"😊"
+    },{
+        username:"test4",
+        content:"🐳🐳"
+    },],
+    caption:"😎😎"
 },]
 
 export const dummyStories=[{
