@@ -42,7 +42,7 @@ export const dummyFeed=[{
     username:"AmitSevda",
     pfp:"https://images.pexels.com/photos/19105510/pexels-photo-19105510/free-photo-of-man-lying-down-on-wooden-footpath.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
     location:"South India",
-    images:["https://images.pexels.com/photos/774282/pexels-photo-774282.jpeg?auto=compress&cs=tinysrgb&w=1600","https://images.pexels.com/photos/4503875/pexels-photo-4503875.jpeg?auto=compress&cs=tinysrgb&w=300"],
+    images:["https://images.pexels.com/photos/774282/pexels-photo-774282.jpeg?auto=compress&cs=tinysrgb&w=1600",],
     likes:45,
     comments:[{
         username:"test",
@@ -62,7 +62,7 @@ export const dummyFeed=[{
     username:"Rahul",
     location:"Hawaii",
     pfp:"https://images.pexels.com/photos/19105510/pexels-photo-19105510/free-photo-of-man-lying-down-on-wooden-footpath.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-    images:["https://images.pexels.com/photos/4612303/pexels-photo-4612303.jpeg?auto=compress&cs=tinysrgb&w=600","https://images.pexels.com/photos/4503875/pexels-photo-4503875.jpeg?auto=compress&cs=tinysrgb&w=300"],
+    images:["https://images.pexels.com/photos/4612303/pexels-photo-4612303.jpeg?auto=compress&cs=tinysrgb&w=600",],
     likes:45,
     comments:[{
         username:"test",

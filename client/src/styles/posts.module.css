@@ -54,10 +54,20 @@
     position: absolute;
     right: 2px;
 }
-.content{
+.contentBox{
     width: 100%;
+    display: flex;
+    overflow-y: hidden;
     box-shadow: 0 0 4px rgb(188, 188, 188);
     border-radius: 5px;
+    position: relative;
+}
+/* .contentBox::-webkit-scrollbar{
+    display: none;
+} */
+.content{
+    min-width: 100%;
+    object-fit: cover;
 }
 .postEngage{
     display: flex;
@@ -113,4 +123,20 @@
     font-size: 13px;
     color: #868686;
     border-bottom: 1px solid #dedede;
+}
+.scrollLeft,.scrollRight{
+    position: absolute  ;
+    top: 50%;
+    width: 25px;
+    height: 25px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline: 10px;
+    cursor: pointer;
+}
+.scrollRight{
+    right: 0px;
 }
