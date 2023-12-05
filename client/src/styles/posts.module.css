@@ -1,0 +1,116 @@
+.container{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.post{
+    /* border: 1px solid black; */
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.userInfo{
+    width: 100%;
+    height: 50px;
+    padding-block: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    /* border: 1px solid rgb(44, 44, 2); */
+    position: relative;
+}
+.pfp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /* border: 1px solid red; */
+    width: 70%;
+    height: 100%;
+    padding-top: 25px;
+}
+.info h5{
+    font-size: 14px;
+}
+.info p{
+    margin-top: -2px;
+    font-size: 12px;
+    color:#868686;
+}
+.userInfo i{
+    position: absolute;
+    right: 2px;
+}
+.content{
+    width: 100%;
+    box-shadow: 0 0 10px rgb(188, 188, 188);
+    border-radius: 5px;
+}
+.postEngage{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-block: 20px;
+    height: 40px;
+}
+.postEngage1,.postEngage2{
+    display: flex;
+    gap: 15px;
+}
+.postEngage i{
+    font-size: 23px;
+    cursor: pointer;
+}
+.postEngage img{
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+}
+.likedBy{
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    font-weight: 600;
+    font-size: 13.5px;
+}
+.caption{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+    height: 30px;
+    justify-content:flex-start ;
+    /* border: 1px solid red; */
+}
+.caption span{
+    font-size: 14px;
+}
+.commentSection{
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.addComment{
+    width: 100%;
+    padding-block: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #868686;
+    border-bottom: 1px solid #dedede;
+}
