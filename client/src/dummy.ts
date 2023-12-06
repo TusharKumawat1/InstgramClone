@@ -2,7 +2,7 @@ export const dummyFeed=[{
     username:"tushar",
     pfp:"https://images.pexels.com/photos/19105510/pexels-photo-19105510/free-photo-of-man-lying-down-on-wooden-footpath.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
     location:"in my mind",
-    images:["https://images.pexels.com/photos/889954/pexels-photo-889954.jpeg?auto=compress&cs=tinysrgb&w=1600","https://images.pexels.com/photos/3022403/pexels-photo-3022403.jpeg?auto=compress&cs=tinysrgb&w=300","https://images.pexels.com/photos/4503875/pexels-photo-4503875.jpeg?auto=compress&cs=tinysrgb&w=300"],
+    images:["https://images.pexels.com/photos/889954/pexels-photo-889954.jpeg?auto=compress&cs=tinysrgb&w=1600","https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1600","https://images.pexels.com/photos/1670187/pexels-photo-1670187.jpeg?auto=compress&cs=tinysrgb&w=300"],
     likes:45,
     comments:[{
         username:"test",
@@ -42,7 +42,7 @@ export const dummyFeed=[{
     username:"AmitSevda",
     pfp:"https://images.pexels.com/photos/19105510/pexels-photo-19105510/free-photo-of-man-lying-down-on-wooden-footpath.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
     location:"South India",
-    images:["https://images.pexels.com/photos/774282/pexels-photo-774282.jpeg?auto=compress&cs=tinysrgb&w=1600",],
+    images:["https://images.pexels.com/photos/774282/pexels-photo-774282.jpeg?auto=compress&cs=tinysrgb&w=1600","https://images.pexels.com/photos/1668246/pexels-photo-1668246.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/982263/pexels-photo-982263.jpeg?auto=compress&cs=tinysrgb&w=600"],
     likes:45,
     comments:[{
         username:"test",

@@ -9,17 +9,19 @@ export default function Feed() {
   const scrollToRight = () => {
     const container = storiesRef.current;
     if (container) {
+      const nextImageWidth = container.scrollLeft + container.clientWidth;
       container.scrollTo({
-        left: (container.scrollLeft = -1000),
+        left: nextImageWidth-250,
         behavior: "smooth",
       });
-    }
+    } 
   };
   const scrollToLeft = () => {
     const container = storiesRef.current;
     if (container) {
+      const prevImageWidth = container.scrollLeft - container.clientWidth;
       container.scrollTo({
-        left: (container.scrollLeft = 1000),
+        left: prevImageWidth >= 0 ? prevImageWidth +300: 0,
         behavior: "smooth",
       });
     }
@@ -39,10 +41,11 @@ export default function Feed() {
               </div>
             );
           })}
-          <span className={Styles.scrollLeft} onClick={scrollToRight}>
+          
+          <span className={Styles.scrollLeft} onClick={scrollToLeft}>
             <i className="fa-solid fa-angle-left"></i>
           </span>
-          <span className={Styles.scrollRight} onClick={scrollToLeft}>
+          <span className={Styles.scrollRight} onClick={scrollToRight}>
             <i className="fa-solid fa-angle-right"></i>
           </span>
         </div>

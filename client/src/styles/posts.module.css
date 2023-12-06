@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 .userInfo{
     width: 100%;
@@ -62,9 +63,9 @@
     border-radius: 5px;
     position: relative;
 }
-/* .contentBox::-webkit-scrollbar{
+.contentBox::-webkit-scrollbar{
     display: none;
-} */
+}
 .content{
     min-width: 100%;
     object-fit: cover;
@@ -124,9 +125,12 @@
     color: #868686;
     border-bottom: 1px solid #dedede;
 }
+/* relative to post container */
 .scrollLeft,.scrollRight{
     position: absolute  ;
-    top: 50%;
+    top: 41%;
+    /* left: 0; */
+    left: 0;
     width: 25px;
     height: 25px;
     background-color: whitesmoke;
@@ -138,5 +142,12 @@
     cursor: pointer;
 }
 .scrollRight{
-    right: 0px;
+    left: 90%;
+}
+.btnContainer{
+  border: 10px solid red;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    position: relative;
 }

@@ -1,23 +1,32 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Styles from "../styles/posts.module.css";
 import { shareIcon } from "../assets";
 import { dummyFeed } from "../dummy";
 export default function Posts() {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const scrollToRight = () => {
-    const container = document.getElementsByClassName(".contentBox")
+  const [contentRefs, setContentRefs] = useState<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    // Initialize refs based on the length of dummyFeed
+    setContentRefs(dummyFeed.map(() => null));
+  }, []);
+
+  const scrollToRight = (index: number) => {
+    const container = contentRefs[index];
     if (container) {
-      container[0].scrollTo({
-        left: (container[0].scrollLeft = -300),
+      const nextImageWidth = container.scrollLeft + container.clientWidth;
+      container.scrollTo({
+        left: nextImageWidth,
         behavior: "smooth",
       });
     }
   };
-  const scrollToLeft = () => {
-    const container = document.getElementsByClassName(".content")
+
+  const scrollToLeft = (index: number) => {
+    const container = contentRefs[index];
     if (container) {
-      container[0].scrollTo({
-        left: (container[0].scrollLeft = 300),
+      const prevImageWidth = container.scrollLeft - container.clientWidth;
+      container.scrollTo({
+        left: prevImageWidth >= 0 ? prevImageWidth : 0,
         behavior: "smooth",
       });
     }
@@ -36,7 +45,18 @@ export default function Posts() {
                 </div>
                 <i className="fa-solid fa-ellipsis"></i>
               </div>
-              <div className={Styles.contentBox} id="content">
+              <div
+                className={Styles.contentBox}
+                ref={(el) => {
+                  if (el && !contentRefs[index]) {
+                    setContentRefs((prevRefs) => {
+                      const newRefs = [...prevRefs];
+                      newRefs[index] = el;
+                      return newRefs;
+                    });
+                  }
+                }}
+              >
                 {item.images.map((content, index) => {
                   return (
                     <img
@@ -46,14 +66,19 @@ export default function Posts() {
                     ></img>
                   );
                 })}
-                <span className={Styles.scrollLeft} onClick={scrollToRight}>
-                  <i className="fa-solid fa-angle-left"></i>
-                </span>
-                <span className={Styles.scrollRight} onClick={scrollToLeft}>
-                  <i className="fa-solid fa-angle-right"></i>
-                </span>
               </div>
-
+              <span
+                className={Styles.scrollLeft}
+                onClick={() => scrollToLeft(index)}
+              >
+               { item.images.length>0 && <i className="fa-solid fa-angle-left"></i>}
+              </span>
+              <span
+                className={Styles.scrollRight}
+                onClick={() => scrollToRight(index)}
+              >
+               { item.images.length>0 && <i className="fa-solid fa-angle-right"></i>}
+              </span>
               <div className={Styles.postEngage}>
                 <div className={Styles.postEngage1}>
                   <i className="fa-regular fa-heart"></i>
