@@ -67,18 +67,33 @@ export default function Posts() {
                   );
                 })}
               </div>
-              <span
-                className={Styles.scrollLeft}
-                onClick={() => scrollToLeft(index)}
-              >
-               { item.images.length>0 && <i className="fa-solid fa-angle-left"></i>}
-              </span>
-              <span
-                className={Styles.scrollRight}
-                onClick={() => scrollToRight(index)}
-              >
-               { item.images.length>0 && <i className="fa-solid fa-angle-right"></i>}
-              </span>
+              <div>
+                {item.images.length > 1 && (
+                  <span
+                    className={Styles.scrollLeft}
+                    onClick={() => scrollToLeft(index)}
+                  >
+                    <i className="fa-solid fa-angle-left"></i>
+                  </span>
+                )}
+                <div>
+                  {item.images.length > 1 && (
+                    <span
+                      className={Styles.scrollRight}
+                      onClick={() => scrollToRight(index)}
+                    >
+                      <i className="fa-solid fa-angle-right"></i>
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className={Styles.dotsContainer}>
+                {item.images.length > 1 &&
+                  item.images.map((el,index) => {
+                    return <div className={Styles.imageDots} key={index}/>;
+                  })}
+              </div>
+
               <div className={Styles.postEngage}>
                 <div className={Styles.postEngage1}>
                   <i className="fa-regular fa-heart"></i>

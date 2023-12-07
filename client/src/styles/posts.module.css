@@ -151,3 +151,19 @@
     z-index: 99999;
     position: relative;
 }
+.imageDots{
+    height: 7px;
+    width: 7px;
+    border-radius: 50%;
+    background-color: white;
+    opacity: .5;
+ 
+}
+.dotsContainer{
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    position: absolute;
+    bottom: 180px;
+}
