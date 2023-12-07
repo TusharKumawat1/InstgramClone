@@ -20,6 +20,8 @@
     cursor: pointer;
 }
 .options{
+    text-decoration: none;
+    color: inherit;
     font-weight: 400;
     font-size: 18px;
     margin: 10px;

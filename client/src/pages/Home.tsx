@@ -27,7 +27,7 @@ export default function Home() {
   const { loading, error, data } = useQuery(getinfo, {
     variables: {
       token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiOTY5NDAxMTgwMiIsIl9pZCI6IjY1NjViMGI2NGJlZDRhNzk1NmEwYjkyNCIsImlhdCI6MTcwMTE2NDQyMn0.lXyJ6hn-wx9FZCuNZ_usTb1i9V6AUWHYn4h-NVNygxU",
+      localStorage.getItem("token")
     },
   });
   useEffect(() => {
@@ -37,6 +37,7 @@ export default function Home() {
     // if (data) {
     //   console.log(data.getPfInfo.data.userId);
     // }
+    console.log(data)
   }, []);
 
   return (

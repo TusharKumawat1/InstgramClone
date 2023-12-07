@@ -1,0 +1,177 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+}
+.profileSection {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.innerContainer {
+  width: 60%;
+  height: 100%;
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+}
+.userDetails{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #e2e2e2;
+    width: 100%;
+    height: 43%;
+}
+.infoSection {
+
+
+  padding: 35px 100px;
+  display: flex;
+  gap: 100px;
+}
+.pfp {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.details{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.editProfile {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+  /* padding-right: 100px; */
+}
+.primaryBtn{
+    border: none;
+    height: 33px;
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: 0.1s ease;
+    cursor: pointer;
+}
+.primaryBtn:hover{
+    background-color: #d3d3d3;
+}
+.username{
+    font-weight: 490;
+    font-size: 20px;
+}
+.editProfile i {
+    font-size: 20px;
+    cursor: pointer;
+}
+.postNconnections{
+    margin-block: 20px;
+    width: 100%;
+    display: flex;
+    gap: 30px;
+}
+.about{
+    display: flex;
+    flex-direction: column;
+}
+.fullname{
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.bio{
+    font-size: 13px;
+}
+.links{
+    color: rgb(8, 8, 127);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+.links:hover{
+    text-decoration: underline;
+}
+.highlights{
+    padding: 20px 80px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+.createHighlightIcon{
+    width: 80px;
+    height: 80px;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.createHighlight i{
+    font-size: 50px;
+    font-weight: 100;
+    color: #d3d3d3;
+}
+.createHighlight{
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+.createHighlight p{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 12px;
+}
+.library{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 100px;
+}
+.options{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 50px;
+    cursor: pointer;
+}
+.options span{
+    font-size: 13px;
+    font-weight: 500;
+    color:#b9b8b8;
+}
+.posts{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+.cameraIcon{
+    width: 70px;
+    height: 70px;
+    border :1px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
+.firstPhotoBtn{
+    border: none;
+    background: none;
+    color:rgb(0, 180, 251);
+    font-size: 14px;
+    font-weight: 600;
+}

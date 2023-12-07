@@ -33,12 +33,10 @@ const server = new ApolloServer({
       getPfInfo: async (_, req) => {
         try {
             const {token}=req;
-            console.log(req)
             if (!token) {
                 throw new Error("Please provide a token");
             }
             const decoded=jwt.verify(token,process.env.JWT_SIGN)
-            console.log(decoded)
             const ifValidUser=await ProfileInfo.findOne({userId:decoded._id}).populate({
                 path:"userId",
                 select:"-password"

@@ -4,7 +4,8 @@ import Styles from "../styles/asidenav.module.css";
 import MoreOptions from "./MoreOptions";
 import { MyContext } from "../context/Mycontext";
 import { isMoreType } from "../context/ContextApi";
-
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function AsideNav() {
   const { isMoreOptionsAvailable, setIsMoreOptionsAvailable } =
     useContext<isMoreType>(MyContext);
@@ -12,6 +13,10 @@ export default function AsideNav() {
   const toggleIsMoreOptions = () => {
     setIsMoreOptionsAvailable((p) => !p);
   };
+  const navigate=useNavigate()
+  const goToProfile=()=>{
+    navigate("/profile")
+  }
     useEffect(() => {
     console.log(isAlreadyOpen)
     }, [isAlreadyOpen])
@@ -25,17 +30,17 @@ export default function AsideNav() {
           height={50}
           className={Styles.logo}
         />
-        <span className={Styles.options}>
+        <Link to="/" className={Styles.options}>
           <i className="fa-solid fa-house"></i>Home
-        </span>
-        <span className={Styles.options}>
+        </Link>
+        <Link to="" className={Styles.options}>
           {" "}
           <i className="fa-solid fa-magnifying-glass"></i>Search
-        </span>
-        <span className={Styles.options}>
+        </Link>
+        <Link to="" className={Styles.options}>
           <i className="fa-regular fa-compass"></i>Explore
-        </span>
-        <span className={Styles.options}>
+        </Link>
+        <Link to="" className={Styles.options}>
           {" "}
           <img
             src={reels}
@@ -45,17 +50,17 @@ export default function AsideNav() {
             className={Styles.reelsIcon}
           />
           Reels
-        </span>
-        <span className={Styles.options}>
+        </Link>
+        <Link to="" className={Styles.options}>
           <i className="fa-brands fa-facebook-messenger"></i>Messages
-        </span>
-        <span className={Styles.options}>
+        </Link>
+        <Link to="" className={Styles.options}>
           <i className="fa-regular fa-heart"></i>Notification
-        </span>
-        <span className={Styles.options}>
+        </Link>
+        <Link to="" className={Styles.options}>
           <i className="fa-regular fa-square-plus"></i>Create
-        </span>
-        <span className={Styles.options}>
+        </Link>
+        <Link to="/profile" className={Styles.options} >
           <img
             src={
               "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
@@ -66,7 +71,7 @@ export default function AsideNav() {
             className={Styles.pfp}
           />
           Profile
-        </span>
+        </Link>
       </div>
       {isMoreOptionsAvailable && (
         <MoreOptions isAlreadyOpen ={isAlreadyOpen} />
