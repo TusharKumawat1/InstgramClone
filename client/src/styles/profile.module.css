@@ -167,6 +167,7 @@
     justify-content: center;
     align-items: center;
     font-size: 40px;
+    cursor: pointer;
 }
 .firstPhotoBtn{
     border: none;
@@ -174,4 +175,5 @@
     color:rgb(0, 180, 251);
     font-size: 14px;
     font-weight: 600;
+    cursor: pointer;
 }

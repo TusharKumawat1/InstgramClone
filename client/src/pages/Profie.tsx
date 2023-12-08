@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import Styles from "../styles/profile.module.css";
 import AsideNav from "../components/AsideNav";
 import { profile } from "console";
 import Footer from "../components/Footer";
+import { MyContext } from "../context/Mycontext";
+import Modal from "../components/Modal";
 export default function Profie() {
+  const { isModalOpen, setIsModalOpen } = useContext(MyContext);
   return (
     <div className={Styles.container}>
       <AsideNav />
+      {isModalOpen && <Modal />}
       <div className={Styles.profileSection}>
         <div className={Styles.innerContainer}>
           <div className={Styles.userDetails}>
@@ -54,22 +58,37 @@ export default function Profie() {
               </div>
             </div>
           </div>
-        <div className={Styles.library}>
+          <div className={Styles.library}>
             <div className={Styles.options}>
-                <span><i className="fa-solid fa-table-cells"></i> Posts</span>
-                <span><i className="fa-regular fa-bookmark"></i> Saved</span>
-                <span><i className="fa-solid fa-id-card-clip"></i> Taged</span>
+              <span>
+                <i className="fa-solid fa-table-cells"></i> Posts
+              </span>
+              <span>
+                <i className="fa-regular fa-bookmark"></i> Saved
+              </span>
+              <span>
+                <i className="fa-solid fa-id-card-clip"></i> Taged
+              </span>
             </div>
             <div className={Styles.posts}>
-                <div className={Styles.cameraIcon}>
+              <div
+                className={Styles.cameraIcon}
+                onClick={() => setIsModalOpen(true)}
+              >
                 <i className="fa-solid fa-camera"></i>
-                </div>
-                <h1>Share Photos</h1>
-                <p>When you share photos, they will appear on your profile.</p>
-                <button className={Styles.firstPhotoBtn}>Share your first photo</button>
+              </div>
+              <h1>Share Photos</h1>
+              <p>When you share photos, they will appear on your profile.</p>
+              <button
+                className={Styles.firstPhotoBtn}
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+              >
+                Share your first photo
+              </button>
             </div>
-            <Footer/>
-        </div>
+            <Footer />
+          </div>
         </div>
       </div>
     </div>

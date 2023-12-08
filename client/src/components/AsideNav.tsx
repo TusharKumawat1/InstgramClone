@@ -6,10 +6,10 @@ import { MyContext } from "../context/Mycontext";
 import { isMoreType } from "../context/ContextApi";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import ClickAwayListener from 'react-click-away-listener';
 export default function AsideNav() {
   const { isMoreOptionsAvailable, setIsMoreOptionsAvailable } =
     useContext<isMoreType>(MyContext);
-  const [isAlreadyOpen, setIsAlreadyOpen] = useState(false);
   const toggleIsMoreOptions = () => {
     setIsMoreOptionsAvailable((p) => !p);
   };
@@ -17,9 +17,7 @@ export default function AsideNav() {
   const goToProfile=()=>{
     navigate("/profile")
   }
-    useEffect(() => {
-    console.log(isAlreadyOpen)
-    }, [isAlreadyOpen])
+
   return (
     <div className={Styles.aside}>
       <div className={Styles.sectionFirst}>
@@ -74,7 +72,9 @@ export default function AsideNav() {
         </Link>
       </div>
       {isMoreOptionsAvailable && (
-        <MoreOptions isAlreadyOpen ={isAlreadyOpen} />
+        <ClickAwayListener onClickAway={()=>setIsMoreOptionsAvailable(false)}>
+          <MoreOptions/>
+        </ClickAwayListener>
       )}
       <div className={Styles.sectionSecond}>
         <p className={Styles.options}>
@@ -83,8 +83,6 @@ export default function AsideNav() {
         <p
           className={Styles.options}
           onClick={toggleIsMoreOptions} 
-          onMouseEnter={() => setIsAlreadyOpen(p=>true)}
-          onMouseLeave={() => setIsAlreadyOpen(p=>false)}
         >
           <i className="fa-solid fa-bars"></i>More
         </p>

@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction  } from "react";
+import React, { useState, Dispatch, SetStateAction } from "react";
 import { MyContext } from "./Mycontext";
 
 type ContextApiProviderProps = {
@@ -17,6 +17,7 @@ export type isMoreType = {
 };
 export default function ContextApi({ children }: ContextApiProviderProps) {
   const [isLogin, setIsLogin] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMoreOptionsAvailable, setIsMoreOptionsAvailable] = useState(false);
   const [SignupSteps, setSignupSteps] = useState(0);
   const [userDetails, setUserDetails] = useState<userDetailsType>({
@@ -26,7 +27,6 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
     username: "",
     password: "",
   });
-
   return (
     <MyContext.Provider
       value={{
@@ -38,6 +38,8 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
         setSignupSteps,
         isMoreOptionsAvailable,
         setIsMoreOptionsAvailable,
+        isModalOpen,
+        setIsModalOpen,
       }}
     >
       {children}
