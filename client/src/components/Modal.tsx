@@ -35,11 +35,11 @@ export default function Modal() {
       <i className={`fa-solid fa-x ${Styles.closeBtn}`}></i>
       <ClickAwayListener onClickAway={() => setIsModalOpen(false)}>
         <div className={Styles.modal}>
-          <FileUploader
-            handleChange={handleFile}
+          {/* <FileUploader
+            handleChange={handleDropFile}
             name="file"
             types={fileTypes}
-          />
+          /> */}
           <p className={Styles.title}>Create new post</p>
           {/* If any image is available then show the image  */}
           {image ? (
