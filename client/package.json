@@ -12,6 +12,8 @@
     "@types/node": "^16.18.60",
     "@types/react": "^18.2.34",
     "@types/react-dom": "^18.2.14",
+    "cloudinary": "^1.41.0",
+    "cloudinary-core": "^2.13.0",
     "graphql": "^16.8.1",
     "react": "^18.2.0",
     "react-click-away-listener": "^2.2.3",

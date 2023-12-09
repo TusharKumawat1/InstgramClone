@@ -30,14 +30,16 @@ export default function Home() {
       localStorage.getItem("token")
     },
   });
+  const token: string | null = localStorage.getItem("token");
+
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!token) {
       navigate("/auth");
     }
     // if (data) {
     //   console.log(data.getPfInfo.data.userId);
     // }
-    console.log(data)
+    // console.log(data)
   }, []);
 
   return (

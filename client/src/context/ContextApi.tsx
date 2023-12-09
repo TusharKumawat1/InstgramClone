@@ -27,6 +27,24 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
     username: "",
     password: "",
   });
+  const getImageUrl = async (image: string) => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append(
+        "upload_preset", "eaajn3c2"
+    );
+    data.append("cloud_name", "dy72jxgzz");
+    data.append("folder", "Cloudinary-React");
+    const response = await fetch(
+        `https://api.cloudinary.com/v1_1/dy72jxgzz/image/upload`,
+        {
+            method: "POST",
+            body: data,
+        }
+    );
+    const json = await response.json();
+    return json
+  };
   return (
     <MyContext.Provider
       value={{
@@ -40,6 +58,7 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
         setIsMoreOptionsAvailable,
         isModalOpen,
         setIsModalOpen,
+        getImageUrl,
       }}
     >
       {children}
