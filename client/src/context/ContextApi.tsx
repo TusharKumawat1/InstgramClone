@@ -14,6 +14,7 @@ type userDetailsType = {
 export type isMoreType = {
   isMoreOptionsAvailable: boolean;
   setIsMoreOptionsAvailable: Dispatch<SetStateAction<boolean>>;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 export default function ContextApi({ children }: ContextApiProviderProps) {
   const [isLogin, setIsLogin] = useState(true);

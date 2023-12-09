@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ClickAwayListener from 'react-click-away-listener';
 export default function AsideNav() {
-  const { isMoreOptionsAvailable, setIsMoreOptionsAvailable } =
+  const { isMoreOptionsAvailable, setIsMoreOptionsAvailable ,setIsModalOpen} =
     useContext<isMoreType>(MyContext);
   const toggleIsMoreOptions = () => {
     setIsMoreOptionsAvailable((p) => !p);
@@ -55,7 +55,7 @@ export default function AsideNav() {
         <Link to="" className={Styles.options}>
           <i className="fa-regular fa-heart"></i>Notification
         </Link>
-        <Link to="" className={Styles.options}>
+        <Link to="" className={Styles.options} onClick={()=>setIsModalOpen(true)}>
           <i className="fa-regular fa-square-plus"></i>Create
         </Link>
         <Link to="/profile" className={Styles.options} >
