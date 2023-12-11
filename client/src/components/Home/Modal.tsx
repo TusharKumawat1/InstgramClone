@@ -3,7 +3,9 @@ import Styles from "../../styles/components/modal.module.css";
 import ClickAwayListener from "react-click-away-listener";
 import { MyContext } from "../../context/Mycontext";
 import { FileUploader } from "react-drag-drop-files";
-import Loader from "../Auth/Signup/Loader";
+import ImageLoader from "./ImageLoader";
+
+
 
 export default function Modal() {
   const { setIsModalOpen, getImageUrl } = useContext(MyContext);
@@ -48,7 +50,7 @@ export default function Modal() {
             </div>
           ) : // else show upload image
           isImageLoading ? (
-            "loading..."
+            <ImageLoader/>
           ) : (
             <div className={Styles.createPost}>
               <div className={Styles.icons}>
