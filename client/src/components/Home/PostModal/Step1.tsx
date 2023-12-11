@@ -32,12 +32,12 @@ export default function Step1() {
     <div className={Styles.container}>
       <p className={Styles.title}>Create new post</p>
           {/* If any image is available then show the image  */}
-          {image ? (
+          {/* {image ? (
             <div className={Styles.imageContainer}>
-              <img src={image} alt="" className={Styles.createPost} />
+              <img src={image} alt="" className={Styles.image} />
             </div>
-          ) : // else show upload image
-          isImageLoading ? (
+          ) : // else show upload image */}
+         {                isImageLoading ? (
             <ImageLoader/>
           ) : (
             <div className={Styles.createPost}>
