@@ -4,7 +4,7 @@ import AsideNav from "../components/AsideBar/AsideNav";
 import { profile } from "console";
 import Footer from "../components/Home/Footer";
 import { MyContext } from "../context/Mycontext";
-import Modal from "../components/Home/Modal";
+import Modal from "../components/Home/PostModal/Modal";
 export default function Profie() {
   const { isModalOpen, setIsModalOpen } = useContext(MyContext);
   return (

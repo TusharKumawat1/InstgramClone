@@ -5,7 +5,7 @@ import ContextApi from "./context/ContextApi";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Profie from "./pages/Profie";
-import Modal from "./components/Home/Modal";
+import Modal from "./components/Home/PostModal/Modal";
 import { MyContext } from "./context/Mycontext";
 export default function App() {
   const { isModalOpen } = useContext(MyContext);
