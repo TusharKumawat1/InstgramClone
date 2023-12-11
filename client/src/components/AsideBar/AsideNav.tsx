@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { instagramFont, reels } from "../../assets";
-import Styles from "../../styles/asidenav.module.css";
+import Styles from "../../styles/components/asidenav.module.css";
 import MoreOptions from "./MoreOptions";
 import { MyContext } from "../../context/Mycontext";
 import { isMoreType } from "../../context/ContextApi";

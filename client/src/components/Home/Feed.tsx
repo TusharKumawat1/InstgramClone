@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import Styles from "../../styles/feed.module.css";
+import Styles from "../../styles/components/feed.module.css";
 import Suggestion from "./Suggestion";
 import { dummyStories } from "../../dummy";
 import Posts from "./Posts";

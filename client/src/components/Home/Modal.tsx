@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Styles from "../../styles/modal.module.css";
+import Styles from "../../styles/components/modal.module.css";
 import ClickAwayListener from "react-click-away-listener";
 import { MyContext } from "../../context/Mycontext";
 import { FileUploader } from "react-drag-drop-files";

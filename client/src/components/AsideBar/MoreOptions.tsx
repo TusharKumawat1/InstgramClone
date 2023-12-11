@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useContext } from "react";
-import Styles from "../../styles/asidenav.module.css";
+import Styles from "../../styles/components/asidenav.module.css";
 import { MyContext } from "../../context/Mycontext";
 import { isMoreType } from "../../context/ContextApi";
 

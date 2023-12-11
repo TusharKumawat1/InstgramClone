@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import Styles from "../styles/auth.module.css";
+import Styles from "../styles/pages/auth.module.css";
 import LoginForm from "../components/Auth/Login/LoginForm";
 import Footer from "../components/Home/Footer";
 import Hero from "../components/Auth/Hero";

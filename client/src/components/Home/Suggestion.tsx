@@ -1,5 +1,5 @@
 import React from 'react'
-import Styles from "../../styles/sugestions.module.css"
+import Styles from "../../styles/components/sugestions.module.css"
 import { dummyStories, dummySuggestions } from '../../dummy'
 export default function Suggestion() {
   return (

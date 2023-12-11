@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import Styles from "../../../styles/login.module.css";
+import Styles from "../../../styles/components/login.module.css";
 import { instagramFont, asset6, asset7 } from "../../../assets/index";
 import { MyContext } from "../../../context/Mycontext";
 import { useForm } from "react-hook-form";

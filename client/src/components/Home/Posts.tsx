@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import Styles from "../../styles/posts.module.css";
+import Styles from "../../styles/components/posts.module.css";
 import { shareIcon } from "../../assets";
 import { dummyFeed } from "../../dummy";
 export default function Posts() {

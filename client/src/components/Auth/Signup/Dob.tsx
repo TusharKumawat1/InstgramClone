@@ -1,8 +1,8 @@
 import React, { useContext, useCallback, useState, useEffect } from "react";
-import Styles from "../../../styles/login.module.css";
+import Styles from "../../../styles/components/login.module.css";
 import { cake, asset6, asset7 } from "../../../assets/index";
 import { MyContext } from "../../../context/Mycontext";
-import Dobstyles from "../../../styles/dob.module.css";
+import Dobstyles from "../../../styles/components/dob.module.css";
 import { SelectDatepicker } from "react-select-datepicker";
 import { useForm } from "react-hook-form";
 

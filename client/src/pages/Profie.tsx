@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Styles from "../styles/profile.module.css";
+import Styles from "../styles/pages/profile.module.css";
 import AsideNav from "../components/AsideBar/AsideNav";
 import { profile } from "console";
 import Footer from "../components/Home/Footer";
