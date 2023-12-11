@@ -1,23 +1,19 @@
-import React, { useContext, useState ,useEffect} from "react";
-import { instagramFont, reels } from "../assets";
-import Styles from "../styles/asidenav.module.css";
+import React, { useContext, useState, useEffect } from "react";
+import { instagramFont, reels } from "../../assets";
+import Styles from "../../styles/asidenav.module.css";
 import MoreOptions from "./MoreOptions";
-import { MyContext } from "../context/Mycontext";
-import { isMoreType } from "../context/ContextApi";
+import { MyContext } from "../../context/Mycontext";
+import { isMoreType } from "../../context/ContextApi";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import ClickAwayListener from 'react-click-away-listener';
+import ClickAwayListener from "react-click-away-listener";
 export default function AsideNav() {
-  const { isMoreOptionsAvailable, setIsMoreOptionsAvailable ,setIsModalOpen} =
+  const { isMoreOptionsAvailable, setIsMoreOptionsAvailable, setIsModalOpen } =
     useContext<isMoreType>(MyContext);
   const toggleIsMoreOptions = () => {
     setIsMoreOptionsAvailable((p) => !p);
   };
-  const navigate=useNavigate()
-  const goToProfile=()=>{
-    navigate("/profile")
-  }
-
+  const navigate = useNavigate();
   return (
     <div className={Styles.aside}>
       <div className={Styles.sectionFirst}>
@@ -55,10 +51,14 @@ export default function AsideNav() {
         <Link to="" className={Styles.options}>
           <i className="fa-regular fa-heart"></i>Notification
         </Link>
-        <Link to="" className={Styles.options} onClick={()=>setIsModalOpen(true)}>
+        <Link
+          to=""
+          className={Styles.options}
+          onClick={() => setIsModalOpen(true)}
+        >
           <i className="fa-regular fa-square-plus"></i>Create
         </Link>
-        <Link to="/profile" className={Styles.options} >
+        <Link to="/profile" className={Styles.options}>
           <img
             src={
               "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
@@ -72,18 +72,15 @@ export default function AsideNav() {
         </Link>
       </div>
       {isMoreOptionsAvailable && (
-        <ClickAwayListener onClickAway={()=>setIsMoreOptionsAvailable(false)}>
-          <MoreOptions/>
+        <ClickAwayListener onClickAway={() => setIsMoreOptionsAvailable(false)}>
+          <MoreOptions />
         </ClickAwayListener>
       )}
       <div className={Styles.sectionSecond}>
         <p className={Styles.options}>
           <i className="fa-brands fa-threads"></i>Threads
         </p>
-        <p
-          className={Styles.options}
-          onClick={toggleIsMoreOptions} 
-        >
+        <p className={Styles.options} onClick={toggleIsMoreOptions}>
           <i className="fa-solid fa-bars"></i>More
         </p>
       </div>

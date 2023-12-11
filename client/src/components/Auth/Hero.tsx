@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Styles from "../styles/hero.module.css";
-import { asset8, asset2, asset3, asset4, asset5 } from "../assets/index";
+import Styles from "../../styles/hero.module.css";
+import { asset8, asset2, asset3, asset4, asset5 } from "../../assets/index";
 export default function Hero() {
   //geating random path 
   const list = [asset2, asset3, asset4, asset5];

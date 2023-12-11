@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useContext } from "react";
-import Styles from "../styles/asidenav.module.css";
-import { MyContext } from "../context/Mycontext";
-import { isMoreType } from "../context/ContextApi";
+import Styles from "../../styles/asidenav.module.css";
+import { MyContext } from "../../context/Mycontext";
+import { isMoreType } from "../../context/ContextApi";
 
 export default function MoreOptions() {
   const { setIsMoreOptionsAvailable } = useContext<isMoreType>(MyContext);

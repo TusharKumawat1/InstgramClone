@@ -8,6 +8,7 @@
     height: 82%;
     background-color: white;
     border-radius: 10px;
+    z-index: 9999;
 }
 .title{
     width: 100%;
@@ -28,6 +29,7 @@
   justify-content: center;
   align-items: center;
   transition: .3s ease;
+  z-index: 9999;
 }
 .createPost{
     display: flex;

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
-import Styles from "../styles/posts.module.css";
-import { shareIcon } from "../assets";
-import { dummyFeed } from "../dummy";
+import Styles from "../../styles/posts.module.css";
+import { shareIcon } from "../../assets";
+import { dummyFeed } from "../../dummy";
 export default function Posts() {
   const [contentRefs, setContentRefs] = useState<(HTMLDivElement | null)[]>([]);
 

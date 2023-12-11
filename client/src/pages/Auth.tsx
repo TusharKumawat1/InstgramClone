@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import Styles from "../styles/auth.module.css";
-import LoginForm from "../components/LoginForm";
-import Footer from "../components/Footer";
-import Hero from "../components/Hero";
+import LoginForm from "../components/Auth/Login/LoginForm";
+import Footer from "../components/Home/Footer";
+import Hero from "../components/Auth/Hero";
 import { MyContext } from "../context/Mycontext";
-import SignupForm from "../components/SignupForm";
-import Dob from "../components/Dob";
-import OtpPage from "../components/OtpPage";
+import SignupForm from "../components/Auth/Signup/SignupForm";
+import Dob from "../components/Auth/Signup/Dob";
+import OtpPage from "../components/Auth/Signup/OtpPage";
 
 export default function Auth() {
   const {isLogin,SignupSteps,setSignupSteps}=useContext(MyContext);

@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import Styles from "../styles/profile.module.css";
-import AsideNav from "../components/AsideNav";
+import AsideNav from "../components/AsideBar/AsideNav";
 import { profile } from "console";
-import Footer from "../components/Footer";
+import Footer from "../components/Home/Footer";
 import { MyContext } from "../context/Mycontext";
-import Modal from "../components/Modal";
+import Modal from "../components/Home/Modal";
 export default function Profie() {
   const { isModalOpen, setIsModalOpen } = useContext(MyContext);
   return (
     <div className={Styles.container}>
       <AsideNav />
-      {isModalOpen && <Modal />}
+
       <div className={Styles.profileSection}>
         <div className={Styles.innerContainer}>
           <div className={Styles.userDetails}>

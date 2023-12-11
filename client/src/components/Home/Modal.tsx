@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import Styles from "../styles/modal.module.css";
+import Styles from "../../styles/modal.module.css";
 import ClickAwayListener from "react-click-away-listener";
-import { MyContext } from "../context/Mycontext";
+import { MyContext } from "../../context/Mycontext";
 import { FileUploader } from "react-drag-drop-files";
-import Loader from "./Loader";
+import Loader from "../Auth/Signup/Loader";
 
 export default function Modal() {
   const { setIsModalOpen, getImageUrl } = useContext(MyContext);
