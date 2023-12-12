@@ -192,7 +192,6 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: rgb(255, 255, 255);
   border-radius: 50%;
   cursor: pointer;
-  /* Other styles as needed */
 }
 
   
