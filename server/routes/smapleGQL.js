@@ -20,7 +20,7 @@ const server = new ApolloServer({
             userId:user
             bio:String
             pfp:String
-            follower:[user]
+            followers:[user]
             following:[user]
             posts:[String]
         }
@@ -45,7 +45,7 @@ const server = new ApolloServer({
                 path:"userId",
                 select:"-password"
             }).populate({
-              path:"follower",
+              path:"followers",
               select:"-password"
             })
             if (!ifValidUser) {

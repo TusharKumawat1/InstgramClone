@@ -23,13 +23,13 @@ const profileInfoSchema = new Schema(
     followers: [
       {
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: "ProfileInfo",
       },
     ],
     following: [
       {
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: "ProfileInfo",
       },
     ],
     posts: Array,
