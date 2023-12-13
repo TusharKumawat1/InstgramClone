@@ -10,6 +10,7 @@ export default function MoreOptions() {
  const handleLogout=()=>{
   localStorage.removeItem("token")
   navigate("/auth")
+  setIsMoreOptionsAvailable(false)
  }
   return (
     <div className={Styles.moreOptionsContainer} >
