@@ -20,8 +20,8 @@ const server = new ApolloServer({
             userId:user
             bio:String
             pfp:String
-            followers:[user]
-            following:[user]
+            followers:[profileInfos]
+            following:[profileInfos]
             posts:[String]
         }
         type ProfileInfoResponse {
