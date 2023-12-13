@@ -11,6 +11,14 @@ type userDetailsType = {
   username: string;
   password: string;
 };
+type authenticUserType = {
+  userId:{
+    username: string;
+    fullname: string;
+  }
+  pfp: string;
+  _id: string;
+};
 export type isMoreType = {
   isMoreOptionsAvailable: boolean;
   setIsMoreOptionsAvailable: Dispatch<SetStateAction<boolean>>;
@@ -21,6 +29,7 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
   const [isLogin, setIsLogin] = useState(true);
   const [images, setImages] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDiscardModalOpen, setIsDiscardModalOpen] = useState(false);
   const [isMoreOptionsAvailable, setIsMoreOptionsAvailable] = useState(false);
   const [postSteps, setPostSteps] = useState<number>(0);
   const [SignupSteps, setSignupSteps] = useState(0);
@@ -31,6 +40,7 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
     username: "",
     password: "",
   });
+  const [authenticUser, setauthenticUser] = useState<authenticUserType>();
   const generateBase64=(file:Blob)=>{
     const reader = new FileReader();
     reader.onload = async () => {
@@ -75,7 +85,11 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
         setImages,
         postSteps,
         setPostSteps,
-        generateBase64
+        generateBase64,
+        isDiscardModalOpen, 
+        setIsDiscardModalOpen,
+        authenticUser,
+       setauthenticUser
       }}
     >
       {children}

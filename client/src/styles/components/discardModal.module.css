@@ -11,3 +11,45 @@
     transition: .3s ease;
     z-index: 99999;
 }
+.modal{
+    width: 22%;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+.warning{
+    text-align: center;
+    border-bottom: 1px solid rgb(215, 215, 215);
+    width: 100%;
+    padding-block: 30px;
+}
+.warning p{
+    padding-top: 10px;
+    font-size: 14px;
+    color: #7a7a7a;
+}
+.discardBtn{
+    background: none;
+    color: red;
+    border: none;
+    padding-block: 17px;
+    border-bottom: 1px solid rgb(215, 215, 215);
+    width: 100%;
+    cursor: pointer;
+    font-size: 14px;
+}
+.cancleBtn{
+    background: none;
+    color: #000000;
+    font-size: 14px;
+    border: none;
+    padding-block: 17px;
+    width: 100%;
+    cursor: pointer;
+}
+.discardBtn:active,.cancleBtn:active{
+    background-color: #e7e7e7;
+}

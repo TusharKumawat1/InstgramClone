@@ -7,9 +7,14 @@ import Step1 from "./Step1";
 import Step2 from "./Step2";
 
 export default function Modal() {
-  const { setIsModalOpen, setImages, postSteps, setPostSteps } =
-    useContext(MyContext);
-  var    ContentToDisplay = <Step1 />;
+  const {
+    setIsModalOpen,
+    setImages,
+    postSteps,
+    setPostSteps,
+    isDiscardModalOpen,
+  } = useContext(MyContext);
+  var ContentToDisplay = <Step1 />;
   const fileTypes = ["JPG", "PNG", "GIF"];
   if (postSteps === 0) {
     ContentToDisplay = <Step1 />;
@@ -21,9 +26,11 @@ export default function Modal() {
       <i className={`fa-solid fa-x ${Styles.closeBtn}`}></i>
       <ClickAwayListener
         onClickAway={() => {
-          setIsModalOpen(false);
-          setImages([]);
-          setPostSteps(0);
+          if (!isDiscardModalOpen) {
+            setIsModalOpen(false);
+            setImages([]);
+            setPostSteps(0);
+          }
         }}
       >
         <div className={Styles.modal}>{ContentToDisplay}</div>

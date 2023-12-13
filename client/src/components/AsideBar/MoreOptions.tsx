@@ -2,10 +2,15 @@ import React, { useRef, useEffect, useContext } from "react";
 import Styles from "../../styles/components/asidenav.module.css";
 import { MyContext } from "../../context/Mycontext";
 import { isMoreType } from "../../context/ContextApi";
+import { useNavigate } from "react-router-dom";
 
 export default function MoreOptions() {
   const { setIsMoreOptionsAvailable } = useContext<isMoreType>(MyContext);
- 
+  const navigate=useNavigate();
+ const handleLogout=()=>{
+  localStorage.removeItem("token")
+  navigate("/auth")
+ }
   return (
     <div className={Styles.moreOptionsContainer} >
       <div className={Styles.above}>
@@ -31,7 +36,7 @@ export default function MoreOptions() {
       </div>
       <div className={Styles.below}>
         <span className={Styles.options}>Switch account</span>
-        <span className={Styles.options}>Log out</span>
+        <span className={Styles.options} onClick={handleLogout}>Log out</span>
       </div>
     </div>
   );

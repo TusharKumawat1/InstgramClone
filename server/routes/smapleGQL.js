@@ -10,6 +10,7 @@ const server = new ApolloServer({
             dob:String
             user:String
             fullname:String
+            pfp:String
         } 
         type Error {
             message: String!
@@ -19,6 +20,9 @@ const server = new ApolloServer({
             userId:user
             bio:String
             pfp:String
+            follower:[user]
+            following:[user]
+            posts:[String]
         }
         type ProfileInfoResponse {
             data: profileInfos
@@ -40,6 +44,9 @@ const server = new ApolloServer({
             const ifValidUser=await ProfileInfo.findOne({userId:decoded._id}).populate({
                 path:"userId",
                 select:"-password"
+            }).populate({
+              path:"follower",
+              select:"-password"
             })
             if (!ifValidUser) {
                 throw new Error("wrong token");

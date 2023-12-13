@@ -7,20 +7,19 @@ import NotFound from "./pages/NotFound";
 import Profie from "./pages/Profie";
 import Modal from "./components/Home/PostModal/Modal";
 import { MyContext } from "./context/Mycontext";
+import DiscardModal from "./components/DiscardModal";
 export default function App() {
-  const { isModalOpen } = useContext(MyContext);
+  const { isModalOpen, isDiscardModalOpen } = useContext(MyContext);
   return (
-    
-      <BrowserRouter>
-        <Routes>
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profie />} />
-          <Route path="/modal" element={<Modal />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        {isModalOpen && <Modal/>}
-      </BrowserRouter>
-
+    <BrowserRouter>
+      <Routes>
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profie />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      {isModalOpen && <Modal />}
+      {isDiscardModalOpen && <DiscardModal />}
+    </BrowserRouter>
   );
 }

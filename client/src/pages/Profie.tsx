@@ -6,7 +6,7 @@ import Footer from "../components/Home/Footer";
 import { MyContext } from "../context/Mycontext";
 import Modal from "../components/Home/PostModal/Modal";
 export default function Profie() {
-  const { isModalOpen, setIsModalOpen } = useContext(MyContext);
+  const { setIsModalOpen ,authenticUser} = useContext(MyContext);
   return (
     <div className={Styles.container}>
       <AsideNav />
@@ -17,14 +17,14 @@ export default function Profie() {
             <div className={Styles.infoSection}>
               <img
                 src={
-                  "https://images.pexels.com/photos/1408221/pexels-photo-1408221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  authenticUser && authenticUser.pfp
                 }
                 alt=""
                 className={Styles.pfp}
               />
               <div className={Styles.details}>
                 <div className={Styles.editProfile}>
-                  <h3 className={Styles.username}>tusharkumawat._</h3>
+                  <h3 className={Styles.username}>{authenticUser && authenticUser.userId.username}</h3>
                   <button className={Styles.primaryBtn}>Edit profile</button>
                   <button className={Styles.primaryBtn}>View archive</button>
                   <i className="fa-solid fa-gear"></i>

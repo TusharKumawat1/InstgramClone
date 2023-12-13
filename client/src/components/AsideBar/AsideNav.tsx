@@ -8,8 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ClickAwayListener from "react-click-away-listener";
 export default function AsideNav() {
-  const { isMoreOptionsAvailable, setIsMoreOptionsAvailable, setIsModalOpen } =
+  const { isMoreOptionsAvailable, setIsMoreOptionsAvailable, setIsModalOpen, } =
     useContext<isMoreType>(MyContext);
+    const {authenticUser}=useContext(MyContext);
   const toggleIsMoreOptions = () => {
     setIsMoreOptionsAvailable((p) => !p);
   };
@@ -61,7 +62,7 @@ export default function AsideNav() {
         <Link to="/profile" className={Styles.options}>
           <img
             src={
-              "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
+             authenticUser && authenticUser.pfp
             }
             alt="img"
             width={40}

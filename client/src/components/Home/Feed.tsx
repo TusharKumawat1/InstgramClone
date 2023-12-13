@@ -4,6 +4,7 @@ import Suggestion from "./Suggestion";
 import { dummyStories } from "../../dummy";
 import Posts from "./Posts";
 import Footer from "./Footer";
+
 export default function Feed() {
   const storiesRef = useRef<HTMLDivElement>(null);
   const scrollToRight = () => {

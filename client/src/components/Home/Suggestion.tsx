@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Styles from "../../styles/components/sugestions.module.css"
 import { dummyStories, dummySuggestions } from '../../dummy'
+import { MyContext } from '../../context/Mycontext'
 export default function Suggestion() {
+  const {authenticUser}=useContext(MyContext)
   return (
     <div className={Styles.container}>
       <div  className={Styles.profileName}>
-              <img src={"https://images.pexels.com/photos/426976/pexels-photo-426976.jpeg?auto=compress&cs=tinysrgb&w=1600"} className={Styles.pfp}></img>
+              <img src={authenticUser && authenticUser.pfp} className={Styles.pfp}></img>
               <div className={Styles.info}>
-                <h6 className={Styles.username}>tusharkumawt._</h6>
-                <p className={Styles.followedBy}>Tushar Kumawat</p>
+                <h6 className={Styles.username}>{authenticUser && authenticUser.userId.username}</h6>
+                <p className={Styles.followedBy}>{authenticUser && authenticUser.userId.fullname}</p>
               </div>
               <button className={Styles.switchBtn}>Switch</button>
             </div>

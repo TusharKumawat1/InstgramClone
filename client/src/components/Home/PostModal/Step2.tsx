@@ -3,10 +3,10 @@ import Styles from "../../../styles/components/ModalCss/Step2.module.css";
 import { MyContext } from "../../../context/Mycontext";
 import ClickAwayListener from "react-click-away-listener";
 export default function Step2() {
-  const { images ,setImages} = useContext(MyContext);
+  const { images, setImages, setIsDiscardModalOpen } = useContext(MyContext);
   const [aspectRatioBox, setAspectRatioBox] = useState(false);
   const [zoomBox, setZoomBox] = useState(false);
-  const [multiSelect, setMultiSelect] = useState(true);
+  const [multiSelect, setMultiSelect] = useState(false);
   const [zoomRange, setZoomRange] = useState(10);
   const imageContainerRef = useRef<HTMLDivElement | null>(null);
   const aspectBtnRef = useRef<HTMLDivElement | null>(null);
@@ -85,19 +85,43 @@ export default function Step2() {
       }px`;
     }
   };
-  const addMoreImage=(e:React.ChangeEvent<HTMLInputElement>)=>{
-      const newFile=e.target.files?.[0]
-      if (newFile) {
-        setImages((p: string[]) => [...p, URL.createObjectURL(newFile)]);
-      }
-  }
-  useEffect(()=>{
-    console.log(images)
-  },[images])
+  const addMoreImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newFile = e.target.files?.[0];
+    if (newFile) {
+      setImages((p: string[]) => [...p, URL.createObjectURL(newFile)]);
+    }
+  };
+  const showMultiSelectBox = () => {
+    setMultiSelect(true)
+    if (multiSelectRef.current && aspectBtnRef.current && zoomBtnRef.current) {
+      multiSelectRef.current?.querySelectorAll("i").forEach((iTag) => {
+        iTag.style.color = "black";
+        iTag.style.background = "white";
+      });
+      aspectBtnRef.current.style.opacity = ".4";
+      zoomBtnRef.current.style.opacity = ".4";
+      multiSelectRef.current.style.background="white"
+    }
+  };
+  const hideMultiSelectBox = () => {
+    setMultiSelect(false)
+    if (multiSelectRef.current && aspectBtnRef.current && zoomBtnRef.current) {
+      multiSelectRef.current?.querySelectorAll("i").forEach((iTag) => {
+        iTag.style.color = "white";
+        iTag.style.background = "black";
+      });
+      aspectBtnRef.current.style.opacity = ".8";
+      zoomBtnRef.current.style.opacity = ".8";
+      multiSelectRef.current.style.background="black"
+    }
+  };
+  const handleDiscardModalOpen = () => {
+    setIsDiscardModalOpen(true);
+  };
   return (
     <div className={Styles.container}>
       <div className={Styles.Top}>
-        <i className={`fa-solid fa-arrow-left ${Styles.previousBtn}`}></i>
+        <i className={`fa-solid fa-arrow-left ${Styles.previousBtn}`} onClick={handleDiscardModalOpen}></i>
         <p>Crop</p>
         <button className={Styles.nextBtn} type="button">
           Next
@@ -136,7 +160,11 @@ export default function Step2() {
             <i className={`fa-solid fa-magnifying-glass-plus`}></i>
           </span>
         </div>
-        <span className={Styles.feature} ref={multiSelectRef}>
+        <span
+          className={Styles.feature}
+          ref={multiSelectRef}
+          onClick={showMultiSelectBox}
+        >
           <i className={`fa-regular fa-square ${Styles.upperBox}`}></i>
           <i className={`fa-regular fa-square ${Styles.lowerBox}`}></i>
         </span>
@@ -191,12 +219,12 @@ export default function Step2() {
         </ClickAwayListener>
       )}
       {multiSelect && (
-        <ClickAwayListener onClickAway={() => {}}>
+        <ClickAwayListener onClickAway={hideMultiSelectBox}>
           <div className={Styles.multipleImages}>
             {images.map((url: string, i: number) => (
               <div key={i} className={Styles.previewImageContainer}>
                 <img src={url} className={Styles.previewImage}></img>
-                <i className={`fa-solid fa-x ${Styles.removeImage}`} ></i>
+                <i className={`fa-solid fa-x ${Styles.removeImage}`}></i>
               </div>
             ))}
             <div className={Styles.addMoreImageContainer}>

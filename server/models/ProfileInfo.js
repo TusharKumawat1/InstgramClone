@@ -10,7 +10,7 @@ const profileInfoSchema = new Schema(
     pfp: {
       type: String,
       default:
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ADefault_pfp.jpg&psig=AOvVaw27EIfEtRBasmHePx2Vdrhi&ust=1699006225681000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCOiussiJpYIDFQAAAAAdAAAAABAD",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1024px-Default_pfp.svg.png",
     },
     bio: {
       type: String,
