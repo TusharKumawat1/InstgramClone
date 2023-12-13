@@ -31,6 +31,16 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
     username: "",
     password: "",
   });
+  const generateBase64=(file:Blob)=>{
+    const reader = new FileReader();
+    reader.onload = async () => {
+      if (reader.result) {
+        const base64String = reader.result.toString(); //converting image to base64
+        return base64String
+      }
+    };
+    reader.readAsDataURL(file);
+  }
   const getImageUrl = async (image: string) => {
     const data = new FormData();
     data.append("file", image);
@@ -65,6 +75,7 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
         setImages,
         postSteps,
         setPostSteps,
+        generateBase64
       }}
     >
       {children}

@@ -170,7 +170,7 @@
   border-radius: 7px;
   color: white;
   left: 8%;
-  opacity: .9;
+  opacity: 0.9;
   background-color: black;
   display: flex;
   align-items: center;
@@ -192,4 +192,61 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
 }
 
-  
+.multipleImages {
+  position: absolute;
+  height: 120px;
+  min-width: 170px;
+  border-radius: 10px;
+  color: white;
+  right: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgb(29, 29, 29);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  bottom: 60px;
+  transition: 0.5s ease;
+  padding: 10px;
+  transition: .5s ease;
+}
+.previewImage {
+  width: 90px;
+  height: 90px;
+  z-index: 99;
+  opacity: 1;
+}
+.previewImageContainer {
+  position: relative;
+}
+.removeImage {
+  position: absolute;
+  height: 20px;
+  color: white;
+  width: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 9px;
+  cursor: pointer;
+}
+.addMoreImageBtn{
+  color: #848484;
+  font-weight: 300;
+  cursor: pointer;
+  font-size: 22px;
+}
+.addMoreImageContainer{
+  height: 100%;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+.addMoreImageContainer input{
+  display: none;
+}
