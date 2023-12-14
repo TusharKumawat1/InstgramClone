@@ -5,8 +5,38 @@ import { profile } from "console";
 import Footer from "../components/Home/Footer";
 import { MyContext } from "../context/Mycontext";
 import Modal from "../components/Home/PostModal/Modal";
+import { gql, useQuery } from "@apollo/client";
 export default function Profie() {
   const { setIsModalOpen ,authenticUser} = useContext(MyContext);
+  const {setauthenticUser}=useContext(MyContext)
+  const getinfo = gql`
+    query Query($token: String) {
+      getPfInfo(token: $token) {
+        errors {
+          message
+        }
+        data {
+          _id
+          userId {
+            username
+            fullname
+          }
+          pfp
+        }
+      }
+    }
+  `;
+
+  const { loading, error, data } = useQuery(getinfo, {
+    variables: {
+      token:
+      localStorage.getItem("token")
+    },
+  });
+  const token: string | null = localStorage.getItem("token");
+  if (!loading) {
+    setauthenticUser(data.getPfInfo.data)
+  }
   return (
     <div className={Styles.container}>
       <AsideNav />
