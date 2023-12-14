@@ -5,6 +5,7 @@ import { MyContext } from "../../../context/Mycontext";
 import ImageLoader from "../ImageLoader";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
+import Step3 from "./Step3";
 
 export default function Modal() {
   const {
@@ -13,6 +14,7 @@ export default function Modal() {
     postSteps,
     setPostSteps,
     isDiscardModalOpen,
+    ModalRef,
   } = useContext(MyContext);
   var ContentToDisplay = <Step1 />;
   const fileTypes = ["JPG", "PNG", "GIF"];
@@ -20,6 +22,8 @@ export default function Modal() {
     ContentToDisplay = <Step1 />;
   } else if (postSteps === 1) {
     ContentToDisplay = <Step2 />;
+  } else if (postSteps === 2) {
+    ContentToDisplay = <Step3 />;
   }
   return (
     <div className={Styles.overlay}>
@@ -33,7 +37,9 @@ export default function Modal() {
           }
         }}
       >
-        <div className={Styles.modal}>{ContentToDisplay}</div>
+        <div className={Styles.modal} ref={ModalRef}>
+          {ContentToDisplay}
+        </div>
       </ClickAwayListener>
     </div>
   );

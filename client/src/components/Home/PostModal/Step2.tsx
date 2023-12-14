@@ -3,7 +3,7 @@ import Styles from "../../../styles/components/ModalCss/Step2.module.css";
 import { MyContext } from "../../../context/Mycontext";
 import ClickAwayListener from "react-click-away-listener";
 export default function Step2() {
-  const { images, setImages, setIsDiscardModalOpen } = useContext(MyContext);
+  const { images, setImages, setIsDiscardModalOpen,setPostSteps,ModalRef ,setAspectRatio} = useContext(MyContext);
   const [aspectRatioBox, setAspectRatioBox] = useState(false);
   const [zoomBox, setZoomBox] = useState(false);
   const [multiSelect, setMultiSelect] = useState(false);
@@ -40,15 +40,19 @@ export default function Step2() {
       if (aspectRatio === "original") {
         imageContainerRef.current.style.width = "95%";
         imageContainerRef.current.style.height = "95%";
+        setAspectRatio("original")
       } else if (aspectRatio === "1X1") {
         imageContainerRef.current.style.width = "100%";
         imageContainerRef.current.style.height = "100%";
+        setAspectRatio("1X1")
       } else if (aspectRatio === "4X5") {
         imageContainerRef.current.style.width = "80%";
         imageContainerRef.current.style.height = "100%";
+        setAspectRatio("4X5")
       } else if (aspectRatio === "16X9") {
         imageContainerRef.current.style.width = "100%";
         imageContainerRef.current.style.height = "60%";
+        setAspectRatio("16X9")
       }
     }
   };
@@ -92,7 +96,7 @@ export default function Step2() {
     }
   };
   const showMultiSelectBox = () => {
-    setMultiSelect(true)
+    setMultiSelect(true);
     if (multiSelectRef.current && aspectBtnRef.current && zoomBtnRef.current) {
       multiSelectRef.current?.querySelectorAll("i").forEach((iTag) => {
         iTag.style.color = "black";
@@ -100,11 +104,11 @@ export default function Step2() {
       });
       aspectBtnRef.current.style.opacity = ".4";
       zoomBtnRef.current.style.opacity = ".4";
-      multiSelectRef.current.style.background="white"
+      multiSelectRef.current.style.background = "white";
     }
   };
   const hideMultiSelectBox = () => {
-    setMultiSelect(false)
+    setMultiSelect(false);
     if (multiSelectRef.current && aspectBtnRef.current && zoomBtnRef.current) {
       multiSelectRef.current?.querySelectorAll("i").forEach((iTag) => {
         iTag.style.color = "white";
@@ -112,18 +116,36 @@ export default function Step2() {
       });
       aspectBtnRef.current.style.opacity = ".8";
       zoomBtnRef.current.style.opacity = ".8";
-      multiSelectRef.current.style.background="black"
+      multiSelectRef.current.style.background = "black";
     }
   };
   const handleDiscardModalOpen = () => {
     setIsDiscardModalOpen(true);
   };
+  const removeImage = (imageIndex: number) => {
+    if (images.length <= 1) {
+      setIsDiscardModalOpen(true);
+    } else {  
+      const updatedImages = [...images];
+      updatedImages.splice(imageIndex, 1);
+      setImages(updatedImages);
+    }
+  };
+  const gotoStep3=()=>{
+    setPostSteps(2)
+    if (ModalRef.current) {
+      ModalRef.current.style.width="55%"
+    }
+  }
   return (
     <div className={Styles.container}>
       <div className={Styles.Top}>
-        <i className={`fa-solid fa-arrow-left ${Styles.previousBtn}`} onClick={handleDiscardModalOpen}></i>
+        <i
+          className={`fa-solid fa-arrow-left ${Styles.previousBtn}`}
+          onClick={handleDiscardModalOpen}
+        ></i>
         <p>Crop</p>
-        <button className={Styles.nextBtn} type="button">
+        <button className={Styles.nextBtn} type="button" onClick={gotoStep3}>
           Next
         </button>
       </div>
@@ -224,7 +246,10 @@ export default function Step2() {
             {images.map((url: string, i: number) => (
               <div key={i} className={Styles.previewImageContainer}>
                 <img src={url} className={Styles.previewImage}></img>
-                <i className={`fa-solid fa-x ${Styles.removeImage}`}></i>
+                <i
+                  className={`fa-solid fa-x ${Styles.removeImage}`}
+                  onClick={() => removeImage(i)}
+                ></i>
               </div>
             ))}
             <div className={Styles.addMoreImageContainer}>

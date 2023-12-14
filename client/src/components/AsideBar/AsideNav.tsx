@@ -59,7 +59,7 @@ export default function AsideNav() {
         >
           <i className="fa-regular fa-square-plus"></i>Create
         </Link>
-        <Link to="/profile" className={Styles.options}>
+        <Link to={`/profile/${authenticUser && authenticUser.userId.username}`} className={Styles.options}>
           <img
             src={
              authenticUser && authenticUser.pfp

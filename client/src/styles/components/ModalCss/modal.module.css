@@ -1,10 +1,10 @@
 .modal{
-    transition: 3s ease;
+    transition: .5s ease;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    width: 36%;
+    min-width: 36%;
     height: 81%;
     background-color: white;
     border-radius: 10px;

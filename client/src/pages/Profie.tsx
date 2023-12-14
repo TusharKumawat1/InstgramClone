@@ -41,7 +41,7 @@ export default function Profie() {
                   </span>
                 </div>
                 <div className={Styles.about}>
-                  <h4 className={Styles.fullname}>Tushar Kumawat</h4>
+                  <h4 className={Styles.fullname}>{authenticUser&&authenticUser.userId.username}</h4>
                   <p className={Styles.bio}>Bio</p>
                   <a className={Styles.links}>link</a>
                 </div>
