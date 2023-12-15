@@ -3,16 +3,27 @@ import Styles from "../../../styles/components/ModalCss/Step2.module.css";
 import { MyContext } from "../../../context/Mycontext";
 import ClickAwayListener from "react-click-away-listener";
 export default function Step2() {
-  const { images, setImages, setIsDiscardModalOpen,setPostSteps,ModalRef ,setAspectRatio} = useContext(MyContext);
+  const {
+    images,
+    setImages,
+    setIsDiscardModalOpen,
+    setPostSteps,
+    ModalRef,
+    setAspectRatio,
+    zoomRange, 
+    setZoomRange,
+    aspectRatio
+  } = useContext(MyContext);
   const [aspectRatioBox, setAspectRatioBox] = useState(false);
   const [zoomBox, setZoomBox] = useState(false);
   const [multiSelect, setMultiSelect] = useState(false);
-  const [zoomRange, setZoomRange] = useState(10);
+
   const imageContainerRef = useRef<HTMLDivElement | null>(null);
   const aspectBtnRef = useRef<HTMLDivElement | null>(null);
   const zoomBtnRef = useRef<HTMLDivElement | null>(null);
   const multiSelectRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
+
   const showAspectBox = () => {
     setAspectRatioBox((p) => true);
     if (aspectBtnRef.current && zoomBtnRef.current && multiSelectRef.current) {
@@ -24,6 +35,7 @@ export default function Step2() {
       multiSelectRef.current.style.opacity = ".4";
     }
   };
+
   const hideAspectBox = () => {
     setAspectRatioBox((p) => false);
     if (aspectBtnRef.current && zoomBtnRef.current && multiSelectRef.current) {
@@ -35,24 +47,25 @@ export default function Step2() {
       multiSelectRef.current.style.opacity = ".8";
     }
   };
+  // seting image acpect ratio 
   const handleAspectRatio = (aspectRatio: string) => {
     if (imageContainerRef.current) {
       if (aspectRatio === "original") {
         imageContainerRef.current.style.width = "95%";
         imageContainerRef.current.style.height = "95%";
-        setAspectRatio("original")
+        setAspectRatio("original");
       } else if (aspectRatio === "1X1") {
         imageContainerRef.current.style.width = "100%";
         imageContainerRef.current.style.height = "100%";
-        setAspectRatio("1X1")
+        setAspectRatio("1X1");
       } else if (aspectRatio === "4X5") {
         imageContainerRef.current.style.width = "80%";
         imageContainerRef.current.style.height = "100%";
-        setAspectRatio("4X5")
+        setAspectRatio("4X5");
       } else if (aspectRatio === "16X9") {
         imageContainerRef.current.style.width = "100%";
         imageContainerRef.current.style.height = "60%";
-        setAspectRatio("16X9")
+        setAspectRatio("16X9");
       }
     }
   };
@@ -79,7 +92,7 @@ export default function Step2() {
     }
   };
   const handleZoom = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setZoomRange((p) => parseFloat(e.target.value));
+    setZoomRange((p:number) => parseFloat(e.target.value));
     if (imageRef.current) {
       imageRef.current.style.width = `${
         (700 * parseFloat(e.target.value)) / 20
@@ -125,18 +138,42 @@ export default function Step2() {
   const removeImage = (imageIndex: number) => {
     if (images.length <= 1) {
       setIsDiscardModalOpen(true);
-    } else {  
+    } else {
       const updatedImages = [...images];
       updatedImages.splice(imageIndex, 1);
       setImages(updatedImages);
     }
   };
-  const gotoStep3=()=>{
-    setPostSteps(2)
+  const gotoStep3 = () => {
+    setPostSteps(2);
     if (ModalRef.current) {
-      ModalRef.current.style.width="55%"
+      ModalRef.current.style.width = "55%";
     }
-  }
+  };
+  useEffect(() => {
+    if (imageContainerRef.current) {
+      if (aspectRatio === "original") {
+        imageContainerRef.current.style.width = "95%";
+      } else if (aspectRatio === "1X1") {
+        imageContainerRef.current.style.width = "100%";
+        imageContainerRef.current.style.height = "100%";
+      } else if (aspectRatio === "4X5") {
+        imageContainerRef.current.style.width = "80%";
+        imageContainerRef.current.style.height = "100%";
+      } else if (aspectRatio === "16X9") {
+        imageContainerRef.current.style.width = "100%";
+        imageContainerRef.current.style.height = "60%";
+      }
+    }
+    if (imageRef.current) {
+      imageRef.current.style.width = `${
+        (700 * parseFloat(zoomRange)) / 20
+      }px`;
+      imageRef.current.style.height = `${
+        (700 * parseFloat(zoomRange)) / 20
+      }px`;
+    }
+  });
   return (
     <div className={Styles.container}>
       <div className={Styles.Top}>

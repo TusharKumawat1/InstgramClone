@@ -20,6 +20,12 @@
   font-size: 16px;
   font-weight: 600;
 }
+.nextBtn{
+  border: none;
+  background: none;
+  color: rgb(24, 143, 254);
+  cursor: pointer;
+}
 .mainContainer{
   width: 100%;
   height: 100%;
@@ -30,7 +36,7 @@
   align-items: center;
 }
 .imageHolder{
-  width: 65%;
+  width: 66%;
   height: 100%;
   overflow: hidden;
   display: flex;
@@ -40,14 +46,142 @@
 .imageContainer{
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 .image{
+  width: 700px;
+  height: 700px;
+  /* border-bottom-left-radius:10px ; */
+  background-position: top;
+}
+.imageMask{
   width: 100%;
   height: 100%;
-  /* border-bottom-left-radius:10px ; */
+  position: absolute;
+  top: 0px;
 }
-.filterSection{
-  width: 35%;
+.editSection{
+  width: 34%;
   height: 100%;
-  background-color:rgb(255, 12, 12);
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-items: center;
+}
+.options{
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #d7d7d7;
+ 
+}
+.btn{
+  transition: .3s ease;
+  width: 50%;
+  padding-block: 10px;
+  background:none;
+  border:none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #d7d7d7;
+  cursor: pointer;
+}
+.filters{
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding:20px 0px 0px 25px
+}
+.filter{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  color: rgb(86, 86, 86);
+  cursor: pointer;
+  font-size: 12px;
+  position: relative;
+}
+.ballonImg{
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+}
+.mask{
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  top: 0px;
+}
+.Aden{
+  backdrop-filter: contrast(90%) brightness(120%) saturate(85%) sepia(0%) hue-rotate(20deg) grayscale(0%) invert(0%) blur(0px);
+  mix-blend-mode: darken;
+  background: rgba(125, 105, 24, .1);
+  opacity: 1;
+}
+.Clarendon{
+  backdrop-filter: contrast(120%) brightness(125%) saturate(100%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
+  mix-blend-mode: overlay;
+  background: rgba(127, 187, 227, 0.2);
+  opacity: 1;
+}
+.Gingham{
+  backdrop-filter: contrast(105%) brightness(100%) saturate(100%) sepia(0%) hue-rotate(350deg) grayscale(0%) invert(0%) blur(0px);
+  mix-blend-mode: normal;
+  background: linear-gradient(to right, rgba(66, 10, 14, 0.2) 1, rgba(0, 0, 0, 0));
+  opacity: 1;
+}
+.NoFilter{
+  backdrop-filter: contrast(100%) brightness(100%) saturate(100%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
+  mix-blend-mode: normal;
+  background: rgba(0, 0, 0, 0.0);
+  opacity: 1;
+}
+.Inkwell{
+  backdrop-filter: contrast(110%) brightness(110%) saturate(100%) sepia(30%) hue-rotate(0deg) grayscale(100%) invert(0%) blur(0px);
+  mix-blend-mode: normal;
+  background: rgba(0, 0, 0, 0);
+  opacity: 1;
+}
+.Hudson{
+  backdrop-filter: contrast(90%) brightness(120%) saturate(110%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
+  mix-blend-mode: multiply;
+  background: radial-gradient(50% 50%, circle closest-corner, rgba(255, 177, 166, 1) 50, rgba(52, 33, 52, 1));
+  opacity: 5;
+}
+.Lofi{
+  backdrop-filter: contrast(150%) brightness(100%) saturate(110%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
+  mix-blend-mode: multiply;
+  background: radial-gradient(50% 50%, circle closest-corner, rgba(0, 0, 0, 0) 70, rgba(34, 34, 34, 1));
+  opacity: 1;
+}
+.Maven{
+  backdrop-filter: contrast(95%) brightness(95%) saturate(150%) sepia(25%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
+  mix-blend-mode: hue;
+  background: rgba(3, 230, 26, 0.2);
+  opacity: 1;
+}
+.Reyes{
+  backdrop-filter: contrast(85%) brightness(110%) saturate(75%) sepia(22%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
+  mix-blend-mode: soft-light;
+  background: rgba(173, 205, 239, 1);
+  opacity: 0.5;
+}
+.Xpro2{
+  backdrop-filter: contrast(100%) brightness(100%) saturate(100%) sepia(30%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
+  mix-blend-mode: color-burn;
+  background: rgba(62, 162, 253, 0.5);
+  opacity: 1;
+}
+.Perpetua{
+  backdrop-filter: contrast(100%) brightness(100%) saturate(100%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
+  mix-blend-mode: normal;
+  background: linear-gradient(to bottom, rgba(0, 91, 154, 1) 1, rgba(61, 193, 230, 0));
+  opacity: 0.5;
+}
+.Toaster{
+  backdrop-filter: contrast(110%) brightness(110%) saturate(130%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
+  mix-blend-mode: screen;
+  background: radial-gradient(50% 50%, circle closest-corner, rgba(15, 78, 128, 1) 1, rgba(59, 0, 59, 1));
+  opacity: 0.5;
 }

@@ -1,9 +1,16 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Styles from "../../../styles/components/ModalCss/step3.module.css";
 import { MyContext } from "../../../context/Mycontext";
+import { ballon } from "../../../assets";
 export default function Step3() {
-  const { images, setPostSteps, ModalRef, aspectRatio } = useContext(MyContext);
+  const { images, setPostSteps, ModalRef, aspectRatio, zoomRange } =
+    useContext(MyContext);
   const imageContainerRef = useRef<HTMLDivElement | null>(null);
+  const imageMaskRef = useRef<HTMLDivElement | null>(null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
+  const filterBtnRef = useRef<HTMLButtonElement | null>(null);
+  const adjustBtnRef = useRef<HTMLButtonElement | null>(null);
+  const [IsfilterSection, setIsfilterSection] = useState(true);
   const gotoStep2 = () => {
     setPostSteps(1);
     if (ModalRef.current) {
@@ -25,7 +32,43 @@ export default function Step3() {
         imageContainerRef.current.style.height = "60%";
       }
     }
+    if (imageRef.current) {
+      imageRef.current.style.width = `${(700 * parseFloat(zoomRange)) / 20}px`;
+      imageRef.current.style.height = `${(700 * parseFloat(zoomRange)) / 20}px`;
+    }
   });
+  const applyFilter = (e: React.MouseEvent<HTMLElement>) => {
+    const target = e.target as HTMLElement;
+    if (imageMaskRef.current) {
+      imageMaskRef.current.className = "";
+      imageMaskRef.current.classList.add(Styles.imageMask);
+      imageMaskRef.current.classList.add(target.classList[0]);
+    }
+  };
+  const showAdjustments=()=>{
+    setIsfilterSection(false)
+    if(filterBtnRef.current && adjustBtnRef.current){
+      adjustBtnRef.current.style.color="black";
+      adjustBtnRef.current.style.borderBottom="1px solid black";
+      filterBtnRef.current.style.color="#d7d7d7";
+      filterBtnRef.current.style.borderBottom="1px solid #d7d7d7";
+    }
+  }
+  const showFilters=()=>{
+    setIsfilterSection(true)
+    if(filterBtnRef.current && adjustBtnRef.current){
+      filterBtnRef.current.style.color="black";
+      filterBtnRef.current.style.borderBottom="1px solid black";
+      adjustBtnRef.current.style.color="#d7d7d7";
+      adjustBtnRef.current.style.borderBottom="1px solid #d7d7d7";
+    }
+  }
+  useEffect(()=>{
+    if(filterBtnRef.current){
+      filterBtnRef.current.style.color="black";
+      filterBtnRef.current.style.borderBottom="1px solid black";
+    }
+  },[])
   return (
     <div className={Styles.container}>
       <div className={Styles.Top}>
@@ -41,10 +84,91 @@ export default function Step3() {
       <div className={Styles.mainContainer}>
         <div className={Styles.imageHolder}>
           <div className={Styles.imageContainer} ref={imageContainerRef}>
-            <img src={images[0]} alt="" className={Styles.image} />
+            <img
+              src={images[0]}
+              alt=""
+              className={Styles.image}
+              ref={imageRef}
+            />
+            <div className={Styles.imageMask} ref={imageMaskRef}></div>
           </div>
         </div>
-        <div className={Styles.filterSection}></div>
+        <div className={Styles.editSection}>
+          <div className={Styles.options}>
+            <button className={Styles.btn} type="button" onClick={showFilters}
+            ref={filterBtnRef}
+            >Filters</button>
+            <button className={Styles.btn} type="button" onClick={showAdjustments}
+            ref={adjustBtnRef}
+            >Adjustment</button>
+          </div>
+          {IsfilterSection ? (
+            <div className={Styles.filters} >
+              <div className={`${Styles.filter}`} onClick={applyFilter}>
+                <img src={ballon} alt="filter" className={Styles.ballonImg} />
+                <div className={`${Styles.Aden} ${Styles.mask}`}></div>
+                <p>Aden</p>
+              </div>
+              <div className={Styles.filter} onClick={applyFilter}>
+                <img src={ballon} alt="filter" className={Styles.ballonImg} />
+                <div className={`${Styles.Clarendon} ${Styles.mask}`}></div>
+                <p>Clarendon</p>
+              </div>
+              <div className={Styles.filter} onClick={applyFilter}>
+                <img src={ballon} alt="filter" className={Styles.ballonImg} />
+                <div className={`${Styles.Gingham} ${Styles.mask}`}></div>
+                <p>Gingham</p>
+              </div>
+              <div className={Styles.filter} onClick={applyFilter}>
+                <img src={ballon} alt="filter" className={Styles.ballonImg} />
+                <div className={`${Styles.Inkwell} ${Styles.mask}`}></div>
+                <p>Inkwell</p>
+              </div>
+              <div className={Styles.filter} onClick={applyFilter}>
+                <img src={ballon} alt="filter" className={Styles.ballonImg} />
+                <div className={`${Styles.Hudson} ${Styles.mask}`}></div>
+                <p>Hudson</p>
+              </div>
+              <div className={Styles.filter} onClick={applyFilter}>
+                <img src={ballon} alt="filter" className={Styles.ballonImg} />
+                <div className={`${Styles.NoFilter} ${Styles.mask}`}></div>
+                <p>Original</p>
+              </div>
+              <div className={Styles.filter} onClick={applyFilter}>
+                <img src={ballon} alt="filter" className={Styles.ballonImg} />
+                <div className={`${Styles.Toaster} ${Styles.mask}`}></div>
+                <p>Toaster</p>
+              </div>
+              <div className={Styles.filter} onClick={applyFilter}>
+                <img src={ballon} alt="filter" className={Styles.ballonImg} />
+                <div className={`${Styles.Lofi} ${Styles.mask}`}></div>
+                <p>Lofi</p>
+              </div>
+              <div className={Styles.filter} onClick={applyFilter}>
+                <img src={ballon} alt="filter" className={Styles.ballonImg} />
+                <div className={`${Styles.Maven} ${Styles.mask}`}></div>
+                <p>Maven</p>
+              </div>
+              <div className={Styles.filter} onClick={applyFilter}>
+                <img src={ballon} alt="filter" className={Styles.ballonImg} />
+                <div className={`${Styles.Reyes} ${Styles.mask}`}></div>
+                <p>Reyes</p>
+              </div>
+              <div className={Styles.filter} onClick={applyFilter}>
+                <img src={ballon} alt="filter" className={Styles.ballonImg} />
+                <div className={`${Styles.Xpro2} ${Styles.mask}`}></div>
+                <p>Xpro2</p>
+              </div>
+              <div className={Styles.filter} onClick={applyFilter}>
+                <img src={ballon} alt="filter" className={Styles.ballonImg} />
+                <div className={`${Styles.Perpetua} ${Styles.mask}`}></div>
+                <p>Perpetua</p>
+              </div>
+            </div>
+          ) : (
+            "Adjust..."
+          )}
+        </div>
       </div>
     </div>
   );

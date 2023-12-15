@@ -15,6 +15,8 @@ export default function Modal() {
     setPostSteps,
     isDiscardModalOpen,
     ModalRef,
+    setZoomRange,
+    setAspectRatio
   } = useContext(MyContext);
   var ContentToDisplay = <Step1 />;
   const fileTypes = ["JPG", "PNG", "GIF"];
@@ -34,6 +36,8 @@ export default function Modal() {
             setIsModalOpen(false);
             setImages([]);
             setPostSteps(0);
+            setAspectRatio("")
+            setZoomRange(20)
           }
         }}
       >

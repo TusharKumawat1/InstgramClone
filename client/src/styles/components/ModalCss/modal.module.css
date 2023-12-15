@@ -1,14 +1,15 @@
-.modal{
-    transition: .5s ease;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    min-width: 36%;
-    height: 81%;
-    background-color: white;
-    border-radius: 10px;
-    z-index: 9999;
+.modal {
+  transition: 0.5s ease;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 36%;
+  height: 81%;
+  background-color: white;
+  border-radius: 10px;
+  z-index: 9999;
+  overflow: hidden;
 }
 .overlay {
   position: fixed;
@@ -20,15 +21,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: .3s ease;
+  transition: 0.3s ease;
   z-index: 9999;
 }
-.closeBtn{
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 18px;
-    color: white;
-    cursor: pointer;
-    z-index: 999;
+.closeBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  z-index: 999;
 }

@@ -35,6 +35,7 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
   const [isMoreOptionsAvailable, setIsMoreOptionsAvailable] = useState(false);
   const [postSteps, setPostSteps] = useState<number>(0);
   const [SignupSteps, setSignupSteps] = useState(0);
+  const [zoomRange, setZoomRange] = useState(20);
   const [userDetails, setUserDetails] = useState<userDetailsType>({
     user: "",
     dob: "",
@@ -94,7 +95,9 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
         setauthenticUser,
         ModalRef,
         aspectRatio, 
-        setAspectRatio
+        setAspectRatio,
+        zoomRange, 
+        setZoomRange
       }}
     >
       {children}

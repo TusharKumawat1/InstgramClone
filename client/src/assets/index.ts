@@ -14,6 +14,7 @@ import instagramFont from "./instagramFont.png";
 import optpng from "./otp.png"
 import reels from "./clapperboard.png"
 import shareIcon from "./instagram-share-icon.png"
+import ballon from "./Baloon.png"
 export {
   asset0,
   asset1,
@@ -30,5 +31,6 @@ export {
   cake,
   optpng,
   reels,
-  shareIcon
+  shareIcon,
+  ballon
 };
