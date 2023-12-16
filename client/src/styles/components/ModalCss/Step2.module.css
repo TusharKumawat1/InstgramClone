@@ -178,12 +178,12 @@
   bottom: 60px;
   transition: 0.5s ease;
 }
-input[type="range"] {
+.zoomBox [type="range"] {
   height: 3px;
   width: 80%;
   -webkit-appearance: none;
 }
-input[type="range"]::-webkit-slider-thumb {
+.zoomBox [type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 10px;
   height: 10px;

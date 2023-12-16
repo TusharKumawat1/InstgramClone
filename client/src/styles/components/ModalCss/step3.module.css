@@ -90,7 +90,8 @@
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  padding:20px 0px 0px 25px
+  padding:20px 0px 0px 25px;
+  position: relative;
 }
 .filter{
   display: flex;
@@ -118,70 +119,167 @@
   mix-blend-mode: darken;
   background: rgba(125, 105, 24, .1);
   opacity: 1;
+  transition: .1s ease-in-out;
 }
 .Clarendon{
   backdrop-filter: contrast(120%) brightness(125%) saturate(100%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
   mix-blend-mode: overlay;
   background: rgba(127, 187, 227, 0.2);
   opacity: 1;
+  transition: .1s ease-in-out;
 }
 .Gingham{
   backdrop-filter: contrast(105%) brightness(100%) saturate(100%) sepia(0%) hue-rotate(350deg) grayscale(0%) invert(0%) blur(0px);
   mix-blend-mode: normal;
   background: linear-gradient(to right, rgba(66, 10, 14, 0.2) 1, rgba(0, 0, 0, 0));
   opacity: 1;
+  transition: .1s ease-in-out;
 }
 .NoFilter{
   backdrop-filter: contrast(100%) brightness(100%) saturate(100%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
   mix-blend-mode: normal;
   background: rgba(0, 0, 0, 0.0);
   opacity: 1;
+  transition: .1s ease-in-out;
 }
 .Inkwell{
   backdrop-filter: contrast(110%) brightness(110%) saturate(100%) sepia(30%) hue-rotate(0deg) grayscale(100%) invert(0%) blur(0px);
   mix-blend-mode: normal;
   background: rgba(0, 0, 0, 0);
   opacity: 1;
+  transition: .1s ease-in-out;
 }
 .Hudson{
   backdrop-filter: contrast(90%) brightness(120%) saturate(110%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
   mix-blend-mode: multiply;
   background: radial-gradient(50% 50%, circle closest-corner, rgba(255, 177, 166, 1) 50, rgba(52, 33, 52, 1));
   opacity: 5;
+  transition: .1s ease-in-out;
 }
 .Lofi{
   backdrop-filter: contrast(150%) brightness(100%) saturate(110%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
   mix-blend-mode: multiply;
   background: radial-gradient(50% 50%, circle closest-corner, rgba(0, 0, 0, 0) 70, rgba(34, 34, 34, 1));
   opacity: 1;
+  transition: .1s ease-in-out;
 }
 .Maven{
   backdrop-filter: contrast(95%) brightness(95%) saturate(150%) sepia(25%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
   mix-blend-mode: hue;
   background: rgba(3, 230, 26, 0.2);
   opacity: 1;
+  transition: .1s ease-in-out;
 }
 .Reyes{
   backdrop-filter: contrast(85%) brightness(110%) saturate(75%) sepia(22%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
   mix-blend-mode: soft-light;
   background: rgba(173, 205, 239, 1);
   opacity: 0.5;
+  transition: .1s ease-in-out;
 }
 .Xpro2{
   backdrop-filter: contrast(100%) brightness(100%) saturate(100%) sepia(30%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
   mix-blend-mode: color-burn;
   background: rgba(62, 162, 253, 0.5);
   opacity: 1;
+  transition: .1s ease-in-out;
 }
 .Perpetua{
   backdrop-filter: contrast(100%) brightness(100%) saturate(100%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
   mix-blend-mode: normal;
   background: linear-gradient(to bottom, rgba(0, 91, 154, 1) 1, rgba(61, 193, 230, 0));
   opacity: 0.5;
+  transition: .1s ease-in-out;
 }
 .Toaster{
   backdrop-filter: contrast(110%) brightness(110%) saturate(130%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
   mix-blend-mode: screen;
   background: radial-gradient(50% 50%, circle closest-corner, rgba(15, 78, 128, 1) 1, rgba(59, 0, 59, 1));
   opacity: 0.5;
+  transition: .1s ease-in-out;
+}
+.filterOpacity{
+  width: 107%;
+  height: 20%;
+  margin-left:-24px;
+  border-top:1px solid #d7d7d7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.maskOpacityRange{
+  height: 3px;
+  width: 80%;
+  -webkit-appearance: none;
+  background-color: #000000;
+}
+.maskOpacityRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background-color: #000000;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.previousBtn{
+  cursor: pointer;
+}
+.filterOpacity p{
+  color: black;
+  width: 30px;
+}
+.adjustementSection{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+.adjustements{
+  width: 90%;
+  height: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-inline: 20px;
+  margin-block: 5px;
+}
+.adjustements p{
+  font-size: 16px;
+}
+.adjustement{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.resetBtn{
+  background: none;
+  border: none;
+  color:rgb(0, 140, 255);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+.adjustementInputRange{
+  height: 3px;
+  width: 90%;
+  -webkit-appearance: none;
+  background-color: #000000;
+}
+.adjustementInputRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background-color: #000000;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.rangeContainer{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 5px;
 }

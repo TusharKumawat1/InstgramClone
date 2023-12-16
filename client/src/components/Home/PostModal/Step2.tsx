@@ -94,11 +94,13 @@ export default function Step2() {
   const handleZoom = (e: React.ChangeEvent<HTMLInputElement>) => {
     setZoomRange((p:number) => parseFloat(e.target.value));
     if (imageRef.current) {
+      const imageHeight=imageRef.current.clientHeight;
+      const imageWidth=imageRef.current.clientWidth;
       imageRef.current.style.width = `${
-        (700 * parseFloat(e.target.value)) / 20
+        (imageHeight * parseFloat(e.target.value)) / 20
       }px`;
       imageRef.current.style.height = `${
-        (700 * parseFloat(e.target.value)) / 20
+        (imageWidth * parseFloat(e.target.value)) / 20
       }px`;
     }
   };
