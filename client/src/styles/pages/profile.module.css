@@ -20,7 +20,6 @@
 .userDetails{
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid #e2e2e2;
     width: 100%;
     height: 43%;
 }
@@ -105,6 +104,8 @@
     display: flex;
     justify-content: flex-start;
     gap: 10px;
+    width: 100%;
+    height: 40%;
 }
 .createHighlightIcon{
     width: 80px;
@@ -137,6 +138,7 @@
     align-items: center;
     flex-direction: column;
     gap: 100px;
+    border-top: 1px solid #d3d3d3;
 }
 .options{
     width: 50%;
@@ -196,9 +198,14 @@
  }
  .library{
     border-top: 1px solid #d3d3d3;
-    width: 120%;
+    width: 140%;
  }
  .infoSection{
     padding:35px 5px;
  }
 }
+@media screen and (max-height: 850px) {
+    .userDetails{
+        height: 60%;
+    }
+   }
