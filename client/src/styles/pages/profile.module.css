@@ -25,8 +25,6 @@
     height: 43%;
 }
 .infoSection {
-
-
   padding: 35px 100px;
   display: flex;
   gap: 100px;
@@ -62,6 +60,7 @@
     border-radius: 5px;
     transition: 0.1s ease;
     cursor: pointer;
+    min-width: 120px;
 }
 .primaryBtn:hover{
     background-color: #d3d3d3;
@@ -177,4 +176,29 @@
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
+}
+@media screen and (max-width: 1700px) {
+ .profileSection{
+    justify-content: start;
+    margin-left: 10%;
+ }
+ .infoSection{
+    padding:35px 50px;
+ }
+}
+@media screen and (max-width: 1400px) {
+ .profileSection{
+    justify-content: start;
+    margin-left: 4%;
+ }
+ .userDetails{
+    border: none;
+ }
+ .library{
+    border-top: 1px solid #d3d3d3;
+    width: 120%;
+ }
+ .infoSection{
+    padding:35px 5px;
+ }
 }
