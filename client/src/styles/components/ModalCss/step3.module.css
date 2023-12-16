@@ -48,6 +48,25 @@
   height: 100%;
   overflow: hidden;
   position: relative;
+  display: flex;
+}
+.rightArrow,.leftArrow{
+  position: absolute;
+  top:50%;
+  width: 30px;
+  height: 30px;
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0,0.7);
+  border-radius: 50%;
+  right: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 999999;
+}
+.leftArrow{
+  left: 10px;
 }
 .image{
   width: 700px;
@@ -135,7 +154,7 @@
   opacity: 1;
   transition: .1s ease-in-out;
 }
-.NoFilter{
+.Original{
   backdrop-filter: contrast(100%) brightness(100%) saturate(100%) sepia(0%) hue-rotate(0deg) grayscale(0%) invert(0%) blur(0px);
   mix-blend-mode: normal;
   background: rgba(0, 0, 0, 0.0);

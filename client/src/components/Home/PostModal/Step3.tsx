@@ -27,6 +27,20 @@ export default function Step3() {
     { name: "Temprature", range: 0 },
     { name: "Vignette", range: 0 },
   ]);
+  const filters = [
+    "Aden",
+    "Clarendon",
+    "Gingham",
+    "Inkwell",
+    "Hudson",
+    "Original",
+    "Toaster",
+    "Lofi",
+    "Maven",
+    "Reyes",
+    "Xpro2",
+    "Perpetua",
+  ];
   const gotoStep2 = () => {
     setPostSteps(1);
     if (ModalRef.current) {
@@ -56,12 +70,11 @@ export default function Step3() {
   const applyFilter = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
     setIsRange(true);
-    if (target.classList[0] === `${Styles.NoFilter}`) {
+    if (target.classList[0] === `${Styles.Original}`) {
       setIsRange(false);
     }
     if (imageMaskRef.current) {
-      imageMaskRef.current.className = "";
-      imageMaskRef.current.classList.add(Styles.imageMask);
+      imageMaskRef.current.className = `${Styles.imageMask}`;
       imageMaskRef.current.classList.add(target.classList[0]);
     }
   };
@@ -94,13 +107,13 @@ export default function Step3() {
     adjustmentName: string,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const operation=adjustmentName.toLocaleLowerCase()
-    const value=Number(e.target.value)/100
-    const operationValue= value<=1? 1+value : -value
-    console.log(operationValue,"operationvalue")
-    console.log(value)
+    const operation = adjustmentName.toLocaleLowerCase();
+    const value = Number(e.target.value);
+    const operationValue = value < 0 ? 100 - -value / 2 : 100 + value;
+    console.log(operationValue, "operationvalue");
+    console.log(value);
     if (imageMaskRef.current) {
-      imageMaskRef.current.style.backdropFilter=`${operation}(${operationValue}%)`
+      imageMaskRef.current.style.backdropFilter = `${operation}(${operationValue}%)`;
     }
     setAdjustments((pre) =>
       pre.map((adjustment) =>
@@ -111,6 +124,9 @@ export default function Step3() {
     );
   };
   const handleReset = (adjustmentName: string) => {
+    if (imageMaskRef.current) {
+      imageMaskRef.current.style.backdropFilter = `${adjustmentName}(100%)`;
+    }
     setAdjustments((pre) =>
       pre.map((adjustement) =>
         adjustement.name === adjustmentName
@@ -118,6 +134,24 @@ export default function Step3() {
           : adjustement
       )
     );
+  };
+  const scrollToRight = () => {
+    if (imageContainerRef.current) {
+      const nextImage=imageContainerRef.current.clientWidth + imageContainerRef.current.scrollLeft +10
+      imageContainerRef.current.scrollTo({
+        left: nextImage,
+        behavior: "smooth",
+      })
+    }
+  };
+  const scrollToleft = () => {
+    if (imageContainerRef.current) {
+      const nextImage=imageContainerRef.current.clientWidth - imageContainerRef.current.scrollLeft
+      imageContainerRef.current.scrollTo({
+        left: nextImage,
+        behavior: "smooth",
+      })
+    }
   };
   useEffect(() => {
     if (filterBtnRef.current) {
@@ -140,14 +174,20 @@ export default function Step3() {
       <div className={Styles.mainContainer}>
         <div className={Styles.imageHolder}>
           <div className={Styles.imageContainer} ref={imageContainerRef}>
-            <img
-              src={images[0]}
-              alt=""
-              className={Styles.image}
-              ref={imageRef}
-            />
+            {
+              images && images.map((image:string)=>{
+                return  <img
+                src={image}
+                alt=""
+                className={Styles.image}
+                ref={imageRef}
+              />
+              })
+            }
             <div className={Styles.imageMask} ref={imageMaskRef}></div>
           </div>
+            <i className={`fa-solid fa-angle-right ${Styles.rightArrow}`} onClick={scrollToRight}></i>
+            <i className={`fa-solid fa-angle-left ${Styles.leftArrow}`} onClick={scrollToleft}></i>
         </div>
         <div className={Styles.editSection}>
           <div className={Styles.options}>
@@ -170,66 +210,19 @@ export default function Step3() {
           </div>
           {IsfilterSection ? (
             <div className={Styles.filters}>
-              <div className={`${Styles.filter}`} onClick={applyFilter}>
-                <img src={ballon} alt="filter" className={Styles.ballonImg} />
-                <div className={`${Styles.Aden} ${Styles.mask}`}></div>
-                <p>Aden</p>
-              </div>
-              <div className={Styles.filter} onClick={applyFilter}>
-                <img src={ballon} alt="filter" className={Styles.ballonImg} />
-                <div className={`${Styles.Clarendon} ${Styles.mask}`}></div>
-                <p>Clarendon</p>
-              </div>
-              <div className={Styles.filter} onClick={applyFilter}>
-                <img src={ballon} alt="filter" className={Styles.ballonImg} />
-                <div className={`${Styles.Gingham} ${Styles.mask}`}></div>
-                <p>Gingham</p>
-              </div>
-              <div className={Styles.filter} onClick={applyFilter}>
-                <img src={ballon} alt="filter" className={Styles.ballonImg} />
-                <div className={`${Styles.Inkwell} ${Styles.mask}`}></div>
-                <p>Inkwell</p>
-              </div>
-              <div className={Styles.filter} onClick={applyFilter}>
-                <img src={ballon} alt="filter" className={Styles.ballonImg} />
-                <div className={`${Styles.Hudson} ${Styles.mask}`}></div>
-                <p>Hudson</p>
-              </div>
-              <div className={Styles.filter} onClick={applyFilter}>
-                <img src={ballon} alt="filter" className={Styles.ballonImg} />
-                <div className={`${Styles.NoFilter} ${Styles.mask}`}></div>
-                <p>Original</p>
-              </div>
-              <div className={Styles.filter} onClick={applyFilter}>
-                <img src={ballon} alt="filter" className={Styles.ballonImg} />
-                <div className={`${Styles.Toaster} ${Styles.mask}`}></div>
-                <p>Toaster</p>
-              </div>
-              <div className={Styles.filter} onClick={applyFilter}>
-                <img src={ballon} alt="filter" className={Styles.ballonImg} />
-                <div className={`${Styles.Lofi} ${Styles.mask}`}></div>
-                <p>Lofi</p>
-              </div>
-              <div className={Styles.filter} onClick={applyFilter}>
-                <img src={ballon} alt="filter" className={Styles.ballonImg} />
-                <div className={`${Styles.Maven} ${Styles.mask}`}></div>
-                <p>Maven</p>
-              </div>
-              <div className={Styles.filter} onClick={applyFilter}>
-                <img src={ballon} alt="filter" className={Styles.ballonImg} />
-                <div className={`${Styles.Reyes} ${Styles.mask}`}></div>
-                <p>Reyes</p>
-              </div>
-              <div className={Styles.filter} onClick={applyFilter}>
-                <img src={ballon} alt="filter" className={Styles.ballonImg} />
-                <div className={`${Styles.Xpro2} ${Styles.mask}`}></div>
-                <p>Xpro2</p>
-              </div>
-              <div className={Styles.filter} onClick={applyFilter}>
-                <img src={ballon} alt="filter" className={Styles.ballonImg} />
-                <div className={`${Styles.Perpetua} ${Styles.mask}`}></div>
-                <p>Perpetua</p>
-              </div>
+              {filters.map((filter, index) => {
+                return (
+                  <div className={`${Styles.filter}`} onClick={applyFilter}>
+                    <img
+                      src={ballon}
+                      alt="filter"
+                      className={Styles.ballonImg}
+                    />
+                    <div className={`${Styles[filter]} ${Styles.mask}`}></div>
+                    <p>{filter}</p>
+                  </div>
+                );
+              })}
               {IsRange && (
                 <div className={Styles.filterOpacity}>
                   <input
@@ -252,7 +245,11 @@ export default function Step3() {
                     <div className={Styles.adjustement}>
                       <p>{item.name}</p>
                       {item.range != 0 && (
-                        <button className={Styles.resetBtn} type="button" onClick={()=>handleReset(item.name)}>
+                        <button
+                          className={Styles.resetBtn}
+                          type="button"
+                          onClick={() => handleReset(item.name)}
+                        >
                           Reset
                         </button>
                       )}
