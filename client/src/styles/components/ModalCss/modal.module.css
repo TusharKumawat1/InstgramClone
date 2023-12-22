@@ -33,3 +33,8 @@
   cursor: pointer;
   z-index: 999;
 }
+@media screen and (max-width: 1700px) {
+  .modal{
+    width: 50%;
+  }
+}

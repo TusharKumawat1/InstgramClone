@@ -10,9 +10,9 @@ export default function Step2() {
     setPostSteps,
     ModalRef,
     setAspectRatio,
-    zoomRange, 
+    zoomRange,
     setZoomRange,
-    aspectRatio
+    aspectRatio,
   } = useContext(MyContext);
   const [aspectRatioBox, setAspectRatioBox] = useState(false);
   const [zoomBox, setZoomBox] = useState(false);
@@ -47,7 +47,7 @@ export default function Step2() {
       multiSelectRef.current.style.opacity = ".8";
     }
   };
-  // seting image acpect ratio 
+  // seting image acpect ratio
   const handleAspectRatio = (aspectRatio: string) => {
     if (imageContainerRef.current) {
       if (aspectRatio === "original") {
@@ -92,10 +92,10 @@ export default function Step2() {
     }
   };
   const handleZoom = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setZoomRange((p:number) => parseFloat(e.target.value));
+    setZoomRange((p: number) => parseFloat(e.target.value));
     if (imageRef.current) {
-      const imageHeight=imageRef.current.clientHeight;
-      const imageWidth=imageRef.current.clientWidth;
+      const imageHeight = imageRef.current.clientHeight;
+      const imageWidth = imageRef.current.clientWidth;
       imageRef.current.style.width = `${
         (imageHeight * parseFloat(e.target.value)) / 20
       }px`;
@@ -168,12 +168,8 @@ export default function Step2() {
       }
     }
     if (imageRef.current) {
-      imageRef.current.style.width = `${
-        (700 * parseFloat(zoomRange)) / 20
-      }px`;
-      imageRef.current.style.height = `${
-        (700 * parseFloat(zoomRange)) / 20
-      }px`;
+      imageRef.current.style.width = `${(700 * parseFloat(zoomRange)) / 20}px`;
+      imageRef.current.style.height = `${(700 * parseFloat(zoomRange)) / 20}px`;
     }
   });
   return (
