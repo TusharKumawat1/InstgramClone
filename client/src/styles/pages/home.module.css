@@ -5,3 +5,8 @@
     background-color: transparent;  
     color: inherit;
 }
+@media screen and (max-width: 800px) {
+    .container{
+        /* justify-content: flex-end; */
+    }
+  }

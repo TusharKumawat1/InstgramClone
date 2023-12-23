@@ -112,12 +112,21 @@
   }
 }
 @media screen and (max-width: 1600px) {
-    .mainArea {
-        width: 50%;
-      }
+  .mainArea {
+    width: 50%;
+  }
 }
 @media screen and (max-width: 1500px) {
-    .mainArea {
-        width: 55%;
-      }
+  .mainArea {
+    width: 55%;
+  }
+}
+@media screen and (max-width: 800px) {
+    .mainArea{
+        width: 100%;
+        padding: 10px auto;
+    }
+    .stories{
+        width: 100%;
+    }
 }
