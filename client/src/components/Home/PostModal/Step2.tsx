@@ -149,7 +149,10 @@ export default function Step2() {
   const gotoStep3 = () => {
     setPostSteps(2);
     if (ModalRef.current) {
-      ModalRef.current.style.width = "55%";
+      const addWidth = (ModalRef.current.offsetWidth / 10) * 5;
+      ModalRef.current.style.width = `${
+        ModalRef.current.offsetWidth + addWidth
+      }px`;
     }
   };
   useEffect(() => {

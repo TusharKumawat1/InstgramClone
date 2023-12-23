@@ -35,6 +35,21 @@
 }
 @media screen and (max-width: 1700px) {
   .modal{
-    width: 50%;
+     min-width: 40%;
+  }
+}
+@media screen and (max-width: 1500px) {
+  .modal{
+     min-width: 45%;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .modal{
+     min-width: 50%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .modal{
+     min-width: 55%;
   }
 }

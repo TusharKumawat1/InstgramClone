@@ -3,7 +3,6 @@
     flex-direction: column;
     width: 30%;
     max-width: 350px;
-    min-width: 300px;
     height: 100%;
     background-color: transparent;
     border-right: 1px solid #e1e1e1;
@@ -107,3 +106,25 @@
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
 }
+.instaLogo{
+    display: none;
+    font-size: 25px;
+    padding: 20px 0px 0px 35px;
+}
+a{
+    text-decoration: none;
+}
+@media screen and (max-width: 1200px) {
+    .options span{
+      display: none;
+    }
+    .logo{
+        display: none;
+    }
+    .instaLogo{
+        display: block;
+    }
+  .aside{
+    width: 100px;
+  }
+  }

@@ -18,22 +18,25 @@ export default function AsideNav() {
   return (
     <div className={Styles.aside}>
       <div className={Styles.sectionFirst}>
-        <img
+    <Link to={"/"}>
+    <img
           src={instagramFont}
           alt="img"
           width={120}
           height={50}
           className={Styles.logo}
-        />
+        /> 
+        <i className={`${Styles.instaLogo} fa-brands fa-instagram`}></i>
+    </Link>
         <Link to="/" className={Styles.options}>
-          <i className="fa-solid fa-house"></i>Home
+          <i className="fa-solid fa-house"></i><span>Home</span>
         </Link>
         <Link to="" className={Styles.options}>
           {" "}
-          <i className="fa-solid fa-magnifying-glass"></i>Search
+          <i className="fa-solid fa-magnifying-glass"></i><span>Search</span>
         </Link>
         <Link to="" className={Styles.options}>
-          <i className="fa-regular fa-compass"></i>Explore
+          <i className="fa-regular fa-compass"></i><span>Explore</span>
         </Link>
         <Link to="" className={Styles.options}>
           {" "}
@@ -44,20 +47,20 @@ export default function AsideNav() {
             height={25}
             className={Styles.reelsIcon}
           />
-          Reels
+          <span>Reels</span>
         </Link>
         <Link to="" className={Styles.options}>
-          <i className="fa-brands fa-facebook-messenger"></i>Messages
+          <i className="fa-brands fa-facebook-messenger"></i><span>Messages</span>
         </Link>
         <Link to="" className={Styles.options}>
-          <i className="fa-regular fa-heart"></i>Notification
+          <i className="fa-regular fa-heart"></i><span>Notification</span>
         </Link>
         <Link
           to=""
           className={Styles.options}
           onClick={() => setIsModalOpen(true)}
         >
-          <i className="fa-regular fa-square-plus"></i>Create
+          <i className="fa-regular fa-square-plus"></i><span>Create</span>
         </Link>
         <Link to={`/profile/${authenticUser && authenticUser.userId.username}`} className={Styles.options}>
           <img
@@ -69,7 +72,7 @@ export default function AsideNav() {
             height={40}
             className={Styles.pfp}
           />
-          Profile
+          <span>Profile</span>
         </Link>
       </div>
       {isMoreOptionsAvailable && (
@@ -79,10 +82,10 @@ export default function AsideNav() {
       )}
       <div className={Styles.sectionSecond}>
         <p className={Styles.options}>
-          <i className="fa-brands fa-threads"></i>Threads
+          <i className="fa-brands fa-threads"></i><span>Threads</span>
         </p>
         <p className={Styles.options} onClick={toggleIsMoreOptions}>
-          <i className="fa-solid fa-bars"></i>More
+          <i className="fa-solid fa-bars"></i><span>More</span>
         </p>
       </div>
     </div>

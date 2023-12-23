@@ -55,7 +55,9 @@ export default function Feed() {
           <Posts/>
         </div>
       </div>
+      <div className={Styles.sugestionContainer}>
       <Suggestion />
+      </div>
     </div>
   );
 }

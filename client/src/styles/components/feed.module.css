@@ -1,97 +1,123 @@
-.container{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    overflow: auto;
-    justify-content: center;
-    gap: 20px;
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  overflow: auto;
+  justify-content: center;
+  gap: 20px;
 }
-.mainArea{
-    width: 40%;
-    min-height: 100vh;
-    /* border: 1px solid black; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    /* background-color: antiquewhite; */
-    position: relative;
-    left: -50px;
+.mainArea {
+  width: 40%;
+  min-height: 100vh;
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* background-color: antiquewhite; */
+  position: relative;
+  left: -50px;
 }
-.stories{
-    width: 100%;
-    height: 200px;
-    display: flex;
-    gap: 15px;
-    padding: 50px 0px;
-    padding-left: 10px;
-    margin-block: 20px;
-    margin-top: 120px;
-    margin-inline: 20px;
-    /* border: 1px dashed rgb(0, 0, 0); */
-    justify-content: flex-start;
-    align-items: center;
-    overflow: auto;
-    overflow-y: hidden;
-    position: relative;
+.stories {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  gap: 15px;
+  padding: 50px 0px;
+  padding-left: 10px;
+  margin-block: 20px;
+  margin-top: 120px;
+  margin-inline: 20px;
+  /* border: 1px dashed rgb(0, 0, 0); */
+  justify-content: flex-start;
+  align-items: center;
+  overflow: auto;
+  overflow-y: hidden;
+  position: relative;
 }
-.scrollRight,.scrollLeft{
-    position: sticky;
-    padding-inline: 10px;
-    right: 10px;
-    top: -20px;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    cursor: pointer;
-    transform: translateY(-8px);
+.scrollRight,
+.scrollLeft {
+  position: sticky;
+  padding-inline: 10px;
+  right: 10px;
+  top: -20px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+  transform: translateY(-8px);
 }
-.scrollLeft{
-    right: 95%;
+.scrollLeft {
+  right: 95%;
 }
 .stories::-webkit-scrollbar {
+  display: none;
+}
+.users {
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.pfpBOrder {
+  width: 62px;
+  height: 62px;
+  background: linear-gradient(
+    to bottom left,
+    rgb(255, 0, 157),
+    rgb(255, 255, 0)
+  );
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pfp {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+  object-position: center;
+}
+.username {
+  font-size: 12px;
+  font-weight: 500;
+  color: #222;
+}
+.feed {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 20px; */
+  /* border: 1px dotted black; */
+}
+@media screen and (max-width: 1200px) {
+  .sugestionContainer {
     display: none;
   }
-.users{
-    width: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  .stories {
+    width: 120%;
+  }
+  .mainArea {
+    width: 50%;
+  }
 }
-.pfpBOrder{
-    width: 62px;
-    height: 62px;
-    background:linear-gradient(to bottom left ,rgb(255, 0, 157),rgb(255, 255, 0));
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;    
+@media screen and (max-width: 1600px) {
+    .mainArea {
+        width: 50%;
+      }
 }
-.pfp{
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    border: 2px solid white;
-    object-fit: cover;
-    object-position: center;
-}
-.username{
-    font-size: 12px;
-    font-weight: 500;
-    color: #222;
-}
-.feed{
-    width: 90%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* margin-top: 20px; */
-    /* border: 1px dotted black; */
+@media screen and (max-width: 1500px) {
+    .mainArea {
+        width: 55%;
+      }
 }
