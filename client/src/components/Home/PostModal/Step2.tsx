@@ -17,7 +17,6 @@ export default function Step2() {
   const [aspectRatioBox, setAspectRatioBox] = useState(false);
   const [zoomBox, setZoomBox] = useState(false);
   const [multiSelect, setMultiSelect] = useState(false);
-
   const imageContainerRef = useRef<HTMLDivElement | null>(null);
   const aspectBtnRef = useRef<HTMLDivElement | null>(null);
   const zoomBtnRef = useRef<HTMLDivElement | null>(null);

@@ -35,21 +35,28 @@
   justify-content: flex-start;
   align-items: center;
 }
-.imageHolder{
+.imageHolder {
   width: 64%;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.imageContainer{
-  width: 100%;
   height: 100%;
   overflow: hidden;
   position: relative;
   display: flex;
 }
+
+.imageContainer {
+  flex-shrink: 0; /* Prevent images from shrinking */
+  width: 100%; /* Each image takes up the full width of the container */
+  height: 100%; /* Each image takes up the full height of the container */
+  display: inline-flex; /* Display images in a row */
+  transition: transform 0.5s ease; /* Add smooth transition for scrolling */
+}
+
+.image {
+  width: 100%; /* Image takes up the full width of its container */
+  height: 100%; /* Image takes up the full height of its container */
+  object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+}
+
 .rightArrow,.leftArrow{
   position: absolute;
   top:50%;
@@ -68,12 +75,7 @@
 .leftArrow{
   left: 10px;
 }
-.image{
-  width: 100%;
-  height: 100%;
-  /* background-position: bottom; */
-  object-position: top;
-}
+
 .imageMask{
   width: 100%;
   height: 100%;
