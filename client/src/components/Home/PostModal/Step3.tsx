@@ -9,9 +9,9 @@ type adjustmentType = {
 export default function Step3() {
   const { images, setPostSteps, ModalRef, aspectRatio, zoomRange } =
     useContext(MyContext);
-  const imageContainerRef = useRef<HTMLDivElement | null>(null);
+    const imageContainerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const imageMaskRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const imageRef = useRef<HTMLImageElement | null>(null);
+  const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
   const filterBtnRef = useRef<HTMLButtonElement | null>(null);
   const adjustBtnRef = useRef<HTMLButtonElement | null>(null);
   const [IsfilterSection, setIsfilterSection] = useState(true);
@@ -47,26 +47,26 @@ export default function Step3() {
       ModalRef.current.style.width = "36%";
     }
   };
-  useEffect(() => {
-    if (imageContainerRef.current) {
-      if (aspectRatio === "original") {
-        imageContainerRef.current.style.width = "95%";
-      } else if (aspectRatio === "1X1") {
-        imageContainerRef.current.style.width = "100%";
-        imageContainerRef.current.style.height = "100%";
-      } else if (aspectRatio === "4X5") {
-        imageContainerRef.current.style.width = "80%";
-        imageContainerRef.current.style.height = "100%";
-      } else if (aspectRatio === "16X9") {
-        imageContainerRef.current.style.width = "100%";
-        imageContainerRef.current.style.height = "60%";
-      }
-    }
-    if (imageRef.current) {
-      imageRef.current.style.width = `${(700 * parseFloat(zoomRange)) / 20}px`;
-      imageRef.current.style.height = `${(700 * parseFloat(zoomRange)) / 20}px`;
-    }
-  });
+  // useEffect(() => {
+  //   if (imageContainerRef.current) {
+  //     if (aspectRatio === "original") {
+  //       imageContainerRef.current.style.width = "95%";
+  //     } else if (aspectRatio === "1X1") {
+  //       imageContainerRef.current.style.width = "100%";
+  //       imageContainerRef.current.style.height = "100%";
+  //     } else if (aspectRatio === "4X5") {
+  //       imageContainerRef.current.style.width = "80%";
+  //       imageContainerRef.current.style.height = "100%";
+  //     } else if (aspectRatio === "16X9") {
+  //       imageContainerRef.current.style.width = "100%";
+  //       imageContainerRef.current.style.height = "60%";
+  //     }
+  //   }
+  //   if (imageRef.current) {
+  //     imageRef.current.style.width = `${(700 * parseFloat(zoomRange)) / 20}px`;
+  //     imageRef.current.style.height = `${(700 * parseFloat(zoomRange)) / 20}px`;
+  //   }
+  // });
   const applyFilter = (e: React.MouseEvent<HTMLElement>,index:number) => {
     const target = e.target as HTMLElement;
     setIsRange(true);
@@ -188,6 +188,35 @@ export default function Step3() {
         .map((_, index) => imageMaskRefs.current[index] || null);
     }
   }, [images.length]);
+  useEffect(() => {
+    if (imageRefs.current.length === images.length) {
+      imageRefs.current.forEach((container, index) => {
+        const maskref= imageMaskRefs.current[index]!
+        if (container && aspectRatio) {
+          if (aspectRatio === "original") {
+            container.style.width = "95%";
+            maskref.style.width="95%";
+          } else if (aspectRatio === "1X1") {
+            container.style.width = "100%";
+            container.style.height = "100%";
+            maskref.style.width="100%";
+            maskref.style.height="100%";
+          } else if (aspectRatio === "4X5") {
+            container.style.width = "80%";
+            container.style.height = "100%";
+            maskref.style.width="80%";
+            maskref.style.height="100%";
+          } else if (aspectRatio === "16X9") {
+            container.style.width = "100%";
+            container.style.height = "60%";
+            maskref.style.width="100%";
+            maskref.style.top="20%";
+            maskref.style.height="60%";
+          }
+        }
+      });
+    }
+  }, [aspectRatio, images.length]);
   return (
     <div className={Styles.container}>
       <div className={Styles.Top}>
@@ -196,15 +225,15 @@ export default function Step3() {
           onClick={gotoStep2}
         ></i>
         <p>Edit</p>
-        <button className={Styles.nextBtn} type="button">
+        <button className={Styles.nextBtn} type="button" onClick={()=>setPostSteps(3)}>
           Next
         </button>
       </div>
       <div className={Styles.mainContainer}>
         <div className={Styles.imageHolder} ref={imageHolderRef}>
           {images.map((image: string, index: number) => (
-            <div className={Styles.imageContainer} key={index}>
-              <img src={image} alt="" className={Styles.image} />
+            <div className={Styles.imageContainer} key={index} ref={(el) => (imageContainerRefs.current[index] = el)}>
+              <img src={image} alt={`image${index}`} className={Styles.image} ref={(el) => (imageRefs.current[index] = el)}/>
               <div className={Styles.imageMask} ref={(el) => (imageMaskRefs.current[index] = el)}></div>
             </div>
           ))}

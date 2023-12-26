@@ -215,6 +215,7 @@
   height: 90px;
   z-index: 99;
   opacity: 1;
+  cursor: pointer;
 }
 .previewImageContainer {
   position: relative;

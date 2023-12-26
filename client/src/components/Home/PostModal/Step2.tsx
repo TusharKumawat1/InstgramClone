@@ -16,13 +16,13 @@ export default function Step2() {
   } = useContext(MyContext);
   const [aspectRatioBox, setAspectRatioBox] = useState(false);
   const [zoomBox, setZoomBox] = useState(false);
+  const [imageToPreview, setimageToPreview] = useState(images[0]);
   const [multiSelect, setMultiSelect] = useState(false);
   const imageContainerRef = useRef<HTMLDivElement | null>(null);
   const aspectBtnRef = useRef<HTMLDivElement | null>(null);
   const zoomBtnRef = useRef<HTMLDivElement | null>(null);
   const multiSelectRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
-
   const showAspectBox = () => {
     setAspectRatioBox((p) => true);
     if (aspectBtnRef.current && zoomBtnRef.current && multiSelectRef.current) {
@@ -154,6 +154,9 @@ export default function Step2() {
       }px`;
     }
   };
+  const preViewImage = (newImage: string) => {
+    setimageToPreview(newImage);
+  };
   useEffect(() => {
     if (imageContainerRef.current) {
       if (aspectRatio === "original") {
@@ -189,7 +192,7 @@ export default function Step2() {
       <div className={Styles.mainContainer}>
         <div className={Styles.imageContainer} ref={imageContainerRef}>
           <img
-            src={images[0]}
+            src={imageToPreview}
             alt="loading.."
             className={Styles.image}
             ref={imageRef}
@@ -282,7 +285,11 @@ export default function Step2() {
           <div className={Styles.multipleImages}>
             {images.map((url: string, i: number) => (
               <div key={i} className={Styles.previewImageContainer}>
-                <img src={url} className={Styles.previewImage}></img>
+                <img
+                  src={url}
+                  className={Styles.previewImage}
+                  onClick={() => preViewImage(url)}
+                ></img>
                 <i
                   className={`fa-solid fa-x ${Styles.removeImage}`}
                   onClick={() => removeImage(i)}

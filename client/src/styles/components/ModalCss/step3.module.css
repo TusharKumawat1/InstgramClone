@@ -41,6 +41,7 @@
   overflow: hidden;
   position: relative;
   display: flex;
+  align-items: center;
 }
 
 .imageContainer {
@@ -49,6 +50,8 @@
   height: 100%; /* Each image takes up the full height of the container */
   display: inline-flex; /* Display images in a row */
   transition: transform 0.5s ease; /* Add smooth transition for scrolling */
+  align-items: center;
+  justify-content: center;
 }
 
 .image {
