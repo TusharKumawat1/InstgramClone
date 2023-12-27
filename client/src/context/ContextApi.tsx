@@ -44,6 +44,7 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
     password: "",
   });
   const [authenticUser, setauthenticUser] = useState<authenticUserType>();
+  const [appliedFilters,setAppliedFilters]=useState([])
   const generateBase64 = (file: Blob) => {
     const reader = new FileReader();
     reader.onload = async () => {
@@ -97,7 +98,9 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
         aspectRatio, 
         setAspectRatio,
         zoomRange, 
-        setZoomRange
+        setZoomRange,
+        appliedFilters,
+        setAppliedFilters
       }}
     >
       {children}

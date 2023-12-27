@@ -7,9 +7,15 @@ type adjustmentType = {
   range: number;
 };
 export default function Step3() {
-  const { images, setPostSteps, ModalRef, aspectRatio, zoomRange } =
-    useContext(MyContext);
-    const imageContainerRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const {
+    images,
+    setPostSteps,
+    ModalRef,
+    aspectRatio,
+    appliedFilters,
+    setAppliedFilters,
+  } = useContext(MyContext);
+  const imageContainerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const imageMaskRefs = useRef<(HTMLDivElement | null)[]>([]);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
   const filterBtnRef = useRef<HTMLButtonElement | null>(null);
@@ -46,28 +52,9 @@ export default function Step3() {
     if (ModalRef.current) {
       ModalRef.current.style.width = "36%";
     }
+    setAppliedFilters([])
   };
-  // useEffect(() => {
-  //   if (imageContainerRef.current) {
-  //     if (aspectRatio === "original") {
-  //       imageContainerRef.current.style.width = "95%";
-  //     } else if (aspectRatio === "1X1") {
-  //       imageContainerRef.current.style.width = "100%";
-  //       imageContainerRef.current.style.height = "100%";
-  //     } else if (aspectRatio === "4X5") {
-  //       imageContainerRef.current.style.width = "80%";
-  //       imageContainerRef.current.style.height = "100%";
-  //     } else if (aspectRatio === "16X9") {
-  //       imageContainerRef.current.style.width = "100%";
-  //       imageContainerRef.current.style.height = "60%";
-  //     }
-  //   }
-  //   if (imageRef.current) {
-  //     imageRef.current.style.width = `${(700 * parseFloat(zoomRange)) / 20}px`;
-  //     imageRef.current.style.height = `${(700 * parseFloat(zoomRange)) / 20}px`;
-  //   }
-  // });
-  const applyFilter = (e: React.MouseEvent<HTMLElement>,index:number) => {
+  const applyFilter = (e: React.MouseEvent<HTMLElement>, index: number) => {
     const target = e.target as HTMLElement;
     setIsRange(true);
     if (target.classList[0] === `${Styles.Original}`) {
@@ -77,6 +64,13 @@ export default function Step3() {
       const maskRef = imageMaskRefs.current[index]!;
       maskRef.className = `${Styles.imageMask}`;
       maskRef.classList.add(target.classList[0]);
+      const AppliedFilter = {
+        imageIndex: index,
+        filter: maskRef.classList,
+      };
+      const newArray = [...appliedFilters];
+      newArray[index] = AppliedFilter;
+      setAppliedFilters(newArray);
     }
   };
   const showAdjustments = () => {
@@ -97,14 +91,24 @@ export default function Step3() {
       adjustBtnRef.current.style.borderBottom = "1px solid #d7d7d7";
     }
   };
-  const handleOpacity = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleOpacity = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const newOpacity = Number(e.target.value);
+    const newArray = [...appliedFilters];
+    newArray[index]["opacity"] = newOpacity / 100;
+    setAppliedFilters(newArray);
+    console.log(newOpacity / 100);
     setMaskOpacityRange(newOpacity);
     if (imageMaskRefs.current[index]) {
-      imageMaskRefs.current[index]!.style.setProperty('opacity', `${newOpacity / 100}`);
+      imageMaskRefs.current[index]!.style.setProperty(
+        "opacity",
+        `${newOpacity / 100}`
+      );
     }
   };
- 
+
   const handleAdjustmentsRange = (
     adjustmentName: string,
     e: React.ChangeEvent<HTMLInputElement>,
@@ -140,7 +144,6 @@ export default function Step3() {
       )
     );
   };
-
 
   const scrollToRight = () => {
     if (imageHolderRef.current) {
@@ -179,6 +182,14 @@ export default function Step3() {
       filterBtnRef.current.style.color = "black";
       filterBtnRef.current.style.borderBottom = "1px solid black";
     }
+    // Cheacking if any filter available
+    const maskref = imageMaskRefs.current!;
+    maskref.forEach((mask, index) => {
+      if (mask && appliedFilters[index]) {
+        mask.className = appliedFilters[index].filter;
+        mask.style.opacity=appliedFilters[index].opacity
+      }
+    });
   }, []);
   useEffect(() => {
     // Initialize refs for image masks
@@ -191,27 +202,27 @@ export default function Step3() {
   useEffect(() => {
     if (imageRefs.current.length === images.length) {
       imageRefs.current.forEach((container, index) => {
-        const maskref= imageMaskRefs.current[index]!
+        const maskref = imageMaskRefs.current[index]!;
         if (container && aspectRatio) {
           if (aspectRatio === "original") {
             container.style.width = "95%";
-            maskref.style.width="95%";
+            maskref.style.width = "95%";
           } else if (aspectRatio === "1X1") {
             container.style.width = "100%";
             container.style.height = "100%";
-            maskref.style.width="100%";
-            maskref.style.height="100%";
+            maskref.style.width = "100%";
+            maskref.style.height = "100%";
           } else if (aspectRatio === "4X5") {
             container.style.width = "80%";
             container.style.height = "100%";
-            maskref.style.width="80%";
-            maskref.style.height="100%";
+            maskref.style.width = "80%";
+            maskref.style.height = "100%";
           } else if (aspectRatio === "16X9") {
             container.style.width = "100%";
             container.style.height = "60%";
-            maskref.style.width="100%";
-            maskref.style.top="20%";
-            maskref.style.height="60%";
+            maskref.style.width = "100%";
+            maskref.style.top = "20%";
+            maskref.style.height = "60%";
           }
         }
       });
@@ -225,16 +236,32 @@ export default function Step3() {
           onClick={gotoStep2}
         ></i>
         <p>Edit</p>
-        <button className={Styles.nextBtn} type="button" onClick={()=>setPostSteps(3)}>
+        <button
+          className={Styles.nextBtn}
+          type="button"
+          onClick={() => setPostSteps(3)}
+        >
           Next
         </button>
       </div>
       <div className={Styles.mainContainer}>
         <div className={Styles.imageHolder} ref={imageHolderRef}>
           {images.map((image: string, index: number) => (
-            <div className={Styles.imageContainer} key={index} ref={(el) => (imageContainerRefs.current[index] = el)}>
-              <img src={image} alt={`image${index}`} className={Styles.image} ref={(el) => (imageRefs.current[index] = el)}/>
-              <div className={Styles.imageMask} ref={(el) => (imageMaskRefs.current[index] = el)}></div>
+            <div
+              className={Styles.imageContainer}
+              key={index}
+              ref={(el) => (imageContainerRefs.current[index] = el)}
+            >
+              <img
+                src={image}
+                alt={`image${index}`}
+                className={Styles.image}
+                ref={(el) => (imageRefs.current[index] = el)}
+              />
+              <div
+                className={Styles.imageMask}
+                ref={(el) => (imageMaskRefs.current[index] = el)}
+              ></div>
             </div>
           ))}
         </div>
@@ -274,9 +301,12 @@ export default function Step3() {
             <div className={Styles.filters}>
               {filters.map((filter, index) => {
                 return (
-                  <div className={`${Styles.filter}`} onClick={(e)=>{
-                    applyFilter(e,currentIndex)
-                  }}>
+                  <div
+                    className={`${Styles.filter}`}
+                    onClick={(e) => {
+                      applyFilter(e, currentIndex);
+                    }}
+                  >
                     <img
                       src={ballon}
                       alt="filter"
@@ -295,8 +325,8 @@ export default function Step3() {
                     min={0}
                     max={100}
                     value={MaskOpacityRange}
-                    onChange={(e)=>{
-                      handleOpacity(e,currentIndex)
+                    onChange={(e) => {
+                      handleOpacity(e, currentIndex);
                     }}
                   />
                   <p>{MaskOpacityRange}</p>
@@ -314,7 +344,7 @@ export default function Step3() {
                         <button
                           className={Styles.resetBtn}
                           type="button"
-                          onClick={() => handleReset(item.name,currentIndex)}
+                          onClick={() => handleReset(item.name, currentIndex)}
                         >
                           Reset
                         </button>
@@ -329,7 +359,9 @@ export default function Step3() {
                         value={item.range}
                         min={-100}
                         max={100}
-                        onChange={(e) => handleAdjustmentsRange(item.name, e,currentIndex)}
+                        onChange={(e) =>
+                          handleAdjustmentsRange(item.name, e, currentIndex)
+                        }
                       />
                       <p>{item.range}</p>
                     </div>

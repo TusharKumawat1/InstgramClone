@@ -15,9 +15,6 @@ export default function Step1() {
       setPostSteps(1);
     }
   };
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
   return (
     <div className={Styles.container}>
       <p className={Styles.title}>Create new post</p>

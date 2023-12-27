@@ -3,7 +3,7 @@ import Styles from "../styles/components/discardModal.module.css"
 import ClickAwayListener from 'react-click-away-listener'
 import { MyContext } from '../context/Mycontext'
 export default function DiscardModal() {
-    const { setIsDiscardModalOpen ,setImages,setPostSteps,setAspectRatio,setZoomRange }=useContext(MyContext)
+    const { setIsDiscardModalOpen ,setImages,setPostSteps,setAspectRatio,setZoomRange ,setAppliedFilters}=useContext(MyContext)
     const discardModalRef=useRef<HTMLDivElement | null>(null)
     const discardPost=()=>{
         setImages([])
@@ -11,6 +11,7 @@ export default function DiscardModal() {
         setPostSteps(0)
         setAspectRatio("")
         setZoomRange(20)
+        setAppliedFilters([])
     }
   return (
     <div className={Styles.overlay} ref={discardModalRef}>

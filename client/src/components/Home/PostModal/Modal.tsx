@@ -17,7 +17,8 @@ export default function Modal() {
     isDiscardModalOpen,
     ModalRef,
     setZoomRange,
-    setAspectRatio
+    setAspectRatio,
+    setAppliedFilters
   } = useContext(MyContext);
   var ContentToDisplay = <Step1 />;
   const fileTypes = ["JPG", "PNG", "GIF"];
@@ -41,6 +42,7 @@ export default function Modal() {
             setPostSteps(0);
             setAspectRatio("")
             setZoomRange(20)
+            setAppliedFilters([])
           }
         }}
       >
