@@ -44,16 +44,45 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
     password: "",
   });
   const [authenticUser, setauthenticUser] = useState<authenticUserType>();
-  const [appliedFilters,setAppliedFilters]=useState([])
-  const generateBase64 = (file: Blob) => {
-    const reader = new FileReader();
-    reader.onload = async () => {
-      if (reader.result) {
-        const base64String = reader.result.toString(); //converting image to base64
-        return base64String;
-      }
-    };
-    reader.readAsDataURL(file);
+  const [appliedFilters, setAppliedFilters] = useState([]);
+  // const generateBase64 = async(blobUrl:string) => {
+  //   const response = await fetch(blobUrl);
+  //   const blob = await response.blob();
+  //   console.log("blob : ",blob)
+  //   const reader = new FileReader();
+  //   if (blob) {      
+  //     reader.onload = async () => {
+  //       if (reader.result) {
+  //         const base64String = await reader.result.toString(); //converting image to base64
+  //         return base64String;
+  //       }
+  //     };
+  //   }
+  //   reader.readAsDataURL(blob);
+  // };
+  const generateBase64 = (blobUrl: string): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      fetch(blobUrl)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            if (reader.result) {
+              const base64String = reader.result.toString(); // Converting image to base64
+              resolve(base64String);
+            } else {
+              reject(new Error("Failed to read the blob as base64."));
+            }
+          };
+          reader.onerror = () => {
+            reject(new Error("Error reading the blob."));
+          };
+          reader.readAsDataURL(blob);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   };
   const getImageUrl = async (image: string) => {
     const data = new FormData();
@@ -95,12 +124,12 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
         authenticUser,
         setauthenticUser,
         ModalRef,
-        aspectRatio, 
+        aspectRatio,
         setAspectRatio,
-        zoomRange, 
+        zoomRange,
         setZoomRange,
         appliedFilters,
-        setAppliedFilters
+        setAppliedFilters,
       }}
     >
       {children}

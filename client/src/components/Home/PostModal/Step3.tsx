@@ -306,6 +306,7 @@ export default function Step3() {
                     onClick={(e) => {
                       applyFilter(e, currentIndex);
                     }}
+                    key={index}
                   >
                     <img
                       src={ballon}
