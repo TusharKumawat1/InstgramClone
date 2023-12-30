@@ -28,7 +28,7 @@ export default function LoginForm() {
   const onsubmit = async (data: FormValues) => {
     setresError(false);
     setisloading(true);
-    const res = await fetch("http://localhost:3002/auth/loginUser", {
+    const res = await fetch(`${process.env.REACT_APP_SERVER_PORT}/auth/loginUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

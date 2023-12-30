@@ -15,7 +15,7 @@ export default function OtpPage() {
     e.preventDefault();
     if(otpValue==="696969"){
       setisloading(true)
-      const res=await fetch("http://localhost:3002/auth/createUser",{
+      const res=await fetch(`${process.env.REACT_APP_SERVER_PORT}/auth/createUser`,{
         method:"POST",
         headers:{
           "Content-Type":"application/json"

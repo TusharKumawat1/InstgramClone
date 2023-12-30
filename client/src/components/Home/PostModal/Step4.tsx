@@ -4,6 +4,7 @@ import step4 from "../../../styles/components/ModalCss/step4.module.css";
 import { MyContext } from "../../../context/Mycontext";
 import EmojiPicker from "emoji-picker-react";
 import ClickAwayListener from "react-click-away-listener";
+import { Token } from "graphql";
 type AltTextType = {
   imageIndex: number;
   altText: string;
@@ -36,7 +37,6 @@ export default function Step4() {
     images.forEach(async(blob:string)=>{
       const base64Image= await generateBase64(blob)
       const imageUrl=await getImageUrl(base64Image)
-      console.log(imageUrl)
       imagesUrl.push(imageUrl.secure_url)
     })
     console.log(imagesUrl)
@@ -49,6 +49,15 @@ export default function Step4() {
       aspectRatio: aspectRatio,
       appliedFilters: appliedFilters,
     };
+    const token=localStorage.getItem("token")!
+    const res=await fetch(`${process.env.REACT_APP_SERVER_PORT}/posts/createPost`,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        token:token
+      },
+      body:JSON.stringify(postDetails),
+    })
   }
   const gotoStep3 = () => {
     setPostSteps(2);
@@ -134,9 +143,6 @@ export default function Step4() {
     }
   };
  
-  useEffect(()=>{
-    postContent()
-  },[])
   useEffect(() => {
     if (filterBtnRef.current) {
       filterBtnRef.current.style.color = "black";
@@ -199,8 +205,8 @@ export default function Step4() {
           onClick={gotoStep3}
         ></i>
         <p>Create new post</p>
-        <button className={Styles.nextBtn} type="button">
-          Next
+        <button className={Styles.nextBtn} type="button" onClick={postContent}>
+          Share
         </button>
       </div>
       <div className={Styles.mainContainer}>

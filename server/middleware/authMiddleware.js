@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 dotenv.config();
 export const authMiddleware = async (req, res, next) => {
   const token = req.header("token");
-  console.log("token : ",token)
   if (!token)
     res.status(401).json({ success: false, res: "token not provided" });
 

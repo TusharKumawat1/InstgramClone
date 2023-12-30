@@ -5,6 +5,8 @@ import userRouter from "./routes/auth.js";
 import connectToDB from "./config/dbConfig.js";
 import { expressMiddleware } from "@apollo/server/express4";
 import server from "./routes/smapleGQL.js";
+import posts from "./routes/post.js"
+import { authMiddleware } from "./middleware/authMiddleware.js";
 dotenv.config();
 async function startServer() {
   const app = express();
@@ -13,6 +15,7 @@ async function startServer() {
   await connectToDB();
   app.use("/graphql", expressMiddleware(server));
   app.use("/auth", userRouter);
+  app.use("/posts",authMiddleware,posts );
   app.get("/", (req, res) => res.send("Healthy! 🟢"));
   app.listen(process.env.PORT, () => console.log("server started 🟢"));
 }
