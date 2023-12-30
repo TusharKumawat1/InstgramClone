@@ -15,6 +15,8 @@ import optpng from "./otp.png"
 import reels from "./clapperboard.png"
 import shareIcon from "./instagram-share-icon.png"
 import ballon from "./Baloon.png"
+import postingGif from "./PostingLoader.gif"
+import postingCompleteGif from "./PostCompleteLoader.gif"
 export {
   asset0,
   asset1,
@@ -32,5 +34,7 @@ export {
   optpng,
   reels,
   shareIcon,
-  ballon
+  ballon,
+  postingGif,
+  postingCompleteGif
 };

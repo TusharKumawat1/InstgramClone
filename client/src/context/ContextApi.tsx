@@ -19,6 +19,29 @@ type authenticUserType = {
   pfp: string;
   _id: string;
 };
+type userId={
+  username:string
+  fullname:string
+}
+type followers={
+  _id:string
+}
+type following={
+  _id:string
+}
+type posts={
+  content:string[]
+}
+type profilePageType={
+  pfp?:string
+  bio?:string
+  accountType?:string
+  links?:string
+  userId?:userId
+  followers?:followers[]
+  following?:following[]
+  posts?:posts[]
+}
 export type isMoreType = {
   isMoreOptionsAvailable: boolean;
   setIsMoreOptionsAvailable: Dispatch<SetStateAction<boolean>>;
@@ -36,6 +59,7 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
   const [postSteps, setPostSteps] = useState<number>(0);
   const [SignupSteps, setSignupSteps] = useState(0);
   const [zoomRange, setZoomRange] = useState(20);
+  const [profilePage, setProfilePage] = useState();
   const [userDetails, setUserDetails] = useState<userDetailsType>({
     user: "",
     dob: "",
@@ -130,6 +154,8 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
         setZoomRange,
         appliedFilters,
         setAppliedFilters,
+        profilePage, 
+        setProfilePage
       }}
     >
       {children}

@@ -66,7 +66,7 @@ export default function Step3() {
       maskRef.classList.add(target.classList[0]);
       const AppliedFilter = {
         imageIndex: index,
-        filter: maskRef.classList,
+        filter: maskRef.classList.value,
       };
       const newArray = [...appliedFilters];
       newArray[index] = AppliedFilter;

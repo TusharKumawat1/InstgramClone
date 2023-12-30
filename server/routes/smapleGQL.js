@@ -10,19 +10,38 @@ const server = new ApolloServer({
             dob:String
             user:String
             fullname:String
-            pfp:String
         } 
         type Error {
             message: String!
           }
+        type advancedSetting{
+          hideLikeAndView:Boolean
+          hideComments:Boolean
+        }
+        type appliedFilters{
+          imageIndex:Int
+          filter:String
+        }
+        type post{
+          content:[String]
+          caption:String
+          location:String
+          aspectRatio:String
+          postId:String
+          advancedSetting:advancedSetting
+          appliedFilters:[appliedFilters]
+          date:String
+        }
         type profileInfos {
             _id:String
             userId:user
             bio:String
+            links:String
             pfp:String
             followers:[profileInfos]
             following:[profileInfos]
-            posts:[String]
+            accountType:String
+            posts:[post]
         }
         type ProfileInfoResponse {
             data: profileInfos
@@ -48,9 +67,12 @@ const server = new ApolloServer({
               path:"followers",
               select:"-password"
             })
+        
+            
             if (!ifValidUser) {
-                throw new Error("wrong token");
+              throw new Error("wrong token");
             }
+            ifValidUser.posts.sort((a, b) => new Date(b.date) - new Date(a.date));
             return { data: ifValidUser, errors: null };
         } catch (error) {
             return { errors: [{ message: error.message }] };

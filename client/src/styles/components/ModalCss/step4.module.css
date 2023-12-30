@@ -258,3 +258,37 @@
     color: #170c8b;
     margin-top: 10px;
 }
+.postingContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.postingContainer p{
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid rgb(215, 215, 215);
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+.Gifs{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.postComplete{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.postComplete p{
+  font-size: 30px;
+  border: none;
+}

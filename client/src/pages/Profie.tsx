@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Styles from "../styles/pages/profile.module.css";
 import AsideNav from "../components/AsideBar/AsideNav";
 import { profile } from "console";
@@ -7,36 +7,52 @@ import { MyContext } from "../context/Mycontext";
 import Modal from "../components/Home/PostModal/Modal";
 import { gql, useQuery } from "@apollo/client";
 export default function Profie() {
-  const { setIsModalOpen ,authenticUser} = useContext(MyContext);
-  const {setauthenticUser}=useContext(MyContext)
+  const { setIsModalOpen, profilePage, setProfilePage ,setauthenticUser,isModalOpen} =
+    useContext(MyContext);
   const getinfo = gql`
-    query Query($token: String) {
+    query GetPfInfo($token: String) {
       getPfInfo(token: $token) {
         errors {
           message
         }
         data {
-          _id
           userId {
             username
             fullname
           }
+          bio
           pfp
+          followers {
+            _id
+          }
+          following {
+            _id
+          }
+          accountType
+          posts {
+            content
+          }
+          links
         }
       }
     }
   `;
 
-  const { loading, error, data } = useQuery(getinfo, {
+  const token = localStorage.getItem("token")!;
+  const { loading, error, data ,refetch } = useQuery(getinfo, {
     variables: {
-      token:
-      localStorage.getItem("token")
+      token: token,
     },
   });
-  const token: string | null = localStorage.getItem("token");
-  if (!loading) {
-    setauthenticUser(data.getPfInfo.data)
-  }
+  useEffect(() => {
+    if (!loading && !error && data) {
+      setProfilePage(data.getPfInfo.data);
+      setauthenticUser(data.getPfInfo.data);
+    }
+  }, [loading, error, data, setProfilePage, ]);
+ useEffect(()=>{
+  refetch()
+ },[isModalOpen])
   return (
     <div className={Styles.container}>
       <AsideNav />
@@ -46,34 +62,42 @@ export default function Profie() {
           <div className={Styles.userDetails}>
             <div className={Styles.infoSection}>
               <img
-                src={
-                  authenticUser && authenticUser.pfp
-                }
+                src={profilePage && profilePage.pfp}
                 alt=""
                 className={Styles.pfp}
               />
               <div className={Styles.details}>
                 <div className={Styles.editProfile}>
-                  <h3 className={Styles.username}>{authenticUser && authenticUser.userId.username}</h3>
+                  <h3 className={Styles.username}>
+                    {profilePage && profilePage.userId.username}
+                  </h3>
                   <button className={Styles.primaryBtn}>Edit profile</button>
                   <button className={Styles.primaryBtn}>View archive</button>
                   <i className="fa-solid fa-gear"></i>
                 </div>
                 <div className={Styles.postNconnections}>
                   <span>
-                    <b>0</b> posts
+                    <b> {profilePage && profilePage.posts.length}</b> posts
                   </span>
                   <span>
-                    <b>145</b> followers
+                    <b>{profilePage && profilePage.followers.length}</b>{" "}
+                    followers
                   </span>
                   <span>
-                    <b>200</b> following
+                    <b>{profilePage && profilePage.following.length}</b>{" "}
+                    following
                   </span>
                 </div>
                 <div className={Styles.about}>
-                  <h4 className={Styles.fullname}>{authenticUser&&authenticUser.userId.username}</h4>
-                  <p className={Styles.bio}>Bio</p>
-                  <a className={Styles.links}>link</a>
+                  <h4 className={Styles.fullname}>
+                    {profilePage && profilePage.userId.fullname}
+                  </h4>
+                  <p className={Styles.bio}>
+                    {profilePage && profilePage.bio}
+                  </p>
+                  <a className={Styles.links}>
+                    {profilePage && profilePage.links}
+                  </a>
                 </div>
               </div>
             </div>
@@ -100,23 +124,35 @@ export default function Profie() {
                 <i className="fa-solid fa-id-card-clip"></i> Taged
               </span>
             </div>
-            <div className={Styles.posts}>
-              <div
-                className={Styles.cameraIcon}
-                onClick={() => setIsModalOpen(true)}
-              >
-                <i className="fa-solid fa-camera"></i>
+            {profilePage && profilePage.posts.length <= 0 ? (
+              <div className={Styles.posts}>
+                <div
+                  className={Styles.cameraIcon}
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <i className="fa-solid fa-camera"></i>
+                </div>
+                <h1>Share Photos</h1>
+                <p>When you share photos, they will appear on your profile.</p>
+                <button
+                  className={Styles.firstPhotoBtn}
+                  type="button"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  Share your first photo
+                </button>
               </div>
-              <h1>Share Photos</h1>
-              <p>When you share photos, they will appear on your profile.</p>
-              <button
-                className={Styles.firstPhotoBtn}
-                type="button"
-                onClick={() => setIsModalOpen(true)}
-              >
-                Share your first photo
-              </button>
-            </div>
+            ) : (
+              <div className={Styles.postsContainer}>
+                {
+                 profilePage && profilePage.posts.map((post:any,index:number)=>{
+                    return <div  key={index} className={Styles.post}>
+                      <img src={post.content[0]} alt="" className={Styles.postContent}/>
+                    </div>
+                  })
+                }
+              </div>
+            )}
             <Footer />
           </div>
         </div>
