@@ -20,6 +20,7 @@ export default function Step4() {
     generateBase64,
     getImageUrl,
     ModalRef,
+    settoggleRefetch
   } = useContext(MyContext);
   const imageContainerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const imageMaskRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -82,6 +83,7 @@ export default function Step4() {
       }
     );
     setLoading(false);
+    settoggleRefetch((p:boolean)=>!p)
   };
   const gotoStep3 = () => {
     setPostSteps(2);

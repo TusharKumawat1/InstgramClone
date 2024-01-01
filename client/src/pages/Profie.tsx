@@ -7,8 +7,14 @@ import { MyContext } from "../context/Mycontext";
 import Modal from "../components/Home/PostModal/Modal";
 import { gql, useQuery } from "@apollo/client";
 export default function Profie() {
-  const { setIsModalOpen, profilePage, setProfilePage ,setauthenticUser,isModalOpen} =
-    useContext(MyContext);
+  const {
+    setIsModalOpen,
+    profilePage,
+    setProfilePage,
+    setauthenticUser,
+    isModalOpen,
+    toggleRefetch,
+  } = useContext(MyContext);
   const getinfo = gql`
     query GetPfInfo($token: String) {
       getPfInfo(token: $token) {
@@ -39,7 +45,7 @@ export default function Profie() {
   `;
 
   const token = localStorage.getItem("token")!;
-  const { loading, error, data ,refetch } = useQuery(getinfo, {
+  const { loading, error, data, refetch } = useQuery(getinfo, {
     variables: {
       token: token,
     },
@@ -49,10 +55,11 @@ export default function Profie() {
       setProfilePage(data.getPfInfo.data);
       setauthenticUser(data.getPfInfo.data);
     }
-  }, [loading, error, data, setProfilePage, ]);
- useEffect(()=>{
-  refetch()
- },[isModalOpen])
+  }, [loading, error, data, setProfilePage]);
+  useEffect(() => {
+    refetch();
+    console.log(toggleRefetch)
+  }, [toggleRefetch]);
   return (
     <div className={Styles.container}>
       <AsideNav />
@@ -92,10 +99,8 @@ export default function Profie() {
                   <h4 className={Styles.fullname}>
                     {profilePage && profilePage.userId.fullname}
                   </h4>
-                  <p className={Styles.bio}>
-                    {profilePage && profilePage.bio}
-                  </p>
-                  <a className={Styles.links}>
+                  <p className={Styles.bio}>{profilePage && profilePage.bio}</p>
+                  <a className={Styles.links} href={ profilePage && profilePage.links} target="blank">
                     {profilePage && profilePage.links}
                   </a>
                 </div>
@@ -144,13 +149,41 @@ export default function Profie() {
               </div>
             ) : (
               <div className={Styles.postsContainer}>
-                {
-                 profilePage && profilePage.posts.map((post:any,index:number)=>{
-                    return <div  key={index} className={Styles.post}>
-                      <img src={post.content[0]} alt="" className={Styles.postContent}/>
-                    </div>
-                  })
-                }
+                {profilePage &&
+                  profilePage.posts.map((post: any, index: number) => {
+                    return (
+                      <div key={index} className={Styles.post}>
+                        <img
+                          src={post.content[0]}
+                          alt=""
+                          className={Styles.postContent}
+                        />
+                        <div className={Styles.mask}></div>
+                        <div className={Styles.onHover}>
+                          <span>
+                            {" "}
+                            {post.likes ? post.likes.length : 0}
+                            <i className="fa-solid fa-heart"></i>
+                          </span>
+                          <span>
+                            {" "}
+                            {post.comment ? post.comment.length : 0}
+                            <i className="fa-solid fa-comment"></i>
+                          </span>
+                        </div>
+                      {
+                        post.content.length>1 &&  <span>
+                        <i
+                          className={` fa-solid fa-square ${Styles.upperBox}`}
+                        ></i>
+                        <i
+                          className={`fa-regular fa-square ${Styles.lowerBox}`}
+                        ></i>
+                      </span>
+                      }
+                      </div>
+                    );
+                  })}
               </div>
             )}
             <Footer />

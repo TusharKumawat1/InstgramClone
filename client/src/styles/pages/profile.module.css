@@ -18,11 +18,11 @@
   display: flex;
   flex-direction: column;
 }
-.userDetails{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 43%;
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 43%;
 }
 .infoSection {
   padding: 35px 100px;
@@ -38,11 +38,11 @@
   align-items: center;
   object-fit: cover;
 }
-.details{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+.details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 .editProfile {
   display: flex;
@@ -51,208 +51,255 @@
   align-items: center;
   /* padding-right: 100px; */
 }
-.primaryBtn{
-    border: none;
-    height: 33px;
-    padding: 10px 15px;
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 5px;
-    transition: 0.1s ease;
-    cursor: pointer;
-    min-width: 120px;
+.primaryBtn {
+  border: none;
+  height: 33px;
+  padding: 10px 15px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 5px;
+  transition: 0.1s ease;
+  cursor: pointer;
+  min-width: 120px;
 }
-.primaryBtn:hover{
-    background-color: #d3d3d3;
+.primaryBtn:hover {
+  background-color: #d3d3d3;
 }
-.username{
-    font-weight: 490;
-    font-size: 20px;
+.username {
+  font-weight: 490;
+  font-size: 20px;
 }
 .editProfile i {
-    font-size: 20px;
-    cursor: pointer;
+  font-size: 20px;
+  cursor: pointer;
 }
-.postNconnections{
-    margin-block: 20px;
-    width: 100%;
-    display: flex;
-    gap: 30px;
+.postNconnections {
+  margin-block: 20px;
+  width: 100%;
+  display: flex;
+  gap: 30px;
 }
-.about{
-    display: flex;
-    flex-direction: column;
+.about {
+  display: flex;
+  flex-direction: column;
 }
-.fullname{
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 10px;
+.fullname {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
-.bio{
-    font-size: 13px;
+.bio {
+  font-size: 13px;
 }
-.links{
-    color: rgb(8, 8, 127);
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
+.links {
+  color: rgb(8, 8, 127);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
 }
-.links:hover{
-    text-decoration: underline;
+.links:hover {
+  text-decoration: underline;
 }
-.highlights{
-    padding: 20px 80px;
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
-    width: 100%;
-    height: 40%;
+.highlights {
+  padding: 20px 80px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  height: 40%;
 }
-.createHighlightIcon{
-    width: 80px;
-    height: 80px;
-    border: 1px solid rgb(220, 220, 220);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.createHighlightIcon {
+  width: 80px;
+  height: 80px;
+  border: 1px solid rgb(220, 220, 220);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.createHighlight i{
-    font-size: 50px;
-    font-weight: 100;
-    color: #d3d3d3;
+.createHighlight i {
+  font-size: 50px;
+  font-weight: 100;
+  color: #d3d3d3;
 }
-.createHighlight{
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
+.createHighlight {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
 }
-.createHighlight p{
-    margin-top: 10px;
-    text-align: center;
-    font-size: 12px;
+.createHighlight p {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 12px;
 }
-.library{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 100px;
+.library {
+  width: 97%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 100px;
+  border-top: 1px solid #d3d3d3;
+}
+.options {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 50px;
+  cursor: pointer;
+}
+.options span {
+  font-size: 13px;
+  font-weight: 500;
+  color: #b9b8b8;
+}
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.cameraIcon {
+  width: 70px;
+  height: 70px;
+  border: 1px solid black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  cursor: pointer;
+}
+.firstPhotoBtn {
+  border: none;
+  background: none;
+  color: rgb(0, 180, 251);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.postsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3px;
+  margin-top: -90px;
+  width: 100%;
+  height: auto;
+}
+.post {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  transition: 0.1s ease;
+  cursor: pointer;
+}
+.postContent {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mask {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+.onHover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: 0.3s ease;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  color: white;
+  font-size: 18px;
+  gap: 15px;
+  font-weight: bold;
+}
+.onHover i {
+  padding-left: 5px;
+}
+.post:hover .onHover {
+  display: flex;
+}
+.upperBox,
+.lowerBox {
+  position: absolute;
+}
+.upperBox {
+  z-index: 1;
+  color: #ffffff;
+  border-radius: 4px;
+  top: 10px;
+  right: 11px;
+  border: none;
+  opacity: 2;
+}
+.lowerBox {
+  border-radius: 10px;
+  color: white;
+  right: 8px;
+  top: 13px;
+
+}
+@media screen and (max-width: 1700px) {
+  .profileSection {
+    justify-content: start;
+    margin-left: 10%;
+  }
+  .infoSection {
+    padding: 35px 50px;
+  }
+}
+@media screen and (max-width: 1500px) {
+  .library {
     border-top: 1px solid #d3d3d3;
+    width: 140%;
+  }
+  .post {
+    width: 270px;
+    height: 270px;
+  }
 }
-.options{
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    gap: 50px;
-    cursor: pointer;
-}
-.options span{
-    font-size: 13px;
-    font-weight: 500;
-    color:#b9b8b8;
-}
-.posts{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-}
-.cameraIcon{
-    width: 70px;
-    height: 70px;
-    border :1px solid black;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
-    cursor: pointer;
-}
-.firstPhotoBtn{
+@media screen and (max-width: 1400px) {
+  .profileSection {
+    justify-content: start;
+    margin-left: 4%;
+  }
+  .userDetails {
     border: none;
-    background: none;
-    color:rgb(0, 180, 251);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
+  }
+  .library {
+    border-top: 1px solid #d3d3d3;
+    width: 150%;
+  }
+  .infoSection {
+    padding: 35px 5px;
+  }
+  .post {
+    width: 250px;
+    height: 250px;
+  }
 }
-.postsContainer{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    grid-gap: 10px; 
-    margin-top: -80px;
-    width: 100%;
-    height: auto;
-}
-.post{
-    position:relative;
-    width: 300px;
-    height: 300px;
-    transition: 0.1s ease;
-}
-.postContent{
+@media screen and (max-width: 1200px) {
+  .post {
+    width: 230px;
+    height: 230px;
+  }
+  .postContent {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-@media screen and (max-width: 1700px) {
- .profileSection{
-    justify-content: start;
-    margin-left: 10%;
- }
- .infoSection{
-    padding:35px 50px;
- }
-}
-@media screen and (max-width: 1500px) {
-    
-    .library{
-        border-top: 1px solid #d3d3d3;
-        width: 140%;
-    }
-    .post{
-        width: 270px;
-        height: 270px;
-    }
-}
-@media screen and (max-width: 1400px) {
-    .profileSection{
-        justify-content: start;
-        margin-left: 4%;
-    }
-    .userDetails{
-        border: none;
-    }
-    .library{
-        border-top: 1px solid #d3d3d3;
-        width: 150%;
-    }
-    .infoSection{
-        padding:35px 5px;
-    }
-    .post{
-        width: 250px;
-        height: 250px;
-    }
-}
-@media screen and (max-width: 1200px) {
-
-    .post{
-        width: 230px;
-        height: 230px;
-    }
-    .postContent{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+  }
 }
 @media screen and (max-height: 850px) {
-    .userDetails{
-        height: 60%;
-    }
-   }
+  .userDetails {
+    height: 60%;
+  }
+}
