@@ -8,6 +8,7 @@ import Modal from "./components/Home/PostModal/Modal";
 import { MyContext } from "./context/Mycontext";
 import DiscardModal from "./components/DiscardModal";
 import PostingLoader from "./components/Home/PostingLoader";
+import Loader from "./components/Home/Loader";
 export default function App() {
   const { isModalOpen, isDiscardModalOpen } = useContext(MyContext);
   return (
@@ -15,7 +16,6 @@ export default function App() {
       <Routes>
         <Route path="/auth" element={<Auth />} />
         <Route path="/" element={<Home />} />
-        <Route path="/loader" element={<PostingLoader />} />
         <Route path="/profile/:username" element={<Profie />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

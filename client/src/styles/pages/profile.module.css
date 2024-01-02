@@ -51,6 +51,11 @@
   align-items: center;
   /* padding-right: 100px; */
 }
+.editProfile span{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
 .primaryBtn {
   border: none;
   height: 33px;
@@ -247,6 +252,15 @@
   right: 8px;
   top: 13px;
 
+}
+.privateAccount{
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 @media screen and (max-width: 1700px) {
   .profileSection {

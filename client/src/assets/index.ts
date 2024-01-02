@@ -17,6 +17,7 @@ import shareIcon from "./instagram-share-icon.png"
 import ballon from "./Baloon.png"
 import postingGif from "./PostingLoader.gif"
 import postingCompleteGif from "./PostCompleteLoader.gif"
+import instaLogo from "./instagramLogo.png"
 export {
   asset0,
   asset1,
@@ -36,5 +37,6 @@ export {
   shareIcon,
   ballon,
   postingGif,
-  postingCompleteGif
+  postingCompleteGif,
+  instaLogo
 };

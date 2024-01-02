@@ -5,6 +5,7 @@ import AsideNav from "../components/AsideBar/AsideNav";
 import Feed from "../components/Home/Feed";
 import { useQuery, gql } from "@apollo/client";
 import { MyContext } from "../context/Mycontext";
+import Loader from "../components/Home/Loader";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -34,19 +35,18 @@ export default function Home() {
     },
   });
   const token: string | null = localStorage.getItem("token");
-  if (!loading) {
-    setauthenticUser(data.getPfInfo.data)
-  }
+     if (!loading) {
+      setauthenticUser(data.getPfInfo.data)
+    }
   useEffect(() => {
     if (!token) {
       navigate("/auth");
     }
-    if (data) {
-      console.log(data.getPfInfo.data);
-      // setauthenticUser(data.getPfInfo.data)
-    }
-  }, []);
 
+  }, []);
+  if (loading) {
+    return <Loader/>
+  }
   return (
     <div className={Styles.container}>
       <AsideNav />
