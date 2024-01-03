@@ -16,32 +16,39 @@ export default function Profie() {
     toggleRefetch,
   } = useContext(MyContext);
   const getinfo = gql`
-    query GetPfInfo($token: String) {
-      getPfInfo(token: $token) {
-        errors {
-          message
+  query GetPfInfo($token: String) {
+    getPfInfo(token: $token) {
+      errors {
+        message
+      }
+      data {
+        userId {
+          username
+          fullname
         }
-        data {
-          userId {
-            username
-            fullname
-          }
-          bio
-          pfp
-          followers {
-            _id
-          }
-          following {
-            _id
-          }
-          accountType
-          posts {
-            content
-          }
-          links
+        bio
+        pfp
+        followers {
+          _id
         }
+        following {
+          _id
+        }
+        accountType
+        posts {
+          content
+          appliedFilters {
+            filter
+            imageIndex
+          }
+          postId
+          aspectRatio
+        }
+        links
+        _id
       }
     }
+  }
   `;
 
   const token = localStorage.getItem("token")!;

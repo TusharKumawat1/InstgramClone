@@ -47,8 +47,14 @@ const server = new ApolloServer({
             data: profileInfos
             errors: [Error]
           }
+          type postDetails {
+            userDetails:profileInfos
+            postDetails: post
+            errors: [Error]
+          }
         type Query{
             getPfInfo(token: String): ProfileInfoResponse
+            getPostDetails(userProfileId: String,postId:String):postDetails
         }
     `,
   resolvers: {
@@ -76,6 +82,30 @@ const server = new ApolloServer({
             return { data: ifValidUser, errors: null };
         } catch (error) {
             return { errors: [{ message: error.message }] };
+        }
+      },
+      getPostDetails: async (_, req) => {
+        try {
+          const { userProfileId, postId } = req;
+          if (!userProfileId) {
+            throw new Error("Please Provide a user");
+          }
+          const validProfile = await ProfileInfo.findOne({
+            _id: userProfileId,
+          }).populate({
+            path: "userId",
+            select: "-password",
+          });
+          if (!validProfile) {
+            throw new Error("User not found");
+          }
+          const postDetails=validProfile.posts.filter(post=>post.postId.equals(postId))
+          if (!postDetails) {
+            throw new Error("Post not found")
+          }
+          return { userDetails:validProfile ,postDetails : postDetails[0], errors: null };
+        } catch (error) {
+          return { errors: [{ message: error.message }] };
         }
       },
     },

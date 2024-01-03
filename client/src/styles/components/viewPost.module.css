@@ -12,7 +12,146 @@
   z-index: 9999;
 }
 .modal{
-  width: 80%;
+  width: 70%;
   height: 90%;
   display: flex;
+  background-color: white;
+}
+.imagesHolder{
+  width: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #e9e9e9;
+}
+.imageContainer{
+  width: 100%;
+  height: 100%;
+}
+.content{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.postDeails{
+  display: flex;
+  width: 35%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  position: relative;
+}
+.user{
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e9e9e9;
+}
+.userDetails,.aboutContent{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.pfp,.likedBypfp{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.commentSection{
+  width: 100%;
+  height: 72%;
+  border-bottom: 1px solid #e9e9e9;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 15px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.comments{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}
+.postOverView{
+  width: 100%;
+  height: 13%;
+  border-bottom: 1px solid #e9e9e9;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  gap: 10px;
+}
+.interactions{
+  display: flex;
+  justify-content: space-between;
+}
+.interactions span{
+  display: flex;
+  gap: 10px;
+  font-size: 25px;
+}
+.likedBy{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin-block: 10px;
+  justify-content: center;
+  gap: 10px;
+  font-size: 15px;
+  color: #636363;
+  flex-direction: column;
+}
+.likesOfuser{
+  display: flex;
+}
+.likes{
+  display: flex;
+  gap: 10px;
+}
+.likedBypfp{
+  width: 20px;
+  height: 20px;
+  margin-left: -5px;
+}
+.likedBypfp:nth-child(1){
+  margin-left: 0px;
+}
+.postedOn{
+  display: block;
+  font-size: 12px;
+  color: #979797;
+  margin-top: -5px;
+}
+.addComment{
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  justify-content: center;
+  width: 100%;
+}
+.addComment i {
+  font-size: 23px;
+  cursor: pointer;
+}
+.addComment input{
+  border: none;
+  width: 100%;
+  background: none;
+}
+.addComment input:focus{
+  outline: none;
+}
+.emojiPicker{
+  position: absolute;
+  bottom: 60px;
+  left: 10px;
 }
