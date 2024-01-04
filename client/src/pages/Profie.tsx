@@ -182,11 +182,12 @@ export default function Profie() {
                   profilePage.posts.map((post: any, index: number) => {
                     let filterName = "";
                     if (post.appliedFilters[index]) {
-                      filterName = post.appliedFilters[index].filter
-                        .split(" ")[1]
-                        .substring(6)
-                        .split("_")[0];
+                      filterName = post?.appliedFilters[index]?.filter
+                        ?.split(" ")[1]
+                        ?.substring(6)
+                        ?.split("_")[0];
                     }
+                    console.log(filterName)
                     let height = "100%";
                     let width = "100%";
                     if (post.aspectRatio === "original") {
