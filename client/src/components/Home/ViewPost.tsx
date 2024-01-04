@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, {  useContext, useEffect, useState } from "react";
 import Styles from "../../styles/components/viewPost.module.css";
 import ClickAwayListener from "react-click-away-listener";
 import EmojiPicker from "emoji-picker-react";
 import { gql, useQuery } from "@apollo/client";
-type propesType = {
+import { MyContext } from "../../context/Mycontext";
+
+type contentDetailsType = {
   _id?: string;
   postId?: string;
 };
 
-export default function ViewPost({ _id, postId }: propesType) {
+export default function ViewPost(contentDetails: contentDetailsType) {
+  const {setViewPost}=useContext(MyContext);
   const [showEmojiPicker, setshowEmojiPicker] = useState(false);
   const [postDetails, setPostDetails] = useState<any>();
   const [userDetails, setuserDetails] = useState<any>();
@@ -46,8 +49,8 @@ export default function ViewPost({ _id, postId }: propesType) {
   `;
   const { loading, error, data, refetch } = useQuery(getinfo, {
     variables: {
-      postId: "6593caf210a5a78cdff07470",
-      userProfileId: "65797be10f764cf89154ccea",
+      postId: contentDetails.postId,
+      userProfileId: contentDetails._id,
     },
   });
   useEffect(() => {
@@ -61,10 +64,12 @@ export default function ViewPost({ _id, postId }: propesType) {
     if (error) {
       console.log(error)
     }
-  }, []);
+  }, [ loading, error, data]);
   return (
     <div className={Styles.overlay}>
-      <div className={Styles.modal}>
+  
+     <ClickAwayListener onClickAway={()=>setViewPost(false)}>
+       <div className={Styles.modal}>
         <div className={Styles.imagesHolder}>
           <div className={Styles.imageContainer}>
             <img
@@ -140,6 +145,7 @@ export default function ViewPost({ _id, postId }: propesType) {
           </div>
         </div>
       </div>
+    </ClickAwayListener>
     </div>
   );
 }

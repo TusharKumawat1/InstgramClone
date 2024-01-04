@@ -199,6 +199,9 @@
   height: 300px;
   transition: 0.1s ease;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .postContent {
   width: 100%;

@@ -61,6 +61,7 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
   const [zoomRange, setZoomRange] = useState(20);
   const [profilePage, setProfilePage] = useState<profilePageType>();
   const [toggleRefetch, settoggleRefetch] = useState(false);
+  const [viewPost, setViewPost] = useState(false);
   const [userDetails, setUserDetails] = useState<userDetailsType>({
     user: "",
     dob: "",
@@ -70,21 +71,6 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
   });
   const [authenticUser, setauthenticUser] = useState<authenticUserType>();
   const [appliedFilters, setAppliedFilters] = useState([]);
-  // const generateBase64 = async(blobUrl:string) => {
-  //   const response = await fetch(blobUrl);
-  //   const blob = await response.blob();
-  //   console.log("blob : ",blob)
-  //   const reader = new FileReader();
-  //   if (blob) {      
-  //     reader.onload = async () => {
-  //       if (reader.result) {
-  //         const base64String = await reader.result.toString(); //converting image to base64
-  //         return base64String;
-  //       }
-  //     };
-  //   }
-  //   reader.readAsDataURL(blob);
-  // };
   const generateBase64 = (blobUrl: string): Promise<string> => {
     return new Promise((resolve, reject) => {
       fetch(blobUrl)
@@ -158,7 +144,9 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
         profilePage, 
         setProfilePage,
         toggleRefetch, 
-        settoggleRefetch
+        settoggleRefetch,
+        viewPost, 
+        setViewPost
       }}
     >
       {children}

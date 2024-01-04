@@ -1,54 +1,68 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Styles from "../styles/pages/profile.module.css";
 import AsideNav from "../components/AsideBar/AsideNav";
-import { profile } from "console";
 import Footer from "../components/Home/Footer";
 import { MyContext } from "../context/Mycontext";
-import Modal from "../components/Home/PostModal/Modal";
 import { gql, useQuery } from "@apollo/client";
+import ViewPost from "../components/Home/ViewPost";
+import filters from "../styles/components/ModalCss/step3.module.css";
+import Loader from "../components/Home/Loader";
 export default function Profie() {
   const {
     setIsModalOpen,
     profilePage,
     setProfilePage,
     setauthenticUser,
-    isModalOpen,
     toggleRefetch,
+    viewPost,
+    setViewPost,
   } = useContext(MyContext);
+  const [contentDetails, setContentDetails] = useState({
+    _id: "",
+    postId: "",
+  });
+  const showContnet = (_id: string, postId: string) => {
+    const newObj = { ...contentDetails };
+    newObj._id = _id;
+    newObj.postId = postId;
+    console.log(newObj);
+    setContentDetails((p) => newObj);
+    setViewPost(true);
+  };
   const getinfo = gql`
-  query GetPfInfo($token: String) {
-    getPfInfo(token: $token) {
-      errors {
-        message
-      }
-      data {
-        userId {
-          username
-          fullname
+    query GetPfInfo($token: String) {
+      getPfInfo(token: $token) {
+        errors {
+          message
         }
-        bio
-        pfp
-        followers {
-          _id
-        }
-        following {
-          _id
-        }
-        accountType
-        posts {
-          content
-          appliedFilters {
-            filter
-            imageIndex
+        data {
+          userId {
+            username
+            fullname
           }
-          postId
-          aspectRatio
+          bio
+          pfp
+          followers {
+            _id
+          }
+          following {
+            _id
+          }
+          accountType
+          posts {
+            content
+            appliedFilters {
+              filter
+              imageIndex
+            }
+            postId
+            aspectRatio
+          }
+          links
+          _id
         }
-        links
-        _id
       }
     }
-  }
   `;
 
   const token = localStorage.getItem("token")!;
@@ -59,14 +73,18 @@ export default function Profie() {
   });
   useEffect(() => {
     if (!loading && !error && data) {
+      console.log(data.getPfInfo.data.posts);
       setProfilePage(data.getPfInfo.data);
       setauthenticUser(data.getPfInfo.data);
     }
-  }, [loading, error, data, setProfilePage]);
+  }, [loading, error, data, profilePage]);
   useEffect(() => {
     refetch();
-    console.log(toggleRefetch)
+    console.log(toggleRefetch);
   }, [toggleRefetch]);
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className={Styles.container}>
       <AsideNav />
@@ -107,7 +125,11 @@ export default function Profie() {
                     {profilePage && profilePage.userId.fullname}
                   </h4>
                   <p className={Styles.bio}>{profilePage && profilePage.bio}</p>
-                  <a className={Styles.links} href={ profilePage && profilePage.links} target="blank">
+                  <a
+                    className={Styles.links}
+                    href={profilePage && profilePage.links}
+                    target="blank"
+                  >
                     {profilePage && profilePage.links}
                   </a>
                 </div>
@@ -158,14 +180,44 @@ export default function Profie() {
               <div className={Styles.postsContainer}>
                 {profilePage &&
                   profilePage.posts.map((post: any, index: number) => {
+                    let filterName = "";
+                    if (post.appliedFilters[index]) {
+                      filterName = post.appliedFilters[index].filter
+                        .split(" ")[1]
+                        .substring(6)
+                        .split("_")[0];
+                    }
+                    let height = "100%";
+                    let width = "100%";
+                    if (post.aspectRatio === "original") {
+                      height = "95%";
+                      width = "95%";
+                    } else if (post.aspectRatio === "4X5") {
+                      height = "100%";
+                      width = "80%";
+                    } else if (post.aspectRatio === "16X9") {
+                      height = "60%";
+                      width = "100%";
+                    }
+                    console.log(post.aspectRatio)
                     return (
-                      <div key={index} className={Styles.post}>
+                      <div
+                        key={index}
+                        className={Styles.post}
+                        onClick={() =>
+                          showContnet(profilePage._id, post.postId)
+                        }
+                      >
                         <img
                           src={post.content[0]}
                           alt=""
                           className={Styles.postContent}
+                          style={{ width: width, height: height }}
                         />
-                        <div className={Styles.mask}></div>
+                        <div
+                          className={`${Styles.mask} ${filters[filterName]} `}
+                          style={{ width: width, height: height }}
+                        ></div>
                         <div className={Styles.onHover}>
                           <span>
                             {" "}
@@ -178,19 +230,20 @@ export default function Profie() {
                             <i className="fa-solid fa-comment"></i>
                           </span>
                         </div>
-                      {
-                        post.content.length>1 &&  <span>
-                        <i
-                          className={` fa-solid fa-square ${Styles.upperBox}`}
-                        ></i>
-                        <i
-                          className={`fa-regular fa-square ${Styles.lowerBox}`}
-                        ></i>
-                      </span>
-                      }
+                        {post.content.length > 1 && (
+                          <span>
+                            <i
+                              className={` fa-solid fa-square ${Styles.upperBox}`}
+                            ></i>
+                            <i
+                              className={`fa-regular fa-square ${Styles.lowerBox}`}
+                            ></i>
+                          </span>
+                        )}
                       </div>
                     );
                   })}
+                {viewPost && <ViewPost {...contentDetails} />}
               </div>
             )}
             <Footer />
