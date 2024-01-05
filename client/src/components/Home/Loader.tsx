@@ -5,7 +5,7 @@ export default function Loader() {
   return (
     <div className={Styles.container}>
       <img src={instaLogo} alt="instagramClone" width={100} height={100} />
-      <p> from <br /> <span>Tushar</span> 😊</p>
+      <p> from <br /> <span>Tushar</span> </p>
     </div>
   )
 }

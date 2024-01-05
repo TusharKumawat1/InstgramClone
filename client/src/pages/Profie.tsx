@@ -25,7 +25,6 @@ export default function Profie() {
     const newObj = { ...contentDetails };
     newObj._id = _id;
     newObj.postId = postId;
-    console.log(newObj);
     setContentDetails((p) => newObj);
     setViewPost(true);
   };
@@ -73,14 +72,12 @@ export default function Profie() {
   });
   useEffect(() => {
     if (!loading && !error && data) {
-      console.log(data.getPfInfo.data.posts);
       setProfilePage(data.getPfInfo.data);
       setauthenticUser(data.getPfInfo.data);
     }
   }, [loading, error, data, profilePage]);
   useEffect(() => {
     refetch();
-    console.log(toggleRefetch);
   }, [toggleRefetch]);
   if (loading) {
     return <Loader />;
@@ -180,14 +177,10 @@ export default function Profie() {
               <div className={Styles.postsContainer}>
                 {profilePage &&
                   profilePage.posts.map((post: any, index: number) => {
-                    let filterName = "";
-                    if (post.appliedFilters[index]) {
-                      filterName = post?.appliedFilters[index]?.filter
+                    let filterName = post?.appliedFilters[0]?.filter
                         ?.split(" ")[1]
                         ?.substring(6)
                         ?.split("_")[0];
-                    }
-                    console.log(`Filter name for post ${index}: ${filterName}`);
                     let height = "100%";
                     let width = "100%";
                     if (post.aspectRatio === "original") {
@@ -200,7 +193,6 @@ export default function Profie() {
                       height = "60%";
                       width = "100%";
                     }
-                    console.log(post.aspectRatio)
                     return (
                       <div
                         key={index}
@@ -209,16 +201,17 @@ export default function Profie() {
                           showContnet(profilePage._id, post.postId)
                         }
                       >
-                        <img
-                          src={post.content[0]}
+                    <div className={Styles.imageContainer}>
+                    <img
+                          src={post.content[post.content.length -1]}
                           alt=""
                           className={Styles.postContent}
-                          style={{ width: width, height: height }}
+                      
                         />
                         <div
                           className={`${Styles.mask} ${filters[filterName]} `}
-                          style={{ width: width, height: height }}
                         ></div>
+                    </div>
                         <div className={Styles.onHover}>
                           <span>
                             {" "}
