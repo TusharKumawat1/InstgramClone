@@ -7,10 +7,10 @@ import { MyContext } from "../../context/Mycontext";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import filters from "../../styles/components/ModalCss/step3.module.css";
-import { set } from "react-hook-form";
 type contentDetailsType = {
   _id?: string;
   postId?: string;
+  currentUserId?:string;
 };
 
 export default function ViewPost(contentDetails: contentDetailsType) {
@@ -113,14 +113,27 @@ export default function ViewPost(contentDetails: contentDetailsType) {
   const likePost = async () => {
     setLiked(true)
     const token = localStorage.getItem("token")!
-    
+    const res=await fetch(`${process.env.REACT_APP_SERVER_PORT}/posts/likePost`,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        token:token
+      },
+      body:JSON.stringify({postId:contentDetails.postId,profileId:contentDetails._id})
+    })
+    const result=await res.json()
+    console.log(result)
   };
   useEffect(() => {
     if (data) {
-      console.log(data);
       setuserDetails(data.getPostDetails.userDetails);
       setPostDetails(data.getPostDetails.postDetails);
-      setLiked(postDetails?.liked);
+      if (postDetails?.likes?.filter((id:string)=>id===contentDetails.currentUserId)) {
+        setLiked(true)
+        console.log("likedBY : ",postDetails?.likes?.filter((id:string)=>id===contentDetails.currentUserId))
+      }else{
+        setLiked(false)
+      }
       let newSize = { ...size };
       if (postDetails?.aspectRatio === "original") {
         newSize.height = "95%";
@@ -217,7 +230,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                 <p className={Styles.caption}>
                   {" "}
                   <span>{userDetails && userDetails.userId.username}</span>
-                  {postDetails && postDetails?.caption}
+                 &nbsp; {postDetails && postDetails?.caption}
                 </p>
               </span>
               <div className={Styles.comments}>

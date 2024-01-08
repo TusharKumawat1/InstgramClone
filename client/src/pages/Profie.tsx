@@ -20,11 +20,13 @@ export default function Profie() {
   const [contentDetails, setContentDetails] = useState({
     _id: "",
     postId: "",
+    currentUserId:""
   });
   const showContnet = (_id: string, postId: string) => {
     const newObj = { ...contentDetails };
     newObj._id = _id;
     newObj.postId = postId;
+    newObj.currentUserId=_id;
     setContentDetails((p) => newObj);
     setViewPost(true);
   };

@@ -69,6 +69,8 @@ export default function Step4() {
       advancedSetting: advancedSetting,
       aspectRatio: aspectRatio,
       appliedFilters: appliedFilters,
+      likes:[],
+      comments:[],
     };
     const token = localStorage.getItem("token")!;
     const res = await fetch(

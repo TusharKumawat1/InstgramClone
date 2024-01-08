@@ -32,12 +32,10 @@ export const likePost=async(req,res)=>{
         if (!userProfile) {
             return res.status(404).json({success:false,message:"user not found"})
         }
-        const foundPost = userProfile.posts.find((post) =>post.postId.equals(postId));
-        if (!foundPost.likes) {
-            foundPost.likes=[]
-        }
-        foundPost?.likes?.push(req.user._id)
-        userProfile.save();
+        const foundPostIndex = userProfile.posts.findIndex((post) =>post.postId.equals( postId));
+        userProfile.posts[foundPostIndex]?.likes?.push(req.user._id)
+        await userProfile.save();
+        console.log(userProfile.posts.filter(post=>post.likes))
         return res.status(200).json({success:true,message:"liked successfully",})
 
     } catch (error) {

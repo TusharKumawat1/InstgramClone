@@ -117,7 +117,7 @@
 }
 .aboutContent{
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
 }
 .caption{
   font-size: 15px;
