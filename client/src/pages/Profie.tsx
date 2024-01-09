@@ -20,16 +20,8 @@ export default function Profie() {
   const [contentDetails, setContentDetails] = useState({
     _id: "",
     postId: "",
-    currentUserId:""
+    likedBy: "",
   });
-  const showContnet = (_id: string, postId: string) => {
-    const newObj = { ...contentDetails };
-    newObj._id = _id;
-    newObj.postId = postId;
-    newObj.currentUserId=_id;
-    setContentDetails((p) => newObj);
-    setViewPost(true);
-  };
   const getinfo = gql`
     query GetPfInfo($token: String) {
       getPfInfo(token: $token) {
@@ -40,6 +32,7 @@ export default function Profie() {
           userId {
             username
             fullname
+            _id
           }
           bio
           pfp
@@ -72,6 +65,14 @@ export default function Profie() {
       token: token,
     },
   });
+  const showContnet = (_id: string, postId: string) => {
+    const newObj = { ...contentDetails };
+    newObj._id = _id;
+    newObj.postId = postId;
+    newObj.likedBy = profilePage.userId._id;
+    setContentDetails((p) => newObj);
+    setViewPost(true);
+  };
   useEffect(() => {
     if (!loading && !error && data) {
       setProfilePage(data.getPfInfo.data);
@@ -180,9 +181,9 @@ export default function Profie() {
                 {profilePage &&
                   profilePage.posts.map((post: any, index: number) => {
                     let filterName = post?.appliedFilters[0]?.filter
-                        ?.split(" ")[1]
-                        ?.substring(6)
-                        ?.split("_")[0];
+                      ?.split(" ")[1]
+                      ?.substring(6)
+                      ?.split("_")[0];
                     let height = "100%";
                     let width = "100%";
                     if (post.aspectRatio === "original") {
@@ -203,17 +204,16 @@ export default function Profie() {
                           showContnet(profilePage._id, post.postId)
                         }
                       >
-                    <div className={Styles.imageContainer}>
-                    <img
-                          src={post.content[post.content.length -1]}
-                          alt=""
-                          className={Styles.postContent}
-                      
-                        />
-                        <div
-                          className={`${Styles.mask} ${filters[filterName]} `}
-                        ></div>
-                    </div>
+                        <div className={Styles.imageContainer}>
+                          <img
+                            src={post.content[post.content.length - 1]}
+                            alt=""
+                            className={Styles.postContent}
+                          />
+                          <div
+                            className={`${Styles.mask} ${filters[filterName]} `}
+                          ></div>
+                        </div>
                         <div className={Styles.onHover}>
                           <span>
                             {" "}

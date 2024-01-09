@@ -10,6 +10,7 @@ const server = new ApolloServer({
             dob:String
             user:String
             fullname:String
+            _id:String
         } 
         type Error {
             message: String!
@@ -22,6 +23,12 @@ const server = new ApolloServer({
           imageIndex:Int
           filter:String
         }
+        type comment{
+          userId:String
+          content:String
+          likes:[String]
+          reply:[comment]
+        }
         type post{
           content:[String]
           caption:String
@@ -31,6 +38,8 @@ const server = new ApolloServer({
           advancedSetting:advancedSetting
           appliedFilters:[appliedFilters]
           date:String
+          likes:[String]
+          comments:[comment]
         }
         type profileInfos {
             _id:String

@@ -21,7 +21,7 @@ export const createPost=async(req,res)=>{
         return res.status(400).json({error})
     }
 }
-export const likePost=async(req,res)=>{
+export const likeOrDislikePost=async(req,res)=>{
     try {
         const {profileId,postId}=req.body;
         const user=await User.findById({_id:req.user._id})
@@ -33,10 +33,21 @@ export const likePost=async(req,res)=>{
             return res.status(404).json({success:false,message:"user not found"})
         }
         const foundPostIndex = userProfile.posts.findIndex((post) =>post.postId.equals( postId));
-        userProfile.posts[foundPostIndex]?.likes?.push(req.user._id)
-        await userProfile.save();
-        console.log(userProfile.posts.filter(post=>post.likes))
-        return res.status(200).json({success:true,message:"liked successfully",})
+        if (foundPostIndex===-1) {
+            return res.status(404).json({success:false,message:"post not found"})
+        }
+        if (!userProfile.posts[foundPostIndex]?.likes?.includes(req.user._id)) {
+            userProfile.posts[foundPostIndex]?.likes?.push(req.user._id)
+            userProfile.markModified('posts');
+            await userProfile.save();
+            return res.status(200).json({success:true,message:"liked successfully",})
+        }else{
+            const userIndex = userProfile.posts[foundPostIndex].likes.indexOf(req.user._id);
+            userProfile.posts[foundPostIndex]?.likes?.splice(userIndex, 1);//remove this user 
+            userProfile.markModified('posts');
+            await userProfile.save();
+            return res.status(200).json({success:true,message:"disliked successfully",})
+      }
 
     } catch (error) {
         console.log(error)

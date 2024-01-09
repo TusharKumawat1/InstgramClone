@@ -32,7 +32,7 @@ const profileInfoSchema = new Schema(
         ref: "ProfileInfo",
       },
     ],
-    posts: Array,
+    posts:[Schema.Types.Mixed],
     accountType: {
       type: String,
       default: "public",

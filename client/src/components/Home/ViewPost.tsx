@@ -10,7 +10,7 @@ import filters from "../../styles/components/ModalCss/step3.module.css";
 type contentDetailsType = {
   _id?: string;
   postId?: string;
-  currentUserId?:string;
+  likedBy?:string;
 };
 
 export default function ViewPost(contentDetails: contentDetailsType) {
@@ -41,6 +41,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
           content
           caption
           location
+          likes
           aspectRatio
           postId
           advancedSetting {
@@ -110,10 +111,10 @@ export default function ViewPost(contentDetails: contentDetailsType) {
       setCurrentIndex(newIndex);
     }
   };
-  const likePost = async () => {
-    setLiked(true)
+  const likeOrDislikePost = async () => {
+    setLiked(p=>!p)
     const token = localStorage.getItem("token")!
-    const res=await fetch(`${process.env.REACT_APP_SERVER_PORT}/posts/likePost`,{
+    const res=await fetch(`${process.env.REACT_APP_SERVER_PORT}/posts/likeOrDislikePost`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json",
@@ -121,19 +122,18 @@ export default function ViewPost(contentDetails: contentDetailsType) {
       },
       body:JSON.stringify({postId:contentDetails.postId,profileId:contentDetails._id})
     })
-    const result=await res.json()
-    console.log(result)
+    if(res.ok){
+      setLiked(p=>p)
+    }else{
+      setLiked(p=>!p)
+    }
+    refetch();
   };
   useEffect(() => {
     if (data) {
       setuserDetails(data.getPostDetails.userDetails);
       setPostDetails(data.getPostDetails.postDetails);
-      if (postDetails?.likes?.filter((id:string)=>id===contentDetails.currentUserId)) {
-        setLiked(true)
-        console.log("likedBY : ",postDetails?.likes?.filter((id:string)=>id===contentDetails.currentUserId))
-      }else{
-        setLiked(false)
-      }
+      setLiked(postDetails?.likes?.includes(contentDetails.likedBy) ?? false);
       let newSize = { ...size };
       if (postDetails?.aspectRatio === "original") {
         newSize.height = "95%";
@@ -248,9 +248,10 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                     <i
                       className="fa-solid fa-heart"
                       style={{ color: "#e10e23" }}
+                      onClick={likeOrDislikePost}
                     ></i>
                   ) : (
-                    <i className="fa-regular fa-heart" onClick={likePost}></i>
+                    <i className="fa-regular fa-heart" onClick={likeOrDislikePost}></i>
                   )}
                   <i className="fa-regular fa-comment"></i>
                 </span>
@@ -259,7 +260,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                 </span>
               </div>
               <div className={Styles.likedBy}>
-                {postDetails?.likes ? (
+                {postDetails?.likes ? postDetails.likes.length>2 ? (
                   <div className={Styles.likes}>
                     <div className={Styles.likesOfuser}>
                       {Array.from({ length: 3 }).map((_, index) => (
@@ -273,7 +274,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                     </div>
                     <p>Liked by tusharKumawat._ and 12 others</p>
                   </div>
-                ) : (
+                ):<p>{postDetails.likes.length} like</p> : (
                   <p>Be the first one to like this post</p>
                 )}
                 <span className={Styles.postedOn}>
