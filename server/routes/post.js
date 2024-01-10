@@ -1,5 +1,5 @@
 import express from "express";          
-import { createPost, likeOrDislikePost } from "../controller/post.js";
+import { createPost, likeOrDislikePost,  } from "../controller/post.js";
 
 const router=express.Router();
 

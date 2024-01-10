@@ -1,7 +1,7 @@
 import { ApolloServer } from "@apollo/server";
-import ProfileInfo from "../models/ProfileInfo.js";
-import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
+import { authMiddleware } from "../middleware/authMiddleware.js";
+import { getPostDetails,getPfInfo } from "../controller/graphQl.js";
 dotenv.config()
 const server = new ApolloServer({
   typeDefs: `
@@ -61,6 +61,14 @@ const server = new ApolloServer({
             postDetails: post
             errors: [Error]
           }
+          type Mutation {
+            likeOrDislikePost(profileId: String, postId: String): LikeOrDislikePostResponse
+          }
+          
+          type LikeOrDislikePostResponse {
+            success: Boolean!
+            message: String
+          }
         type Query{
             getPfInfo(token: String): ProfileInfoResponse
             getPostDetails(userProfileId: String,postId:String):postDetails
@@ -68,56 +76,12 @@ const server = new ApolloServer({
     `,
   resolvers: {
     Query: {
-      getPfInfo: async (_, req) => {
-        try {
-            const {token}=req;
-            if (!token) {
-                throw new Error("Please provide a token");
-            }
-            const decoded=jwt.verify(token,process.env.JWT_SIGN)
-            const ifValidUser=await ProfileInfo.findOne({userId:decoded._id}).populate({
-                path:"userId",
-                select:"-password"
-            }).populate({
-              path:"followers",
-              select:"-password"
-            })
-        
-            
-            if (!ifValidUser) {
-              throw new Error("wrong token");
-            }
-            ifValidUser.posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-            return { data: ifValidUser, errors: null };
-        } catch (error) {
-            return { errors: [{ message: error.message }] };
-        }
-      },
-      getPostDetails: async (_, req) => {
-        try {
-          const { userProfileId, postId } = req;
-          if (!userProfileId) {
-            throw new Error("Please Provide a user");
-          }
-          const validProfile = await ProfileInfo.findOne({
-            _id: userProfileId,
-          }).populate({
-            path: "userId",
-            select: "-password",
-          });
-          if (!validProfile) {
-            throw new Error("User not found");
-          }
-          const postDetails=validProfile.posts.filter(post=>post.postId.equals(postId))
-          if (!postDetails) {
-            throw new Error("Post not found")
-          }
-          return { userDetails:validProfile ,postDetails : postDetails[0], errors: null };
-        } catch (error) {
-          return { errors: [{ message: error.message }] };
-        }
-      },
+      getPfInfo: getPfInfo,
+      getPostDetails: getPostDetails,
     },
+    // Mutation:{
+    //   likeOrDislikePost:[authMiddleware,likeOrDislikePost]
+    // }
   },
 });
 await server.start();

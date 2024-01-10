@@ -17,6 +17,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
   const { setViewPost } = useContext(MyContext);
   const [showEmojiPicker, setshowEmojiPicker] = useState(false);
   const [liked, setLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
   const [postDetails, setPostDetails] = useState<any>();
   const [userDetails, setuserDetails] = useState<any>();
   const imageHolderRef = useRef<HTMLDivElement | null>(null);
@@ -127,13 +128,13 @@ export default function ViewPost(contentDetails: contentDetailsType) {
     }else{
       setLiked(p=>!p)
     }
+    setLikesCount((prevCount) => (liked ? prevCount++: prevCount--));
     refetch();
   };
   useEffect(() => {
     if (data) {
       setuserDetails(data.getPostDetails.userDetails);
       setPostDetails(data.getPostDetails.postDetails);
-      setLiked(postDetails?.likes?.includes(contentDetails.likedBy) ?? false);
       let newSize = { ...size };
       if (postDetails?.aspectRatio === "original") {
         newSize.height = "95%";
@@ -154,7 +155,12 @@ export default function ViewPost(contentDetails: contentDetailsType) {
       console.log(error);
     }
   }, [loading, error, data, postDetails, liked]);
-
+  useEffect(() => {
+    if (postDetails && contentDetails) {
+      setLiked(postDetails.likes?.includes(contentDetails.likedBy) ?? false);
+      setLikesCount(postDetails?.likes.length)
+    }
+  }, [postDetails, contentDetails]);
   return (
     <div className={Styles.overlay}>
       <ClickAwayListener onClickAway={() => setViewPost(false)}>
@@ -274,7 +280,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                     </div>
                     <p>Liked by tusharKumawat._ and 12 others</p>
                   </div>
-                ):<p>{postDetails.likes.length} like</p> : (
+                ):<p>{likesCount} like</p> : (
                   <p>Be the first one to like this post</p>
                 )}
                 <span className={Styles.postedOn}>

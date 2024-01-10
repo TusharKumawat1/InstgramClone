@@ -51,6 +51,7 @@ export default function Profie() {
             }
             postId
             aspectRatio
+            likes
           }
           links
           _id
@@ -81,7 +82,7 @@ export default function Profie() {
   }, [loading, error, data, profilePage]);
   useEffect(() => {
     refetch();
-  }, [toggleRefetch]);
+  }, [toggleRefetch,viewPost]);
   if (loading) {
     return <Loader />;
   }
