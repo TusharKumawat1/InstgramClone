@@ -52,6 +52,11 @@ export default function Profie() {
             postId
             aspectRatio
             likes
+            comments {
+              commentedBy {
+                profileId
+              }
+            }
           }
           links
           _id
@@ -223,7 +228,7 @@ export default function Profie() {
                           </span>
                           <span>
                             {" "}
-                            {post.comment ? post.comment.length : 0}
+                            {post.comments ? post.comments.length : 0}
                             <i className="fa-solid fa-comment"></i>
                           </span>
                         </div>

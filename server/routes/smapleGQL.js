@@ -23,11 +23,15 @@ const server = new ApolloServer({
           imageIndex:Int
           filter:String
         }
+        type commentedBy{
+          profileId:String,
+          pfp:String,
+          username:String
+        }
         type comment{
-          userId:String
+          commentedBy:commentedBy
           content:String
-          likes:[String]
-          reply:[comment]
+          date:String
         }
         type post{
           content:[String]
@@ -39,7 +43,7 @@ const server = new ApolloServer({
           appliedFilters:[appliedFilters]
           date:String
           likes:[String]
-          comments:[comment]
+          comments:[ comment]
         }
         type profileInfos {
             _id:String

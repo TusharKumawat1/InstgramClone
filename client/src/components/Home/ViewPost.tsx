@@ -10,7 +10,7 @@ import filters from "../../styles/components/ModalCss/step3.module.css";
 type contentDetailsType = {
   _id?: string;
   postId?: string;
-  likedBy?:string;
+  likedBy?: string;
 };
 
 export default function ViewPost(contentDetails: contentDetailsType) {
@@ -18,11 +18,13 @@ export default function ViewPost(contentDetails: contentDetailsType) {
   const [showEmojiPicker, setshowEmojiPicker] = useState(false);
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
+  const [commentContent, setCommentContent] = useState("");
   const [postDetails, setPostDetails] = useState<any>();
   const [userDetails, setuserDetails] = useState<any>();
   const imageHolderRef = useRef<HTMLDivElement | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const imageMaskRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [size, setSize] = useState({
     height: "100%",
     width: "100%",
@@ -43,6 +45,15 @@ export default function ViewPost(contentDetails: contentDetailsType) {
           caption
           location
           likes
+          comments {
+            commentedBy {
+              profileId
+              pfp
+              username
+            }
+            content
+            date
+          }
           aspectRatio
           postId
           advancedSetting {
@@ -113,22 +124,51 @@ export default function ViewPost(contentDetails: contentDetailsType) {
     }
   };
   const likeOrDislikePost = async () => {
-    setLiked(p=>!p)
-    const token = localStorage.getItem("token")!
-    const res=await fetch(`${process.env.REACT_APP_SERVER_PORT}/posts/likeOrDislikePost`,{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        token:token
-      },
-      body:JSON.stringify({postId:contentDetails.postId,profileId:contentDetails._id})
-    })
-    if(res.ok){
-      setLiked(p=>p)
-    }else{
-      setLiked(p=>!p)
+    setLiked((p) => !p);
+    setLikesCount((prevCount) => (liked ? prevCount++ : prevCount--));
+    const token = localStorage.getItem("token")!;
+    const res = await fetch(
+      `${process.env.REACT_APP_SERVER_PORT}/posts/likeOrDislikePost`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+        body: JSON.stringify({
+          postId: contentDetails.postId,
+          profileId: contentDetails._id,
+        }),
+      }
+    );
+    if (res.ok) {
+      setLiked((p) => p);
+    } else {
+      setLiked((p) => !p);
     }
-    setLikesCount((prevCount) => (liked ? prevCount++: prevCount--));
+    setLikesCount((prevCount) => (liked ? prevCount++ : prevCount--));
+    refetch();
+  };
+  const focousCommentSaction = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+  const addComment = async() => {
+    const token = localStorage.getItem("token")!;
+    const res =await fetch(`${process.env.REACT_APP_SERVER_PORT}/posts/addcomment`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        token: token,
+      },
+      body: JSON.stringify({
+        profileId: contentDetails._id,
+        postId: contentDetails.postId,
+        commentContent: commentContent,
+      }),
+    })
+    console.log(await res.json())
     refetch();
   };
   useEffect(() => {
@@ -158,7 +198,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
   useEffect(() => {
     if (postDetails && contentDetails) {
       setLiked(postDetails.likes?.includes(contentDetails.likedBy) ?? false);
-      setLikesCount(postDetails?.likes.length)
+      setLikesCount(postDetails?.likes.length);
     }
   }, [postDetails, contentDetails]);
   return (
@@ -236,12 +276,29 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                 <p className={Styles.caption}>
                   {" "}
                   <span>{userDetails && userDetails.userId.username}</span>
-                 &nbsp; {postDetails && postDetails?.caption}
+                  &nbsp; {postDetails && postDetails?.caption}
                 </p>
               </span>
               <div className={Styles.comments}>
                 {postDetails?.comments ? (
-                  " "
+                  <div className={Styles.commentedBy}>
+                    {postDetails.comments.map((comment: any, index: number) => {
+                      return (
+                        <div key={index} className={Styles.comment}>
+                          <img
+                            src={comment.commentedBy.pfp}
+                            alt={comment.commentedBy.username}
+                            className={Styles.pfp}
+                          />
+                          <p className={Styles.caption}>
+                            {" "}
+                            <span>{comment.commentedBy.username}</span>
+                            &nbsp; {comment.content}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
                 ) : (
                   <p className={Styles.noComment}>No comments yet</p>
                 )}
@@ -257,30 +314,40 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                       onClick={likeOrDislikePost}
                     ></i>
                   ) : (
-                    <i className="fa-regular fa-heart" onClick={likeOrDislikePost}></i>
+                    <i
+                      className="fa-regular fa-heart"
+                      onClick={likeOrDislikePost}
+                    ></i>
                   )}
-                  <i className="fa-regular fa-comment"></i>
+                  <i
+                    className="fa-regular fa-comment"
+                    onClick={focousCommentSaction}
+                  ></i>
                 </span>
                 <span>
                   <i className="fa-regular fa-bookmark"></i>
                 </span>
               </div>
               <div className={Styles.likedBy}>
-                {postDetails?.likes ? postDetails.likes.length>2 ? (
-                  <div className={Styles.likes}>
-                    <div className={Styles.likesOfuser}>
-                      {Array.from({ length: 3 }).map((_, index) => (
-                        <img
-                          key={index}
-                          src="https://images.pexels.com/photos/19450636/pexels-photo-19450636/free-photo-of-clock-at-a-station.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                          className={Styles.likedBypfp}
-                          alt={`Image ${index}`}
-                        />
-                      ))}
+                {postDetails?.likes ? (
+                  postDetails.likes.length > 2 ? (
+                    <div className={Styles.likes}>
+                      <div className={Styles.likesOfuser}>
+                        {Array.from({ length: 3 }).map((_, index) => (
+                          <img
+                            key={index}
+                            src="https://images.pexels.com/photos/19450636/pexels-photo-19450636/free-photo-of-clock-at-a-station.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            className={Styles.likedBypfp}
+                            alt={`Image ${index}`}
+                          />
+                        ))}
+                      </div>
+                      <p>Liked by tusharKumawat._ and 12 others</p>
                     </div>
-                    <p>Liked by tusharKumawat._ and 12 others</p>
-                  </div>
-                ):<p>{likesCount} like</p> : (
+                  ) : (
+                    <p>{likesCount} like</p>
+                  )
+                ) : (
                   <p>Be the first one to like this post</p>
                 )}
                 <span className={Styles.postedOn}>
@@ -293,13 +360,28 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                 className="fa-regular fa-face-smile"
                 onClick={() => setshowEmojiPicker(true)}
               ></i>
-              <input type="text" placeholder="Add comment..." />
+              <input
+                type="text"
+                placeholder="Add comment..."
+                ref={inputRef}
+                value={commentContent}
+                onChange={(e) => setCommentContent(e.target.value)}
+              />
+              {commentContent.length > 0 && (
+                <button type="button" onClick={addComment}>
+                  Post
+                </button>
+              )}
               {showEmojiPicker && (
                 <ClickAwayListener
                   onClickAway={() => setshowEmojiPicker(false)}
                 >
                   <div className={Styles.emojiPicker}>
-                    <EmojiPicker />
+                    <EmojiPicker
+                      onEmojiClick={(data) =>
+                        setCommentContent((p) => p + data.emoji)
+                      }
+                    />
                   </div>
                 </ClickAwayListener>
               )}

@@ -115,7 +115,8 @@
   overflow: hidden;
   overflow-y: auto;
 }
-.aboutContent{
+.aboutContent,.comment{
+  display: flex;
   justify-content: flex-start;
   align-items: center;
 }
@@ -131,6 +132,20 @@
   width: 100%;
   height: 100%;
   flex-direction: column;
+  margin-top: 15px;
+}
+.commentedBy{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 15px;
+}
+.comment{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
 }
 .postOverView{
   width: 100%;
@@ -202,9 +217,17 @@
   border: none;
   width: 100%;
   background: none;
+  margin-right: 60px;
 }
 .addComment input:focus{
   outline: none;
+}
+.addComment button{
+  background: none;
+  border: none;
+  color: #00aaff;
+  font-weight: bold;
+  cursor: pointer;
 }
 .emojiPicker{
   position: absolute;
