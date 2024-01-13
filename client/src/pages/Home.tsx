@@ -35,9 +35,11 @@ export default function Home() {
     },
   });
   const token: string | null = localStorage.getItem("token");
-     if (!loading) {
-      setauthenticUser(data.getPfInfo.data)
-    }
+    useEffect(() => {
+      if (!loading && !error && data) {
+        setauthenticUser(data.getPfInfo.data)   
+      }
+    }, [loading, error, data, ]);
   useEffect(() => {
     if (!token) {
       navigate("/auth");

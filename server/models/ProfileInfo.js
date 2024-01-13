@@ -7,6 +7,7 @@ const profileInfoSchema = new Schema(
         type:Schema.Types.ObjectId,
         ref:"User"
     },
+    gender:String,
     pfp: {
       type: String,
       default:

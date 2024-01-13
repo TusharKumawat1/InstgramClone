@@ -23,17 +23,17 @@ export default function Profie() {
     likedBy: "",
   });
   const getinfo = gql`
-    query GetPfInfo($token: String) {
-      getPfInfo(token: $token) {
-        errors {
-          message
+  query GetPfInfo($token: String) {
+    getPfInfo(token: $token) {
+      errors {
+        message
+      }
+      data {
+        userId {
+          username
+          fullname
+          _id
         }
-        data {
-          userId {
-            username
-            fullname
-            _id
-          }
           bio
           pfp
           followers {
@@ -63,12 +63,12 @@ export default function Profie() {
         }
       }
     }
-  `;
-
-  const token = localStorage.getItem("token")!;
-  const { loading, error, data, refetch } = useQuery(getinfo, {
-    variables: {
-      token: token,
+    `;
+    
+    const token = localStorage.getItem("token")!;
+    const { loading, error, data, refetch } = useQuery(getinfo, {
+      variables: {
+        token: token,
     },
   });
   const showContnet = (_id: string, postId: string) => {
@@ -83,10 +83,10 @@ export default function Profie() {
     if (!loading && !error && data) {
       setauthenticUser((p:any)=>({
         ...p,
-        ...data.getPfInfo.data
-      }));
+          ...data.getPfInfo.data
+        }));
     }
-  }, [loading, error, data, authenticUser]);
+  }, [loading, error, data, ]);
   useEffect(() => {
     refetch();
   }, [toggleRefetch, viewPost]);
