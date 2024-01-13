@@ -11,43 +11,34 @@ type userDetailsType = {
   username: string;
   password: string;
 };
-type authenticUserType = {
-  userId: {
-    username: string;
-    fullname: string;
-  };
-  pfp: string;
+type userId = {
+  username: string;
+  fullname: string;
+};
+type followers = {
   _id: string;
 };
-type userId={
-  username:string
-  fullname:string
-}
-type followers={
-  _id:string
-}
-type following={
-  _id:string
-}
-type posts={
-  content:string[]
-}
-type profilePageType={
-  pfp?:string
-  bio?:string
-  accountType?:string
-  links?:string
-  userId?:userId
-  followers?:followers[]
-  following?:following[]
-  posts?:posts[]
-}
+type following = {
+  _id: string;
+};
+type posts = {
+  content: string[];
+};
+type authenticUserType = {
+  pfp?: string;
+  bio?: string;
+  accountType?: string;
+  links?: string;
+  userId?: userId;
+  followers?: followers[];
+  following?: following[];
+  posts?: posts[];
+};
 export type isMoreType = {
   isMoreOptionsAvailable: boolean;
   setIsMoreOptionsAvailable: Dispatch<SetStateAction<boolean>>;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 };
-
 export default function ContextApi({ children }: ContextApiProviderProps) {
   const ModalRef = useRef<HTMLDivElement | null>(null);
   const [isLogin, setIsLogin] = useState(true);
@@ -59,9 +50,10 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
   const [postSteps, setPostSteps] = useState<number>(0);
   const [SignupSteps, setSignupSteps] = useState(0);
   const [zoomRange, setZoomRange] = useState(20);
-  const [profilePage, setProfilePage] = useState<profilePageType>();
   const [toggleRefetch, settoggleRefetch] = useState(false);
   const [viewPost, setViewPost] = useState(false);
+  const [authenticUser, setauthenticUser] = useState<authenticUserType>();
+  const [appliedFilters, setAppliedFilters] = useState([]);
   const [userDetails, setUserDetails] = useState<userDetailsType>({
     user: "",
     dob: "",
@@ -69,8 +61,6 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
     username: "",
     password: "",
   });
-  const [authenticUser, setauthenticUser] = useState<authenticUserType>();
-  const [appliedFilters, setAppliedFilters] = useState([]);
   const generateBase64 = (blobUrl: string): Promise<string> => {
     return new Promise((resolve, reject) => {
       fetch(blobUrl)
@@ -141,12 +131,10 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
         setZoomRange,
         appliedFilters,
         setAppliedFilters,
-        profilePage, 
-        setProfilePage,
-        toggleRefetch, 
+        toggleRefetch,
         settoggleRefetch,
-        viewPost, 
-        setViewPost
+        viewPost,
+        setViewPost,
       }}
     >
       {children}

@@ -19,3 +19,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.appContainer {
+  display: flex;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  background-color: transparent;  
+  color: inherit;
+  flex-direction: row;
+}
+
+.contentContainer {
+  width: 100%; /* 70% of the container width */
+  overflow: auto; /* Add scroll if content overflows */
+}

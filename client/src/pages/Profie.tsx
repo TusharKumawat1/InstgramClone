@@ -7,11 +7,11 @@ import { gql, useQuery } from "@apollo/client";
 import ViewPost from "../components/Home/ViewPost";
 import filters from "../styles/components/ModalCss/step3.module.css";
 import Loader from "../components/Home/Loader";
+import { Link } from "react-router-dom";
 export default function Profie() {
   const {
     setIsModalOpen,
-    profilePage,
-    setProfilePage,
+    authenticUser,
     setauthenticUser,
     toggleRefetch,
     viewPost,
@@ -75,68 +75,78 @@ export default function Profie() {
     const newObj = { ...contentDetails };
     newObj._id = _id;
     newObj.postId = postId;
-    newObj.likedBy = profilePage.userId._id;
+    newObj.likedBy = authenticUser.userId._id;
     setContentDetails((p) => newObj);
     setViewPost(true);
   };
   useEffect(() => {
     if (!loading && !error && data) {
-      setProfilePage(data.getPfInfo.data);
-      setauthenticUser(data.getPfInfo.data);
+      setauthenticUser((p:any)=>({
+        ...p,
+        ...data.getPfInfo.data
+      }));
     }
-  }, [loading, error, data, profilePage]);
+  }, [loading, error, data, authenticUser]);
   useEffect(() => {
     refetch();
-  }, [toggleRefetch,viewPost]);
+  }, [toggleRefetch, viewPost]);
   if (loading) {
     return <Loader />;
   }
   return (
     <div className={Styles.container}>
-      <AsideNav />
-
       <div className={Styles.profileSection}>
         <div className={Styles.innerContainer}>
           <div className={Styles.userDetails}>
             <div className={Styles.infoSection}>
               <img
-                src={profilePage && profilePage.pfp}
+                src={authenticUser && authenticUser.pfp}
                 alt=""
                 className={Styles.pfp}
               />
               <div className={Styles.details}>
                 <div className={Styles.editProfile}>
                   <h3 className={Styles.username}>
-                    {profilePage && profilePage.userId.username}
+                    {authenticUser && authenticUser.userId.username}
                   </h3>
-                  <button className={Styles.primaryBtn}>Edit profile</button>
-                  <button className={Styles.primaryBtn}>View archive</button>
+                  <Link
+                    to={`/profile/${authenticUser?.userId?.username}/edit`}
+                    className={Styles.primaryBtn}
+                  >
+                    Edit profile
+                  </Link>
+                  <Link to="" className={Styles.primaryBtn}>
+                    View archive
+                  </Link>
                   <i className="fa-solid fa-gear"></i>
                 </div>
                 <div className={Styles.postNconnections}>
                   <span>
-                    <b> {profilePage && profilePage.posts.length}</b> posts
+                    <b> {authenticUser && authenticUser?.posts?.length}</b>{" "}
+                    posts
                   </span>
                   <span>
-                    <b>{profilePage && profilePage.followers.length}</b>{" "}
+                    <b>{authenticUser && authenticUser?.followers?.length}</b>{" "}
                     followers
                   </span>
                   <span>
-                    <b>{profilePage && profilePage.following.length}</b>{" "}
+                    <b>{authenticUser && authenticUser?.following?.length}</b>{" "}
                     following
                   </span>
                 </div>
                 <div className={Styles.about}>
                   <h4 className={Styles.fullname}>
-                    {profilePage && profilePage.userId.fullname}
+                    {authenticUser && authenticUser?.userId?.fullname}
                   </h4>
-                  <p className={Styles.bio}>{profilePage && profilePage.bio}</p>
+                  <p className={Styles.bio}>
+                    {authenticUser && authenticUser?.bio}
+                  </p>
                   <a
                     className={Styles.links}
-                    href={profilePage && profilePage.links}
+                    href={authenticUser && authenticUser?.links}
                     target="blank"
                   >
-                    {profilePage && profilePage.links}
+                    {authenticUser && authenticUser?.links}
                   </a>
                 </div>
               </div>
@@ -164,7 +174,7 @@ export default function Profie() {
                 <i className="fa-solid fa-id-card-clip"></i> Taged
               </span>
             </div>
-            {profilePage && profilePage.posts.length <= 0 ? (
+            {authenticUser && authenticUser?.posts?.length <= 0 ? (
               <div className={Styles.posts}>
                 <div
                   className={Styles.cameraIcon}
@@ -184,8 +194,8 @@ export default function Profie() {
               </div>
             ) : (
               <div className={Styles.postsContainer}>
-                {profilePage &&
-                  profilePage.posts.map((post: any, index: number) => {
+                {authenticUser &&
+                  authenticUser?.posts?.map((post: any, index: number) => {
                     let filterName = post?.appliedFilters[0]?.filter
                       ?.split(" ")[1]
                       ?.substring(6)
@@ -207,7 +217,7 @@ export default function Profie() {
                         key={index}
                         className={Styles.post}
                         onClick={() =>
-                          showContnet(profilePage._id, post.postId)
+                          showContnet(authenticUser._id, post.postId)
                         }
                       >
                         <div className={Styles.imageContainer}>

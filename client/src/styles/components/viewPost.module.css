@@ -147,6 +147,15 @@
   align-items: center;
   gap: 10px;
 }
+.commentDiv{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.commentTimestamp{
+  font-size: 13px;
+  color:gray
+}
 .postOverView{
   width: 100%;
   height: 13%;

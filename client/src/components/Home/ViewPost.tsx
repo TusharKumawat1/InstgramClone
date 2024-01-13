@@ -7,6 +7,7 @@ import { MyContext } from "../../context/Mycontext";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import filters from "../../styles/components/ModalCss/step3.module.css";
+import { formatDistance, parseISO } from "date-fns";
 type contentDetailsType = {
   _id?: string;
   postId?: string;
@@ -154,22 +155,32 @@ export default function ViewPost(contentDetails: contentDetailsType) {
       inputRef.current.focus();
     }
   };
-  const addComment = async() => {
+  const addComment = async () => {
     const token = localStorage.getItem("token")!;
-    const res =await fetch(`${process.env.REACT_APP_SERVER_PORT}/posts/addcomment`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        token: token,
-      },
-      body: JSON.stringify({
-        profileId: contentDetails._id,
-        postId: contentDetails.postId,
-        commentContent: commentContent,
-      }),
-    })
-    console.log(await res.json())
+    const res = await fetch(
+      `${process.env.REACT_APP_SERVER_PORT}/posts/addcomment`,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+        body: JSON.stringify({
+          profileId: contentDetails._id,
+          postId: contentDetails.postId,
+          commentContent: commentContent,
+        }),
+      }
+    );
+    console.log(await res.json());
     refetch();
+  };
+  const commentTimestamp = (timeString: string) => {
+    const date = new Date(Number(timeString));
+    const relativeTime = formatDistance(date, new Date(), { addSuffix: false });
+    // const newdate=relativeTime.split(" ")
+    // return newdate[1]+newdate[2].slice(0,1);
+    return relativeTime;
   };
   useEffect(() => {
     if (data) {
@@ -256,29 +267,54 @@ export default function ViewPost(contentDetails: contentDetailsType) {
           <div className={Styles.postDeails}>
             <div className={Styles.user}>
               <span className={Styles.userDetails}>
-                <img
-                  src={userDetails && userDetails?.pfp}
-                  className={Styles.pfp}
-                />
-                <p>{userDetails && userDetails.userId.username}</p>
+                {loading ? (
+                  <Skeleton circle={true} width={35} height={35} />
+                ) : (
+                  <img
+                    src={userDetails && userDetails?.pfp}
+                    className={Styles.pfp}
+                  />
+                )}
+                <p>
+                  {loading ? (
+                    <Skeleton width={150} height={15} />
+                  ) : (
+                    userDetails && userDetails.userId.username
+                  )}
+                </p>
               </span>
               <span>
                 <i className="fa-solid fa-ellipsis"></i>
               </span>
             </div>
             <div className={Styles.commentSection}>
-              <span className={Styles.aboutContent}>
-                <img
-                  src={userDetails && userDetails?.pfp}
-                  className={Styles.pfp}
-                />
+              {loading ? (
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                >
+                  <Skeleton circle={true} width={35} height={35} count={5} />
+                  <Skeleton
+                    width={150}
+                    height={15}
+                    count={5}
+                    style={{ marginBlock: "10px" }}
+                  />
+                </div>
+              ) : (
+                <span className={Styles.aboutContent}>
+                  <img
+                    src={userDetails && userDetails?.pfp}
+                    className={Styles.pfp}
+                  />
 
-                <p className={Styles.caption}>
-                  {" "}
-                  <span>{userDetails && userDetails.userId.username}</span>
-                  &nbsp; {postDetails && postDetails?.caption}
-                </p>
-              </span>
+                  <p className={Styles.caption}>
+                    {" "}
+                    <span>{userDetails && userDetails.userId.username}</span>
+                    &nbsp; {postDetails && postDetails?.caption}
+                  </p>
+                </span>
+              )}
+
               <div className={Styles.comments}>
                 {postDetails?.comments ? (
                   <div className={Styles.commentedBy}>
@@ -290,17 +326,24 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                             alt={comment.commentedBy.username}
                             className={Styles.pfp}
                           />
-                          <p className={Styles.caption}>
-                            {" "}
-                            <span>{comment.commentedBy.username}</span>
-                            &nbsp; {comment.content}
-                          </p>
+                          <div className={Styles.commentDiv}>
+                            <p className={Styles.caption}>
+                              {" "}
+                              <span>{comment.commentedBy.username}</span>
+                              &nbsp; {comment.content}
+                            </p>
+                            <span className={Styles.commentTimestamp}>
+                              {commentTimestamp(comment.date)}
+                            </span>
+                          </div>
                         </div>
                       );
                     })}
                   </div>
                 ) : (
-                  <p className={Styles.noComment}>No comments yet</p>
+                  <p className={Styles.noComment}>
+                    {loading ? "loading..." : "No comments yet"}
+                  </p>
                 )}
               </div>
             </div>

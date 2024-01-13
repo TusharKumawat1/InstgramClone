@@ -49,7 +49,6 @@ export default function Home() {
   }
   return (
     <div className={Styles.container}>
-      <AsideNav />
       <Feed />
     </div>
   );

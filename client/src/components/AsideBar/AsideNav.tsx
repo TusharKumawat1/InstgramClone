@@ -7,6 +7,7 @@ import { isMoreType } from "../../context/ContextApi";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ClickAwayListener from "react-click-away-listener";
+import Skeleton from "react-loading-skeleton";
 export default function AsideNav() {
   const { isMoreOptionsAvailable, setIsMoreOptionsAvailable, setIsModalOpen, } =
     useContext<isMoreType>(MyContext);
@@ -63,7 +64,7 @@ export default function AsideNav() {
           <i className="fa-regular fa-square-plus"></i><span>Create</span>
         </Link>
         <Link to={`/profile/${authenticUser && authenticUser.userId.username}`} className={Styles.options}>
-          <img
+        {!authenticUser? <Skeleton circle={true} height={35} width={35}/> :<img
             src={
              authenticUser && authenticUser.pfp
             }
@@ -71,7 +72,7 @@ export default function AsideNav() {
             width={40}
             height={40}
             className={Styles.pfp}
-          />
+          />}
           <span>Profile</span>
         </Link>
       </div>
