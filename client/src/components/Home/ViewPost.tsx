@@ -131,7 +131,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_PORT}/posts/likeOrDislikePost`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           token: token,
@@ -160,7 +160,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_PORT}/posts/addcomment`,
       {
-        method: "post",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           token: token,

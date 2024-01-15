@@ -4,7 +4,7 @@ import { addComment, createPost, likeOrDislikePost,  } from "../controller/post.
 const router=express.Router();
 
 router.post("/createPost",createPost)
-router.post("/likeOrDislikePost",likeOrDislikePost)
-router.post("/addComment",addComment)
+router.put("/likeOrDislikePost",likeOrDislikePost)
+router.put("/addComment",addComment)
 
 export default router;

@@ -49,39 +49,45 @@
     align-items: flex-start ;
     justify-content: flex-start;
 }
+.identity{
+    gap: 120px;
+}
 .identity span{
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
-.identity span button{
+.identity span input{
+    display: none;
+}
+.changePfp{
     background: none;
     border: none;
     font-weight: 600;
     color:#00a2ff;
     cursor: pointer;
+    font-size: 14px;
 }
 .website{
     gap: 30px;
 }
-.website h4{
-    font-weight: 600;
-}
+
 .website span{
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 112%;
 }
 .text{
     color: #858585;
     font-size: 12px;
 }
 .website input{
-    cursor:not-allowed;
     padding: 5px;
+    color:#009dff;
+    font-weight: 600;
 }
 .bio{
-    gap: 64px;
+    gap: 13px;
     justify-content: flex-end;
 }
 .bioContent{
@@ -91,24 +97,22 @@
     width: 100%;
     resize: vertical;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
 }
-.bio h4{
-    text-align: center;
-}
+
 .gender{
-    gap: 34px;
+    gap: 14px;
 }
 .gender select{
     padding: 5px;
     width: 100%;
 }
 .suggestion h4{
-    text-align: right;
+    text-align: start;
     width: auto;
 }
 .suggestion{
-    gap: 20px;   
-    transform: translateX(-70px);
+    gap: 20px;
 }
 .suggestionContainer input{
    width: 20px;
@@ -116,4 +120,32 @@
 }
 .suggestionContainer{
     font-size: 14px;
+}
+h4{
+    width: 200px;
+    text-align: start;
+    font-weight: 600;
+}
+.submitBtn{
+    width: 100px;
+    padding: 10px;
+    border: none;
+    background-color: #00a2ff;
+    color: white;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.submitBtn:hover{
+    background-color: #048ddc;
+}
+.btnContainer{
+    margin-block: 20px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+button:disabled{
+    background-color: #3e87b1;
+    cursor: not-allowed;
 }

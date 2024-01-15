@@ -54,6 +54,7 @@ const server = new ApolloServer({
             followers:[profileInfos]
             following:[profileInfos]
             accountType:String
+            gender:String
             posts:[post]
         }
         type ProfileInfoResponse {

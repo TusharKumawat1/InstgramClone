@@ -32,14 +32,14 @@ export default function AsideNav() {
         <Link to="/" className={Styles.options}>
           <i className="fa-solid fa-house"></i><span>Home</span>
         </Link>
-        <Link to="" className={Styles.options}>
+        <Link to="#" className={Styles.options}>
           {" "}
           <i className="fa-solid fa-magnifying-glass"></i><span>Search</span>
         </Link>
-        <Link to="" className={Styles.options}>
+        <Link to="#" className={Styles.options}>
           <i className="fa-regular fa-compass"></i><span>Explore</span>
         </Link>
-        <Link to="" className={Styles.options}>
+        <Link to="#" className={Styles.options}>
           {" "}
           <img
             src={reels}
@@ -50,14 +50,14 @@ export default function AsideNav() {
           />
           <span>Reels</span>
         </Link>
-        <Link to="" className={Styles.options}>
+        <Link to="#" className={Styles.options}>
           <i className="fa-brands fa-facebook-messenger"></i><span>Messages</span>
         </Link>
-        <Link to="" className={Styles.options}>
+        <Link to="#" className={Styles.options}>
           <i className="fa-regular fa-heart"></i><span>Notification</span>
         </Link>
         <Link
-          to=""
+          to="#"
           className={Styles.options}
           onClick={() => setIsModalOpen(true)}
         >
