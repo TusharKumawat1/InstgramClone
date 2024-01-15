@@ -43,7 +43,7 @@
     align-items: center;
     object-fit: cover;
 }
-.identity,.website,.bio,.gender,.suggestion {
+.identity,.website,.bio,.dropDown,.suggestion {
     display: flex;
     gap: 45px;
     align-items: flex-start ;
@@ -100,10 +100,10 @@
     font-size: 15px;
 }
 
-.gender{
+.dropDown{
     gap: 14px;
 }
-.gender select{
+.dropDown select{
     padding: 5px;
     width: 100%;
 }

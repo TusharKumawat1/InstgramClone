@@ -12,6 +12,7 @@ export default function EditProfile() {
     gender: "",
     bio: "",
     pfp: "",
+    accountType:""
   });
   const [disable, setDisable] = useState(true);
   const getinfo = gql`
@@ -30,6 +31,7 @@ export default function EditProfile() {
           bio
           links
           gender
+          accountType
         }
       }
     }
@@ -86,6 +88,7 @@ export default function EditProfile() {
         gender: Data.gender,
         bio: Data.bio,
         pfp: Data.pfp,
+        accountType: Data.accountType,
       }));
     }
   }, [loading, error, data]);
@@ -97,7 +100,7 @@ export default function EditProfile() {
   return (
     <div className={Styles.container}>
       <div className={Styles.settings}>
-        
+
       </div>
       <div className={Styles.editSection}>
         <div className={Styles.editProfile}>
@@ -142,7 +145,7 @@ export default function EditProfile() {
                 </p>
               </span>
             </div>
-            <div className={Styles.gender}>
+            <div className={Styles.dropDown}>
               <h4>Gender</h4>
               <span className={Styles.bioContent}>
                 <select
@@ -157,6 +160,22 @@ export default function EditProfile() {
                 </select>
                 <p className={Styles.text}>
                   This won’t be part of your public profile.
+                </p>
+              </span>
+            </div>
+            <div className={Styles.dropDown}>
+              <h4>Account Type</h4>
+              <span className={Styles.bioContent}>
+                <select
+                  name="accountType"
+                  value={profileAttributes.gender}
+                  onChange={handleProfileAttributes}
+                >
+                  <option value="public">Public</option>
+                  <option value="private">Private</option>
+                </select>
+                <p className={Styles.text}>
+                You can decide whether people can see your profile or not.
                 </p>
               </span>
             </div>
