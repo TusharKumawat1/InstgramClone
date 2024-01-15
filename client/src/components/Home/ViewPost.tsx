@@ -7,7 +7,7 @@ import { MyContext } from "../../context/Mycontext";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import filters from "../../styles/components/ModalCss/step3.module.css";
-import { formatDistance, parseISO } from "date-fns";
+import { formatDistance } from "date-fns";
 type contentDetailsType = {
   _id?: string;
   postId?: string;
@@ -15,7 +15,7 @@ type contentDetailsType = {
 };
 
 export default function ViewPost(contentDetails: contentDetailsType) {
-  const { setViewPost } = useContext(MyContext);
+  const { setViewPost ,authenticUser} = useContext(MyContext);
   const [showEmojiPicker, setshowEmojiPicker] = useState(false);
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
@@ -212,6 +212,9 @@ export default function ViewPost(contentDetails: contentDetailsType) {
       setLikesCount(postDetails?.likes.length);
     }
   }, [postDetails, contentDetails]);
+  useEffect(()=>{
+    refetch();
+  },[authenticUser])
   return (
     <div className={Styles.overlay}>
       <ClickAwayListener onClickAway={() => setViewPost(false)}>

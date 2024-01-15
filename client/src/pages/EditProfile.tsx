@@ -96,7 +96,9 @@ export default function EditProfile() {
   }, []);
   return (
     <div className={Styles.container}>
-      <div className={Styles.settings}></div>
+      <div className={Styles.settings}>
+        
+      </div>
       <div className={Styles.editSection}>
         <div className={Styles.editProfile}>
           <h2>Edit Profile</h2>

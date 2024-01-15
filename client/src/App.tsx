@@ -24,7 +24,7 @@ export default function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/" element={<Home />} />
             <Route path="/profile/:username" element={<Profie />} />
-            <Route path="/profile/:username/edit" element={<EditProfile />} />
+            <Route path="/profile/edit" element={<EditProfile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           {isModalOpen && <Modal />}

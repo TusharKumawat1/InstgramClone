@@ -110,12 +110,12 @@ export default function Profie() {
                     {authenticUser && authenticUser.userId.username}
                   </h3>
                   <Link
-                    to={`/profile/${authenticUser?.userId?.username}/edit`}
+                    to={`/profile/edit`}
                     className={Styles.primaryBtn}
                   >
                     Edit profile
                   </Link>
-                  <Link to="" className={Styles.primaryBtn}>
+                  <Link to="#" className={Styles.primaryBtn}>
                     View archive
                   </Link>
                   <i className="fa-solid fa-gear"></i>
