@@ -12,7 +12,7 @@ export default function EditProfile() {
     gender: "",
     bio: "",
     pfp: "",
-    accountType:""
+    accountType: "",
   });
   const [disable, setDisable] = useState(true);
   const getinfo = gql`
@@ -37,7 +37,7 @@ export default function EditProfile() {
     }
   `;
   const token = localStorage.getItem("token")!;
-  const { loading, error, data ,refetch} = useQuery(getinfo, {
+  const { loading, error, data, refetch } = useQuery(getinfo, {
     variables: {
       token: token,
     },
@@ -66,14 +66,14 @@ export default function EditProfile() {
     refetch();
   };
   const handlePfp = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDisable(true)
+    setDisable(true);
     const file = e.target?.files?.[0]!;
     const url = URL.createObjectURL(file);
     setProfileAttributes((p) => ({ ...p, pfp: url }));
     const base64 = await generateBase64(url);
     const CloudImage = await getImageUrl(base64);
     setProfileAttributes((p) => ({ ...p, pfp: CloudImage.secure_url }));
-    setDisable(false)
+    setDisable(false);
   };
   useEffect(() => {
     if (!loading && !error && data) {
@@ -100,7 +100,21 @@ export default function EditProfile() {
   return (
     <div className={Styles.container}>
       <div className={Styles.settings}>
-
+        <div className={Styles.accountCenter}>
+          <h4>
+            <i className="fa-brands fa-meta" style={{ color: "#1682d4" }}></i>{" "}
+            &nbsp; NotMeta
+          </h4>
+          <p>
+            I created this Instagram web clone for educational purposes, with no
+            ulterior motives. My primary goal is to enhance my coding skills by
+            working on a real-world project that mimics the popular social media
+            platform. Additionally, I aim to demonstrate my abilities to others
+            and potentially use it as part of my portfolio to showcase my web
+            development skills. My intention is purely educational and
+            professional, with no intent to misuse or exploit the application.
+          </p>
+        </div>
       </div>
       <div className={Styles.editSection}>
         <div className={Styles.editProfile}>
@@ -175,7 +189,7 @@ export default function EditProfile() {
                   <option value="private">Private</option>
                 </select>
                 <p className={Styles.text}>
-                You can decide whether people can see your profile or not.
+                  You can decide whether people can see your profile or not.
                 </p>
               </span>
             </div>

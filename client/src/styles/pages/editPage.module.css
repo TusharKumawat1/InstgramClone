@@ -11,6 +11,7 @@
     width: 22%;
     height: 100%;
     border-right: 1px solid rgb(222, 222, 222);
+    align-items: center;
 }
 .editSection{
     display: flex;
@@ -148,4 +149,19 @@ h4{
 button:disabled{
     background-color: #3e87b1;
     cursor: not-allowed;
+}
+.accountCenter{
+    box-shadow: 0 0 10px rgb(188, 188, 188);
+    width: 80%;
+    height: 250px;
+    border-radius: 10px;
+    margin-block: 10px;
+    text-align: center;
+    padding: 10px;
+}
+.accountCenter p{
+    color: #858585;
+    font-size: 13px;
+    text-align: start;
+    margin-top: 10px;
 }
