@@ -4,6 +4,7 @@ import User from "../models/User.js";
 import dotenv from "dotenv";
 dotenv.config();
 export const editProfileAttributes = async (req, res) => {
+  const client = new MongoClient(process.env.MONGODB_URI);
   try {
     const { profileAttributes } = req.body;
     const userExist = await User.findById({ _id: req.user._id });
@@ -11,14 +12,14 @@ export const editProfileAttributes = async (req, res) => {
       return res
         .status(404)
         .json({ success: false, message: "user not found" });
-    }
+      }
     const userProfile = await ProfileInfo.findOne({ userId: req.user._id });
     if (profileAttributes.link) userProfile.links = profileAttributes.link;
     if (profileAttributes.accountType) userProfile.accountType = profileAttributes.accountType;
     if (profileAttributes.gender) userProfile.gender = profileAttributes.gender;
     if (profileAttributes.bio) userProfile.bio = profileAttributes.bio;
     if (profileAttributes.pfp) {
-      const client = new MongoClient(process.env.MONGODB_URI);
+      userProfile.pfp=profileAttributes.pfp;
       await client.connect();
       const database = client.db("instagramClone");
       const collection = database.collection("profileinfos");

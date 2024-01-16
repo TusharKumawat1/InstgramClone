@@ -7,6 +7,7 @@
   background-color: transparent;
   border-right: 1px solid #e1e1e1;
   justify-content: space-between;
+  transition: .3s ease;
 }
 .sectionFirst {
   display: flex;
@@ -112,13 +113,76 @@
 .instaLogo {
   display: none;
   font-size: 25px;
-  padding: 20px 0px 0px 35px;
+  transition: .5s ease-in-out;
 }
 a {
   text-decoration: none;
 }
+.searchbox{
+  width: 400px;
+  max-width: 400px;
+  /* min-width: 300px; */
+  height: 100%;
+  z-index: 9999;
+  background-color: #ffffff;
+  position: absolute;
+  top: 0;
+  left: 3.8%;
+  transition: .3s ease;
+  border: 1px solid #d7d7d7;
+  animation: animation .5s  1  both;
+}
+.logo1{
+  font-size: 25px;
+  padding: 20px 0px 0px 35px;
+  transition: .5s ease-in-out;
+  margin-block: 10px;
+  margin-bottom: 49px;
+}
+@keyframes animation{
+  from{
+    width: 0px;
+  }to{
+    width: 400px;
+  }
+}
+.searchbox.hide {
+  animation: hideSearchBoxAnimation 0.5s forwards;
+}
+
+@keyframes hideSearchBoxAnimation {
+  from {
+    width: 400px;
+  }
+  to {
+    width: 0;
+  }
+}
+@media screen and (max-width: 1800px) {
+  .searchbox{
+    left: 4%;
+  }
+}
+@media screen and (max-width: 1700px) {
+  .searchbox{
+    left: 4.5%;
+  }
+}
+@media screen and (max-width: 1600px) {
+  .searchbox{
+    left: 4.7%;
+  }
+}
+@media screen and (max-width: 1500px) {
+  .searchbox{
+    left: 5%;
+  }
+}
 @media screen and (max-width: 1200px) {
   .options span {
+    display: none;
+  }
+  .logoContainer{
     display: none;
   }
   .logo {
@@ -126,6 +190,8 @@ a {
   }
   .instaLogo {
     display: block;
+    text-align: center;
+    margin-block: 10px;
   }
   .aside {
     width: 100px;

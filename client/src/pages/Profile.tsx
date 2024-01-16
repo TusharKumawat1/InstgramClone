@@ -8,7 +8,7 @@ import ViewPost from "../components/Home/ViewPost";
 import filters from "../styles/components/ModalCss/step3.module.css";
 import Loader from "../components/Home/Loader";
 import { Link } from "react-router-dom";
-export default function Profie() {
+export default function Proflie() {
   const {
     setIsModalOpen,
     authenticUser,
