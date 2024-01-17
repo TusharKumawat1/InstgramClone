@@ -1,28 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import Styles from "../styles/pages/profile.module.css";
-import AsideNav from "../components/AsideBar/AsideNav";
-import Footer from "../components/Home/Footer";
 import { MyContext } from "../context/Mycontext";
 import { gql, useQuery } from "@apollo/client";
-import ViewPost from "../components/Home/ViewPost";
-import filters from "../styles/components/ModalCss/step3.module.css";
 import Loader from "../components/Home/Loader";
-import { Link } from "react-router-dom";
 import ProfilePage from "../components/Home/ProfilePage";
 export default function Proflie() {
   const {
-    setIsModalOpen,
     authenticUser,
     setauthenticUser,
     toggleRefetch,
     viewPost,
-    setViewPost,
   } = useContext(MyContext);
-  const [contentDetails, setContentDetails] = useState({
-    _id: "",
-    postId: "",
-    likedBy: "",
-  });
   const getinfo = gql`
   query GetPfInfo($token: String) {
     getPfInfo(token: $token) {
@@ -72,14 +60,6 @@ export default function Proflie() {
         token: token,
     },
   });
-  const showContnet = (_id: string, postId: string) => {
-    const newObj = { ...contentDetails };
-    newObj._id = _id;
-    newObj.postId = postId;
-    newObj.likedBy = authenticUser.userId._id;
-    setContentDetails((p) => newObj);
-    setViewPost(true);
-  };
   useEffect(() => {
     if (!loading && !error && data) {
       setauthenticUser((p:any)=>({

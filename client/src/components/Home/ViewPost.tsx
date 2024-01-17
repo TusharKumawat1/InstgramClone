@@ -202,16 +202,17 @@ export default function ViewPost(contentDetails: contentDetailsType) {
         setSize((p) => newSize);
       }
     }
-    if (error) {
-      console.log(error);
-    }
-  }, [loading, error, data, postDetails, liked]);
-  useEffect(() => {
     if (postDetails && contentDetails) {
       setLiked(postDetails.likes?.includes(contentDetails.likedBy) ?? false);
       setLikesCount(postDetails?.likes.length);
     }
-  }, [postDetails, contentDetails]);
+    if (error) {
+      console.log(error);
+    }
+  }, [loading, error, data, postDetails, liked,contentDetails]);
+  // useEffect(() => {
+   
+  // }, [postDetails, contentDetails]);
   useEffect(()=>{
     refetch();
   },[authenticUser])

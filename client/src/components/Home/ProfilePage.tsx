@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Footer from "./Footer";
 import Styles from "../../styles/pages/profile.module.css";
 import { MyContext } from "../../context/Mycontext";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import filters from "../../styles/components/ModalCss/step3.module.css"
 import ViewPost from "./ViewPost";
 type userId = {
@@ -45,7 +45,11 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
     setIsModalOpen,
     viewPost,
     setViewPost,
+    authenticUser
   } = useContext(MyContext);
+  const profile=useParams()
+  console.log(profile)
+  const LoggedInUserProfile=authenticUser?._id===profilePage?._id?true:false
   const [contentDetails, setContentDetails] = useState({
     _id: "",
     postId: "",
@@ -59,9 +63,6 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
     setContentDetails((p) => newObj);
     setViewPost(true);
   };
-  useEffect(() => {
-    console.log(profilePage);
-  }, []);
   return (
     <div className={Styles.profileSection}>
     <div className={Styles.innerContainer}>
@@ -77,15 +78,29 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
               <h3 className={Styles.username}>
                 {profilePage && profilePage.userId.username}
               </h3>
+            {
+              LoggedInUserProfile ? <span>
               <Link
-                to={`/profile/edit`}
-                className={Styles.primaryBtn}
+                 to={`/profile/edit`}
+                 className={Styles.primaryBtn}
+               >
+                 Edit profile
+               </Link>
+               <Link to="#" className={Styles.primaryBtn}>
+                 View archive
+               </Link>
+              </span>: <span>
+             <Link
+                to={`#`}
+                className={`${Styles.primaryBtn} ${Styles.followBtn}`}
               >
-                Edit profile
+                Follow
               </Link>
               <Link to="#" className={Styles.primaryBtn}>
-                View archive
+                Message
               </Link>
+             </span>
+            }
               <i className="fa-solid fa-gear"></i>
             </div>
             <div className={Styles.postNconnections}>
@@ -135,31 +150,34 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
           <span>
             <i className="fa-solid fa-table-cells"></i> Posts
           </span>
-          <span>
+         { LoggedInUserProfile && <span>
             <i className="fa-regular fa-bookmark"></i> Saved
-          </span>
+          </span>}
           <span>
             <i className="fa-solid fa-id-card-clip"></i> Taged
           </span>
         </div>
         {profilePage && profilePage?.posts?.length <= 0 ? (
-          <div className={Styles.posts}>
-            <div
-              className={Styles.cameraIcon}
-              onClick={() => setIsModalOpen(true)}
-            >
-              <i className="fa-solid fa-camera"></i>
-            </div>
-            <h1>Share Photos</h1>
-            <p>When you share photos, they will appear on your profile.</p>
-            <button
-              className={Styles.firstPhotoBtn}
-              type="button"
-              onClick={() => setIsModalOpen(true)}
-            >
-              Share your first photo
-            </button>
+          LoggedInUserProfile ?  <div className={Styles.posts}>
+          <div
+            className={Styles.cameraIcon}
+            onClick={() => setIsModalOpen(true)}
+          >
+            <i className="fa-solid fa-camera"></i>
           </div>
+          <h1>Share Photos</h1>
+          <p>When you share photos, they will appear on your profile.</p>
+          <button
+            className={Styles.firstPhotoBtn}
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+          >
+            Share your first photo
+          </button>
+        </div>:<div className={Styles.noPost}>
+        <i className="fa-solid fa-camera"></i>
+        <p>No posts yet</p>
+        </div>
         ) : (
           <div className={Styles.postsContainer}>
             {profilePage &&

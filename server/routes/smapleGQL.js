@@ -2,13 +2,8 @@ import { ApolloServer } from "@apollo/server";
 import dotenv from "dotenv"
 import { getPfInfo, searchProfile } from "../controller/user.js";
 import { getPostDetails } from "../controller/post.js";
-
 dotenv.config()
 const server = new ApolloServer({
-  context: ({ req }) => {
-    console.log(req)
-    return { req: req.req };// Include the req object in the context
-  },
   typeDefs: `
         type user{
             username:String
@@ -82,18 +77,16 @@ const server = new ApolloServer({
         type Query{
             getPfInfo(token: String): ProfileInfoResponse
             getPostDetails(userProfileId: String,postId:String):postDetails
-            searchProfile(profileId:String):ProfileInfoResponse
+            searchProfile(profileId:String,token:String):ProfileInfoResponse
         }
     `,
   resolvers: {
     Query: {
       getPfInfo: getPfInfo,
       getPostDetails: getPostDetails,
-      searchProfile:searchProfile,
-    }
+      searchProfile:searchProfile
+    },
   },
-
 });
 await server.start();
-
 export default server;
