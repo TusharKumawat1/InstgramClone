@@ -3,6 +3,7 @@ import Styles from "../styles/pages/editPage.module.css";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../context/Mycontext";
 import { gql, useQuery } from "@apollo/client";
+import { toast } from "react-toastify";
 export default function EditProfile() {
   const { authenticUser, setauthenticUser, generateBase64, getImageUrl } =
     useContext(MyContext);
@@ -64,6 +65,9 @@ export default function EditProfile() {
       }
     );
     refetch();
+   if (res.ok) {
+    toast.success("Change successful")
+   }
   };
   const handlePfp = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setDisable(true);

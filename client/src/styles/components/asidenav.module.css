@@ -138,24 +138,25 @@ a {
   transition: .5s ease-in-out;
   margin-block: 10px;
   margin-bottom: 49px;
+  color: black;
+  animation: logoAnimation .5s  1  both;
 }
 @keyframes animation{
   from{
     width: 0px;
+    opacity: 0;
   }to{
     width: 400px;
+    opacity: 1;
   }
-}
-.searchbox.hide {
-  animation: hideSearchBoxAnimation 0.5s forwards;
 }
 
-@keyframes hideSearchBoxAnimation {
+@keyframes logoAnimation {
   from {
-    width: 400px;
+    opacity: 0;
   }
   to {
-    width: 0;
+    opacity: 1;
   }
 }
 @media screen and (max-width: 1800px) {

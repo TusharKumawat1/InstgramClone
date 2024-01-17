@@ -9,11 +9,15 @@ import { MyContext } from "./context/Mycontext";
 import DiscardModal from "./components/DiscardModal";
 import AsideNav from "./components/AsideBar/AsideNav";
 import EditProfile from "./pages/EditProfile";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Search from "./pages/Search";
 export default function App() {
   const { isModalOpen, isDiscardModalOpen } = useContext(MyContext);
   return (
     
     <BrowserRouter>
+    <ToastContainer />
       <div className="appContainer">
         {localStorage.getItem("token") && <AsideNav />}
         <div className="contentContainer">
@@ -22,6 +26,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/profile/edit" element={<EditProfile />} />
+            <Route path="/search/:_id" element={<Search />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           {isModalOpen && <Modal />}

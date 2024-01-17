@@ -8,6 +8,7 @@
   color: black;
   z-index: 99999;
   background-color: white;
+  overflow: hidden;
 }
 h2{
     font-weight: 600;
@@ -57,4 +58,36 @@ h2{
     color: #a4a4a4;
     font-size: 16px;
     font-weight: 600;
+}
+.searchResults{
+    display: flex;
+    justify-self: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.skeletons, .users{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.pfp{
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.username{
+    font-weight: 600;
+    color: black;
+}
+.fullname{
+    color: #bababa;
+    font-size: 14px;
 }

@@ -119,3 +119,27 @@ export const addComment = async (req, res) => {
       .json({ success: false, message: "Internal server Error" });
   }
 };
+export const getPostDetails=async (_, req) => {
+  try {
+    const { userProfileId, postId } = req;
+    if (!userProfileId) {
+      throw new Error("Please Provide a user");
+    }
+    const validProfile = await ProfileInfo.findOne({
+      _id: userProfileId,
+    }).populate({
+      path: "userId",
+      select: "-password",
+    });
+    if (!validProfile) {
+      throw new Error("User not found");
+    }
+    const postDetails=validProfile.posts.filter(post=>post.postId.equals(postId))
+    if (!postDetails) {
+      throw new Error("Post not found")
+    }
+    return { userDetails:validProfile ,postDetails : postDetails[0], errors: null };
+  } catch (error) {
+    return { errors: [{ message: error.message }] };
+  }
+}

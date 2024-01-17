@@ -1,9 +1,14 @@
 import { ApolloServer } from "@apollo/server";
 import dotenv from "dotenv"
-import { authMiddleware } from "../middleware/authMiddleware.js";
-import { getPostDetails,getPfInfo } from "../controller/graphQl.js";
+import { getPfInfo, searchProfile } from "../controller/user.js";
+import { getPostDetails } from "../controller/post.js";
+
 dotenv.config()
 const server = new ApolloServer({
+  context: ({ req }) => {
+    console.log(req)
+    return { req: req.req };// Include the req object in the context
+  },
   typeDefs: `
         type user{
             username:String
@@ -77,17 +82,18 @@ const server = new ApolloServer({
         type Query{
             getPfInfo(token: String): ProfileInfoResponse
             getPostDetails(userProfileId: String,postId:String):postDetails
+            searchProfile(profileId:String):ProfileInfoResponse
         }
     `,
   resolvers: {
     Query: {
       getPfInfo: getPfInfo,
       getPostDetails: getPostDetails,
-    },
-    // Mutation:{
-    //   likeOrDislikePost:[authMiddleware,likeOrDislikePost]
-    // }
+      searchProfile:searchProfile,
+    }
   },
+
 });
 await server.start();
+
 export default server;

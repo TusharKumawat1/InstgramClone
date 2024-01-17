@@ -8,6 +8,7 @@ import ViewPost from "../components/Home/ViewPost";
 import filters from "../styles/components/ModalCss/step3.module.css";
 import Loader from "../components/Home/Loader";
 import { Link } from "react-router-dom";
+import ProfilePage from "../components/Home/ProfilePage";
 export default function Proflie() {
   const {
     setIsModalOpen,
@@ -95,7 +96,7 @@ export default function Proflie() {
   }
   return (
     <div className={Styles.container}>
-      <div className={Styles.profileSection}>
+      {/* <div className={Styles.profileSection}>
         <div className={Styles.innerContainer}>
           <div className={Styles.userDetails}>
             <div className={Styles.infoSection}>
@@ -261,7 +262,8 @@ export default function Proflie() {
             <Footer />
           </div>
         </div>
-      </div>
+      </div> */}
+      <ProfilePage profilePage={authenticUser}/>
     </div>
   );
 }
