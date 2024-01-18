@@ -58,11 +58,11 @@ export default function SearchBox() {
   };
   return (
     <div className={Styles.container}>
-      <i
-        className="fa-solid fa-arrow-left"
+     
+      <h2> <i
+        className={`fa-solid fa-arrow-left ${Styles.backBtn}`}
         onClick={() => setshowSearchBox(false)}
-      ></i>
-      <h2>Search</h2>
+      ></i> &nbsp; Search</h2>
       <div className={Styles.inputContainer}>
         <input
           type="text"
