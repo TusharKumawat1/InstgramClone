@@ -204,15 +204,17 @@ export default function ViewPost(contentDetails: contentDetailsType) {
     }
     if (postDetails && contentDetails) {
       setLiked(postDetails.likes?.includes(contentDetails.likedBy) ?? false);
+      console.log("is liked ",liked)
+      console.log("all likes",postDetails.likes)
       setLikesCount(postDetails?.likes.length);
     }
     if (error) {
       console.log(error);
     }
   }, [loading, error, data, postDetails, liked,contentDetails]);
-  // useEffect(() => {
-   
-  // }, [postDetails, contentDetails]);
+  useEffect(() => {
+   console.log(contentDetails.likedBy)
+  }, []);
   useEffect(()=>{
     refetch();
   },[authenticUser])

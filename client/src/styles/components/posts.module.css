@@ -167,3 +167,25 @@
     position: absolute;
     bottom: 180px;
 }
+
+@media screen and (max-width: 800px) {
+    .container{
+        width: 100%;
+    }
+    .post{
+        width: 102%;
+    }
+    .userInfo{
+        border-top: 1px solid #d3d3d3;
+        padding-inline: 20px;
+        padding-block: 30px;
+    }
+    .postEngage,.likedBy,.caption,.commentSection{
+        padding-inline: 20px;
+    }
+    .contentBox{
+        box-shadow: none;
+        border-radius: none;
+    }
+    
+  }

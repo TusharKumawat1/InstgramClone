@@ -102,6 +102,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  object-fit: cover;
 }
 .commentSection{
   width: 100%;
@@ -253,4 +254,66 @@
   font-weight: 600;
   margin-top: 50px;
   color: #9c9a9a;
+}
+@media screen and (max-width: 2100px) {
+  .modal{
+    width: 60%;
+  }
+}
+@media screen and (max-width: 1900px) {
+  .modal{
+    width: 70%;
+  }
+}
+@media screen and (max-width: 1700px) {
+  .modal{
+    width: 75%;
+  }
+}
+@media screen and (max-width: 1500px) {
+  .modal{
+    width: 80%;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .modal{
+    width: 85%;
+  }
+}
+@media screen and (max-width: 1350px) {
+  .modal{
+    width: 85%;
+  }
+  .postDeails{
+    width: 35%;
+    min-width: 300px;
+  }
+  .imagesHolder{
+    width: 68%;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .modal{
+    width: 90%;
+  }
+  .postDeails{
+    width: 35%;
+    min-width: 300px;
+  }
+  .imagesHolder{
+    width: 68%;
+  }
+}
+@media screen and (max-width: 1000px) {
+
+  .postDeails{
+    width: 40%;
+    min-width: 300px;
+  }
+  .imagesHolder{
+    width: 60%;
+  }
+  .scrollBtnContainer{
+    width: 60%;
+  }
 }

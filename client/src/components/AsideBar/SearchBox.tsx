@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Styles from "../../styles/components/searchbox.module.css";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Link } from "react-router-dom";
+import { MyContext } from "../../context/Mycontext";
 type resultType = {
   pfp: string;
   _id: string;
@@ -16,6 +17,8 @@ export default function SearchBox() {
   const [loading, setloading] = useState(true);
   const [searchResult, setSearchResult] = useState<resultType[]>();
   const [query, setQuery] = useState("");
+  const { authenticUser, showSearchBox, setshowSearchBox } =
+    useContext(MyContext);
   const token = localStorage.getItem("token")!;
   const SearchUser = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setloading(true);
@@ -55,6 +58,10 @@ export default function SearchBox() {
   };
   return (
     <div className={Styles.container}>
+      <i
+        className="fa-solid fa-arrow-left"
+        onClick={() => setshowSearchBox(false)}
+      ></i>
       <h2>Search</h2>
       <div className={Styles.inputContainer}>
         <input
@@ -86,7 +93,12 @@ export default function SearchBox() {
                   })
               : searchResult?.map((result, index) => {
                   return (
-                    <Link to={`/search/${result._id}`} className={Styles.users} key={index} >
+                    <Link
+                      to={`/search/${result._id}`}
+                      className={Styles.users}
+                      key={index}
+                      onClick={() => setshowSearchBox(false)}
+                    >
                       <img
                         src={result.pfp}
                         alt={result._id}

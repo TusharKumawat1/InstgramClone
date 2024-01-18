@@ -91,3 +91,13 @@ h2{
     color: #bababa;
     font-size: 14px;
 }
+@media screen and (max-width: 800px) {
+    .container{
+        position: fixed;
+        top: 0px;
+        height: 100%;
+        border: 1px solid red;
+        z-index: 9999;
+        right: 0;
+    }
+}

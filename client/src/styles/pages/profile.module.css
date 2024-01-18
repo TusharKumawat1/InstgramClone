@@ -311,6 +311,9 @@
   color: #b9b8b8;
   font-weight: 600;
 }
+.topNav{
+  display: none;
+}
 @media screen and (max-width: 1700px) {
   .innerContainer{
     width: 70%;
@@ -350,8 +353,74 @@
     width: 80%;
   }
 }
-@media screen and (max-height: 850px) {
-  .userDetails {
-    height: 60%;
+
+@media screen and (max-width: 800px) {
+  .innerContainer{
+    width: 100%;
+  }
+  .infoSection{
+    width: 100%;
+    padding-inline: 10px;
+    padding-top: 40px;
+    gap: 30px;
+    position: relative;
+    height: 320px;
+  }
+  .pfp{
+    width: 80px;
+    height: 80px;
+    min-width:80px;
+    min-height: 80px;
+  }
+  .editProfile{
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+  }
+  .editProfile i{
+    display: none ;
+  }
+  .postNconnections span{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 300;
+  }
+  .postNconnections{
+    padding-inline: 30px;
+    padding-block: 10px;
+    border-top:1px solid #dadada;
+    position: absolute;
+    bottom: -5%;
+    width: 100%;
+    right: 0%;
+    justify-content: space-evenly;
+  }
+  .highlights{
+    display: none;
+  }
+  .about{
+    margin-top: 30px;
+    transform: translateX(-35%);
+  }
+  .topNav{
+    width: 100%;
+    height: 80px;
+    border-bottom:1px solid #dadada;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+  }
+  .library{
+    width: 100%;
+  }
+  .postsContainer{
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .post{
+    width: 33vw;
+    height: 15vh;
   }
 }

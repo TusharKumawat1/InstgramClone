@@ -57,15 +57,20 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
   });
   const showContnet = (_id: string, postId: string) => {
     const newObj = { ...contentDetails };
-    newObj._id = _id;
-    newObj.postId = postId;
-    newObj.likedBy = profilePage.userId._id;
+    newObj._id = _id;//user who upload post
+    newObj.postId = postId;//post id 
+    newObj.likedBy = authenticUser.userId._id;//logged in user
     setContentDetails((p) => newObj);
     setViewPost(true);
   };
   return (
     <div className={Styles.profileSection}>
     <div className={Styles.innerContainer}>
+      <div className={Styles.topNav}>
+      <i className="fa-solid fa-gear"></i>
+      <p> {profilePage && profilePage.userId.username}</p>
+      <i className="fa-solid fa-user-plus"></i>
+      </div>
       <div className={Styles.userDetails}>
         <div className={Styles.infoSection}>
           <img

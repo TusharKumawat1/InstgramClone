@@ -12,8 +12,8 @@ import SearchBox from "./SearchBox";
 export default function AsideNav() {
   const { isMoreOptionsAvailable, setIsMoreOptionsAvailable, setIsModalOpen } =
     useContext<isMoreType>(MyContext);
-  const { authenticUser } = useContext(MyContext);
-  const [showSearchBox, setshowSearchBox] = useState(false);
+  const { authenticUser ,showSearchBox, setshowSearchBox} = useContext(MyContext);
+
   const [logo, setlogo] = useState(
     <img
       src={instagramFont}
@@ -45,24 +45,24 @@ export default function AsideNav() {
   return (
     <div className={Styles.aside}>
       <div className={Styles.sectionFirst}>
-        <Link to={"/"}>
+        <Link to={"/"} className={Styles.mainLogo}>
           <span className={Styles.logoContainer}> {logo}</span>
           <i className={`${Styles.instaLogo} fa-brands fa-instagram`}></i>
         </Link>
-        <Link to="/" className={Styles.options}>
+        <Link to="/" className={`${Styles.options} ${Styles.home}`} >
           <i className="fa-solid fa-house"></i>
           <span>Home</span>
         </Link>
-        <Link to="#" className={Styles.options} onClick={ShowSearchBox}>
+        <Link to="#" className={`${Styles.options} ${Styles.search}`} onClick={ShowSearchBox}>
           {" "}
           <i className="fa-solid fa-magnifying-glass"></i>
           <span>Search</span>
         </Link>
-        <Link to="#" className={Styles.options}>
+        <Link to="#" className={`${Styles.options} ${Styles.explore}`}>
           <i className="fa-regular fa-compass"></i>
           <span>Explore</span>
         </Link>
-        <Link to="#" className={Styles.options}>
+        <Link to="#" className={`${Styles.options} ${Styles.reels}`}>
           {" "}
           <img
             src={reels}
@@ -73,17 +73,17 @@ export default function AsideNav() {
           />
           <span>Reels</span>
         </Link>
-        <Link to="#" className={Styles.options}>
+        <Link to="#" className={`${Styles.options} ${Styles.message}`}>
           <i className="fa-brands fa-facebook-messenger"></i>
           <span>Messages</span>
         </Link>
-        <Link to="#" className={Styles.options}>
+        <Link to="#" className={`${Styles.options} ${Styles.notification}`}>
           <i className="fa-regular fa-heart"></i>
           <span>Notification</span>
         </Link>
         <Link
           to="#"
-          className={Styles.options}
+          className={`${Styles.options} ${Styles.create}`}
           onClick={() => setIsModalOpen(true)}
         >
           <i className="fa-regular fa-square-plus"></i>
@@ -91,7 +91,7 @@ export default function AsideNav() {
         </Link>
         <Link
           to={`/profile/${authenticUser && authenticUser.userId.username}`}
-          className={Styles.options}
+          className={`${Styles.options} ${Styles.profile}`}
         >
           {!authenticUser ? (
             <Skeleton circle={true} height={35} width={35} />
@@ -113,11 +113,11 @@ export default function AsideNav() {
         </ClickAwayListener>
       )}
       <div className={Styles.sectionSecond}>
-        <p className={Styles.options}>
+        <p className={`${Styles.options} `}>
           <i className="fa-brands fa-threads"></i>
           <span>Threads</span>
         </p>
-        <p className={Styles.options} onClick={toggleIsMoreOptions}>
+        <p className={`${Styles.options} `} onClick={toggleIsMoreOptions}>
           <i className="fa-solid fa-bars"></i>
           <span>More</span>
         </p>

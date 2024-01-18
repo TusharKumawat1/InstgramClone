@@ -26,6 +26,7 @@ code {
   background-color: transparent;  
   color: inherit;
   flex-direction: row;
+  position: relative;
 }
 
 .contentContainer {

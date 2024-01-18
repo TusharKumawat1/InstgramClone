@@ -7,7 +7,6 @@
   background-color: transparent;
   border-right: 1px solid #e1e1e1;
   justify-content: space-between;
-  transition: .3s ease;
 }
 .sectionFirst {
   display: flex;
@@ -201,18 +200,25 @@ a {
 @media screen and (max-width: 800px) {
    .aside{
     flex-direction: row;
-    width: 100vw;
+    min-width: 100vw;
     height: 70px;
     position: fixed;
     z-index: 9999;
-    bottom: 0px;
-    left: 0;
+    bottom: 0%;
+    right: 0%;
+    /* overflow: hidden; */
+    justify-content: center;
    }
    .sectionSecond{
     display: none;
    }
    .sectionFirst{
     flex-direction: row;
-    background-color: #ffffff;
+    width: 100%;
+    justify-content: space-evenly;
+    background-color: white;
+   }
+   .mainLogo,.explore,.create,.notification{
+    display: none;
    }
   }

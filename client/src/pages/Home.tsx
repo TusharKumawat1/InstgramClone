@@ -6,6 +6,7 @@ import Feed from "../components/Home/Feed";
 import { useQuery, gql } from "@apollo/client";
 import { MyContext } from "../context/Mycontext";
 import Loader from "../components/Home/Loader";
+import { instagramFont } from "../assets";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -51,6 +52,13 @@ export default function Home() {
   }
   return (
     <div className={Styles.container}>
+      <div className={Styles.topNav}>
+        <img src={instagramFont} alt="instagram" width={110} height={50}/>
+        <span>
+        <i className="fa-regular fa-square-plus"></i>
+        <i className="fa-regular fa-heart"></i>
+        </span>
+      </div>
       <Feed />
     </div>
   );

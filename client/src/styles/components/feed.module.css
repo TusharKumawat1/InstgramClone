@@ -122,11 +122,22 @@
   }
 }
 @media screen and (max-width: 800px) {
+  .container{
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+   overflow-x:hidden ;
+   position: relative;
+   margin-top: 50px;
+  }
     .mainArea{
         width: 100%;
-        padding: 10px auto;
+        transform: translateX(11%);
     }
     .stories{
         width: 100%;
+    }
+    .feed{
+      width: 100%;
     }
 }

@@ -54,6 +54,7 @@ export default function Search() {
           userId {
             username
             fullname
+            _id
           }
           pfp
         }

@@ -54,6 +54,7 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
   const [viewPost, setViewPost] = useState(false);
   const [authenticUser, setauthenticUser] = useState<authenticUserType>();
   const [appliedFilters, setAppliedFilters] = useState([]);
+  const [showSearchBox, setshowSearchBox] = useState(false);
   const [userDetails, setUserDetails] = useState<userDetailsType>({
     user: "",
     dob: "",
@@ -135,6 +136,8 @@ export default function ContextApi({ children }: ContextApiProviderProps) {
         settoggleRefetch,
         viewPost,
         setViewPost,
+        showSearchBox, 
+        setshowSearchBox
       }}
     >
       {children}
