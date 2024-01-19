@@ -215,8 +215,9 @@ a {
    .sectionFirst{
     flex-direction: row;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content:center;
     background-color: white;
+    padding-inline:10px ;
    }
    .mainLogo,.explore,.create,.notification{
     display: none;

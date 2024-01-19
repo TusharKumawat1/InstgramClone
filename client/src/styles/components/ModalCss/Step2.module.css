@@ -210,6 +210,7 @@
   transition: 0.5s ease;
   padding: 10px;
   transition: .5s ease;
+ 
 }
 .previewImage {
   width: 90px;
@@ -217,6 +218,7 @@
   z-index: 99;
   opacity: 1;
   cursor: pointer;
+  object-fit: cover;
 }
 .previewImageContainer {
   position: relative;

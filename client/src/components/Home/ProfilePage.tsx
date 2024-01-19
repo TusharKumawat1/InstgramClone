@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Footer from "./Footer";
 import Styles from "../../styles/pages/profile.module.css";
 import { MyContext } from "../../context/Mycontext";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import filters from "../../styles/components/ModalCss/step3.module.css"
 import ViewPost from "./ViewPost";
 type userId = {
@@ -47,8 +47,6 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
     setViewPost,
     authenticUser
   } = useContext(MyContext);
-  const profile=useParams()
-  console.log(profile)
   const LoggedInUserProfile=authenticUser?._id===profilePage?._id?true:false
   const [contentDetails, setContentDetails] = useState({
     _id: "",
@@ -213,7 +211,7 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
                   >
                     <div className={Styles.imageContainer}>
                       <img
-                        src={post.content[post.content.length - 1]}
+                        src={post.content[0]}
                         alt=""
                         className={Styles.postContent}
                       />

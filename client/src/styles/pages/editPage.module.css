@@ -158,6 +158,8 @@ button:disabled{
     margin-block: 10px;
     text-align: center;
     padding: 10px;
+    overflow: hidden;
+    overflow-y:auto ;
 }
 .accountCenter p{
     color: #858585;

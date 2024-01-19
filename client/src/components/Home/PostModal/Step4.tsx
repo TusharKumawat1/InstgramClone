@@ -60,7 +60,8 @@ export default function Step4() {
       imagesUrl.push(imageUrl.secure_url);
     });
     // Wait for all promises to resolve
-    await Promise.all(promises);
+    await Promise.allSettled(promises);
+    console.log(imagesUrl)
     let postDetails = {
       content: imagesUrl,
       caption: caption,
@@ -177,7 +178,6 @@ export default function Step4() {
       filterBtnRef.current.style.borderBottom = "1px solid black";
     }
   }, []);
-
   useEffect(() => {
     // Initialize refs for image masks
     if (imageMaskRefs.current.length !== images.length) {

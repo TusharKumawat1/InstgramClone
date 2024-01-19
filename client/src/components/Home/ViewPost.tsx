@@ -225,7 +225,6 @@ export default function ViewPost(contentDetails: contentDetailsType) {
           <div className={Styles.imagesHolder} ref={imageHolderRef}>
             {postDetails ? (
               postDetails?.content
-                ?.toReversed()
                 ?.map((content: string, index: number) => {
                   let filterName = "";
                   if (postDetails?.appliedFilters[index]) {
