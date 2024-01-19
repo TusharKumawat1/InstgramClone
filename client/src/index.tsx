@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import ContextApi from "./context/ContextApi";
 const client = new ApolloClient({
-  uri: `${process.env.REACT_APP_SERVER_PORT}`,
+  uri: `${process.env.REACT_APP_SERVER_PORT}/graphql`,
   cache: new InMemoryCache(),
 });
 const root = ReactDOM.createRoot(
