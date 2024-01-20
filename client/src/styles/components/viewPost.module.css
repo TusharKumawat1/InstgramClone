@@ -11,14 +11,14 @@
   transition: 0.3s ease;
   z-index: 9999;
 }
-.modal{
+.modal {
   width: 70%;
   height: 90%;
   display: flex;
   background-color: white;
   position: relative;
 }
-.imagesHolder{
+.imagesHolder {
   width: 65%;
   display: flex;
   justify-content: flex-start;
@@ -26,34 +26,36 @@
   border-right: 1px solid #e9e9e9;
   overflow: hidden;
 }
-.imageContainer{
-  flex-shrink: 0; 
-  width: 100%; 
-  height: 100%; 
+.imageContainer {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
   display: inline-flex;
-  transition: transform 0.5s ease; 
+  transition: transform 0.5s ease;
   align-items: center;
   justify-content: center;
   position: relative;
+  cursor: pointer;
 }
-.content{
+.content {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.scrollBtnContainer{
+.scrollBtnContainer {
   width: 65%;
   position: absolute;
   display: flex;
   padding: 10px;
   justify-content: space-between;
-  top:50%;
+  top: 50%;
 }
-.rightArrow,.leftArrow{
+.rightArrow,
+.leftArrow {
   width: 30px;
   height: 30px;
   color: rgb(255, 255, 255);
-  background-color: rgba(0, 0, 0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -61,13 +63,13 @@
   cursor: pointer;
   z-index: 999999;
 }
-.imageMask{
+.imageMask {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0px;
 }
-.postDeails{
+.postDeails {
   display: flex;
   width: 35%;
   height: 100%;
@@ -77,7 +79,7 @@
   position: relative;
   min-width: 400px;
 }
-.user{
+.user {
   padding: 15px;
   width: 100%;
   display: flex;
@@ -85,17 +87,19 @@
   align-items: center;
   border-bottom: 1px solid #e9e9e9;
 }
-.userDetails,.aboutContent{
+.userDetails,
+.aboutContent {
   display: flex;
   gap: 10px;
   align-items: center;
   word-break: break-all;
 }
-.userDetails p{
+.userDetails p {
   font-size: 15px;
   font-weight: 600;
 }
-.pfp,.likedBypfp{
+.pfp,
+.likedBypfp {
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -104,7 +108,7 @@
   align-items: center;
   object-fit: cover;
 }
-.commentSection{
+.commentSection {
   width: 100%;
   height: 72%;
   border-bottom: 1px solid #e9e9e9;
@@ -116,48 +120,49 @@
   overflow: hidden;
   overflow-y: auto;
 }
-.aboutContent,.comment{
+.aboutContent,
+.comment {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
-.caption{
+.caption {
   font-size: 15px;
   display: inline;
 }
-.caption span{
+.caption span {
   font-weight: 600;
 }
-.comments{
+.comments {
   display: flex;
   width: 100%;
   height: 100%;
   flex-direction: column;
   margin-top: 15px;
 }
-.commentedBy{
+.commentedBy {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
   gap: 15px;
 }
-.comment{
+.comment {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
 }
-.commentDiv{
+.commentDiv {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-.commentTimestamp{
+.commentTimestamp {
   font-size: 13px;
-  color:gray
+  color: gray;
 }
-.postOverView{
+.postOverView {
   width: 100%;
   height: 13%;
   border-bottom: 1px solid #e9e9e9;
@@ -166,21 +171,21 @@
   padding: 15px;
   gap: 10px;
 }
-.interactions{
+.interactions {
   display: flex;
   justify-content: space-between;
 }
-.interactions span{
+.interactions span {
   display: flex;
   gap: 20px;
   font-size: 25px;
   justify-content: center;
   align-items: center;
 }
-.interactions i{
+.interactions i {
   cursor: pointer;
 }
-.likedBy{
+.likedBy {
   display: flex;
   width: 100%;
   height: 100%;
@@ -191,28 +196,28 @@
   color: #636363;
   flex-direction: column;
 }
-.likesOfuser{
+.likesOfuser {
   display: flex;
 }
-.likes{
+.likes {
   display: flex;
   gap: 10px;
 }
-.likedBypfp{
+.likedBypfp {
   width: 20px;
   height: 20px;
   margin-left: -5px;
 }
-.likedBypfp:nth-child(1){
+.likedBypfp:nth-child(1) {
   margin-left: 0px;
 }
-.postedOn{
+.postedOn {
   display: block;
   font-size: 12px;
   color: #979797;
   margin-top: -5px;
 }
-.addComment{
+.addComment {
   display: flex;
   gap: 15px;
   padding: 15px;
@@ -223,97 +228,175 @@
   font-size: 23px;
   cursor: pointer;
 }
-.addComment input{
+.addComment input {
   border: none;
   width: 100%;
   background: none;
   margin-right: 60px;
 }
-.addComment input:focus{
+.addComment input:focus {
   outline: none;
 }
-.addComment button{
+.addComment button {
   background: none;
   border: none;
   color: #00aaff;
   font-weight: bold;
   cursor: pointer;
 }
-.emojiPicker{
+.emojiPicker {
   position: absolute;
   bottom: 60px;
   left: 10px;
 }
-.imageSkeleton{
+.imageSkeleton {
   width: 100%;
   height: 100%;
 }
-.noComment{
+.noComment {
   text-align: center;
   font-size: 15px;
   font-weight: 600;
   margin-top: 50px;
   color: #9c9a9a;
 }
+.doubleClick {
+  position: absolute;
+  bottom: 45%;
+  left: 45%;
+  font-size: 120px;
+  background: -webkit-linear-gradient(#fd195e, #e103ca);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: like 1s 1 ease both;
+  transition: 0.3s ease;
+}
+@keyframes like {
+  0% {
+    opacity: 0.4;
+    transform: rotate(-20deg);
+    bottom: 40%;
+  }
+  70% {
+    opacity: 0.8;
+    transform: rotate(0deg), scale(1.2, 1.2);
+    bottom: 45%;
+  }
+  100% {
+    transform: scale(1, 1);
+    bottom: 90%;
+    opacity: 0;
+  }
+}
+.topNav{
+  display: none;
+}
 @media screen and (max-width: 2100px) {
-  .modal{
+  .modal {
     width: 60%;
   }
 }
 @media screen and (max-width: 1900px) {
-  .modal{
+  .modal {
     width: 70%;
   }
 }
 @media screen and (max-width: 1700px) {
-  .modal{
+  .modal {
     width: 75%;
   }
 }
 @media screen and (max-width: 1500px) {
-  .modal{
+  .modal {
     width: 80%;
   }
 }
 @media screen and (max-width: 1400px) {
-  .modal{
+  .modal {
     width: 85%;
   }
 }
 @media screen and (max-width: 1350px) {
-  .modal{
+  .modal {
     width: 85%;
   }
-  .postDeails{
+  .postDeails {
     width: 35%;
     min-width: 300px;
   }
-  .imagesHolder{
+  .imagesHolder {
     width: 68%;
   }
 }
 @media screen and (max-width: 1100px) {
-  .modal{
+  .modal {
     width: 90%;
   }
-  .postDeails{
+  .postDeails {
     width: 35%;
     min-width: 300px;
   }
-  .imagesHolder{
+  .imagesHolder {
     width: 68%;
   }
 }
 @media screen and (max-width: 1000px) {
-
-  .postDeails{
+  .postDeails {
     width: 40%;
     min-width: 300px;
   }
-  .imagesHolder{
+  .imagesHolder {
     width: 60%;
   }
-  .scrollBtnContainer{
+  .scrollBtnContainer {
     width: 60%;
   }
+}
+@media screen and (max-width: 800px) {
+ .topNav{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  top: 0%;
+  right: 0%;
+  color: black;
+  z-index: 9999;
+  background-color: white;
+  font-size: 20px;
+  border-bottom: 1px solid #e2e1e1;
+ }
+ .modal{
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  margin-top: 50%;
+ }
+ /* .postDeails{
+  display: none;
+ } */
+ .imagesHolder{
+  width: 100%;
+ }
+ .user{
+  width: 100%;
+  position: fixed;
+  top: 5%;
+  background-color: white;
+ }
+ .aboutContent,.commentSection{
+  display: none;
+ }
+ .addComment{
+  display: none;
+ }
+ .postDeails{
+  width: 100%;
+ }
+ .postOverView{
+  border-bottom: none;
+ }
 }

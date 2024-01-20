@@ -15,8 +15,9 @@ type contentDetailsType = {
 };
 
 export default function ViewPost(contentDetails: contentDetailsType) {
-  const { setViewPost ,authenticUser} = useContext(MyContext);
+  const { setViewPost, authenticUser } = useContext(MyContext);
   const [showEmojiPicker, setshowEmojiPicker] = useState(false);
+  const [doubleClick, setDoubleClick] = useState(false);
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
   const [commentContent, setCommentContent] = useState("");
@@ -182,6 +183,15 @@ export default function ViewPost(contentDetails: contentDetailsType) {
     // return newdate[1]+newdate[2].slice(0,1);
     return relativeTime;
   };
+  const handleDoubleClick=()=>{
+    setDoubleClick(true)
+    if (!liked) {
+      likeOrDislikePost();
+    }
+    setTimeout(() => {
+      setDoubleClick(false)
+    }, 1000);
+  }
   useEffect(() => {
     if (data) {
       setuserDetails(data.getPostDetails.userDetails);
@@ -204,55 +214,57 @@ export default function ViewPost(contentDetails: contentDetailsType) {
     }
     if (postDetails && contentDetails) {
       setLiked(postDetails.likes?.includes(contentDetails.likedBy) ?? false);
-      console.log("is liked ",liked)
-      console.log("all likes",postDetails.likes)
       setLikesCount(postDetails?.likes.length);
     }
     if (error) {
       console.log(error);
     }
-  }, [loading, error, data, postDetails, liked,contentDetails]);
+  }, [loading, error, data, postDetails, liked, contentDetails]);
   useEffect(() => {
-   console.log(contentDetails.likedBy)
-  }, []);
-  useEffect(()=>{
     refetch();
-  },[authenticUser])
+  }, [authenticUser]);
   return (
     <div className={Styles.overlay}>
+      <div className={Styles.topNav}>
+      <i className="fa-solid fa-angle-left" onClick={() => setViewPost(false)}></i>
+      <p>Post</p>
+      <span></span>
+      </div>
       <ClickAwayListener onClickAway={() => setViewPost(false)}>
         <div className={Styles.modal}>
           <div className={Styles.imagesHolder} ref={imageHolderRef}>
             {postDetails ? (
-              postDetails?.content
-                ?.map((content: string, index: number) => {
-                  let filterName = "";
-                  if (postDetails?.appliedFilters[index]) {
-                    filterName = postDetails?.appliedFilters[index]?.filter
-                      ?.split(" ")[1]
-                      ?.substring(6)
-                      ?.split("_")[0];
-                  }
-                  return (
-                    <div className={Styles.imageContainer} key={index}>
-                      <img
-                        src={content}
-                        className={Styles.content}
-                        alt={`content${index}`}
-                        style={{ width: size.width, height: size.height }}
-                      />
-                      <div
-                        className={`${Styles.imageMask} ${filters[filterName]}`}
-                        ref={(el) => (imageMaskRefs.current[index] = el)}
-                        style={{
-                          width: size.width,
-                          height: size.height,
-                          top: size.top,
-                        }}
-                      ></div>
-                    </div>
-                  );
-                })
+              postDetails?.content?.map((content: string, index: number) => {
+                let filterName = "";
+                if (postDetails?.appliedFilters[index]) {
+                  filterName = postDetails?.appliedFilters[index]?.filter
+                    ?.split(" ")[1]
+                    ?.substring(6)
+                    ?.split("_")[0];
+                }
+                return (
+                  <div className={Styles.imageContainer} key={index} onDoubleClick={handleDoubleClick}>
+                    <img
+                      src={content}
+                      className={Styles.content}
+                      alt={`content${index}`}
+                      style={{ width: size.width, height: size.height }}
+                    />
+                    <div
+                      className={`${Styles.imageMask} ${filters[filterName]}`}
+                      ref={(el) => (imageMaskRefs.current[index] = el)}
+                      style={{
+                        width: size.width,
+                        height: size.height,
+                        top: size.top,
+                      }}
+                    ></div>
+                  {doubleClick&&  <i
+                      className={`fa-solid fa-heart ${Styles.doubleClick}`}
+                    ></i>}
+                  </div>
+                );
+              })
             ) : (
               <Skeleton width={1000} height={1000} />
             )}
