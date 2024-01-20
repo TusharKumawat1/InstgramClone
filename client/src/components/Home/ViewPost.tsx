@@ -46,7 +46,11 @@ export default function ViewPost(contentDetails: contentDetailsType) {
           content
           caption
           location
-          likes
+          likes {
+            _id
+            pfp
+            username
+          }
           comments {
             commentedBy {
               profileId
@@ -127,7 +131,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
   };
   const likeOrDislikePost = async () => {
     setLiked((p) => !p);
-    setLikesCount((prevCount) => (liked ? prevCount++ : prevCount--));
+    setLikesCount((p) => (liked ? p-1 : p+1));
     const token = localStorage.getItem("token")!;
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_PORT}/posts/likeOrDislikePost`,
@@ -143,13 +147,13 @@ export default function ViewPost(contentDetails: contentDetailsType) {
         }),
       }
     );
-    if (res.ok) {
-      setLiked((p) => p);
-    } else {
-      setLiked((p) => !p);
-    }
-    setLikesCount((prevCount) => (liked ? prevCount++ : prevCount--));
-    refetch();
+    // if (res.ok) {
+    //   setLiked((p) => p);
+    // } else {
+    //   setLiked((p) => !p);
+    // }
+    // setLikesCount((prevCount) => (liked ? prevCount++ : prevCount--));
+    // refetch();
   };
   const focousCommentSaction = () => {
     if (inputRef.current) {
@@ -183,15 +187,15 @@ export default function ViewPost(contentDetails: contentDetailsType) {
     // return newdate[1]+newdate[2].slice(0,1);
     return relativeTime;
   };
-  const handleDoubleClick=()=>{
-    setDoubleClick(true)
+  const handleDoubleClick = () => {
+    setDoubleClick(true);
     if (!liked) {
       likeOrDislikePost();
     }
     setTimeout(() => {
-      setDoubleClick(false)
+      setDoubleClick(false);
     }, 1000);
-  }
+  };
   useEffect(() => {
     if (data) {
       setuserDetails(data.getPostDetails.userDetails);
@@ -212,23 +216,34 @@ export default function ViewPost(contentDetails: contentDetailsType) {
         setSize((p) => newSize);
       }
     }
-    if (postDetails && contentDetails) {
-      setLiked(postDetails.likes?.includes(contentDetails.likedBy) ?? false);
-      setLikesCount(postDetails?.likes.length);
-    }
     if (error) {
       console.log(error);
     }
-  }, [loading, error, data, postDetails, liked, contentDetails]);
+  }, [loading, error, data, postDetails, liked, ]);
   useEffect(() => {
     refetch();
   }, [authenticUser]);
+  useEffect(()=>{
+    if (postDetails && contentDetails) {
+      setLiked(
+        postDetails.likes?.find(
+          (like: any) => like._id === contentDetails.likedBy
+        )
+          ? true
+          : false
+      );
+      setLikesCount(postDetails?.likes.length);
+    }
+  },[contentDetails,postDetails])
   return (
     <div className={Styles.overlay}>
       <div className={Styles.topNav}>
-      <i className="fa-solid fa-angle-left" onClick={() => setViewPost(false)}></i>
-      <p>Post</p>
-      <span></span>
+        <i
+          className="fa-solid fa-angle-left"
+          onClick={() => setViewPost(false)}
+        ></i>
+        <p>Post</p>
+        <span></span>
       </div>
       <ClickAwayListener onClickAway={() => setViewPost(false)}>
         <div className={Styles.modal}>
@@ -243,7 +258,11 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                     ?.split("_")[0];
                 }
                 return (
-                  <div className={Styles.imageContainer} key={index} onDoubleClick={handleDoubleClick}>
+                  <div
+                    className={Styles.imageContainer}
+                    key={index}
+                    onDoubleClick={handleDoubleClick}
+                  >
                     <img
                       src={content}
                       className={Styles.content}
@@ -259,9 +278,11 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                         top: size.top,
                       }}
                     ></div>
-                  {doubleClick&&  <i
-                      className={`fa-solid fa-heart ${Styles.doubleClick}`}
-                    ></i>}
+                    {doubleClick && (
+                      <i
+                        className={`fa-solid fa-heart ${Styles.doubleClick}`}
+                      ></i>
+                    )}
                   </div>
                 );
               })

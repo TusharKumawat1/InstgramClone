@@ -33,6 +33,11 @@ const server = new ApolloServer({
           content:String
           date:String
         }
+        type likes{
+          _id:String
+          pfp:String
+          username:String
+        }
         type post{
           content:[String]
           caption:String
@@ -42,7 +47,7 @@ const server = new ApolloServer({
           advancedSetting:advancedSetting
           appliedFilters:[appliedFilters]
           date:String
-          likes:[String]
+          likes:[likes]
           comments:[ comment]
         }
         type profileInfos {

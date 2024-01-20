@@ -39,7 +39,9 @@ export default function Search() {
             }
             postId
             aspectRatio
-            likes
+            likes{
+              _id
+            }
             comments {
               commentedBy {
                 profileId

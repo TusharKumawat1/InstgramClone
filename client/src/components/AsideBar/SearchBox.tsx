@@ -17,7 +17,7 @@ export default function SearchBox() {
   const [loading, setloading] = useState(true);
   const [searchResult, setSearchResult] = useState<resultType[]>();
   const [query, setQuery] = useState("");
-  const { authenticUser, showSearchBox, setshowSearchBox } =
+  const {  setshowSearchBox } =
     useContext(MyContext);
   const token = localStorage.getItem("token")!;
   const SearchUser = async (e: React.ChangeEvent<HTMLInputElement>) => {

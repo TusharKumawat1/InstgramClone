@@ -48,18 +48,25 @@ export const likeOrDislikePost = async (req, res) => {
         .status(404)
         .json({ success: false, message: "post not found" });
     }
-    if (!userProfile.posts[foundPostIndex]?.likes?.includes(req.user._id)) {
-      userProfile.posts[foundPostIndex]?.likes?.push(req.user._id);
+    const like = userProfile.posts[foundPostIndex]?.likes?.findIndex((like) =>
+        like._id===(req.user._id)
+    );
+ 
+    if (like=== -1) {
+      const likedByUser = await ProfileInfo.findOne({ userId: req.user._id });
+      const payLoad = {
+        _id: req.user._id,
+        pfp: likedByUser.pfp,
+        username: user.username,
+      };
+      userProfile.posts[foundPostIndex]?.likes?.push(payLoad);
       userProfile.markModified("posts");
       await userProfile.save();
       return res
         .status(200)
         .json({ success: true, message: "liked successfully" });
     } else {
-      const userIndex = userProfile.posts[foundPostIndex].likes.indexOf(
-        req.user._id
-      );
-      userProfile.posts[foundPostIndex]?.likes?.splice(userIndex, 1); //remove this user
+      userProfile.posts[foundPostIndex]?.likes?.splice(like, 1); //remove this user
       userProfile.markModified("posts");
       await userProfile.save();
       return res
@@ -75,8 +82,8 @@ export const addComment = async (req, res) => {
   try {
     const { profileId, postId, commentContent } = req.body;
     const user = await ProfileInfo.findOne({ userId: req.user._id }).populate({
-        path:"userId",
-        select:"-password"
+      path: "userId",
+      select: "-password",
     });
     if (!user) {
       return res
@@ -99,9 +106,9 @@ export const addComment = async (req, res) => {
     }
     const data = {
       commentedBy: {
-        profileId:user._id,
-        pfp:user.pfp,
-        username:user.userId.username
+        profileId: user._id,
+        pfp: user.pfp,
+        username: user.userId.username,
       },
       content: commentContent,
       date: new Date(),
@@ -119,7 +126,7 @@ export const addComment = async (req, res) => {
       .json({ success: false, message: "Internal server Error" });
   }
 };
-export const getPostDetails=async (_, req) => {
+export const getPostDetails = async (_, req) => {
   try {
     const { userProfileId, postId } = req;
     if (!userProfileId) {
@@ -134,12 +141,18 @@ export const getPostDetails=async (_, req) => {
     if (!validProfile) {
       throw new Error("User not found");
     }
-    const postDetails=validProfile.posts.filter(post=>post.postId.equals(postId))
+    const postDetails = validProfile.posts.filter((post) =>
+      post.postId.equals(postId)
+    );
     if (!postDetails) {
-      throw new Error("Post not found")
+      throw new Error("Post not found");
     }
-    return { userDetails:validProfile ,postDetails : postDetails[0], errors: null };
+    return {
+      userDetails: validProfile,
+      postDetails: postDetails[0],
+      errors: null,
+    };
   } catch (error) {
     return { errors: [{ message: error.message }] };
   }
-}
+};

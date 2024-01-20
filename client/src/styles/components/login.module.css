@@ -34,9 +34,9 @@
     border: 1px solid #c0c0c0; 
     background-color: #fbfbfb;
     width: 100%;
-    padding: 10px;
     font-size: 13px;
     border-radius: 4px;
+    padding: 15px 80px 10px 10px;
 }
 .formInput:focus{
     outline: 1px solid  #d6d6d6;
@@ -51,7 +51,7 @@
     
 }
 .formInput:placeholder-shown ~ .formInputLable{
-    top: 10px;
+    top: 14px;
     font-size: 11px;
 }
 .loginBtn{
