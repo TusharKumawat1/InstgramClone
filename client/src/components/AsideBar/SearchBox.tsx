@@ -44,7 +44,6 @@ export default function SearchBox() {
         throw new Error("Network response was not ok");
       }
       const parsedData = await res.json();
-      console.log(parsedData);
       setSearchResult(parsedData.result);
     } catch (error) {
       console.error("Error fetching data:", error);

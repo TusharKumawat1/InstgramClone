@@ -73,7 +73,6 @@ export default function Search() {
   });
   useEffect(() => {
     if (!loading && !error && data) {
-      console.log(data);
       setProfileData(data.searchProfile.data);
       setauthenticUser(data.getPfInfo.data)
     }

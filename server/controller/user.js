@@ -1,7 +1,6 @@
 import ProfileInfo from "../models/ProfileInfo.js";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
-import { authMiddleware } from "../middleware/authMiddleware.js";
 export const searchUser = async (req, res) => {
   try {
     const keyWord = req.query.search
@@ -83,8 +82,57 @@ export const searchProfile = async (_, args) => {
     if (!profileData) {
       return { errors: [{ message: "User Not found" }] };
     }
+    profileData.posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     return { data: profileData, errors: null };
   } catch (error) {
     console.log(error);
   }
 };
+export const follow=async(req,res)=>{
+try {
+  const {follow}=req.body
+  const user=await User.findById({id:req.user._id})
+  const userProfile=await ProfileInfo.findOne({userId:req.user._id})
+  if (!user) return res.status(400).json({success:false,message:"Not Authorized"})
+  const followee=await ProfileInfo.findById({_id:follow})
+  if (!followee) return res.status(404).json({success:false,message:" User Not found"})
+  followee.followers.push(req.user.id)
+  userProfile.following.push(user._id)
+  await followee.save();
+  await userProfile.save();
+  return res.status(200).json({success:True,message:"Follow Successful"})
+} catch (error) {
+  return res.status(500).json({success:false,message:"Internal Server Error"})
+}
+}
+export const Unfollow=async(req,res)=>{
+try {
+  const {unfollow}=req.body
+  const user=await User.findById({id:req.user._id})
+  const userProfile=await ProfileInfo.findOne({userId:req.user._id})
+  if (!user) return res.status(400).json({success:false,message:"Not Authorized"})
+  const unfollowing=await ProfileInfo.findById({_id:unfollow})
+  if (!unfollowing) return res.status(404).json({success:false,message:" User Not found"})
+  unfollowing.followers.splice(req.user.id,1)
+  userProfile.following.splice(user._id,1)
+  await unfollowing.save();
+  await userProfile.save();
+  return res.status(200).json({success:True,message:"Unfollow Successful"})
+} catch (error) {
+  return res.status(500).json({success:false,message:"Internal Server Error"})
+}
+}
+export const FriendRequest=async(req,res)=>{
+  try {
+    const {follow}=req.body
+    const user=await User.findById({id:req.user._id})
+    if (!user) return res.status(400).json({success:false,message:"Not Authorized"})
+    const followee=await ProfileInfo.findById({_id:follow})
+    if (!followee) return res.status(404).json({success:false,message:" User Not found"})
+    followee.FriendRequest.push(req.user._id)
+    await followee.save();
+    return res.status(200).json({success:True,message:"Request sent"})
+  } catch (error) {
+    return res.status(500).json({success:false,message:"Internal Server Error"})
+  }
+}

@@ -314,6 +314,13 @@
 .topNav{
   display: none;
 }
+.privateAccount{
+  text-align: center;
+  height: 20vh;
+  min-height: 20vh;
+  margin-block: 20vh;
+  border: 1px solid rgb(225, 225, 225);
+}
 @media screen and (max-width: 1700px) {
   .innerContainer{
     width: 70%;

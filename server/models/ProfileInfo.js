@@ -24,13 +24,13 @@ const profileInfoSchema = new Schema(
     followers: [
       {
         type: Schema.Types.ObjectId,
-        ref: "ProfileInfo",
+        ref: "User",
       },
     ],
     following: [
       {
         type: Schema.Types.ObjectId,
-        ref: "ProfileInfo",
+        ref: "User",
       },
     ],
     posts:[Schema.Types.Mixed],
@@ -38,6 +38,12 @@ const profileInfoSchema = new Schema(
       type: String,
       default: "public",
     },
+    FriendRequests:[
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      }
+    ]
   },
   { timestamps: true, minimize: false }
 );

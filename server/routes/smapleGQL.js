@@ -61,6 +61,7 @@ const server = new ApolloServer({
             accountType:String
             gender:String
             posts:[post]
+            FriendRequest:[profileInfos]
         }
         type ProfileInfoResponse {
             data: profileInfos

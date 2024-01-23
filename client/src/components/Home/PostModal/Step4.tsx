@@ -61,7 +61,6 @@ export default function Step4() {
     });
     // Wait for all promises to resolve
     await Promise.allSettled(promises);
-    console.log(imagesUrl)
     let postDetails = {
       content: imagesUrl,
       caption: caption,

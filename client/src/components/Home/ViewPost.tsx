@@ -177,7 +177,6 @@ export default function ViewPost(contentDetails: contentDetailsType) {
         }),
       }
     );
-    console.log(await res.json());
     refetch();
   };
   const commentTimestamp = (timeString: string) => {

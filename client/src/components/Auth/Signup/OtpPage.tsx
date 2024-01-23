@@ -28,6 +28,7 @@ export default function OtpPage() {
         navigate("/")
    
         localStorage.removeItem("userDetails")
+        setSignupSteps(0)
       }else{
         console.log(result)
       }

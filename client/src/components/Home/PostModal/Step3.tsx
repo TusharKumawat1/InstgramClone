@@ -99,7 +99,6 @@ export default function Step3() {
     const newArray = [...appliedFilters];
     newArray[index]["opacity"] = newOpacity / 100;
     setAppliedFilters(newArray);
-    console.log(newOpacity / 100);
     setMaskOpacityRange(newOpacity);
     if (imageMaskRefs.current[index]) {
       imageMaskRefs.current[index]!.style.setProperty(
