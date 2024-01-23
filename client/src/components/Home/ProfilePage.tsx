@@ -34,6 +34,7 @@ type ProfilePageType = {
   following: Following[];
   posts: Post[];
   LoggedInUser: boolean;
+  FriendRequests: string[];
 };
 
 interface ProfilePageProps {
@@ -52,8 +53,9 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
   });
   const NotAllowed =
     !LoggedInUserProfile &&
-   ( profilePage?.accountType === "private" ||
-    profilePage?.followers?.includes(authenticUser.userId._id));
+    (profilePage?.accountType === "private" ||
+      profilePage?.followers?.includes(authenticUser.userId._id));
+  const [Status, setStatus] = useState("Follow");
   const showContnet = (_id: string, postId: string) => {
     const newObj = { ...contentDetails };
     newObj._id = _id; //user who upload post
@@ -62,7 +64,31 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
     setContentDetails((p) => newObj);
     setViewPost(true);
   };
-
+  const token=localStorage.getItem("token")!
+  const handleFollow = async () => {
+    if (profilePage?.FriendRequests?.includes(profilePage?.userId._id)) {
+      setStatus(p=>"requested")
+      const res=await fetch(`${process.env.REACT_APP_SERVER_PORT}/users/friendRequest`,{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          token:token
+        },
+        body:JSON.stringify({follow:profilePage.userId._id})
+      })
+      console.log(await res.json())
+    }else{
+      const res=await fetch(`${process.env.REACT_APP_SERVER_PORT}/users/follow`,{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          token:token
+        },
+        body:JSON.stringify({follow:profilePage.userId._id})
+      })
+      console.log(await res.json())
+    }
+  };
   return (
     <div className={Styles.profileSection}>
       <div className={Styles.innerContainer}>
@@ -94,12 +120,22 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
                   </span>
                 ) : (
                   <span>
-                    <Link
-                      to={`#`}
-                      className={`${Styles.primaryBtn} ${Styles.followBtn}`}
-                    >
-                      Follow
-                    </Link>
+                    {NotAllowed ? (
+                      <Link
+                        to={`#`}
+                        className={`${Styles.primaryBtn} ${Styles.followBtn}`}
+                        onClick={handleFollow}
+                      >
+                        {Status}
+                      </Link>
+                    ) : (
+                      <Link
+                        to={`#`}
+                        className={`${Styles.primaryBtn} ${Styles.followBtn}`}
+                      >
+                        <p>Unfollow</p>
+                      </Link>
+                    )}
                     <Link to="#" className={Styles.primaryBtn}>
                       Message
                     </Link>

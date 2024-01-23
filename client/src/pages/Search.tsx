@@ -6,7 +6,7 @@ import { MyContext } from "../context/Mycontext";
 
 export default function Search() {
   const profile = useParams();
-  const {setauthenticUser}=useContext(MyContext)
+  const { setauthenticUser } = useContext(MyContext);
   const [profileData, setProfileData] = useState();
   const getinfo = gql`
     query SearchProfile(
@@ -20,6 +20,7 @@ export default function Search() {
           userId {
             username
             fullname
+            _id
           }
           bio
           links
@@ -28,6 +29,9 @@ export default function Search() {
             _id
           }
           following {
+            _id
+          }
+          FriendRequests {
             _id
           }
           accountType
@@ -39,7 +43,7 @@ export default function Search() {
             }
             postId
             aspectRatio
-            likes{
+            likes {
               _id
             }
             comments {
@@ -74,7 +78,7 @@ export default function Search() {
   useEffect(() => {
     if (!loading && !error && data) {
       setProfileData(data.searchProfile.data);
-      setauthenticUser(data.getPfInfo.data)
+      setauthenticUser(data.getPfInfo.data);
     }
   }, [loading, error, data]);
   return (

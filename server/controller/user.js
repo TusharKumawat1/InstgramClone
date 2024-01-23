@@ -91,6 +91,8 @@ export const searchProfile = async (_, args) => {
 export const follow=async(req,res)=>{
 try {
   const {follow}=req.body
+  console.log(follow)
+  if (!follow) return res.status(400).json({success:false,message:"send the id of user"})
   const user=await User.findById({id:req.user._id})
   const userProfile=await ProfileInfo.findOne({userId:req.user._id})
   if (!user) return res.status(400).json({success:false,message:"Not Authorized"})
@@ -102,6 +104,7 @@ try {
   await userProfile.save();
   return res.status(200).json({success:True,message:"Follow Successful"})
 } catch (error) {
+  console.log(error)
   return res.status(500).json({success:false,message:"Internal Server Error"})
 }
 }
@@ -125,14 +128,16 @@ try {
 export const FriendRequest=async(req,res)=>{
   try {
     const {follow}=req.body
+    console.log(follow)
     const user=await User.findById({id:req.user._id})
     if (!user) return res.status(400).json({success:false,message:"Not Authorized"})
     const followee=await ProfileInfo.findById({_id:follow})
     if (!followee) return res.status(404).json({success:false,message:" User Not found"})
-    followee.FriendRequest.push(req.user._id)
+    followee.FriendRequests.push(req.user._id)
     await followee.save();
     return res.status(200).json({success:True,message:"Request sent"})
   } catch (error) {
+    console.log(error)
     return res.status(500).json({success:false,message:"Internal Server Error"})
   }
 }
