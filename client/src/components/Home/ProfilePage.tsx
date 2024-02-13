@@ -64,31 +64,74 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
     setContentDetails((p) => newObj);
     setViewPost(true);
   };
-  const token=localStorage.getItem("token")!
+  const token = localStorage.getItem("token")!;
+  const sendFriendRequest=async()=>{
+    const res = await fetch(
+      `${process.env.REACT_APP_SERVER_PORT}/users/friendRequest`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+        body: JSON.stringify({ follow: profilePage._id }),
+      }
+    );
+    console.log(await res.json());
+  }
+  const follow=async()=>{
+    setStatus((p) => "Unfollow")
+    const res = await fetch(
+      `${process.env.REACT_APP_SERVER_PORT}/users/follow`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+        body: JSON.stringify({ follow: profilePage._id }),
+      }
+    );
+    console.log(await res.json());
+  }
+  const unfollow=async()=>{
+    setStatus((p) => "Unfollow")
+    const res = await fetch(
+      `${process.env.REACT_APP_SERVER_PORT}/users/follow`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+        body: JSON.stringify({ unfollow: profilePage._id }),
+      }
+    );
+    console.log(await res.json());
+  }
+  
   const handleFollow = async () => {
-    if (profilePage?.FriendRequests?.includes(profilePage?.userId._id)) {
-      setStatus(p=>"requested")
-      const res=await fetch(`${process.env.REACT_APP_SERVER_PORT}/users/friendRequest`,{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json",
-          token:token
-        },
-        body:JSON.stringify({follow:profilePage.userId._id})
-      })
-      console.log(await res.json())
+    if (profilePage?.accountType==="private" && !profilePage?.followers?.includes(authenticUser.userId._id) ) {
+      setStatus((p) => "requested");
+      await sendFriendRequest();
+    } else if (profilePage?.accountType==="public" && !profilePage?.followers?.includes(authenticUser.userId._id) ) {
+      setStatus("unfollow");
+      await follow();
     }else{
-      const res=await fetch(`${process.env.REACT_APP_SERVER_PORT}/users/follow`,{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json",
-          token:token
-        },
-        body:JSON.stringify({follow:profilePage.userId._id})
-      })
-      console.log(await res.json())
+      setStatus("follow")
+      await unfollow();
     }
   };
+  useEffect(()=>{
+    let isFollowed=profilePage?.followers.filter((f)=>f._id===authenticUser.userId._id)
+    if ( isFollowed) {
+      setStatus("Unfollow")
+    }else if (profilePage?.FriendRequests?.includes(authenticUser.userId._id)) {
+      setStatus("Requested")
+    }else{
+      setStatus("Follow")
+    }
+  },[profilePage])
   return (
     <div className={Styles.profileSection}>
       <div className={Styles.innerContainer}>
@@ -120,22 +163,13 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
                   </span>
                 ) : (
                   <span>
-                    {NotAllowed ? (
-                      <Link
-                        to={`#`}
-                        className={`${Styles.primaryBtn} ${Styles.followBtn}`}
-                        onClick={handleFollow}
-                      >
-                        {Status}
-                      </Link>
-                    ) : (
-                      <Link
-                        to={`#`}
-                        className={`${Styles.primaryBtn} ${Styles.followBtn}`}
-                      >
-                        <p>Unfollow</p>
-                      </Link>
-                    )}
+                    <Link
+                      to={`#`}
+                      className={`${Styles.primaryBtn} ${Styles.followBtn}`}
+                      onClick={handleFollow}
+                    >
+                      {Status}
+                    </Link>
                     <Link to="#" className={Styles.primaryBtn}>
                       Message
                     </Link>

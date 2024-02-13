@@ -170,6 +170,7 @@
   flex-direction: column;
   padding: 15px;
   gap: 10px;
+  min-height: 110px;
 }
 .interactions {
   display: flex;

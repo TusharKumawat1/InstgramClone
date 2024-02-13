@@ -171,10 +171,10 @@ export default function EditProfile() {
                   value={profileAttributes.gender}
                   onChange={handleProfileAttributes}
                 >
+                  <option value="notSpecified">Not Prefer to Say</option>
                   <option value="custom">Custom</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
-                  <option value="notSpecified">Not Prefer to Say</option>
                 </select>
                 <p className={Styles.text}>
                   This won’t be part of your public profile.
@@ -186,7 +186,7 @@ export default function EditProfile() {
               <span className={Styles.bioContent}>
                 <select
                   name="accountType"
-                  value={profileAttributes.gender}
+                  value={profileAttributes.accountType}
                   onChange={handleProfileAttributes}
                 >
                   <option value="public">Public</option>

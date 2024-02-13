@@ -153,7 +153,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
     //   setLiked((p) => !p);
     // }
     // setLikesCount((prevCount) => (liked ? prevCount++ : prevCount--));
-    // refetch();
+    refetch();
   };
   const focousCommentSaction = () => {
     if (inputRef.current) {
@@ -416,13 +416,13 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                         {Array.from({ length: 3 }).map((_, index) => (
                           <img
                             key={index}
-                            src="https://images.pexels.com/photos/19450636/pexels-photo-19450636/free-photo-of-clock-at-a-station.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            src={postDetails?.likes[index]?.pfp}
                             className={Styles.likedBypfp}
                             alt={`Image ${index}`}
                           />
                         ))}
                       </div>
-                      <p>Liked by tusharKumawat._ and 12 others</p>
+                      <p>{`Liked by ${postDetails.likes[postDetails.likes.length-1].username} and ${postDetails.likes.length-1} others`}</p>
                     </div>
                   ) : (
                     <p>{likesCount} like</p>
