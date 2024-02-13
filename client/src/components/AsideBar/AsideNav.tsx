@@ -90,14 +90,14 @@ export default function AsideNav() {
           <span>Create</span>
         </Link>
         <Link
-          to={`/profile/${authenticUser && authenticUser.userId.username}`}
+          to={`/profile/${authenticUser && authenticUser?.userId?.username}`}
           className={`${Styles.options} ${Styles.profile}`}
         >
           {!authenticUser ? (
             <Skeleton circle={true} height={35} width={35} />
           ) : (
             <img
-              src={authenticUser && authenticUser.pfp}
+              src={authenticUser && authenticUser?.pfp}
               alt="img"
               width={40}
               height={40}

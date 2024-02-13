@@ -123,7 +123,7 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
     }
   };
   useEffect(()=>{
-    let isFollowed=profilePage?.followers.filter((f)=>f._id===authenticUser.userId._id)
+    let isFollowed=profilePage?.followers?.filter((f)=>f._id===authenticUser.userId._id)
     if ( isFollowed) {
       setStatus("Unfollow")
     }else if (profilePage?.FriendRequests?.includes(authenticUser.userId._id)) {

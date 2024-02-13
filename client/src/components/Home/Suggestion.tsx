@@ -7,10 +7,10 @@ export default function Suggestion() {
   return (
     <div className={Styles.container}>
       <div  className={Styles.profileName}>
-              <img src={authenticUser && authenticUser.pfp} className={Styles.pfp}></img>
+              <img src={authenticUser && authenticUser?.pfp} className={Styles.pfp}></img>
               <div className={Styles.info}>
-                <h6 className={Styles.username}>{authenticUser && authenticUser.userId.username}</h6>
-                <p className={Styles.followedBy}>{authenticUser && authenticUser.userId.fullname}</p>
+                <h6 className={Styles.username}>{authenticUser && authenticUser?.userId?.username}</h6>
+                <p className={Styles.followedBy}>{authenticUser && authenticUser?.userId?.fullname}</p>
               </div>
               <button className={Styles.switchBtn}>Switch</button>
             </div>
