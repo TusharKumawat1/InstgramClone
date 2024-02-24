@@ -84,13 +84,17 @@ const server = new ApolloServer({
             getPfInfo(token: String): ProfileInfoResponse
             getPostDetails(userProfileId: String,postId:String):postDetails
             searchProfile(profileId:String,token:String):ProfileInfoResponse
+           dummyQuery:String
         }
     `,
   resolvers: {
     Query: {
       getPfInfo: getPfInfo,
       getPostDetails: getPostDetails,
-      searchProfile:searchProfile
+      searchProfile:searchProfile,
+      dummyQuery:(_,__,context)=>{
+          return context.token
+      }
     },
   },
 });

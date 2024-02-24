@@ -15,7 +15,11 @@ async function startServer() {
   app.use(cors());
   app.use(express.json());
   await connectToDB();
-  app.use("/graphql", expressMiddleware(server));
+  app.use("/graphql", expressMiddleware(server,{
+    context:({req})=>{
+      return req.headers
+    }
+  }));
   app.use("/auth", userRouter);
   app.use("/posts",authMiddleware,posts );
   app.use("/profile",authMiddleware,editProfile );
