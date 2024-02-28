@@ -42,7 +42,7 @@ interface ProfilePageProps {
 }
 
 export default function ProfilePage({ profilePage }: ProfilePageProps) {
-  const { setIsModalOpen, viewPost, setViewPost, authenticUser } =
+  const { setIsModalOpen, viewPost, setViewPost, authenticUser ,settoggleRefetch} =
     useContext(MyContext);
   const LoggedInUserProfile =
     authenticUser?._id === profilePage?._id ? true : false;
@@ -51,10 +51,10 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
     postId: "",
     likedBy: "",
   });
-  const NotAllowed =
-    !LoggedInUserProfile &&
-    (profilePage?.accountType === "private" ||
-      profilePage?.followers?.includes(authenticUser.userId._id));
+  let NotAllowed =
+    (authenticUser?._id !== profilePage?._id &&
+      profilePage?.accountType === "private") ||
+    profilePage?.followers?.includes(authenticUser.userId._id);
   const [Status, setStatus] = useState("Follow");
   const showContnet = (_id: string, postId: string) => {
     const newObj = { ...contentDetails };
@@ -65,7 +65,7 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
     setViewPost(true);
   };
   const token = localStorage.getItem("token")!;
-  const sendFriendRequest=async()=>{
+  const sendFriendRequest = async () => {
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_PORT}/users/friendRequest`,
       {
@@ -78,9 +78,9 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
       }
     );
     console.log(await res.json());
-  }
-  const follow=async()=>{
-    setStatus((p) => "Unfollow")
+    settoggleRefetch((p:boolean)=>!p)
+  };
+  const follow = async () => {
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_PORT}/users/follow`,
       {
@@ -93,11 +93,11 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
       }
     );
     console.log(await res.json());
-  }
-  const unfollow=async()=>{
-    setStatus((p) => "Unfollow")
+    settoggleRefetch((p:boolean)=>!p)
+  };
+  const unfollow = async () => {
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_PORT}/users/follow`,
+      `${process.env.REACT_APP_SERVER_PORT}/users/unfollow`,
       {
         method: "POST",
         headers: {
@@ -108,36 +108,46 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
       }
     );
     console.log(await res.json());
-  }
-  
+    settoggleRefetch((p:boolean)=>!p)
+  };
+
   const handleFollow = async () => {
-    if (profilePage?.accountType==="private" && !profilePage?.followers?.includes(authenticUser.userId._id) ) {
+    let isFollowed = profilePage?.followers?.filter(
+      (f) => f._id === authenticUser.userId._id
+    );
+    if (profilePage?.accountType === "private" && !isFollowed[0]?._id) {
       setStatus((p) => "requested");
       await sendFriendRequest();
-    } else if (profilePage?.accountType==="public" && !profilePage?.followers?.includes(authenticUser.userId._id) ) {
+    } else if (profilePage?.accountType === "public" && !isFollowed[0]?._id) {
       setStatus("unfollow");
       await follow();
-    }else{
-      setStatus("follow")
+    } else if (isFollowed[0]?._id) {
+      setStatus("follow");
       await unfollow();
     }
   };
-  useEffect(()=>{
-    let isFollowed=profilePage?.followers?.filter((f)=>f._id===authenticUser.userId._id)
-    if ( isFollowed) {
-      setStatus("Unfollow")
-    }else if (profilePage?.FriendRequests?.includes(authenticUser.userId._id)) {
-      setStatus("Requested")
-    }else{
-      setStatus("Follow")
+  useEffect(() => {
+    let isFollowed = profilePage?.followers?.filter(
+      (f) => f._id === authenticUser?.userId?._id
+    );
+    let isRequested = profilePage?.FriendRequests?.find(
+      (i: any) => i?._id === authenticUser.userId._id
+    );
+    if (isFollowed?.length > 0) {
+      setStatus("Unfollow");
+    } else if (isRequested) {
+      setStatus("Requested");
+    } else if (isFollowed?.length < 1) {
+      setStatus("Follow");
     }
-  },[profilePage])
+  }, [profilePage, authenticUser]);
+
   return (
     <div className={Styles.profileSection}>
       <div className={Styles.innerContainer}>
         <div className={Styles.topNav}>
           <i className="fa-solid fa-gear"></i>
-          <p> {profilePage && profilePage.userId.username}</p>
+          <p> {profilePage && profilePage?.userId?.username}</p>
           <i className="fa-solid fa-user-plus"></i>
         </div>
         <div className={Styles.userDetails}>
@@ -150,7 +160,7 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
             <div className={Styles.details}>
               <div className={Styles.editProfile}>
                 <h3 className={Styles.username}>
-                  {profilePage && profilePage.userId.username}
+                  {profilePage && profilePage?.userId?.username}
                 </h3>
                 {LoggedInUserProfile ? (
                   <span>

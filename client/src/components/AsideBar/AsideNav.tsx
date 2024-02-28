@@ -9,11 +9,12 @@ import { Link } from "react-router-dom";
 import ClickAwayListener from "react-click-away-listener";
 import Skeleton from "react-loading-skeleton";
 import SearchBox from "./SearchBox";
+import Notification from "./Notification";
 export default function AsideNav() {
   const { isMoreOptionsAvailable, setIsMoreOptionsAvailable, setIsModalOpen } =
     useContext<isMoreType>(MyContext);
   const { authenticUser ,showSearchBox, setshowSearchBox} = useContext(MyContext);
-
+  const [showNotification, setShowNotification] = useState(false)
   const [logo, setlogo] = useState(
     <img
       src={instagramFont}
@@ -41,6 +42,22 @@ export default function AsideNav() {
       />
     );
     setshowSearchBox(false);
+  };
+  const Shownotify = () => {
+    setlogo(<i className={`${Styles.logo1} fa-brands fa-instagram`}></i>);
+    setShowNotification(true);
+  };
+  const hideNotify = () => {
+    setlogo(
+      <img
+        src={instagramFont}
+        alt="img"
+        width={120}
+        height={50}
+        className={Styles.logo}
+      />
+    );
+    setShowNotification(false);
   };
   return (
     <div className={Styles.aside}>
@@ -77,7 +94,7 @@ export default function AsideNav() {
           <i className="fa-brands fa-facebook-messenger"></i>
           <span>Messages</span>
         </Link>
-        <Link to="#" className={`${Styles.options} ${Styles.notification}`}>
+        <Link to="#" className={`${Styles.options} ${Styles.notification}`} onClick={Shownotify}>
           <i className="fa-regular fa-heart"></i>
           <span>Notification</span>
         </Link>
@@ -126,6 +143,13 @@ export default function AsideNav() {
         <ClickAwayListener onClickAway={hideSearchBox}>
           <div className={Styles.searchbox}>
             <SearchBox />
+          </div>
+        </ClickAwayListener>
+      )}
+      {showNotification && (
+        <ClickAwayListener onClickAway={hideNotify}>
+          <div className={Styles.searchbox}>
+            <Notification/>
           </div>
         </ClickAwayListener>
       )}

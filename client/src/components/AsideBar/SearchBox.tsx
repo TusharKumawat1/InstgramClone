@@ -93,23 +93,23 @@ export default function SearchBox() {
               : searchResult?.map((result, index) => {
                   return (
                     <Link
-                      to={`/search/${result._id}`}
+                      to={`/search/${result?._id}`}
                       className={Styles.users}
                       key={index}
                       onClick={() => setshowSearchBox(false)}
                     >
                       <img
-                        src={result.pfp}
-                        alt={result._id}
+                        src={result?.pfp}
+                        alt={result?._id}
                         className={Styles.pfp}
                       />
                       <div>
                         {" "}
                         <h4 className={Styles.username}>
-                          {result.userId.username}
+                          {result?.userId?.username}
                         </h4>
                         <p className={Styles.fullname}>
-                          {result.userId.fullname}
+                          {result?.userId?.fullname}
                         </p>
                       </div>
                     </Link>

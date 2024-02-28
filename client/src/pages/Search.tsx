@@ -6,7 +6,7 @@ import { MyContext } from "../context/Mycontext";
 
 export default function Search() {
   const profile = useParams();
-  const { setauthenticUser } = useContext(MyContext);
+  const { setauthenticUser,viewPost ,toggleRefetch} = useContext(MyContext);
   const [profileData, setProfileData] = useState();
   const getinfo = gql`
     query SearchProfile(
@@ -68,7 +68,7 @@ export default function Search() {
     }
   `;
   const token = localStorage.getItem("token")!;
-  const { loading, error, data } = useQuery(getinfo, {
+  const { loading, error, data ,refetch} = useQuery(getinfo, {
     variables: {
       profileId: profile._id,
       token: token,
@@ -81,6 +81,9 @@ export default function Search() {
       setauthenticUser(data.getPfInfo.data);
     }
   }, [loading, error, data]);
+  useEffect(()=>{
+    refetch();
+  },[viewPost,toggleRefetch])
   return (
     <div>
       <ProfilePage profilePage={profileData!} />

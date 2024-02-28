@@ -147,12 +147,6 @@ export default function ViewPost(contentDetails: contentDetailsType) {
         }),
       }
     );
-    // if (res.ok) {
-    //   setLiked((p) => p);
-    // } else {
-    //   setLiked((p) => !p);
-    // }
-    // setLikesCount((prevCount) => (liked ? prevCount++ : prevCount--));
     refetch();
   };
   const focousCommentSaction = () => {
