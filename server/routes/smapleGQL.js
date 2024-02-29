@@ -1,7 +1,7 @@
 import { ApolloServer } from "@apollo/server";
 import dotenv from "dotenv"
 import { getPfInfo, searchProfile } from "../controller/user.js";
-import { getPostDetails } from "../controller/post.js";
+import { getFeed, getPostDetails } from "../controller/post.js";
 dotenv.config()
 const server = new ApolloServer({
   typeDefs: `
@@ -80,11 +80,18 @@ const server = new ApolloServer({
             success: Boolean!
             message: String
           }
+          type feed{
+            username:String
+            profileId:String
+            userId:String
+            pfp:String
+            post:post
+          }
         type Query{
             getPfInfo(token: String): ProfileInfoResponse
             getPostDetails(userProfileId: String,postId:String):postDetails
             searchProfile(profileId:String,token:String):ProfileInfoResponse
-           dummyQuery:String
+            getFeed:[feed]
         }
     `,
   resolvers: {
@@ -92,11 +99,10 @@ const server = new ApolloServer({
       getPfInfo: getPfInfo,
       getPostDetails: getPostDetails,
       searchProfile:searchProfile,
-      dummyQuery:(_,__,context)=>{
-          return context.token
-      }
+      getFeed:getFeed
     },
   },
+  
 });
 await server.start();
 export default server;

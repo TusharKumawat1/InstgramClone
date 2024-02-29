@@ -82,6 +82,10 @@ export default function ViewPost(contentDetails: contentDetailsType) {
     variables: {
       postId: contentDetails.postId,
       userProfileId: contentDetails._id,
+    },context: {
+      headers: {
+        token:localStorage.getItem("token"),
+      },
     },
   });
   function formatDateFromTimestamp(timestamp: string) {

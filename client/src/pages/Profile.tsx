@@ -60,6 +60,10 @@ export default function Proflie() {
     const { loading, error, data, refetch } = useQuery(getinfo, {
       variables: {
         token: token,
+    },context: {
+      headers: {
+        token:localStorage.getItem("token"),
+      },
     },
   });
   useEffect(() => {

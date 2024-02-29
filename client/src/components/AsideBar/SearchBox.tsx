@@ -98,11 +98,11 @@ export default function SearchBox() {
                       key={index}
                       onClick={() => setshowSearchBox(false)}
                     >
-                      <img
+                      {result?.pfp && <img
                         src={result?.pfp}
                         alt={result?._id}
                         className={Styles.pfp}
-                      />
+                      />}
                       <div>
                         {" "}
                         <h4 className={Styles.username}>

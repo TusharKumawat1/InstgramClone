@@ -48,11 +48,11 @@ export const likeOrDislikePost = async (req, res) => {
         .status(404)
         .json({ success: false, message: "post not found" });
     }
-    const like = userProfile.posts[foundPostIndex]?.likes?.findIndex((like) =>
-        like._id===(req.user._id)
+    const like = userProfile.posts[foundPostIndex]?.likes?.findIndex(
+      (like) => like._id === req.user._id
     );
- 
-    if (like=== -1) {
+
+    if (like === -1) {
       const likedByUser = await ProfileInfo.findOne({ userId: req.user._id });
       const payLoad = {
         _id: req.user._id,
@@ -154,5 +154,57 @@ export const getPostDetails = async (_, req) => {
     };
   } catch (error) {
     return { errors: [{ message: error.message }] };
+  }
+};
+export const getFeed = async (_, __, context) => {
+  try {
+    const userId = context._id;
+    const user = await ProfileInfo.findOne({ userId }).populate({
+      path: "following",
+      select: "-password",
+    });
+
+    if (!user) return new Error("User not found");
+
+    let feed = [];
+
+    for (const followedUser of user.following) {
+      const details = await ProfileInfo.findOne({
+        userId: followedUser._id,
+      }).populate({
+        path: "userId",
+        select: "-password",
+      });
+
+      if (!details) continue;
+
+      feed = feed.concat(
+        details.posts.map((post) => ({
+          userId:details.userId._id,
+          profileId:details._id,
+          username: details.userId.username,
+          pfp: details.pfp,
+          post: {
+            content: post.content,
+            date: post.date,
+            caption: post.caption,
+            location: post.location,
+            altTextForImages: post.altTextForImages,
+            aspectRatio: post.aspectRatio,
+            advancedSetting: {
+              hideLikeAndView: post.advancedSetting.hideLikeAndView,
+              hideComments: post.advancedSetting.hideComments,
+            },
+            likes: post.likes,
+            comment: post.comment,
+            postId: post.postId,
+          },
+        }))
+      );
+    }
+    feed.sort((a, b) => new Date(b.post.date) - new Date(a.post.date));
+    return feed;
+  } catch (error) {
+    throw new Error(error.message);
   }
 };

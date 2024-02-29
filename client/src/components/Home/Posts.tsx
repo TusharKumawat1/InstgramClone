@@ -1,15 +1,18 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import Styles from "../../styles/components/posts.module.css";
 import { shareIcon } from "../../assets";
 import { dummyFeed } from "../../dummy";
+import { MyContext } from "../../context/Mycontext";
 export default function Posts() {
   const [contentRefs, setContentRefs] = useState<(HTMLDivElement | null)[]>([]);
-
+  const {feed}=useContext(MyContext)
   useEffect(() => {
     // Initialize refs based on the length of dummyFeed
     setContentRefs(dummyFeed.map(() => null));
   }, []);
-
+  useEffect(()=>{
+    console.log(feed)
+  },[feed])
   const scrollToRight = (index: number) => {
     const container = contentRefs[index];
     if (container) {

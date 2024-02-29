@@ -73,6 +73,10 @@ export default function Search() {
       profileId: profile._id,
       token: token,
       getPfInfoToken2: token,
+    },context: {
+      headers: {
+        token:localStorage.getItem("token"),
+      },
     },
   });
   useEffect(() => {
