@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-top: 20px;
 }
 .header {
   display: flex;
@@ -45,8 +46,9 @@
   font-weight: bold;
 }
 .user span {
-  color: gray;
+  color: #808080;
   font-weight: 400;
+  font-size: 12px;
 }
 .user p:nth-child(2) {
   font-size: 12px;
@@ -60,6 +62,8 @@
   justify-content: center;
   background-color: black;
   border-radius: 3px;
+  user-select: none;
+  cursor: pointer;
 }
 .contentImage {
   object-fit: cover;
@@ -131,21 +135,11 @@
     display: flex;
     padding: 1px;
     justify-content: space-between;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     border-bottom: 1px solid #808080;
     /* position: relative; */
 }
-.addComment textarea{
-    width: 80%;
-    resize: none;
-    border: none;
-    font-family:sans-serif;
-    word-break: break-all;
-}
-.addComment textarea:focus{
-    outline: none;
-}
-.addComment i{
+.addComment i,.addComment p{
     font-size: 14px;
     color: #808080;
     cursor: pointer;

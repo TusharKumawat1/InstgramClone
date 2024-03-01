@@ -1,8 +1,8 @@
 import Styles from "../../styles/components/posts.module.css";
 import { MyContext } from "../../context/Mycontext";
-import EmojiPicker from "emoji-picker-react";
-import { useState } from "react";
-import ClickAwayListener from "react-click-away-listener";
+import { useContext, useEffect, useState } from "react";
+import doubleClickCss from "../../styles/components/viewPost.module.css";
+import ViewPost from "./ViewPost";
 interface likes {
   _id: String;
   pfp: String;
@@ -19,7 +19,7 @@ interface comment {
 }
 interface Post {
   content: string[];
-  date: Date;
+  date: string;
   caption: string;
   location: string;
   aspectRatio: string;
@@ -44,68 +44,129 @@ interface FeedItem {
 }
 
 export default function Posts() {
-  const [showEmojis, setShowEmojis] = useState(false);
+  const [doubleClick, setDoubleClick] = useState(false);
+  const { feed, viewPost, setViewPost, authenticUser } = useContext(MyContext);
+  const [contentDetails, setContentDetails] = useState({
+    _id: "",
+    postId: "",
+    likedBy: "",
+  });
+  const handleDoubleClick = () => {
+    setDoubleClick(true);
+    setTimeout(() => {
+      setDoubleClick(false);
+    }, 1000);
+  };
+  const showContnet = (_id: string, postId: string) => {
+    const newObj = { ...contentDetails };
+    newObj._id = _id; //user who upload post
+    newObj.postId = postId; //post id
+    newObj.likedBy = authenticUser.userId._id; //logged in user
+    setContentDetails((p) => newObj);
+    setViewPost(true);
+  };
+  function formatTimestamp(timestamp:string) {
+    const msPerSecond = 1000;
+    const msPerMinute = 60 * msPerSecond;
+    const msPerHour = 60 * msPerMinute;
+    const msPerDay = 24 * msPerHour;
+    const msPerWeek = 7 * msPerDay;
+    
+    const diff = Date.now() - parseInt(timestamp, 10);
+  
+    if (diff < msPerMinute) {
+      return 'just now';
+    } else if (diff < msPerHour) {
+      return `${Math.floor(diff / msPerMinute)}m ago`;
+    } else if (diff < msPerDay) {
+      return `${Math.floor(diff / msPerHour)}h ago`;
+    } else if (diff < msPerWeek) {
+      return `${Math.floor(diff / msPerDay)}d ago`;
+    } else {
+      return `${Math.floor(diff / msPerWeek)}w ago`;
+    }
+  }
+  
+  useEffect(() => {
+    console.log(feed);
+  }, [feed]);
   return (
     <div className={Styles.container}>
-      <div className={Styles.post}>
-        <div className={Styles.header}>
-          <div className={Styles.userInfo}>
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkEKyeScqBDQZun2tAFNBJZ7olvwqL2qhErrKLBCLmDlhN7tbz-47GtI3Hsume0s3alcA&usqp=CAU"
-              alt=""
-              className={Styles.pfp}
-            />
-            <div className={Styles.user}>
-              <p>
-                TstUSer <span>.1h</span>{" "}
-              </p>
-              <p>location</p>
-            </div>
-          </div>
-          <i className="fa-solid fa-ellipsis"></i>
-        </div>
-        <div className={Styles.imageContainer}>
-          <img
-            src="https://pbs.twimg.com/media/FpBoIz6agAAZpky.jpg"
-            alt=""
-            className={Styles.contentImage}
-          />
-          <div className={Styles.contentMask}></div>
-        </div>
-        <div className={Styles.engagementBtns}>
-          <div>
-            <i className="fa-regular fa-heart"></i>
-            <i className="fa-regular fa-comment"></i>
-            <i className="fa-brands fa-airbnb"></i>
-          </div>
-          <i className="fa-regular fa-bookmark"></i>
-        </div>
-        <div className={Styles.likes}>
-          <p>{111} likes</p>
-        </div>
-        <div className={Styles.caption}>
-          <p>
-            TstUSer <span>This is caption</span>{" "}
-          </p>
-        </div>
-        <div className={Styles.viewComment}>
-          <p>View all comments</p>
-        </div>
-        <div className={Styles.addComment}>
-          <textarea placeholder="Add a comment..."></textarea>
-          <i
-            className="fa-regular fa-face-smile"
-            onClick={() => setShowEmojis(true)}
-          ></i>
-          {showEmojis && (
-            <ClickAwayListener onClickAway={() => setShowEmojis(false)}>
-              <div className={Styles.emojiContainer}>
-                <EmojiPicker />
+      {feed &&
+        feed.map((item: FeedItem, index: number) => {
+          return (
+            <div className={Styles.post} key={index}>
+              <div className={Styles.header}>
+                <div className={Styles.userInfo}>
+                  <img src={item.pfp} alt="" className={Styles.pfp} />
+                  <div className={Styles.user}>
+                    <p>
+                      {item.username} &nbsp;
+                      <span>.{formatTimestamp(item.post.date)}</span>{" "}
+                    </p>
+                   {
+                    item.post.location &&  <p>location</p>
+                   }
+                  </div>
+                </div>
+                <i className="fa-solid fa-ellipsis"></i>
               </div>
-            </ClickAwayListener>
-          )}
-        </div>
-      </div>
+              <div
+                className={Styles.imageContainer}
+                onDoubleClick={handleDoubleClick}
+              >
+                <img
+                  src={item.post.content[0]}
+                  alt=""
+                  className={Styles.contentImage}
+                />
+                <div className={Styles.contentMask}>
+                  {doubleClick && (
+                    <i
+                      className={`fa-solid fa-heart ${doubleClickCss.doubleClick}`}
+                      style={{left:"40%",fontSize:"100px"}}
+                    ></i>
+                  )}
+                </div>
+              </div>
+              <div className={Styles.engagementBtns}>
+                <div>
+                  <i className="fa-regular fa-heart"></i>
+                  <i
+                    className="fa-regular fa-comment"
+                    onClick={() =>
+                      showContnet(item.profileId, item.post.postId)
+                    }
+                  ></i>
+                  <i className="fa-brands fa-airbnb"></i>
+                </div>
+                <i className="fa-regular fa-bookmark"></i>
+              </div>
+              <div className={Styles.likes}>
+                <p>{item.post.likes.length} likes</p>
+              </div>
+              <div className={Styles.caption}>
+                <p>
+                 {item.username} <span>{item?.post?.caption}</span>{" "}
+                </p>
+              </div>
+              <div className={Styles.viewComment}>
+                <p
+                  onClick={() => showContnet(item.profileId, item.post.postId)}
+                >
+                  View all comments
+                </p>
+              </div>
+              <div className={Styles.addComment}  onClick={() => showContnet(item.profileId, item.post.postId)}>
+              <p>Add a comment...</p>
+                <i
+                  className="fa-regular fa-face-smile"
+                ></i>
+              </div>
+            </div>
+          );
+        })}
+      {viewPost && <ViewPost {...contentDetails} />}
     </div>
   );
 }
