@@ -7,23 +7,21 @@ import { useQuery, gql } from "@apollo/client";
 import { MyContext } from "../context/Mycontext";
 import Loader from "../components/Home/Loader";
 import { instagramFont } from "../assets";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const navigate = useNavigate();
-  const { setauthenticUser } = useContext(MyContext);
+  const { setauthenticUser,setFeed } = useContext(MyContext);
   const getinfo = gql`
-    query Query($token: String) {
+    query GetPfInfo($token: String) {
       getPfInfo(token: $token) {
-        errors {
-          message
-        }
         data {
+          pfp
           _id
           userId {
             username
             fullname
           }
-          pfp
         }
       }
       getFeed {
@@ -52,35 +50,39 @@ export default function Home() {
             username
           }
           comments {
-            content
             commentedBy {
-              profileId
               pfp
+              profileId
               username
             }
+            content
             date
           }
         }
       }
     }
-    
   `;
 
   const { loading, error, data } = useQuery(getinfo, {
     variables: {
-      token: localStorage.getItem("token"),
+      token: localStorage.getItem("token")!,
     },
     context: {
       headers: {
-        token:localStorage.getItem("token"),
+        token: localStorage.getItem("token")!,
+        "Content-Type": "application/json",
       },
     },
   });
   const token: string | null = localStorage.getItem("token");
   useEffect(() => {
     if (!loading && !error && data) {
-      console.log(data)
+      console.log(data);
       setauthenticUser(data.getPfInfo.data);
+      setFeed(data.getFeed)
+    }
+    if (error) {
+      toast.warn("Internal server error");
     }
   }, [loading, error, data]);
   useEffect(() => {

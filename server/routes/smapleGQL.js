@@ -99,7 +99,7 @@ const server = new ApolloServer({
       getPfInfo: getPfInfo,
       getPostDetails: getPostDetails,
       searchProfile:searchProfile,
-      getFeed:getFeed
+      getFeed:getFeed,
     },
   },
   

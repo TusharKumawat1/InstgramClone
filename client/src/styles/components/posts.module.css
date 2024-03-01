@@ -1,191 +1,157 @@
-.container{
-    width: 90%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.container {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.post{
-    /* border: 1px solid black; */
-    width: 95%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+.post {
+  /* border: 1px solid red; */
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
-.userInfo{
-    width: 100%;
-    height: 50px;
-    padding-block: 10px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    /* border: 1px solid rgb(44, 44, 2); */
-    position: relative;
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  justify-content: space-between;
+  padding: 1px;
 }
-.pfp{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    object-fit: cover;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 80%;
+  justify-content: flex-start;
 }
-.info{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    /* border: 1px solid red; */
-    width: 70%;
-    height: 100%;
-    padding-top: 25px;
+.user {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.info h5{
-    font-size: 14px;
+.pfp {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
-.info p{
-    margin-top: -2px;
-    font-size: 12px;
-    color:#868686;
+.user p:nth-child(1) {
+  font-size: 14px;
+  font-weight: bold;
 }
-.userInfo i{
-    position: absolute;
-    right: 2px;
+.user span {
+  color: gray;
+  font-weight: 400;
 }
-.contentBox{
-    width: 100%;
-    display: flex;
-    overflow-y: hidden;
-    box-shadow: 0 0 4px rgb(188, 188, 188);
-    border-radius: 5px;
-    position: relative;
+.user p:nth-child(2) {
+  font-size: 12px;
 }
-.contentBox::-webkit-scrollbar{
-    display: none;
+.imageContainer {
+  position: relative;
+  width: 100%;
+  max-height: 70vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  border-radius: 3px;
 }
-.content{
-    min-width: 100%;
-    object-fit: cover;
+.contentImage {
+  object-fit: cover;
+  object-position: center;
 }
-.postEngage{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding-block: 20px;
-    height: 40px;
+.contentMask {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.postEngage1,.postEngage2{
-    display: flex;
-    gap: 15px;
+.engagementBtns {
+  margin-top: 10px;
+  padding: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.postEngage i{
-    font-size: 23px;
+.engagementBtns div {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.engagementBtns div i:nth-child(3) {
+  transform: rotate(30deg);
+  font-weight: bold;
+}
+.engagementBtns i {
+  font-size: 22px;
+  cursor: pointer;
+}
+.engagementBtns i:hover {
+  color: gray;
+}
+.likes {
+  padding: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-block: 10px;
+}
+.caption {
+  width: 100%;
+  word-break: break-all;
+  padding: 1px;
+  margin-bottom: 10px;
+}
+.caption p {
+  font-size: 14px;
+  font-weight: bold;
+}
+.caption span {
+  font-weight: 400;
+}
+.viewComment {
+    padding: 1px;
+  color: #808080;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.viewComment p{
     cursor: pointer;
-}
-.postEngage img{
-    position: relative;
-    top: 2px;
-    cursor: pointer;
-}
-.likedBy{
-    display: flex;
-    width: 100%;
-    align-items: flex-start;
-    font-weight: 600;
-    font-size: 13.5px;
-}
-.caption{
-    display: flex;
-    width: 100%;
-    align-items: center;
-    gap: 10px;
-    height: 30px;
-    justify-content:flex-start ;
-    /* border: 1px solid red; */
-}
-.caption span{
-    font-size: 14px;
-}
-.commentSection{
-    display: flex;
-    width: 100%;
-    align-items: flex-start;
-    flex-direction: column;
+    display: inline;
 }
 .addComment{
-    width: 100%;
-    padding-block: 10px;
     display: flex;
+    padding: 1px;
     justify-content: space-between;
-    font-size: 13px;
-    color: #868686;
-    border-bottom: 1px solid #dedede;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #808080;
+    /* position: relative; */
 }
-/* relative to post container */
-.scrollLeft,.scrollRight{
-    position: absolute  ;
-    top: 41%;
-    /* left: 0; */
-    left: 0;
-    width: 25px;
-    height: 25px;
-    background-color: whitesmoke;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-inline: 10px;
+.addComment textarea{
+    width: 80%;
+    resize: none;
+    border: none;
+    font-family:sans-serif;
+    word-break: break-all;
+}
+.addComment textarea:focus{
+    outline: none;
+}
+.addComment i{
+    font-size: 14px;
+    color: #808080;
     cursor: pointer;
 }
-.scrollRight{
-    left: 90%;
-}
-.btnContainer{
-  border: 10px solid red;
-    width: 100%;
-    height: 100%;
-    z-index: 99999;
-    position: relative;
-}
-.imageDots{
-    height: 7px;
-    width: 7px;
-    border-radius: 50%;
-    background-color: white;
-    opacity: .5;
- 
-}
-.dotsContainer{
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    gap: 5px;
+.emojiContainer{
     position: absolute;
-    bottom: 180px;
+    right: 0;
+    bottom: 10%;
 }
-
-@media screen and (max-width: 800px) {
-    .container{
-        width: 100%;
-    }
-    .post{
-        width: 102%;
-    }
-    .userInfo{
-        border-top: 1px solid #d3d3d3;
-        padding-inline: 20px;
-        padding-block: 30px;
-    }
-    .postEngage,.likedBy,.caption,.commentSection{
-        padding-inline: 20px;
-    }
-    .contentBox{
-        box-shadow: none;
-        border-radius: none;
-    }
-    
-  }

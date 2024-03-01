@@ -159,23 +159,26 @@ export const getPostDetails = async (_, req) => {
 export const getFeed = async (_, __, context) => {
   try {
     const userId = context._id;
+   console.log(context)
     const user = await ProfileInfo.findOne({ userId }).populate({
       path: "following",
       select: "-password",
     });
-
+    console.log("user : ",user)
     if (!user) return new Error("User not found");
-
+    if (!user.following || user.following.length === 0) {
+     return []
+    }
     let feed = [];
-
     for (const followedUser of user.following) {
+      console.log("running")
       const details = await ProfileInfo.findOne({
         userId: followedUser._id,
       }).populate({
         path: "userId",
         select: "-password",
       });
-
+      console.log("details : ",details)
       if (!details) continue;
 
       feed = feed.concat(
@@ -203,6 +206,7 @@ export const getFeed = async (_, __, context) => {
       );
     }
     feed.sort((a, b) => new Date(b.post.date) - new Date(a.post.date));
+    console.log("feed",feed)
     return feed;
   } catch (error) {
     throw new Error(error.message);
