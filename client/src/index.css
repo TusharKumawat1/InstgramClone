@@ -36,15 +36,3 @@ code {
   width: 100%; /* 70% of the container width */
   overflow: auto; /* Add scroll if content overflows */
 }
-.carousel .thumbs-wrapper {
-  display: none;
-}
-.carousel{
-  height: 100%;
-}
-.carousel .slide img {
-  width: 100%;
-  vertical-align: top;
-  border: 0;
-  height: 100%;
-}

@@ -44,17 +44,20 @@ interface FeedItem {
 }
 
 export default function Posts() {
-  const [doubleClick, setDoubleClick] = useState(false);
+  const [doubleClick, setDoubleClick] = useState<boolean[]>([]);
   const { feed, viewPost, setViewPost, authenticUser } = useContext(MyContext);
   const [contentDetails, setContentDetails] = useState({
     _id: "",
     postId: "",
     likedBy: "",
   });
-  const handleDoubleClick = () => {
-    setDoubleClick(true);
+  const handleDoubleClick = (i:number) => {
+    let updateclick=[...doubleClick]
+    updateclick[i]=true
+    setDoubleClick(updateclick);
     setTimeout(() => {
-      setDoubleClick(false);
+      updateclick[i]=false
+      setDoubleClick(updateclick);
     }, 1000);
   };
   const showContnet = (_id: string, postId: string) => {
@@ -86,7 +89,26 @@ export default function Posts() {
       return `${Math.floor(diff / msPerWeek)}w ago`;
     }
   }
-  
+  const likeOrDislikePost = async (postId:string,profileId:string) => {
+    // setLiked((p) => !p);
+    // setLikesCount((p) => (liked ? p-1 : p+1));
+    const token = localStorage.getItem("token")!;
+    const res = await fetch(
+      `${process.env.REACT_APP_SERVER_PORT}/posts/likeOrDislikePost`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+        body: JSON.stringify({
+          postId,
+          profileId,
+        }),
+      }
+    );
+    // refetch();
+  };
   useEffect(() => {
     console.log(feed);
   }, [feed]);
@@ -113,7 +135,9 @@ export default function Posts() {
               </div>
               <div
                 className={Styles.imageContainer}
-                onDoubleClick={handleDoubleClick}
+                onDoubleClick={()=>{
+                  handleDoubleClick(index)
+                }}
               >
                 <img
                   src={item.post.content[0]}
@@ -121,7 +145,7 @@ export default function Posts() {
                   className={Styles.contentImage}
                 />
                 <div className={Styles.contentMask}>
-                  {doubleClick && (
+                  {doubleClick[index] && (
                     <i
                       className={`fa-solid fa-heart ${doubleClickCss.doubleClick}`}
                       style={{left:"40%",fontSize:"100px"}}
@@ -147,7 +171,7 @@ export default function Posts() {
               </div>
               <div className={Styles.caption}>
                 <p>
-                 {item.username} <span>{item?.post?.caption}</span>{" "}
+                 {item.username} <span>{item.post.caption}</span>{" "}
                 </p>
               </div>
               <div className={Styles.viewComment}>

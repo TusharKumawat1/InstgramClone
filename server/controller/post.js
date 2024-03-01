@@ -1,6 +1,7 @@
 import mongoose, { now } from "mongoose";
 import ProfileInfo from "../models/ProfileInfo.js";
 import User from "../models/User.js";
+import { firstFeed } from "../utils/firstFeed.js";
 
 export const createPost = async (req, res) => {
   try {
@@ -165,9 +166,10 @@ export const getFeed = async (_, __, context) => {
     });
     if (!user) return new Error("User not found");
     if (!user.following || user.following.length === 0) {
-     return []
+     return firstFeed
     }
     let feed = [];
+   
     for (const followedUser of user.following) {
       const details = await ProfileInfo.findOne({
         userId: followedUser._id,
@@ -203,6 +205,7 @@ export const getFeed = async (_, __, context) => {
       );
     }
     feed.sort((a, b) => new Date(b.post.date) - new Date(a.post.date));
+    console.log(feed)
     return feed;
   } catch (error) {
     throw new Error(error.message);
