@@ -210,9 +210,9 @@ export default function SignupForm() {
       </div>
       <div className={Styles.getApp}>
         <p>Get the app</p>
-        <div>
+        <div style={{display:"flex"}}>
           <a href="https://play.google.com/store/apps/details?id=com.instagram.android">
-            <img src={asset6} alt="playstore" width={130} height={40} />
+            <img src={asset6} alt="playstore" width={150}  className={Styles.playstore} />
           </a>
           <a href='ms-windows-store://pdp/?productid=9nblggh5l9xt&amp;referrer=appbadge&amp;source=www.instagram.com&amp;mode=mini&amp;pos=0%2C0%2C1920%2C1032" rel="nofollow noreferrer'>
             <img src={asset7} alt="playstore" width={130} height={40} />

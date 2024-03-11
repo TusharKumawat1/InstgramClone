@@ -1,164 +1,172 @@
-.loginFormContainer{
-    height: 97%;
-    width: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    color: black;
-    min-height: 600px;
+.loginFormContainer {
+  height: 97%;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: black;
+  min-height: 600px;
+  margin-top: 100px;
 }
-.form{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid #c0c0c0; 
-    transition: 1s ease;
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #c0c0c0;
+  transition: 1s ease;
 }
-.instagramFont{
-    margin-block: 30px;
+.instagramFont {
+  margin-block: 30px;
 }
-.inputContainer{
-    display: flex;
-    flex-direction: column;
-    width: 72%;
-    position: relative;
-    justify-content: center;
-    align-items: center;
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 72%;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 }
-.formInput{
-    border: 1px solid #c0c0c0; 
-    background-color: #fbfbfb;
-    width: 100%;
-    font-size: 13px;
-    border-radius: 4px;
-    padding: 15px 80px 10px 10px;
+.formInput {
+  border: 1px solid #c0c0c0;
+  background-color: #fbfbfb;
+  width: 100%;
+  font-size: 13px;
+  border-radius: 4px;
+  padding: 15px 80px 10px 10px;
 }
-.formInput:focus{
-    outline: 1px solid  #d6d6d6;
+.formInput:focus {
+  outline: 1px solid #d6d6d6;
 }
-.formInputLable{
-    font-size: 10px;
-    position: absolute;
-    top: 0px;
-    left: 11px;
-    color: #7b7b7b;
-    transition: .1s ease-in-out;
-    
+.formInputLable {
+  font-size: 10px;
+  position: absolute;
+  top: 0px;
+  left: 11px;
+  color: #7b7b7b;
+  transition: 0.1s ease-in-out;
 }
-.formInput:placeholder-shown ~ .formInputLable{
-    top: 14px;
-    font-size: 11px;
+.formInput:placeholder-shown ~ .formInputLable {
+  top: 14px;
+  font-size: 11px;
 }
-.loginBtn{
-    width: 72%;
-    color: white;
-    font-weight: bold;
-    background-color: #4CB5F9;
-    padding: 8px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.loginBtn {
+  width: 72%;
+  color: white;
+  font-weight: bold;
+  background-color: #4cb5f9;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
-.loginBtn:hover{
-    background-color: #149cf6;
+.loginBtn:hover {
+  background-color: #149cf6;
 }
-.divider{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 80%;
-    color: rgb(138, 138, 138);
-    font-size: 13px;
-    font-weight:500;
+.divider {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+  color: rgb(138, 138, 138);
+  font-size: 13px;
+  font-weight: 500;
 }
-.line{
-    background-color: rgb(210, 210, 210);
-    width: 35%;
-    height: .1px;
+.line {
+  background-color: rgb(210, 210, 210);
+  width: 35%;
+  height: 0.1px;
 }
-.loginViaFacebook{
-   color: #385185;
-   text-decoration: none;
-   font-weight: bold;
-    font-size: 14px;
-    margin-block: 20px;
+.loginViaFacebook {
+  color: #385185;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  margin-block: 20px;
 }
-.forgotPass{
-    font-size: 12px;
-    text-decoration: none;
-    color: black;
-    margin-top: -10px;
-    margin-bottom: 10px;
+.forgotPass {
+  font-size: 12px;
+  text-decoration: none;
+  color: black;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
-.gotoSingup{
-    margin-top: 20px;
-    border: 1px solid #c0c0c0; 
-    font-size: 14px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
+.gotoSingup {
+  margin-top: 20px;
+  border: 1px solid #c0c0c0;
+  font-size: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  padding: 25px;
 }
 .gotoSingup span {
-    font-weight: bold;
-    color: #149cf6;
+  font-weight: bold;
+  color: #149cf6;
 }
-.getApp{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 14px;
-    gap: 10px;
+.getApp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 14px;
+  gap: 10px;
 }
-.getApp div a{
-    margin-inline: 5px;
+.getApp div a {
+  margin-inline: 5px;
 }
+
 @media screen and (max-width: 1100px) {
-    .form{
-        width: 99%;
+    .loginFormContainer{
+        margin-top: -100px;
     }
+  .form {
+    width: 99%;
   }
-  .resError{
-    color: red;
-    text-align: center;
-    font-size: 13px;
-    margin-top: -10px;
-    margin-bottom: 10px;
-    width: 80%;
-  }
-  .xMark,.checkMark,.rotateMark{
-    position: absolute;
-    right: 5px;
-    color: red;
-    font-size: 22px;
 }
-.checkMark{
-    color: #a8a8a8;
+.resError {
+  color: red;
+  text-align: center;
+  font-size: 13px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  width: 80%;
 }
-.checkPass{
-    display: flex;
-    position: absolute;
-    right: 5px;
+.xMark,
+.checkMark,
+.rotateMark {
+  position: absolute;
+  right: 5px;
+  color: red;
+  font-size: 22px;
 }
-.rotateMark{
-    color: #008ce9;
-    cursor: pointer;
+.checkMark {
+  color: #a8a8a8;
 }
-.checkPass .xMark,.checkPass .checkMark{
-    right: 45px;
+.checkPass {
+  display: flex;
+  position: absolute;
+  right: 5px;
 }
-.checkPass p{
-    font-weight: 600;
-    color: #222;
-    cursor: pointer;
+.rotateMark {
+  color: #008ce9;
+  cursor: pointer;
 }
-.checkPass p:hover{
-    color:  #a8a8a8;
+.checkPass .xMark,
+.checkPass .checkMark {
+  right: 45px;
+}
+.checkPass p {
+  font-weight: 600;
+  color: #222;
+  cursor: pointer;
+}
+.checkPass p:hover {
+  color: #a8a8a8;
 }

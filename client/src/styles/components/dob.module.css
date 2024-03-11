@@ -31,9 +31,11 @@ h5{
     margin-inline: 5px;
     border-radius: 3px;
     color: #7b7b7b;
-    
+    padding: 4px;
 }
-
+.datePicker select:nth-child(1){
+    width: 100px;
+}
 .datePicker select:focus{
     outline: none;
 }

@@ -3,6 +3,7 @@ import { MyContext } from "../../context/Mycontext";
 import { useContext, useEffect, useState } from "react";
 import doubleClickCss from "../../styles/components/viewPost.module.css";
 import ViewPost from "./ViewPost";
+import { useNavigate } from "react-router-dom";
 interface likes {
   _id: String;
   pfp: String;
@@ -51,6 +52,7 @@ export default function Posts() {
     postId: "",
     likedBy: "",
   });
+  const navigate=useNavigate()
   const handleDoubleClick = (i:number) => {
     let updateclick=[...doubleClick]
     updateclick[i]=true
@@ -119,7 +121,7 @@ export default function Posts() {
           return (
             <div className={Styles.post} key={index}>
               <div className={Styles.header}>
-                <div className={Styles.userInfo}>
+                <div className={Styles.userInfo} onClick={()=>navigate(`/search/${item.profileId}`)}>
                   <img src={item.pfp} alt="" className={Styles.pfp} />
                   <div className={Styles.user}>
                     <p>
@@ -127,7 +129,7 @@ export default function Posts() {
                       <span>.{formatTimestamp(item.post.date)}</span>{" "}
                     </p>
                    {
-                    item.post.location &&  <p>location</p>
+                    item.post.location &&  <p>{item.post.location}</p>
                    }
                   </div>
                 </div>

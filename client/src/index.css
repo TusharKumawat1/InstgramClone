@@ -36,3 +36,9 @@ code {
   width: 100%; /* 70% of the container width */
   overflow: auto; /* Add scroll if content overflows */
 }
+#rsd__select-day{
+  width: 60px;
+}
+#rsd__select-year{
+  width: 70px;
+}

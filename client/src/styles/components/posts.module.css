@@ -40,10 +40,12 @@
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
+  cursor: pointer;
 }
 .user p:nth-child(1) {
   font-size: 14px;
   font-weight: bold;
+  cursor: pointer;
 }
 .user span {
   color: #808080;
