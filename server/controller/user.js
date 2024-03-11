@@ -167,7 +167,6 @@ export const Unfollow = async (req, res) => {
 export const FriendRequest = async (req, res) => {
   try {
     const { follow } = req.body;
-    console.log(follow);
     const user = await User.findById({ _id: req.user._id });
     if (!user)
       return res

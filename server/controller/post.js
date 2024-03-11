@@ -1,7 +1,6 @@
 import mongoose, { now } from "mongoose";
 import ProfileInfo from "../models/ProfileInfo.js";
 import User from "../models/User.js";
-import { firstFeed } from "../utils/firstFeed.js";
 
 export const createPost = async (req, res) => {
   try {
@@ -165,10 +164,37 @@ export const getFeed = async (_, __, context) => {
       select: "-password",
     });
     if (!user) return new Error("User not found");
-    if (!user.following || user.following.length === 0) {
-     return firstFeed
-    }
     let feed = [];
+    if (!user.following || user.following.length === 0) {
+       const firstFeed=await ProfileInfo.findById({_id:"65eeb9dc8cde2e586686bf8d"}).populate({
+        path: "userId",
+        select: "-password",
+      });
+       feed = feed.concat(
+        firstFeed.posts.map((post) => ({
+          userId:firstFeed.userId._id,
+          profileId:firstFeed._id,
+          username: firstFeed.userId.username,
+          pfp: firstFeed.pfp,
+          post: {
+            content: post.content,
+            date: post.date,
+            caption: post.caption,
+            location: post.location,
+            altTextForImages: post.altTextForImages,
+            aspectRatio: post.aspectRatio,
+            advancedSetting: {
+              hideLikeAndView: post.advancedSetting.hideLikeAndView,
+              hideComments: post.advancedSetting.hideComments,
+            },
+            likes: post.likes,
+            comment: post.comment,
+            postId: post.postId,
+          },
+        }))
+      );
+      return feed
+    }
    
     for (const followedUser of user.following) {
       const details = await ProfileInfo.findOne({
@@ -205,7 +231,6 @@ export const getFeed = async (_, __, context) => {
       );
     }
     feed.sort((a, b) => new Date(b.post.date) - new Date(a.post.date));
-    console.log(feed)
     return feed;
   } catch (error) {
     throw new Error(error.message);

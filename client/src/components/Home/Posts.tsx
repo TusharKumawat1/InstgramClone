@@ -46,23 +46,32 @@ interface FeedItem {
 
 export default function Posts() {
   const [doubleClick, setDoubleClick] = useState<boolean[]>([]);
+  const [alreadyLiked, setAlreadyLiked] = useState<boolean[]>([]);
+  const [likes, setLikes] = useState<number[]>([]);
   const { feed, viewPost, setViewPost, authenticUser } = useContext(MyContext);
   const [contentDetails, setContentDetails] = useState({
     _id: "",
     postId: "",
     likedBy: "",
   });
-  const navigate=useNavigate()
-  const handleDoubleClick = (i:number) => {
-    let updateclick=[...doubleClick]
-    updateclick[i]=true
+  const navigate = useNavigate();
+  const handleDoubleClick = (i: number, postId: string, profileId: string) => {
+    let updateLike = [...alreadyLiked];
+    if (!updateLike[i]) {
+      likeOrDislikePost(postId, profileId, i);
+    }
+    updateLike[i] = true;
+    setAlreadyLiked((p) => updateLike);
+    let updateclick = [...doubleClick];
+    updateclick[i] = true;
     setDoubleClick(updateclick);
     setTimeout(() => {
-      updateclick[i]=false
+      updateclick[i] = false;
       setDoubleClick(updateclick);
     }, 1000);
   };
   const showContnet = (_id: string, postId: string) => {
+    console.log(authenticUser);
     const newObj = { ...contentDetails };
     newObj._id = _id; //user who upload post
     newObj.postId = postId; //post id
@@ -70,17 +79,17 @@ export default function Posts() {
     setContentDetails((p) => newObj);
     setViewPost(true);
   };
-  function formatTimestamp(timestamp:string) {
+  function formatTimestamp(timestamp: string) {
     const msPerSecond = 1000;
     const msPerMinute = 60 * msPerSecond;
     const msPerHour = 60 * msPerMinute;
     const msPerDay = 24 * msPerHour;
     const msPerWeek = 7 * msPerDay;
-    
+
     const diff = Date.now() - parseInt(timestamp, 10);
-  
+
     if (diff < msPerMinute) {
-      return 'just now';
+      return "just now";
     } else if (diff < msPerHour) {
       return `${Math.floor(diff / msPerMinute)}m ago`;
     } else if (diff < msPerDay) {
@@ -91,9 +100,22 @@ export default function Posts() {
       return `${Math.floor(diff / msPerWeek)}w ago`;
     }
   }
-  const likeOrDislikePost = async (postId:string,profileId:string) => {
-    // setLiked((p) => !p);
-    // setLikesCount((p) => (liked ? p-1 : p+1));
+  const likeOrDislikePost = async (
+    postId: string,
+    profileId: string,
+    index: number
+  ) => {
+    let updateLike = [...alreadyLiked];
+    updateLike[index] = !updateLike[index];
+    setAlreadyLiked((p) => updateLike); //update icon
+
+    let updateLikeCount = [...likes];
+    if (updateLike[index]) {
+      updateLikeCount[index] += 1;
+    } else {
+      updateLikeCount[index] -= 1;
+    }
+    setLikes(p=>updateLikeCount)
     const token = localStorage.getItem("token")!;
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_PORT}/posts/likeOrDislikePost`,
@@ -111,8 +133,12 @@ export default function Posts() {
     );
     // refetch();
   };
+
   useEffect(() => {
-    console.log(feed);
+    if (feed) {
+      setLikes(feed.map((item: FeedItem) => item.post.likes.length));
+      setAlreadyLiked(feed.map((item: FeedItem) => item.post.likes.find(el=>el._id===authenticUser.userId._id)))
+    }
   }, [feed]);
   return (
     <div className={Styles.container}>
@@ -121,24 +147,25 @@ export default function Posts() {
           return (
             <div className={Styles.post} key={index}>
               <div className={Styles.header}>
-                <div className={Styles.userInfo} onClick={()=>navigate(`/search/${item.profileId}`)}>
+                <div
+                  className={Styles.userInfo}
+                  onClick={() => navigate(`/search/${item.profileId}`)}
+                >
                   <img src={item.pfp} alt="" className={Styles.pfp} />
                   <div className={Styles.user}>
                     <p>
                       {item.username} &nbsp;
                       <span>.{formatTimestamp(item.post.date)}</span>{" "}
                     </p>
-                   {
-                    item.post.location &&  <p>{item.post.location}</p>
-                   }
+                    {item.post.location && <p>{item.post.location}</p>}
                   </div>
                 </div>
                 <i className="fa-solid fa-ellipsis"></i>
               </div>
               <div
                 className={Styles.imageContainer}
-                onDoubleClick={()=>{
-                  handleDoubleClick(index)
+                onDoubleClick={() => {
+                  handleDoubleClick(index, item.post.postId, item.profileId);
                 }}
               >
                 <img
@@ -150,14 +177,37 @@ export default function Posts() {
                   {doubleClick[index] && (
                     <i
                       className={`fa-solid fa-heart ${doubleClickCss.doubleClick}`}
-                      style={{left:"40%",fontSize:"100px"}}
+                      style={{ left: "40%", fontSize: "100px" }}
                     ></i>
                   )}
                 </div>
               </div>
               <div className={Styles.engagementBtns}>
                 <div>
-                  <i className="fa-regular fa-heart"></i>
+                  {alreadyLiked[index] ? (
+                    <i
+                      className="fa-solid fa-heart"
+                      style={{ color: "#e10e23" }}
+                      onClick={() =>
+                        likeOrDislikePost(
+                          item.post.postId,
+                          item.profileId,
+                          index
+                        )
+                      }
+                    ></i>
+                  ) : (
+                    <i
+                      className="fa-regular fa-heart"
+                      onClick={() =>
+                        likeOrDislikePost(
+                          item.post.postId,
+                          item.profileId,
+                          index
+                        )
+                      }
+                    ></i>
+                  )}
                   <i
                     className="fa-regular fa-comment"
                     onClick={() =>
@@ -169,11 +219,11 @@ export default function Posts() {
                 <i className="fa-regular fa-bookmark"></i>
               </div>
               <div className={Styles.likes}>
-                <p>{item.post.likes.length} likes</p>
+                <p>{likes[index]} likes</p>
               </div>
               <div className={Styles.caption}>
                 <p>
-                 {item.username} <span>{item.post.caption}</span>{" "}
+                  {item.username} <span>{item.post.caption}</span>{" "}
                 </p>
               </div>
               <div className={Styles.viewComment}>
@@ -183,11 +233,12 @@ export default function Posts() {
                   View all comments
                 </p>
               </div>
-              <div className={Styles.addComment}  onClick={() => showContnet(item.profileId, item.post.postId)}>
-              <p>Add a comment...</p>
-                <i
-                  className="fa-regular fa-face-smile"
-                ></i>
+              <div
+                className={Styles.addComment}
+                onClick={() => showContnet(item.profileId, item.post.postId)}
+              >
+                <p>Add a comment...</p>
+                <i className="fa-regular fa-face-smile"></i>
               </div>
             </div>
           );

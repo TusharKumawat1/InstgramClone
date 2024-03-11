@@ -175,6 +175,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
         }),
       }
     );
+    setCommentContent(p=>"")
     refetch();
   };
   const commentTimestamp = (timeString: string) => {

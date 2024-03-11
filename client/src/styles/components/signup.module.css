@@ -91,14 +91,14 @@
 .formInputLable{
     font-size: 10px;
     position: absolute;
-    top: 0px;
+    top: 1px;
     left: 11px;
     color: #7b7b7b;
     transition: .1s ease-in-out;
     
 }
 .formInput:placeholder-shown ~ .formInputLable{
-    top: 14px;
+    top: 19px;
     font-size: 11px;
 }
 .SignupBtn{

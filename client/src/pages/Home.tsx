@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 export default function Home() {
   const navigate = useNavigate();
-  const { setauthenticUser,setFeed } = useContext(MyContext);
+  const { setauthenticUser,setFeed ,toggleRefetch} = useContext(MyContext);
   const getinfo = gql`
     query GetPfInfo($token: String) {
       getPfInfo(token: $token) {
@@ -21,6 +21,7 @@ export default function Home() {
           userId {
             username
             fullname
+            _id
           }
         }
       }
@@ -63,7 +64,7 @@ export default function Home() {
     }
   `;
 
-  const { loading, error, data } = useQuery(getinfo, {
+  const { loading, error, data,refetch } = useQuery(getinfo, {
     variables: {
       token: localStorage.getItem("token")!,
     },
@@ -77,7 +78,6 @@ export default function Home() {
   const token: string | null = localStorage.getItem("token");
   useEffect(() => {
     if (!loading && !error && data) {
-      console.log(data);
       setauthenticUser(data.getPfInfo.data);
       setFeed(data.getFeed)
     }
@@ -90,6 +90,9 @@ export default function Home() {
       navigate("/auth");
     }
   }, []);
+  useEffect(()=>{
+    refetch();
+  },[toggleRefetch])
   if (loading) {
     return <Loader />;
   }
