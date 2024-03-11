@@ -7,7 +7,7 @@ export default function Suggestion() {
   return (
     <div className={Styles.container}>
       <div  className={Styles.profileName}>
-              <img src={authenticUser && authenticUser?.pfp} className={Styles.pfp}></img>
+              <img src={authenticUser && authenticUser?.pfp} className={Styles.pfp} alt={`usersPfp`}></img>
               <div className={Styles.info}>
                 <h6 className={Styles.username}>{authenticUser && authenticUser?.userId?.username}</h6>
                 <p className={Styles.followedBy}>{authenticUser && authenticUser?.userId?.fullname}</p>
@@ -22,7 +22,7 @@ export default function Suggestion() {
         {
           dummySuggestions.map((item,i)=>{
             return <div key={i} className={Styles.suggestedUser}>
-              <img src={item.pfp} className={Styles.pfp}></img>
+              <img src={item.pfp} className={Styles.pfp} alt={`pfp+${i}`}></img>
               <div className={Styles.info}>
                 <h6 className={Styles.username}>{item.username}</h6>
                 <p className={Styles.followedBy}>Folloewd by {item.followedBy[0]}...</p>
