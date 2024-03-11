@@ -115,7 +115,7 @@ export default function AsideNav() {
           ) : (
             <img
               src={authenticUser && authenticUser?.pfp}
-              alt="img"
+              alt={`img+${authenticUser?.userId?._id}`}
               width={40}
               height={40}
               className={Styles.pfp}

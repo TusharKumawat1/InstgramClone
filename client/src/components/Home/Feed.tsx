@@ -42,7 +42,7 @@ export default function Feed() {
            return (
              <div key={i} className={Styles.users}>
                <div className={Styles.pfpBOrder}>
-                 <img src={item.pfp} className={Styles.pfp}></img>
+                 <img src={item.pfp} className={Styles.pfp} alt={`img+-${i}`}></img>
                </div>
                <p className={Styles.username}>{item.username}</p>
              </div>

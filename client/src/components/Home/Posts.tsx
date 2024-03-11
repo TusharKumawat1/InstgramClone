@@ -151,7 +151,7 @@ export default function Posts() {
                   className={Styles.userInfo}
                   onClick={() => navigate(`/search/${item.profileId}`)}
                 >
-                  <img src={item.pfp} alt="" className={Styles.pfp} />
+                  <img src={item.pfp} alt={`image${item.post.postId}`} className={Styles.pfp} />
                   <div className={Styles.user}>
                     <p>
                       {item.username} &nbsp;

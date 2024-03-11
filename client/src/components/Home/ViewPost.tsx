@@ -309,6 +309,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                   <img
                     src={userDetails && userDetails?.pfp}
                     className={Styles.pfp}
+                    alt={userDetails && userDetails?.pfp}
                   />
                 )}
                 <p>
@@ -341,6 +342,7 @@ export default function ViewPost(contentDetails: contentDetailsType) {
                   <img
                     src={userDetails && userDetails?.pfp}
                     className={Styles.pfp}
+                    alt={`pfp${userDetails && userDetails?.pfp}`}
                   />
 
                   <p className={Styles.caption}>

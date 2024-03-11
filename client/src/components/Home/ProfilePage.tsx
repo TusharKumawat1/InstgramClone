@@ -154,7 +154,7 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
           <div className={Styles.infoSection}>
             <img
               src={profilePage && profilePage.pfp}
-              alt=""
+              alt={`pfp${profilePage && profilePage.pfp}`}
               className={Styles.pfp}
             />
             <div className={Styles.details}>
@@ -308,7 +308,7 @@ export default function ProfilePage({ profilePage }: ProfilePageProps) {
                         <div className={Styles.imageContainer}>
                           <img
                             src={post.content[0]}
-                            alt=""
+                            alt={`pfp${post && post.postId}`}
                             className={Styles.postContent}
                           />
                           <div
