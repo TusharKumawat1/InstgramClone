@@ -122,6 +122,12 @@
   }
 }
 @media screen and (max-width: 800px) {
+  .scrollLeft,.scrollRight{
+    display: none;
+  }
+  .stories{
+    gap:20px
+  }
   .container{
     display: flex;
     flex-direction: column;
@@ -140,4 +146,14 @@
     .feed{
       width: 100%;
     }
+}
+@media screen and (max-width: 500px){
+.feed{
+  width: 100%;
+}
+}
+@media screen and (max-width: 400px){
+  .stories{
+    gap: 12px;
+  }
 }

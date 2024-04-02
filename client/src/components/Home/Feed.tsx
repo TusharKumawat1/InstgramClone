@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import  { useContext, useEffect, useRef, useState } from "react";
 import Styles from "../../styles/components/feed.module.css";
 import Suggestion from "./Suggestion";
 import { dummyStories } from "../../dummy";
 import Posts from "./Posts";
-import Footer from "./Footer";
 import { MyContext } from "../../context/Mycontext";
 
 export default function Feed() {

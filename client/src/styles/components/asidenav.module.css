@@ -36,6 +36,7 @@
   display: flex;
   align-items: center;
   height: 50px;
+  width: 50px;
 }
 .pfp,
 .reelsIcon {
@@ -53,6 +54,8 @@
   overflow: hidden;
   margin-right: 2px;
   margin-left: 6px;
+  min-width: 30px;
+  min-height: 30px;
 }
 .options i {
   position: relative;
@@ -223,3 +226,9 @@ a {
     display: none;
    }
   }
+  @media screen and (max-width: 500px){
+    .options img{
+      width: 25px;
+    }
+  }
+  

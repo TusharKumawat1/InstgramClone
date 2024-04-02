@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import  { useContext } from 'react'
 import Styles from "../../styles/components/sugestions.module.css"
-import { dummyStories, dummySuggestions } from '../../dummy'
+import { dummySuggestions } from '../../dummy'
 import { MyContext } from '../../context/Mycontext'
 export default function Suggestion() {
   const {authenticUser}=useContext(MyContext)

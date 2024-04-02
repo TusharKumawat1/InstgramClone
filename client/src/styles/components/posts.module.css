@@ -151,3 +151,21 @@
     right: 0;
     bottom: 10%;
 }
+@media screen and (max-width: 500px){
+  .container{
+    width: 100%;
+    transform: translateX(-.5%);
+  }
+}
+@media screen and (max-width: 450px){
+  .container{
+    width: 100%;
+    transform: translateX(1%);
+  }
+}
+@media screen and (max-width: 300px){
+  .container{
+    width: 100%;
+    transform: translateX(5%);
+  }
+}

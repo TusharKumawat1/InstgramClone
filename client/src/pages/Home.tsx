@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import  { useContext, useEffect, } from "react";
 import { useNavigate } from "react-router-dom";
 import Styles from "../styles/pages/home.module.css";
-import AsideNav from "../components/AsideBar/AsideNav";
 import Feed from "../components/Home/Feed";
 import { useQuery, gql } from "@apollo/client";
 import { MyContext } from "../context/Mycontext";
